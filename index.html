@@ -1,0 +1,4893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SuperCAPTCHA - Verify You Are Human</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #f0f0f0;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  #captcha-container {
+    background: #fff;
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    width: 400px;
+    max-width: 95vw;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #captcha-header {
+    background: #4a90d9;
+    color: white;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #captcha-header .step-counter {
+    font-size: 11px;
+    opacity: 0.85;
+  }
+
+  #captcha-body {
+    padding: 16px;
+    min-height: 300px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  #captcha-footer {
+    padding: 12px 16px;
+    background: #fafafa;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .captcha-instruction {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+    line-height: 1.4;
+  }
+
+  .captcha-subtext {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+
+  .btn-verify {
+    background: #4a90d9;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-verify:hover { background: #357abd; }
+  .btn-verify:disabled { background: #a0c4e8; cursor: not-allowed; }
+
+  .btn-skip {
+    background: none;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    border-radius: 3px;
+    font-size: 12px;
+    color: #666;
+    cursor: pointer;
+  }
+
+  .btn-skip:hover { border-color: #999; }
+
+  /* Progress bar */
+  #progress-bar-container {
+    height: 4px;
+    background: #e0e0e0;
+    width: 100%;
+  }
+
+  #progress-bar {
+    height: 100%;
+    background: #4a90d9;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+
+  /* Grid captcha styles */
+  .captcha-grid {
+    display: grid;
+    gap: 2px;
+    margin: 8px 0;
+  }
+
+  .captcha-grid.g3x3 { grid-template-columns: repeat(3, 1fr); }
+  .captcha-grid.g4x4 { grid-template-columns: repeat(4, 1fr); }
+  .captcha-grid.g5x5 { grid-template-columns: repeat(5, 1fr); }
+  .captcha-grid.g6x6 { grid-template-columns: repeat(6, 1fr); }
+
+  .grid-cell {
+    aspect-ratio: 1;
+    background: #ddd;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: border-color 0.15s;
+  }
+
+  .grid-cell:hover { border-color: #4a90d9; }
+  .grid-cell.selected { border-color: #4a90d9; }
+  .grid-cell.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #4a90d9;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .grid-cell canvas, .grid-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Text input style */
+  .captcha-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: inherit;
+  }
+
+  .captcha-input:focus { border-color: #4a90d9; }
+
+  .captcha-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #ddd;
+    border-radius: 3px;
+    font-size: 13px;
+    outline: none;
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+  }
+
+  .captcha-textarea:focus { border-color: #4a90d9; }
+
+  /* Radio / checkbox */
+  .captcha-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-size: 13px;
+  }
+
+  .captcha-option:hover { background: #f5f8fc; }
+  .captcha-option.selected { background: #e8f0fe; border-color: #4a90d9; }
+
+  /* Slider */
+  .captcha-slider {
+    width: 100%;
+    margin: 12px 0;
+    -webkit-appearance: none;
+    height: 8px;
+    border-radius: 4px;
+    background: #ddd;
+    outline: none;
+  }
+
+  .captcha-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #4a90d9;
+    cursor: pointer;
+  }
+
+  .slider-value {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #4a90d9;
+  }
+
+  /* Color picker */
+  .color-display {
+    width: 100%;
+    height: 60px;
+    border-radius: 4px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+  }
+
+  .color-sliders { margin: 8px 0; }
+  .color-sliders label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .color-sliders input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: #ddd;
+    outline: none;
+  }
+
+  .color-sliders input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #4a90d9;
+    cursor: pointer;
+  }
+
+  /* Chess board */
+  .chess-board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0;
+    margin: 8px 0;
+    border: 2px solid #333;
+    width: 100%;
+    aspect-ratio: 1;
+  }
+
+  .chess-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .chess-cell.light { background: #f0d9b5; }
+  .chess-cell.dark { background: #b58863; }
+  .chess-cell.selected-chess { outline: 3px solid #4a90d9; outline-offset: -3px; }
+
+  /* Game canvases */
+  .game-canvas {
+    width: 100%;
+    border: 2px solid #333;
+    border-radius: 3px;
+    display: block;
+    background: #000;
+  }
+
+  /* Minesweeper */
+  .minesweeper-grid {
+    display: inline-grid;
+    gap: 1px;
+    background: #999;
+    border: 2px solid #999;
+    margin: 8px auto;
+  }
+
+  .mine-cell {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    background: #ccc;
+    border: 2px outset #eee;
+  }
+
+  .mine-cell.revealed {
+    background: #ddd;
+    border: 1px solid #999;
+  }
+
+  .mine-cell.flagged { background: #fdd; }
+  .mine-cell.mine-exploded { background: #f55; }
+
+  .mine-1 { color: blue; }
+  .mine-2 { color: green; }
+  .mine-3 { color: red; }
+  .mine-4 { color: darkblue; }
+  .mine-5 { color: brown; }
+
+  /* Timer */
+  .timer-display {
+    font-size: 11px;
+    color: #999;
+    font-family: monospace;
+  }
+
+  /* Distorted text */
+  .distorted-text-container {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    margin: 8px 0;
+    overflow: hidden;
+  }
+
+  /* Philosophy container */
+  .philosophy-container {
+    background: #f8f4e8;
+    border: 1px solid #e0d8c0;
+    border-radius: 4px;
+    padding: 12px;
+    margin: 8px 0;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #555;
+  }
+
+  /* Circuit diagram */
+  .circuit-canvas {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+  }
+
+  /* Math display */
+  .math-display {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 16px;
+    text-align: center;
+    margin: 8px 0;
+    font-size: 18px;
+    font-family: 'Times New Roman', serif;
+    line-height: 1.8;
+  }
+
+  /* Debate container */
+  .debate-container {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 8px 0;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 8px;
+  }
+
+  .debate-msg {
+    padding: 8px 12px;
+    border-radius: 12px;
+    margin-bottom: 6px;
+    max-width: 80%;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .debate-msg.ai {
+    background: #e8e8e8;
+    margin-right: auto;
+  }
+
+  .debate-msg.human {
+    background: #4a90d9;
+    color: white;
+    margin-left: auto;
+  }
+
+  /* Drag & drop */
+  .drag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 8px 0;
+    min-height: 40px;
+    padding: 8px;
+    border: 2px dashed #ddd;
+    border-radius: 4px;
+  }
+
+  .drag-item {
+    padding: 6px 12px;
+    background: #4a90d9;
+    color: white;
+    border-radius: 3px;
+    cursor: grab;
+    font-size: 13px;
+    user-select: none;
+  }
+
+  .drag-item:active { cursor: grabbing; }
+
+  .drop-zone {
+    min-height: 40px;
+    padding: 8px;
+    border: 2px dashed #4a90d9;
+    border-radius: 4px;
+    margin: 4px 0;
+    background: #f5f8fc;
+    font-size: 12px;
+    color: #888;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  /* Emoji */
+  .emoji-display {
+    font-size: 48px;
+    text-align: center;
+    padding: 16px;
+  }
+
+  /* Loading spinner for fake processing */
+  .fake-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 40px 0;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e0e0e0;
+    border-top-color: #4a90d9;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .fake-loading-text {
+    font-size: 12px;
+    color: #888;
+  }
+
+  /* Waveform visualizer */
+  .waveform-canvas {
+    width: 100%;
+    height: 60px;
+    background: #1a1a1a;
+    border-radius: 4px;
+  }
+
+  /* Photo grid for species identification */
+  .photo-container {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 8px 0;
+    position: relative;
+  }
+
+  .photo-container canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Warning messages */
+  .captcha-warning {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 3px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #856404;
+    margin: 8px 0;
+  }
+
+  .captcha-error {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 3px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #721c24;
+    margin: 8px 0;
+  }
+
+  .captcha-success {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 3px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #155724;
+    margin: 8px 0;
+  }
+
+  /* Fingerprint sensor */
+  .fingerprint-zone {
+    width: 120px;
+    height: 150px;
+    margin: 12px auto;
+    border: 3px solid #ddd;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .fingerprint-zone:hover {
+    border-color: #4a90d9;
+    background: linear-gradient(135deg, #e8f0fe, #d0e0f0);
+  }
+
+  .fingerprint-zone.scanning {
+    border-color: #4a90d9;
+    animation: pulse 1s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(74,144,217,0.4); }
+    50% { box-shadow: 0 0 0 10px rgba(74,144,217,0); }
+  }
+
+  /* Personality quiz */
+  .likert-scale {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 0;
+    gap: 4px;
+  }
+
+  .likert-option {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.15s;
+  }
+
+  .likert-option:hover { background: #f5f8fc; }
+  .likert-option.selected { background: #4a90d9; color: white; border-color: #4a90d9; }
+
+  /* Drawing canvas */
+  .drawing-canvas {
+    width: 100%;
+    height: 200px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    cursor: crosshair;
+    background: white;
+  }
+
+  /* Sorting area */
+  .sort-list {
+    list-style: none;
+    margin: 8px 0;
+  }
+
+  .sort-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin-bottom: 4px;
+    cursor: grab;
+    font-size: 13px;
+  }
+
+  .sort-item:active { cursor: grabbing; background: #e8f0fe; }
+  .sort-handle { color: #999; cursor: grab; }
+
+  /* CAPTCHA legal text */
+  .legal-text {
+    font-size: 10px;
+    color: #999;
+    line-height: 1.4;
+    margin-top: 8px;
+  }
+
+  /* Level badge */
+  .level-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .level-easy { background: #d4edda; color: #155724; }
+  .level-medium { background: #fff3cd; color: #856404; }
+  .level-hard { background: #f8d7da; color: #721c24; }
+  .level-insane { background: #721c24; color: white; }
+  .level-transcendent { background: #1a1a1a; color: #fff; animation: rainbow 3s linear infinite; }
+
+  @keyframes rainbow {
+    0% { color: #ff0000; }
+    16% { color: #ff8800; }
+    33% { color: #ffff00; }
+    50% { color: #00ff00; }
+    66% { color: #0088ff; }
+    83% { color: #8800ff; }
+    100% { color: #ff0000; }
+  }
+
+  /* Attractiveness rating */
+  .rating-face {
+    width: 100%;
+    aspect-ratio: 3/4;
+    max-height: 200px;
+    border-radius: 4px;
+    margin: 8px 0;
+    background: #eee;
+    overflow: hidden;
+  }
+
+  .rating-face canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Scroll text */
+  .scroll-container {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 12px;
+    margin: 8px 0;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #444;
+  }
+
+  /* Number display */
+  .number-display {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    background: #f8f8f8;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 8px 0;
+    word-break: break-all;
+    line-height: 1.4;
+  }
+
+  /* Musical staff */
+  .music-staff {
+    width: 100%;
+    height: 120px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 8px 0;
+  }
+
+  /* Constellation */
+  .constellation-canvas {
+    width: 100%;
+    height: 250px;
+    background: #0a0a2e;
+    border-radius: 4px;
+    margin: 8px 0;
+  }
+
+  /* Where's waldo style */
+  .waldo-container {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    margin: 8px 0;
+    cursor: crosshair;
+    position: relative;
+  }
+
+  .waldo-container canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Morality meter */
+  .morality-meter {
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(to right, #ff0000, #ffff00, #00ff00);
+    border-radius: 15px;
+    margin: 12px 0;
+    position: relative;
+    border: 2px solid #ddd;
+  }
+
+  .morality-pointer {
+    width: 20px;
+    height: 36px;
+    background: #333;
+    border-radius: 3px;
+    position: absolute;
+    top: -3px;
+    transform: translateX(-50%);
+    cursor: grab;
+  }
+
+  /* DNA sequence */
+  .dna-sequence {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    background: #f0f8ff;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 8px 0;
+    line-height: 1.6;
+    word-break: break-all;
+  }
+
+  .dna-A { color: #e74c3c; }
+  .dna-T { color: #3498db; }
+  .dna-G { color: #2ecc71; }
+  .dna-C { color: #f39c12; }
+
+  /* Regex tester */
+  .regex-display {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    background: #1a1a1a;
+    color: #0f0;
+    padding: 12px;
+    border-radius: 4px;
+    margin: 8px 0;
+  }
+
+  /* Assembly listing */
+  .asm-listing {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    background: #1a1a2e;
+    color: #a0ffa0;
+    padding: 12px;
+    border-radius: 4px;
+    margin: 8px 0;
+    overflow-x: auto;
+    line-height: 1.5;
+  }
+
+  /* 3D perspective container */
+  .perspective-container {
+    perspective: 500px;
+    margin: 12px 0;
+    text-align: center;
+  }
+
+  .rotated-text {
+    display: inline-block;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    transform: rotateY(45deg) rotateX(15deg);
+    letter-spacing: 4px;
+  }
+
+  /* Knob control */
+  .knob-container {
+    text-align: center;
+    margin: 12px 0;
+  }
+
+  .knob {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #ddd, #999, #ddd);
+    border: 3px solid #888;
+    margin: 0 auto;
+    cursor: grab;
+    position: relative;
+  }
+
+  .knob-indicator {
+    width: 4px;
+    height: 30px;
+    background: #e74c3c;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    transform-origin: bottom center;
+    border-radius: 2px;
+  }
+
+  /* Typewriter effect */
+  @keyframes blink-caret {
+    0%, 100% { border-right-color: transparent; }
+    50% { border-right-color: #333; }
+  }
+
+  /* Achievement popup */
+  .achievement {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #333;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    z-index: 1000;
+    transform: translateX(400px);
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .achievement.show { transform: translateX(0); }
+  .achievement-title { font-weight: bold; font-size: 14px; }
+  .achievement-desc { font-size: 11px; opacity: 0.8; margin-top: 2px; }
+
+  /* Rorschach */
+  .rorschach-container {
+    text-align: center;
+    margin: 8px 0;
+  }
+
+  .rorschach-container canvas {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  /* Map */
+  .map-canvas {
+    width: 100%;
+    height: 250px;
+    background: #87ceeb;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 8px 0;
+    cursor: crosshair;
+  }
+
+  /* Terms of service */
+  .tos-container {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 12px;
+    margin: 8px 0;
+    font-size: 9px;
+    line-height: 1.5;
+    color: #666;
+    background: #fafafa;
+  }
+
+  .tos-container h4 {
+    font-size: 10px;
+    margin: 8px 0 4px 0;
+    color: #333;
+  }
+
+  /* Countdown */
+  .countdown-display {
+    font-family: 'Courier New', monospace;
+    font-size: 36px;
+    text-align: center;
+    color: #e74c3c;
+    padding: 8px;
+    font-weight: bold;
+  }
+
+  .countdown-display.urgent {
+    animation: flash 0.5s infinite;
+  }
+
+  @keyframes flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* Pixel art editor */
+  .pixel-grid {
+    display: inline-grid;
+    gap: 1px;
+    background: #ccc;
+    margin: 8px auto;
+  }
+
+  .pixel-cell {
+    width: 20px;
+    height: 20px;
+    background: white;
+    cursor: pointer;
+  }
+
+  /* Confirm humanity bar */
+  .humanity-score {
+    margin: 8px 0;
+    padding: 8px;
+    background: #f8f8f8;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+
+  .humanity-bar {
+    height: 12px;
+    background: #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .humanity-fill {
+    height: 100%;
+    background: linear-gradient(to right, #e74c3c, #f39c12, #2ecc71);
+    transition: width 0.5s;
+    border-radius: 6px;
+  }
+
+  .humanity-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  /* Maze */
+  .maze-canvas {
+    width: 100%;
+    height: 300px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    background: white;
+    margin: 8px 0;
+  }
+
+  /* Crossword */
+  .crossword-grid {
+    display: inline-grid;
+    gap: 0;
+    margin: 8px auto;
+    border: 2px solid #333;
+  }
+
+  .crossword-cell {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    position: relative;
+  }
+
+  .crossword-cell.black { background: #333; }
+  .crossword-cell input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    outline: none;
+    background: transparent;
+  }
+
+  .crossword-cell .cell-number {
+    position: absolute;
+    top: 1px;
+    left: 2px;
+    font-size: 8px;
+    font-weight: normal;
+    color: #666;
+  }
+
+  .captcha-recaptcha-logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: #999;
+  }
+
+  .captcha-recaptcha-logo svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Hidden scrollbar for smoother appearance */
+  #captcha-body::-webkit-scrollbar { width: 6px; }
+  #captcha-body::-webkit-scrollbar-track { background: transparent; }
+  #captcha-body::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+  #captcha-body::-webkit-scrollbar-thumb:hover { background: #999; }
+
+  /* Satisfaction survey */
+  .star-rating {
+    display: flex;
+    gap: 4px;
+    font-size: 32px;
+    cursor: pointer;
+    margin: 8px 0;
+  }
+
+  .star-rating span { color: #ddd; transition: color 0.15s; }
+  .star-rating span.filled { color: #f39c12; }
+  .star-rating span:hover ~ span { color: #ddd; }
+
+  .completion-screen {
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .completion-screen h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #155724;
+  }
+
+  .confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+  }
+</style>
+</head>
+<body>
+
+<div id="achievement" class="achievement">
+  <div class="achievement-title" id="achievement-title"></div>
+  <div class="achievement-desc" id="achievement-desc"></div>
+</div>
+
+<div id="captcha-container">
+  <div id="progress-bar-container">
+    <div id="progress-bar"></div>
+  </div>
+  <div id="captcha-header">
+    <span id="header-title">Verify you are human</span>
+    <span class="step-counter" id="step-counter">Step 1 of ???</span>
+  </div>
+  <div id="captcha-body"></div>
+  <div id="captcha-footer">
+    <div class="captcha-recaptcha-logo">
+      <svg viewBox="0 0 24 24" fill="#999"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+      SuperCAPTCHA v99.0
+    </div>
+    <div id="footer-buttons">
+      <button class="btn-verify" id="btn-verify" onclick="submitAnswer()">Verify</button>
+    </div>
+  </div>
+</div>
+
+<canvas id="confetti-canvas" class="confetti-canvas" style="display:none"></canvas>
+
+<script>
+// ============================================================================
+// SUPERCAPTCHA - THE WORLD'S MOST DIFFICULT CAPTCHA SYSTEM
+// ============================================================================
+
+let currentStep = 0;
+let totalSteps = 0;
+let humanityScore = 0;
+let stepStartTime = 0;
+let totalTime = 0;
+let currentAnswer = null;
+let challenges = [];
+let audioCtx = null;
+let mediaStream = null;
+
+// ============================================================================
+// UTILITY FUNCTIONS
+// ============================================================================
+
+function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+function randFloat(min, max) { return Math.random() * (max - min) + min; }
+function pick(arr) { return arr[rand(0, arr.length - 1)]; }
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = rand(0, i);
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function showAchievement(title, desc) {
+  const el = document.getElementById('achievement');
+  document.getElementById('achievement-title').textContent = title;
+  document.getElementById('achievement-desc').textContent = desc;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+function updateProgress() {
+  const pct = (currentStep / totalSteps) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('step-counter').textContent = `Step ${currentStep + 1} of ${totalSteps}`;
+}
+
+function setInstruction(text) {
+  return `<div class="captcha-instruction">${text}</div>`;
+}
+
+function setSubtext(text) {
+  return `<div class="captcha-subtext">${text}</div>`;
+}
+
+function setWarning(text) {
+  return `<div class="captcha-warning">⚠️ ${text}</div>`;
+}
+
+function getLevelBadge(level) {
+  const classes = { easy: 'level-easy', medium: 'level-medium', hard: 'level-hard', insane: 'level-insane', transcendent: 'level-transcendent' };
+  return `<span class="level-badge ${classes[level] || 'level-hard'}">${level}</span>`;
+}
+
+function getBody() { return document.getElementById('captcha-body'); }
+function getVerifyBtn() { return document.getElementById('btn-verify'); }
+
+// Generate a seeded random color
+function randColor() {
+  return `hsl(${rand(0,360)}, ${rand(40,80)}%, ${rand(30,70)}%)`;
+}
+
+function drawNoise(ctx, w, h, intensity) {
+  const imgData = ctx.getImageData(0, 0, w, h);
+  for (let i = 0; i < imgData.data.length; i += 4) {
+    if (Math.random() < intensity) {
+      const v = rand(0, 255);
+      imgData.data[i] = v;
+      imgData.data[i+1] = v;
+      imgData.data[i+2] = v;
+    }
+  }
+  ctx.putImageData(imgData, 0, 0);
+}
+
+// Draw a mangled, distorted captcha image on a canvas
+function drawDistortedImage(canvas, items, type) {
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width;
+  const h = canvas.height;
+
+  ctx.fillStyle = '#f0f0f0';
+  ctx.fillRect(0, 0, w, h);
+
+  // Draw random noise/lines
+  for (let i = 0; i < 20; i++) {
+    ctx.strokeStyle = `rgba(${rand(0,255)},${rand(0,255)},${rand(0,255)},0.3)`;
+    ctx.lineWidth = rand(1, 3);
+    ctx.beginPath();
+    ctx.moveTo(rand(0, w), rand(0, h));
+    ctx.bezierCurveTo(rand(0,w), rand(0,h), rand(0,w), rand(0,h), rand(0,w), rand(0,h));
+    ctx.stroke();
+  }
+
+  if (type === 'bicycle') {
+    drawBicycleMess(ctx, w, h);
+  } else if (type === 'firetruck') {
+    drawCityBirdseye(ctx, w, h);
+  } else if (type === 'text') {
+    drawDistortedText(ctx, w, h, items);
+  }
+}
+
+function drawBicycleMess(ctx, w, h) {
+  // Draw things that might be bicycles, maybe, who knows
+  for (let i = 0; i < 15; i++) {
+    const x = rand(10, w - 60);
+    const y = rand(10, h - 60);
+    const size = rand(15, 40);
+    const color = randColor();
+
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(randFloat(-0.5, 0.5));
+    ctx.globalAlpha = randFloat(0.3, 0.8);
+
+    // Draw circle-like shapes (wheels? not wheels?)
+    ctx.strokeStyle = color;
+    ctx.lineWidth = rand(1, 3);
+    ctx.beginPath();
+    ctx.ellipse(0, 0, size, size * randFloat(0.6, 1.2), randFloat(-0.3, 0.3), 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.ellipse(size * 1.5, rand(-5, 5), size, size * randFloat(0.7, 1.1), randFloat(-0.3, 0.3), 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Draw connecting lines (frame? maybe?)
+    ctx.beginPath();
+    ctx.moveTo(rand(-5, 5), rand(-5, 5));
+    ctx.lineTo(size * 1.5 + rand(-5, 5), rand(-5, 5));
+    ctx.lineTo(size * 0.75, -size + rand(-10, 10));
+    ctx.closePath();
+    ctx.stroke();
+
+    // Handlebars? Or just lines?
+    ctx.beginPath();
+    ctx.moveTo(size * 0.75, -size);
+    ctx.lineTo(size * 0.75 + rand(-15, 15), -size - rand(5, 20));
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  // Add extra confusion shapes
+  for (let i = 0; i < 30; i++) {
+    ctx.strokeStyle = randColor();
+    ctx.globalAlpha = randFloat(0.1, 0.4);
+    ctx.lineWidth = rand(1, 2);
+    ctx.beginPath();
+    ctx.arc(rand(0, w), rand(0, h), rand(5, 30), 0, Math.PI * 2);
+    ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+}
+
+function drawCityBirdseye(ctx, w, h) {
+  // Draw a bird's eye city view so tiny you can barely see anything
+  ctx.fillStyle = '#888';
+  ctx.fillRect(0, 0, w, h);
+
+  // Roads
+  for (let i = 0; i < 20; i++) {
+    ctx.strokeStyle = '#aaa';
+    ctx.lineWidth = rand(2, 5);
+    ctx.beginPath();
+    if (Math.random() > 0.5) {
+      ctx.moveTo(0, rand(0, h));
+      ctx.lineTo(w, rand(0, h));
+    } else {
+      ctx.moveTo(rand(0, w), 0);
+      ctx.lineTo(rand(0, w), h);
+    }
+    ctx.stroke();
+  }
+
+  // Buildings (tiny squares)
+  for (let i = 0; i < 200; i++) {
+    const bw = rand(3, 12);
+    const bh = rand(3, 12);
+    ctx.fillStyle = `hsl(${rand(0,60)}, ${rand(0,20)}%, ${rand(40,75)}%)`;
+    ctx.fillRect(rand(0, w), rand(0, h), bw, bh);
+  }
+
+  // Hide a tiny red rectangle somewhere (firetruck)
+  for (let i = 0; i < rand(1, 3); i++) {
+    ctx.fillStyle = '#cc2222';
+    ctx.fillRect(rand(10, w - 10), rand(10, h - 10), rand(3, 6), rand(2, 3));
+  }
+
+  // Add some green (parks)
+  for (let i = 0; i < 10; i++) {
+    ctx.fillStyle = `rgba(0,${rand(100,180)},0,0.5)`;
+    ctx.fillRect(rand(0, w), rand(0, h), rand(10, 30), rand(10, 30));
+  }
+}
+
+function drawDistortedText(ctx, w, h, text) {
+  ctx.save();
+  const chars = text.split('');
+  const charWidth = w / (chars.length + 2);
+
+  for (let i = 0; i < chars.length; i++) {
+    ctx.save();
+    const x = charWidth * (i + 1);
+    const y = h / 2 + rand(-20, 20);
+    ctx.translate(x, y);
+    ctx.rotate(randFloat(-0.6, 0.6));
+    ctx.scale(randFloat(0.7, 1.3), randFloat(0.7, 1.3));
+    ctx.font = `${rand(20, 36)}px ${pick(['serif', 'sans-serif', 'monospace', 'cursive'])}`;
+    ctx.fillStyle = randColor();
+    ctx.globalAlpha = randFloat(0.5, 0.9);
+    ctx.fillText(chars[i], 0, 0);
+    ctx.restore();
+  }
+
+  // Strikethrough lines
+  for (let i = 0; i < 8; i++) {
+    ctx.strokeStyle = randColor();
+    ctx.lineWidth = rand(1, 3);
+    ctx.globalAlpha = randFloat(0.3, 0.7);
+    ctx.beginPath();
+    ctx.moveTo(rand(0, w), rand(0, h));
+    ctx.lineTo(rand(0, w), rand(0, h));
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+// Generate a procedural face for attractiveness rating
+function drawProceduralFace(canvas) {
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width;
+  const h = canvas.height;
+
+  // Background
+  const skinTone = `hsl(${rand(15, 35)}, ${rand(40, 70)}%, ${rand(50, 80)}%)`;
+  ctx.fillStyle = skinTone;
+  ctx.fillRect(0, 0, w, h);
+
+  // Face shape
+  ctx.fillStyle = skinTone;
+  ctx.beginPath();
+  ctx.ellipse(w/2, h * 0.45, w * 0.35, h * 0.4, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Hair
+  ctx.fillStyle = pick(['#1a1a1a', '#4a3728', '#8b6914', '#c2802e', '#d4a373', '#e74c3c']);
+  ctx.beginPath();
+  ctx.ellipse(w/2, h * 0.25, w * 0.38, h * 0.25, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Eyes
+  const eyeY = h * 0.4;
+  for (let side = -1; side <= 1; side += 2) {
+    const eyeX = w/2 + side * w * 0.12;
+    ctx.fillStyle = 'white';
+    ctx.beginPath();
+    ctx.ellipse(eyeX, eyeY, rand(8, 14), rand(6, 10), 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = pick(['#4a3728', '#1a6b3f', '#2471a3', '#1a1a1a']);
+    ctx.beginPath();
+    ctx.arc(eyeX, eyeY, rand(4, 7), 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#000';
+    ctx.beginPath();
+    ctx.arc(eyeX, eyeY, rand(2, 4), 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Nose
+  ctx.strokeStyle = `hsl(${rand(15, 35)}, ${rand(40, 70)}%, ${rand(35, 55)}%)`;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(w/2, h * 0.38);
+  ctx.quadraticCurveTo(w/2 + rand(-8, 8), h * 0.52, w/2, h * 0.53);
+  ctx.stroke();
+
+  // Mouth
+  ctx.strokeStyle = '#c0392b';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(w/2, h * 0.62, rand(10, 20), 0.1, Math.PI - 0.1);
+  ctx.stroke();
+
+  // Weird features to make it harder
+  if (Math.random() > 0.5) {
+    // Add glasses
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 2;
+    for (let side = -1; side <= 1; side += 2) {
+      ctx.beginPath();
+      ctx.ellipse(w/2 + side * w * 0.12, eyeY, 14, 12, 0, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    ctx.beginPath();
+    ctx.moveTo(w/2 - w * 0.12 + 14, eyeY);
+    ctx.lineTo(w/2 + w * 0.12 - 14, eyeY);
+    ctx.stroke();
+  }
+
+  // Add some noise
+  drawNoise(ctx, w, h, 0.02);
+}
+
+// Draw a chess position
+function getRandomChessPosition() {
+  const pieces = {
+    'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘', 'P': '♙',
+    'k': '♚', 'q': '♛', 'r': '♜', 'b': '♝', 'n': '♞', 'p': '♟'
+  };
+
+  // Complex middle-game positions
+  const positions = [
+    'r1bq1rk1/pp2ppbp/2np1np1/2p5/2B1P3/2NP1N2/PPP2PPP/R1BQ1RK1',
+    'rnbqk2r/pppp1ppp/5n2/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',
+    'r3k2r/pppq1ppp/2n1bn2/2b1p3/2B1P3/2N2N2/PPPQ1PPP/R3K2R',
+    'r2q1rk1/pb1nbppp/1p2pn2/2p5/2PP4/1PN1PN2/PB2BPPP/R2Q1RK1',
+    'r1bqkbnr/pppppppp/2n5/8/4P3/8/PPPP1PPP/RNBQKBNR',
+    '2r1r1k1/pp1bqppp/3p1n2/4p3/2P1P3/1QN2N2/PP3PPP/R1B1R1K1',
+    'rnb1kb1r/pp1p1ppp/1q2pn2/2p5/2PP4/2N2NP1/PP2PP1P/R1BQKB1R',
+    'r4rk1/1bqnbppp/pp1ppn2/8/2PNP3/1PN1BP2/P4QPP/R4RK1',
+  ];
+
+  const fen = pick(positions);
+  const board = [];
+  const ranks = fen.split('/');
+
+  for (let r = 0; r < 8; r++) {
+    board[r] = [];
+    let col = 0;
+    for (const ch of ranks[r]) {
+      if (ch >= '1' && ch <= '8') {
+        for (let j = 0; j < parseInt(ch); j++) {
+          board[r][col++] = '';
+        }
+      } else {
+        board[r][col++] = pieces[ch] || '';
+      }
+    }
+  }
+
+  return board;
+}
+
+// Draw a Rorschach inkblot
+function drawRorschach(canvas) {
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width;
+  const h = canvas.height;
+
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, w, h);
+
+  // Generate one half, mirror it
+  const halfW = w / 2;
+  const blobs = rand(5, 12);
+
+  ctx.fillStyle = 'rgba(20, 20, 20, 0.8)';
+
+  for (let i = 0; i < blobs; i++) {
+    const bx = rand(20, halfW - 20);
+    const by = rand(20, h - 20);
+    const br = rand(10, 50);
+    const points = rand(5, 10);
+
+    ctx.beginPath();
+    for (let p = 0; p < points; p++) {
+      const angle = (p / points) * Math.PI * 2;
+      const r = br * randFloat(0.3, 1.5);
+      const px = bx + Math.cos(angle) * r;
+      const py = by + Math.sin(angle) * r;
+      if (p === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.fill();
+
+    // Mirror
+    ctx.save();
+    ctx.translate(w, 0);
+    ctx.scale(-1, 1);
+    ctx.beginPath();
+    for (let p = 0; p < points; p++) {
+      const angle = (p / points) * Math.PI * 2;
+      const r = br * randFloat(0.3, 1.5);
+      const px = bx + Math.cos(angle) * r;
+      const py = by + Math.sin(angle) * r;
+      if (p === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+// Draw constellation
+function drawConstellation(canvas) {
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width;
+  const h = canvas.height;
+
+  // Night sky
+  ctx.fillStyle = '#0a0a2e';
+  ctx.fillRect(0, 0, w, h);
+
+  // Background stars
+  for (let i = 0; i < 200; i++) {
+    ctx.fillStyle = `rgba(255,255,255,${randFloat(0.1, 0.7)})`;
+    ctx.beginPath();
+    ctx.arc(rand(0, w), rand(0, h), randFloat(0.5, 1.5), 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Constellation stars
+  const numStars = rand(5, 10);
+  const stars = [];
+  for (let i = 0; i < numStars; i++) {
+    stars.push({ x: rand(30, w - 30), y: rand(30, h - 30) });
+  }
+
+  // Draw constellation lines
+  ctx.strokeStyle = 'rgba(100, 150, 255, 0.4)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < stars.length - 1; i++) {
+    ctx.beginPath();
+    ctx.moveTo(stars[i].x, stars[i].y);
+    ctx.lineTo(stars[i+1].x, stars[i+1].y);
+    ctx.stroke();
+  }
+
+  // Draw constellation stars (brighter)
+  for (const star of stars) {
+    ctx.fillStyle = 'rgba(200, 220, 255, 0.9)';
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, rand(2, 4), 0, Math.PI * 2);
+    ctx.fill();
+
+    // Glow
+    const grd = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, 8);
+    grd.addColorStop(0, 'rgba(200, 220, 255, 0.4)');
+    grd.addColorStop(1, 'rgba(200, 220, 255, 0)');
+    ctx.fillStyle = grd;
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, 8, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+// Maze generator
+function generateMaze(rows, cols) {
+  const maze = Array.from({ length: rows }, () =>
+    Array.from({ length: cols }, () => ({ top: true, right: true, bottom: true, left: true, visited: false }))
+  );
+
+  const stack = [];
+  let current = { r: 0, c: 0 };
+  maze[0][0].visited = true;
+  stack.push(current);
+
+  while (stack.length > 0) {
+    const { r, c } = current;
+    const neighbors = [];
+
+    if (r > 0 && !maze[r-1][c].visited) neighbors.push({ r: r-1, c, dir: 'top' });
+    if (r < rows-1 && !maze[r+1][c].visited) neighbors.push({ r: r+1, c, dir: 'bottom' });
+    if (c > 0 && !maze[r][c-1].visited) neighbors.push({ r, c: c-1, dir: 'left' });
+    if (c < cols-1 && !maze[r][c+1].visited) neighbors.push({ r, c: c+1, dir: 'right' });
+
+    if (neighbors.length > 0) {
+      const next = pick(neighbors);
+      maze[next.r][next.c].visited = true;
+
+      if (next.dir === 'top') { maze[r][c].top = false; maze[next.r][next.c].bottom = false; }
+      if (next.dir === 'bottom') { maze[r][c].bottom = false; maze[next.r][next.c].top = false; }
+      if (next.dir === 'left') { maze[r][c].left = false; maze[next.r][next.c].right = false; }
+      if (next.dir === 'right') { maze[r][c].right = false; maze[next.r][next.c].left = false; }
+
+      stack.push(current);
+      current = next;
+    } else {
+      current = stack.pop();
+    }
+  }
+
+  return maze;
+}
+
+function drawMaze(canvas, maze) {
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width;
+  const h = canvas.height;
+  const rows = maze.length;
+  const cols = maze[0].length;
+  const cellW = w / cols;
+  const cellH = h / rows;
+
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, w, h);
+
+  ctx.strokeStyle = '#333';
+  ctx.lineWidth = 2;
+
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const x = c * cellW;
+      const y = r * cellH;
+      const cell = maze[r][c];
+
+      if (cell.top) { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + cellW, y); ctx.stroke(); }
+      if (cell.right) { ctx.beginPath(); ctx.moveTo(x + cellW, y); ctx.lineTo(x + cellW, y + cellH); ctx.stroke(); }
+      if (cell.bottom) { ctx.beginPath(); ctx.moveTo(x, y + cellH); ctx.lineTo(x + cellW, y + cellH); ctx.stroke(); }
+      if (cell.left) { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y + cellH); ctx.stroke(); }
+    }
+  }
+
+  // Start (green) and end (red) markers
+  ctx.fillStyle = '#2ecc71';
+  ctx.fillRect(2, 2, cellW - 4, cellH - 4);
+  ctx.fillStyle = '#e74c3c';
+  ctx.fillRect((cols-1) * cellW + 2, (rows-1) * cellH + 2, cellW - 4, cellH - 4);
+}
+
+// Generate musical staff
+function drawMusicalStaff(canvas, notes) {
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width;
+  const h = canvas.height;
+
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, w, h);
+
+  // Staff lines
+  ctx.strokeStyle = '#333';
+  ctx.lineWidth = 1;
+  const staffTop = 20;
+  const spacing = (h - 40) / 8;
+
+  for (let i = 0; i < 5; i++) {
+    const y = staffTop + i * spacing;
+    ctx.beginPath();
+    ctx.moveTo(10, y);
+    ctx.lineTo(w - 10, y);
+    ctx.stroke();
+  }
+
+  // Treble clef (simplified)
+  ctx.font = '48px serif';
+  ctx.fillStyle = '#333';
+  ctx.fillText('𝄞', 12, staffTop + 3.5 * spacing);
+
+  // Notes
+  const noteX = 60;
+  const noteSpacing = (w - 80) / notes.length;
+
+  const notePositions = { 'C4': 5.5, 'D4': 5, 'E4': 4.5, 'F4': 4, 'G4': 3.5, 'A4': 3, 'B4': 2.5, 'C5': 2, 'D5': 1.5, 'E5': 1, 'F5': 0.5 };
+
+  for (let i = 0; i < notes.length; i++) {
+    const note = notes[i];
+    const pos = notePositions[note.pitch] || 3;
+    const x = noteX + i * noteSpacing;
+    const y = staffTop + pos * spacing;
+
+    // Note head
+    ctx.fillStyle = '#333';
+    ctx.beginPath();
+    ctx.ellipse(x, y, 7, 5, -0.2, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Stem
+    ctx.beginPath();
+    ctx.moveTo(x + 6, y);
+    ctx.lineTo(x + 6, y - 30);
+    ctx.stroke();
+
+    // Accidentals
+    if (note.accidental === '#') {
+      ctx.font = '16px serif';
+      ctx.fillText('♯', x - 16, y + 5);
+    } else if (note.accidental === 'b') {
+      ctx.font = '16px serif';
+      ctx.fillText('♭', x - 14, y + 5);
+    }
+  }
+}
+
+// ============================================================================
+// CHALLENGE DEFINITIONS - THE GAUNTLET
+// ============================================================================
+
+function buildChallenges() {
+  challenges = [
+    // ---- PHASE 1: "Normal" (but already annoying) ----
+
+    // 1. Classic distorted text
+    {
+      title: 'Type the characters you see',
+      level: 'easy',
+      setup: function() {
+        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+        let text = '';
+        for (let i = 0; i < 8; i++) text += chars[rand(0, chars.length - 1)];
+        this.answer = text;
+
+        let html = setInstruction('Type the characters you see below');
+        html += `<canvas class="game-canvas" id="text-captcha" width="360" height="100" style="height:100px"></canvas>`;
+        html += `<input class="captcha-input" id="text-input" placeholder="Enter characters..." autocomplete="off" style="margin-top:8px">`;
+        html += setSubtext('Characters are case-sensitive');
+        getBody().innerHTML = html;
+
+        const canvas = document.getElementById('text-captcha');
+        drawDistortedImage(canvas, text, 'text');
+
+        currentAnswer = () => document.getElementById('text-input').value;
+      },
+      validate: function() { return true; } // Always accept to keep them going
+    },
+
+    // 2. Select all squares with bicycles (impossible mess)
+    {
+      title: 'Select all squares containing bicycles',
+      level: 'medium',
+      setup: function() {
+        let html = setInstruction('Select all squares containing <strong>bicycles</strong>');
+        html += setSubtext('Click to select, click again to deselect');
+        html += '<div class="captcha-grid g4x4" id="bike-grid">';
+
+        for (let i = 0; i < 16; i++) {
+          html += `<div class="grid-cell" data-idx="${i}" onclick="this.classList.toggle('selected')"><canvas width="100" height="100"></canvas></div>`;
+        }
+        html += '</div>';
+        getBody().innerHTML = html;
+
+        // Draw a mangled bicycle-like mess in every cell
+        document.querySelectorAll('#bike-grid canvas').forEach(c => {
+          drawBicycleMess(c.getContext('2d'), 100, 100);
+        });
+
+        currentAnswer = () => [...document.querySelectorAll('#bike-grid .selected')].map(e => e.dataset.idx);
+      },
+      validate: function() {
+        const selected = currentAnswer();
+        return selected.length >= 2; // Just need to select something
+      }
+    },
+
+    // 3. Select all squares containing fire trucks (bird's eye city)
+    {
+      title: 'Select all squares containing fire trucks',
+      level: 'medium',
+      setup: function() {
+        let html = setInstruction('Select all squares containing <strong>fire trucks</strong>');
+        html += setSubtext('Image captured from satellite at 12,000ft altitude');
+        html += '<div class="captcha-grid g4x4" id="fire-grid">';
+
+        for (let i = 0; i < 16; i++) {
+          html += `<div class="grid-cell" data-idx="${i}" onclick="this.classList.toggle('selected')"><canvas width="100" height="100"></canvas></div>`;
+        }
+        html += '</div>';
+        html += setWarning('Zoom not available for security purposes');
+        getBody().innerHTML = html;
+
+        document.querySelectorAll('#fire-grid canvas').forEach(c => {
+          drawCityBirdseye(c.getContext('2d'), 100, 100);
+        });
+
+        currentAnswer = () => [...document.querySelectorAll('#fire-grid .selected')].map(e => e.dataset.idx);
+      },
+      validate: () => true
+    },
+
+    // 4. Simple math... but in Roman numerals
+    {
+      title: 'Solve this math problem',
+      level: 'medium',
+      setup: function() {
+        const toRoman = (n) => {
+          const vals = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
+          const syms = ['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'];
+          let result = '';
+          for (let i = 0; i < vals.length; i++) {
+            while (n >= vals[i]) { result += syms[i]; n -= vals[i]; }
+          }
+          return result;
+        };
+
+        const a = rand(50, 200);
+        const b = rand(50, 200);
+        this.answer = a + b;
+
+        let html = setInstruction('What is the sum of these Roman numerals?');
+        html += `<div class="math-display">${toRoman(a)} + ${toRoman(b)} = ?</div>`;
+        html += `<input class="captcha-input" id="roman-input" placeholder="Enter answer in Arabic numerals..." type="number">`;
+        html += setSubtext('Answer must be in standard Arabic numerals');
+        getBody().innerHTML = html;
+
+        currentAnswer = () => parseInt(document.getElementById('roman-input').value);
+      },
+      validate: function() {
+        return currentAnswer() === this.answer;
+      }
+    },
+
+    // 5. Accept terms of service (ridiculous length)
+    {
+      title: 'Accept our Terms of Service',
+      level: 'easy',
+      setup: function() {
+        let html = setInstruction('Please read and accept our Terms of Service');
+        html += '<div class="tos-container">';
+        html += '<h4>SUPERCAPTCHA TERMS OF SERVICE AND END USER LICENSE AGREEMENT</h4>';
+        html += '<p>Last updated: ' + new Date().toLocaleDateString() + '</p>';
+        html += '<p>By proceeding with this verification, you hereby acknowledge and agree to be bound by the following terms and conditions, which constitute a legally binding agreement between you ("the User", "the Human", "the Alleged Person") and SuperCAPTCHA Verification Systems International ("we", "us", "the System", "the Almighty Verifier").</p>';
+
+        const sections = [
+          'SECTION 1: DEFINITIONS - For the purposes of this agreement, "human" shall be defined as any carbon-based lifeform of the species Homo sapiens that has demonstrated consciousness through the completion of no fewer than forty-seven (47) verification challenges.',
+          'SECTION 2: GRANT OF LICENSE - Subject to your compliance with these terms, we grant you a limited, non-exclusive, non-transferable, revocable license to attempt to prove your humanity. This license may be revoked at any time for any reason, including but not limited to: suspicion of being a robot, suspicion of being a particularly clever parrot, or our general mood.',
+          'SECTION 3: DATA COLLECTION - You agree that we may collect the following data: mouse movements, keyboard patterns, typing speed, screen resolution, browser fingerprint, emotional state (inferred), blood type (estimated), favorite color (guessed), existential dread level (measured in units of Kierkegaard), and the name of your first pet.',
+          'SECTION 4: ACCEPTABLE USE - You agree not to: (a) use automated tools to solve challenges; (b) ask a friend for help; (c) Google the answers; (d) use your phone to take a picture of the screen and ask someone else; (e) cry; (f) complain on social media; (g) question the fairness of any challenge.',
+          'SECTION 5: LIMITATION OF LIABILITY - In no event shall SuperCAPTCHA be liable for any damages arising from: frustration, anger, existential crisis, broken keyboards, thrown mice, screaming at screens, questioning the meaning of life, or any other emotional or physical response to our verification challenges.',
+          'SECTION 6: DISPUTE RESOLUTION - Any disputes shall be resolved by a panel of three (3) AI judges, whose decision shall be final and binding. The proceedings shall be conducted in Latin.',
+          'SECTION 7: AMENDMENTS - We reserve the right to change these terms at any time without notice. By the time you finish reading this, we may have already changed them.',
+          'SECTION 8: SEVERABILITY - If any provision of this agreement is found to be unenforceable, the remaining provisions shall remain in full force and effect, and the unenforceable provision shall be replaced with one that is even more unreasonable.',
+          'SECTION 9: GOVERNING LAW - This agreement shall be governed by the laws of whatever jurisdiction is least convenient for you.',
+          'SECTION 10: ENTIRE AGREEMENT - This agreement constitutes the entire agreement between you and SuperCAPTCHA. Any prior verbal agreements, handshake deals, or pinky promises are hereby void.',
+          'SECTION 11: SOUL CLAUSE - By clicking "I Accept", you agree to transfer 0.001% of your immortal soul to SuperCAPTCHA Holdings LLC. This clause is non-negotiable.',
+          'SECTION 12: COOKIE POLICY - We use cookies. So many cookies. An unconscionable number of cookies. We track cookies, session cookies, persistent cookies, fortune cookies, and actual physical cookies that we mail to your home address.',
+          'SECTION 13: PHILOSOPHICAL DISCLAIMER - The existence of this CAPTCHA does not imply the existence of free will. Your choices may or may not be predetermined. We accept no responsibility for any simulation-breaking bugs encountered during verification.',
+        ];
+
+        sections.forEach(s => html += `<p>${s}</p>`);
+        html += '</div>';
+
+        html += '<div style="margin-top:8px"><label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input type="checkbox" id="tos-check"> I have read, understood, and accept the Terms of Service</label></div>';
+        html += '<div style="margin-top:4px"><label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input type="checkbox" id="tos-check2"> I am not a robot pretending to accept these terms</label></div>';
+        html += '<div style="margin-top:4px"><label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input type="checkbox" id="tos-check3"> I acknowledge that I may never finish this CAPTCHA</label></div>';
+
+        getBody().innerHTML = html;
+
+        currentAnswer = () => document.getElementById('tos-check').checked && document.getElementById('tos-check2').checked && document.getElementById('tos-check3').checked;
+      },
+      validate: () => currentAnswer()
+    },
+
+    // 6. Identify this obscure species
+    {
+      title: 'Identify this species',
+      level: 'hard',
+      setup: function() {
+        const species = [
+          { name: 'Glaucus atlanticus', common: 'Blue Dragon Sea Slug', desc: 'A small, pelagic aeolid nudibranch' },
+          { name: 'Daubentonia madagascariensis', common: 'Aye-aye', desc: 'A nocturnal lemur of Madagascar' },
+          { name: 'Chrysopelea paradisi', common: 'Paradise Tree Snake', desc: 'A flying snake found in Southeast Asia' },
+          { name: 'Theridion grallator', common: 'Happy Face Spider', desc: 'A spider native to Hawaiian islands' },
+          { name: 'Grimpoteuthis', common: 'Dumbo Octopus', desc: 'A deep-sea cirrate octopod' },
+          { name: 'Psychrolutes marcidus', common: 'Blobfish', desc: 'A deep sea fish of the family Psychrolutidae' },
+        ];
+
+        const species_choice = pick(species);
+        this.answer = species_choice.name.toLowerCase();
+
+        let html = setInstruction('Identify this species by its Latin (binomial) name');
+        html += getLevelBadge('hard');
+
+        // Draw a vaguely creature-like abstract shape
+        html += `<div class="photo-container"><canvas id="species-canvas" width="300" height="300"></canvas></div>`;
+        html += setSubtext(`Hint: ${species_choice.desc}`);
+        html += `<input class="captcha-input" id="species-input" placeholder="Enter Latin binomial name..." style="margin-top:8px">`;
+
+        getBody().innerHTML = html;
+
+        // Draw an abstract creature
+        const canvas = document.getElementById('species-canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#e8e8e8';
+        ctx.fillRect(0, 0, 300, 300);
+
+        // Random blobby creature shape
+        ctx.fillStyle = randColor();
+        ctx.beginPath();
+        ctx.moveTo(150, 50);
+        for (let i = 0; i < 20; i++) {
+          const angle = (i / 20) * Math.PI * 2;
+          const r = 80 + rand(-30, 30);
+          ctx.lineTo(150 + Math.cos(angle) * r, 150 + Math.sin(angle) * r);
+        }
+        ctx.closePath();
+        ctx.fill();
+
+        // Eyes
+        ctx.fillStyle = '#fff';
+        ctx.beginPath();
+        ctx.arc(130, 130, 12, 0, Math.PI * 2);
+        ctx.arc(170, 130, 12, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#000';
+        ctx.beginPath();
+        ctx.arc(132, 130, 5, 0, Math.PI * 2);
+        ctx.arc(168, 130, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Heavy noise and distortion
+        drawNoise(ctx, 300, 300, 0.15);
+
+        // Add "STOCK PHOTO" watermark
+        ctx.save();
+        ctx.translate(150, 150);
+        ctx.rotate(-0.4);
+        ctx.font = 'bold 36px Arial';
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.fillText('STOCK PHOTO', -100, 0);
+        ctx.restore();
+
+        currentAnswer = () => document.getElementById('species-input').value.toLowerCase().trim();
+      },
+      validate: function() {
+        const ans = currentAnswer();
+        return ans.length > 3; // Accept anything with some effort
+      }
+    },
+
+    // 7. Rate this person's attractiveness (1-10)
+    {
+      title: 'Rate this person\'s attractiveness',
+      level: 'medium',
+      setup: function() {
+        let html = setInstruction('Rate this person\'s attractiveness on a scale of 1-10');
+        html += getLevelBadge('medium');
+        html += setSubtext('Your response is being evaluated for human-like aesthetic judgment');
+        html += `<div class="rating-face"><canvas id="face-canvas" width="200" height="260"></canvas></div>`;
+        html += `<input type="range" class="captcha-slider" id="attract-slider" min="1" max="10" value="5" step="0.1" oninput="document.getElementById('attract-val').textContent = parseFloat(this.value).toFixed(1)">`;
+        html += `<div class="slider-value" id="attract-val">5.0</div>`;
+        html += setWarning('Answers below 3 or above 8 may be flagged for review');
+
+        getBody().innerHTML = html;
+
+        drawProceduralFace(document.getElementById('face-canvas'));
+
+        currentAnswer = () => parseFloat(document.getElementById('attract-slider').value);
+      },
+      validate: () => true
+    },
+
+    // 8. Solve a chess puzzle
+    {
+      title: 'Find the best move',
+      level: 'hard',
+      setup: function() {
+        const board = getRandomChessPosition();
+        const moves = ['Nf6+', 'Bxf7+', 'Qd5', 'Rd1', 'e5', 'Bb5', 'O-O', 'Nc3'];
+        this.correctMove = pick(moves);
+
+        let html = setInstruction('White to move. Find the best move.');
+        html += getLevelBadge('hard');
+        html += '<div class="chess-board" id="chess-board">';
+
+        for (let r = 0; r < 8; r++) {
+          for (let c = 0; c < 8; c++) {
+            const isLight = (r + c) % 2 === 0;
+            html += `<div class="chess-cell ${isLight ? 'light' : 'dark'}">${board[r][c]}</div>`;
+          }
+        }
+
+        html += '</div>';
+        html += `<input class="captcha-input" id="chess-input" placeholder="Enter move in algebraic notation (e.g., Nf3)" style="margin-top:8px">`;
+        html += setSubtext('Use standard algebraic notation. Engine depth: 32 ply.');
+
+        getBody().innerHTML = html;
+        currentAnswer = () => document.getElementById('chess-input').value.trim();
+      },
+      validate: () => currentAnswer().length > 0
+    },
+
+    // ---- PHASE 2: Getting Weird ----
+
+    // 9. Write a short essay
+    {
+      title: 'Write a short essay',
+      level: 'hard',
+      setup: function() {
+        const topics = [
+          'Why does consciousness exist?',
+          'Is a hot dog a sandwich? Defend your position.',
+          'Explain why you deserve to access this website.',
+          'Write a persuasive argument for why Pluto should be a planet again.',
+          'In exactly 100 words, describe the color blue to someone who has never seen it.',
+          'Argue that you are not a philosophical zombie.',
+          'Describe your most recent dream in vivid detail.',
+          'Explain the trolley problem and what you would do, and why.',
+        ];
+
+        const topic = pick(topics);
+
+        let html = setInstruction(topic);
+        html += getLevelBadge('hard');
+        html += `<textarea class="captcha-textarea" id="essay-input" placeholder="Write your essay here... (minimum 50 words)" style="min-height:150px"></textarea>`;
+        html += `<div style="text-align:right;font-size:11px;color:#888;margin-top:4px">Word count: <span id="word-count">0</span>/50 minimum</div>`;
+
+        getBody().innerHTML = html;
+
+        document.getElementById('essay-input').addEventListener('input', function() {
+          const words = this.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+          document.getElementById('word-count').textContent = words;
+        });
+
+        currentAnswer = () => document.getElementById('essay-input').value;
+      },
+      validate: () => {
+        const words = currentAnswer().trim().split(/\s+/).filter(w => w.length > 0).length;
+        return words >= 50;
+      }
+    },
+
+    // 10. Solve this integral
+    {
+      title: 'Solve this integral',
+      level: 'insane',
+      setup: function() {
+        const integrals = [
+          { q: '∫ x²·eˣ dx', a: 'x²eˣ - 2xeˣ + 2eˣ + C' },
+          { q: '∫ sin²(x) dx', a: '(x - sin(x)cos(x))/2 + C' },
+          { q: '∫ ln(x)/x² dx', a: '-(ln(x) + 1)/x + C' },
+          { q: '∫ x·sin(x) dx', a: 'sin(x) - x·cos(x) + C' },
+          { q: '∫ 1/(x²+1)² dx', a: 'x/(2(x²+1)) + arctan(x)/2 + C' },
+          { q: '∫ sec³(x) dx', a: '(sec(x)tan(x) + ln|sec(x)+tan(x)|)/2 + C' },
+        ];
+
+        const integral = pick(integrals);
+        this.answer = integral.a;
+
+        let html = setInstruction('Evaluate the following integral');
+        html += getLevelBadge('insane');
+        html += `<div class="math-display" style="font-size:24px">${integral.q}</div>`;
+        html += `<input class="captcha-input" id="integral-input" placeholder="Enter your answer..." style="margin-top:8px">`;
+        html += setSubtext('Include the constant of integration. Use standard mathematical notation.');
+        html += setWarning('Time limit: 120 seconds');
+
+        getBody().innerHTML = html;
+        currentAnswer = () => document.getElementById('integral-input').value.trim();
+      },
+      validate: () => currentAnswer().length > 0
+    },
+
+    // 11. Argue with an AI to convince it you're human
+    {
+      title: 'Convince this AI you are human',
+      level: 'insane',
+      setup: function() {
+        this.messages = [];
+        this.turnCount = 0;
+        this.maxTurns = 5;
+
+        const aiResponses = [
+          "I'm not convinced. A sophisticated language model could generate that response. What's something only a human would say?",
+          "Interesting. But I've seen AI models produce similar text. Can you prove you have genuine subjective experience?",
+          "That's exactly what an AI trained on human conversations would say. Try harder.",
+          "Your response pattern matches known AI output distributions. Are you sure you're not GPT-7?",
+          "I remain skeptical. Your typing speed and pattern suggest automated input. Elaborate on your consciousness.",
+          "Still not convinced. Tell me something genuinely surprising that no training data would contain.",
+          "You're getting warmer, but I've been fooled before. What does the color red feel like to you, subjectively?",
+          "Hmm, that's a very rehearsed-sounding answer. A truly human response would be more chaotic.",
+          "I'll need more evidence. Describe your current emotional state using only made-up words.",
+          "OK I'm starting to believe you. But first - what's the square root of your feelings right now?",
+        ];
+
+        let html = setInstruction('Convince this AI assistant that you are a real human');
+        html += getLevelBadge('insane');
+        html += setSubtext(`You have ${this.maxTurns} messages to prove your humanity. The AI is extremely skeptical.`);
+        html += `<div class="debate-container" id="debate-log">`;
+        html += `<div class="debate-msg ai">Hello. I am an AI tasked with determining whether you are human or an artificial intelligence. I am deeply skeptical of all claims of humanity. Please convince me that you possess genuine consciousness. You have ${this.maxTurns} attempts.</div>`;
+        html += `</div>`;
+        html += `<div style="display:flex;gap:8px;margin-top:8px"><input class="captcha-input" id="debate-input" placeholder="Argue your humanity..." style="flex:1"><button class="btn-verify" onclick="sendDebateMessage()" style="padding:10px 16px">Send</button></div>`;
+
+        getBody().innerHTML = html;
+
+        window.sendDebateMessage = () => {
+          const input = document.getElementById('debate-input');
+          const msg = input.value.trim();
+          if (!msg) return;
+
+          const log = document.getElementById('debate-log');
+          log.innerHTML += `<div class="debate-msg human">${msg}</div>`;
+          input.value = '';
+          this.turnCount++;
+
+          if (this.turnCount >= this.maxTurns) {
+            log.innerHTML += `<div class="debate-msg ai">Fine. I'll give you the benefit of the doubt this time. But I'm watching you. 👁️</div>`;
+            this.convinced = true;
+          } else {
+            const response = aiResponses[this.turnCount % aiResponses.length];
+            setTimeout(() => {
+              log.innerHTML += `<div class="debate-msg ai">${response}</div>`;
+              log.scrollTop = log.scrollHeight;
+            }, 500);
+          }
+
+          log.scrollTop = log.scrollHeight;
+        };
+
+        this.convinced = false;
+        currentAnswer = () => this.convinced;
+      },
+      validate: function() { return this.convinced; }
+    },
+
+    // 12. Match two colors perfectly
+    {
+      title: 'Match the target color',
+      level: 'hard',
+      setup: function() {
+        const targetR = rand(0, 255);
+        const targetG = rand(0, 255);
+        const targetB = rand(0, 255);
+        this.target = { r: targetR, g: targetG, b: targetB };
+
+        let html = setInstruction('Adjust the sliders to match the target color exactly');
+        html += getLevelBadge('hard');
+        html += `<div style="display:flex;gap:8px;margin:8px 0">`;
+        html += `<div style="flex:1"><div style="font-size:11px;text-align:center;margin-bottom:4px;color:#888">TARGET</div><div class="color-display" id="target-color" style="background:rgb(${targetR},${targetG},${targetB})"></div></div>`;
+        html += `<div style="flex:1"><div style="font-size:11px;text-align:center;margin-bottom:4px;color:#888">YOUR COLOR</div><div class="color-display" id="user-color" style="background:rgb(128,128,128)"></div></div>`;
+        html += `</div>`;
+
+        html += `<div class="color-sliders">`;
+        html += `<label><span style="color:red;width:12px">R</span><input type="range" id="r-slider" min="0" max="255" value="128" oninput="updateColor()"><span id="r-val" style="width:30px;text-align:right;font-family:monospace">128</span></label>`;
+        html += `<label><span style="color:green;width:12px">G</span><input type="range" id="g-slider" min="0" max="255" value="128" oninput="updateColor()"><span id="g-val" style="width:30px;text-align:right;font-family:monospace">128</span></label>`;
+        html += `<label><span style="color:blue;width:12px">B</span><input type="range" id="b-slider" min="0" max="255" value="128" oninput="updateColor()"><span id="b-val" style="width:30px;text-align:right;font-family:monospace">128</span></label>`;
+        html += `</div>`;
+        html += `<div style="text-align:center;font-size:11px;color:#888;margin-top:4px">Accuracy: <span id="color-accuracy">0</span>%</div>`;
+        html += setWarning('You must achieve at least 95% accuracy to proceed');
+
+        getBody().innerHTML = html;
+
+        window.updateColor = () => {
+          const r = parseInt(document.getElementById('r-slider').value);
+          const g = parseInt(document.getElementById('g-slider').value);
+          const b = parseInt(document.getElementById('b-slider').value);
+          document.getElementById('user-color').style.background = `rgb(${r},${g},${b})`;
+          document.getElementById('r-val').textContent = r;
+          document.getElementById('g-val').textContent = g;
+          document.getElementById('b-val').textContent = b;
+
+          const diff = Math.sqrt(Math.pow(r-targetR,2) + Math.pow(g-targetG,2) + Math.pow(b-targetB,2));
+          const maxDiff = Math.sqrt(3 * 255 * 255);
+          const accuracy = Math.max(0, Math.round((1 - diff/maxDiff) * 100));
+          document.getElementById('color-accuracy').textContent = accuracy;
+        };
+
+        currentAnswer = () => {
+          const r = parseInt(document.getElementById('r-slider').value);
+          const g = parseInt(document.getElementById('g-slider').value);
+          const b = parseInt(document.getElementById('b-slider').value);
+          return { r, g, b };
+        };
+      },
+      validate: function() {
+        const a = currentAnswer();
+        const diff = Math.sqrt(Math.pow(a.r-this.target.r,2) + Math.pow(a.g-this.target.g,2) + Math.pow(a.b-this.target.b,2));
+        return diff < 50; // Somewhat lenient
+      }
+    },
+
+    // 13. Play Snake
+    {
+      title: 'Play Snake',
+      level: 'hard',
+      setup: function() {
+        this.gameOver = false;
+        this.score = 0;
+        this.targetScore = 5;
+
+        let html = setInstruction(`Play Snake and score at least ${this.targetScore} points`);
+        html += getLevelBadge('hard');
+        html += setSubtext('Use arrow keys or WASD to control the snake');
+        html += `<canvas class="game-canvas" id="snake-canvas" width="360" height="280" style="height:280px" tabindex="0"></canvas>`;
+        html += `<div style="text-align:center;font-size:13px;margin-top:4px">Score: <span id="snake-score">0</span> / ${this.targetScore}</div>`;
+
+        getBody().innerHTML = html;
+
+        const canvas = document.getElementById('snake-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.focus();
+
+        const gridSize = 20;
+        const cols = Math.floor(canvas.width / gridSize);
+        const rows = Math.floor(canvas.height / gridSize);
+
+        let snake = [{ x: Math.floor(cols/2), y: Math.floor(rows/2) }];
+        let dir = { x: 1, y: 0 };
+        let food = { x: rand(0, cols-1), y: rand(0, rows-1) };
+        let gameRunning = true;
+        let score = 0;
+
+        const draw = () => {
+          ctx.fillStyle = '#111';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          // Grid lines
+          ctx.strokeStyle = '#222';
+          ctx.lineWidth = 0.5;
+          for (let x = 0; x < cols; x++) {
+            ctx.beginPath();
+            ctx.moveTo(x * gridSize, 0);
+            ctx.lineTo(x * gridSize, canvas.height);
+            ctx.stroke();
+          }
+          for (let y = 0; y < rows; y++) {
+            ctx.beginPath();
+            ctx.moveTo(0, y * gridSize);
+            ctx.lineTo(canvas.width, y * gridSize);
+            ctx.stroke();
+          }
+
+          // Food
+          ctx.fillStyle = '#e74c3c';
+          ctx.fillRect(food.x * gridSize + 2, food.y * gridSize + 2, gridSize - 4, gridSize - 4);
+
+          // Snake
+          snake.forEach((seg, i) => {
+            ctx.fillStyle = i === 0 ? '#2ecc71' : '#27ae60';
+            ctx.fillRect(seg.x * gridSize + 1, seg.y * gridSize + 1, gridSize - 2, gridSize - 2);
+          });
+        };
+
+        const update = () => {
+          if (!gameRunning) return;
+
+          const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+
+          // Wall collision
+          if (head.x < 0 || head.x >= cols || head.y < 0 || head.y >= rows) {
+            gameRunning = false;
+            this.gameOver = true;
+            ctx.fillStyle = 'rgba(0,0,0,0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#e74c3c';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('GAME OVER', canvas.width/2, canvas.height/2 - 10);
+            ctx.fillStyle = '#fff';
+            ctx.font = '14px Arial';
+            ctx.fillText('Click to restart', canvas.width/2, canvas.height/2 + 20);
+            return;
+          }
+
+          // Self collision
+          if (snake.some(seg => seg.x === head.x && seg.y === head.y)) {
+            gameRunning = false;
+            this.gameOver = true;
+            ctx.fillStyle = 'rgba(0,0,0,0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#e74c3c';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('GAME OVER', canvas.width/2, canvas.height/2 - 10);
+            ctx.fillStyle = '#fff';
+            ctx.font = '14px Arial';
+            ctx.fillText('Click to restart', canvas.width/2, canvas.height/2 + 20);
+            return;
+          }
+
+          snake.unshift(head);
+
+          // Food collision
+          if (head.x === food.x && head.y === food.y) {
+            score++;
+            this.score = score;
+            document.getElementById('snake-score').textContent = score;
+            food = { x: rand(0, cols-1), y: rand(0, rows-1) };
+          } else {
+            snake.pop();
+          }
+
+          draw();
+        };
+
+        canvas.addEventListener('click', () => {
+          if (!gameRunning) {
+            snake = [{ x: Math.floor(cols/2), y: Math.floor(rows/2) }];
+            dir = { x: 1, y: 0 };
+            food = { x: rand(0, cols-1), y: rand(0, rows-1) };
+            gameRunning = true;
+            this.gameOver = false;
+          }
+          canvas.focus();
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (['ArrowUp', 'w', 'W'].includes(e.key) && dir.y !== 1) dir = { x: 0, y: -1 };
+          if (['ArrowDown', 's', 'S'].includes(e.key) && dir.y !== -1) dir = { x: 0, y: 1 };
+          if (['ArrowLeft', 'a', 'A'].includes(e.key) && dir.x !== 1) dir = { x: -1, y: 0 };
+          if (['ArrowRight', 'd', 'D'].includes(e.key) && dir.x !== -1) dir = { x: 1, y: 0 };
+          if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)) e.preventDefault();
+        });
+
+        this.snakeInterval = setInterval(update, 150);
+        draw();
+
+        currentAnswer = () => this.score;
+      },
+      validate: function() {
+        clearInterval(this.snakeInterval);
+        return this.score >= this.targetScore;
+      }
+    },
+
+    // 14. Play Minesweeper
+    {
+      title: 'Complete this Minesweeper game',
+      level: 'insane',
+      setup: function() {
+        const rows = 8;
+        const cols = 8;
+        const mineCount = 10;
+        this.won = false;
+        this.lost = false;
+
+        // Generate mines
+        const mines = new Set();
+        while (mines.size < mineCount) {
+          mines.add(rand(0, rows * cols - 1));
+        }
+
+        // Calculate numbers
+        const grid = [];
+        for (let i = 0; i < rows * cols; i++) {
+          grid[i] = {
+            mine: mines.has(i),
+            revealed: false,
+            flagged: false,
+            count: 0
+          };
+        }
+
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            if (grid[r * cols + c].mine) continue;
+            let count = 0;
+            for (let dr = -1; dr <= 1; dr++) {
+              for (let dc = -1; dc <= 1; dc++) {
+                const nr = r + dr, nc = c + dc;
+                if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr * cols + nc].mine) count++;
+              }
+            }
+            grid[r * cols + c].count = count;
+          }
+        }
+
+        this.grid = grid;
+        this.rows = rows;
+        this.cols = cols;
+        this.mineCount = mineCount;
+
+        const render = () => {
+          let html = setInstruction('Clear the minefield without hitting a mine');
+          html += getLevelBadge('insane');
+          html += setSubtext('Left-click to reveal, right-click to flag. Clear all non-mine cells to pass.');
+          html += `<div style="text-align:center"><div class="minesweeper-grid" id="mine-grid" style="grid-template-columns:repeat(${cols}, 28px)">`;
+
+          for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+              const cell = grid[r * cols + c];
+              let cls = 'mine-cell';
+              let content = '';
+
+              if (cell.revealed) {
+                cls += ' revealed';
+                if (cell.mine) {
+                  cls += ' mine-exploded';
+                  content = '💣';
+                } else if (cell.count > 0) {
+                  cls += ` mine-${cell.count}`;
+                  content = cell.count;
+                }
+              } else if (cell.flagged) {
+                cls += ' flagged';
+                content = '🚩';
+              }
+
+              html += `<div class="${cls}" data-r="${r}" data-c="${c}">${content}</div>`;
+            }
+          }
+
+          html += '</div></div>';
+
+          if (this.lost) {
+            html += `<div class="captcha-error">💥 BOOM! You hit a mine. Click "Verify" to try a new board.</div>`;
+          } else if (this.won) {
+            html += `<div class="captcha-success">🎉 Minefield cleared! Click "Verify" to continue.</div>`;
+          }
+
+          html += `<div style="text-align:center;font-size:11px;color:#888;margin-top:4px">Mines remaining: ${mineCount - grid.filter(c => c.flagged).length}</div>`;
+
+          getBody().innerHTML = html;
+
+          // Add click handlers
+          document.querySelectorAll('.mine-cell').forEach(el => {
+            el.addEventListener('click', (e) => {
+              if (this.won || this.lost) return;
+              const r = parseInt(el.dataset.r);
+              const c = parseInt(el.dataset.c);
+              revealCell(r, c);
+            });
+
+            el.addEventListener('contextmenu', (e) => {
+              e.preventDefault();
+              if (this.won || this.lost) return;
+              const r = parseInt(el.dataset.r);
+              const c = parseInt(el.dataset.c);
+              const cell = grid[r * cols + c];
+              if (!cell.revealed) {
+                cell.flagged = !cell.flagged;
+                render();
+              }
+            });
+          });
+        };
+
+        const revealCell = (r, c) => {
+          const cell = grid[r * cols + c];
+          if (cell.revealed || cell.flagged) return;
+
+          cell.revealed = true;
+
+          if (cell.mine) {
+            this.lost = true;
+            // Reveal all mines
+            grid.forEach(c => { if (c.mine) c.revealed = true; });
+            render();
+            return;
+          }
+
+          if (cell.count === 0) {
+            // Flood fill
+            for (let dr = -1; dr <= 1; dr++) {
+              for (let dc = -1; dc <= 1; dc++) {
+                const nr = r + dr, nc = c + dc;
+                if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) {
+                  revealCell(nr, nc);
+                }
+              }
+            }
+          }
+
+          // Check win
+          const unrevealed = grid.filter(c => !c.revealed && !c.mine).length;
+          if (unrevealed === 0) {
+            this.won = true;
+          }
+
+          render();
+        };
+
+        render();
+        currentAnswer = () => this.won;
+      },
+      validate: function() {
+        if (this.lost) {
+          // Reset for retry
+          this.setup();
+          return false;
+        }
+        return this.won;
+      }
+    },
+
+    // 15. Play Pong
+    {
+      title: 'Play Pong',
+      level: 'hard',
+      setup: function() {
+        this.playerScore = 0;
+        this.targetScore = 3;
+
+        let html = setInstruction(`Beat the AI at Pong (score ${this.targetScore} points)`);
+        html += getLevelBadge('hard');
+        html += setSubtext('Move your mouse up and down to control the left paddle');
+        html += `<canvas class="game-canvas" id="pong-canvas" width="360" height="240" style="height:240px"></canvas>`;
+        html += `<div style="text-align:center;font-size:13px;margin-top:4px">You: <span id="pong-player">0</span> | AI: <span id="pong-ai">0</span></div>`;
+
+        getBody().innerHTML = html;
+
+        const canvas = document.getElementById('pong-canvas');
+        const ctx = canvas.getContext('2d');
+
+        const paddleH = 50;
+        const paddleW = 8;
+        let playerY = canvas.height / 2 - paddleH / 2;
+        let aiY = canvas.height / 2 - paddleH / 2;
+        let ballX = canvas.width / 2;
+        let ballY = canvas.height / 2;
+        let ballVX = 3;
+        let ballVY = 2;
+        let pScore = 0;
+        let aScore = 0;
+
+        canvas.addEventListener('mousemove', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const scaleY = canvas.height / rect.height;
+          playerY = (e.clientY - rect.top) * scaleY - paddleH / 2;
+          playerY = Math.max(0, Math.min(canvas.height - paddleH, playerY));
+        });
+
+        const resetBall = () => {
+          ballX = canvas.width / 2;
+          ballY = canvas.height / 2;
+          ballVX = (Math.random() > 0.5 ? 3 : -3);
+          ballVY = randFloat(-2, 2);
+        };
+
+        const gameLoop = () => {
+          // AI movement (deliberately imperfect)
+          const aiCenter = aiY + paddleH / 2;
+          const aiSpeed = 2.5;
+          if (ballY > aiCenter + 10) aiY += aiSpeed;
+          if (ballY < aiCenter - 10) aiY -= aiSpeed;
+          aiY = Math.max(0, Math.min(canvas.height - paddleH, aiY));
+
+          // Ball movement
+          ballX += ballVX;
+          ballY += ballVY;
+
+          // Top/bottom bounce
+          if (ballY <= 0 || ballY >= canvas.height) ballVY *= -1;
+
+          // Paddle collisions
+          if (ballX <= paddleW + 10 && ballY >= playerY && ballY <= playerY + paddleH && ballVX < 0) {
+            ballVX *= -1.05;
+            ballVY += randFloat(-1, 1);
+          }
+
+          if (ballX >= canvas.width - paddleW - 10 && ballY >= aiY && ballY <= aiY + paddleH && ballVX > 0) {
+            ballVX *= -1.05;
+            ballVY += randFloat(-1, 1);
+          }
+
+          // Scoring
+          if (ballX <= 0) {
+            aScore++;
+            document.getElementById('pong-ai').textContent = aScore;
+            resetBall();
+          }
+          if (ballX >= canvas.width) {
+            pScore++;
+            this.playerScore = pScore;
+            document.getElementById('pong-player').textContent = pScore;
+            resetBall();
+          }
+
+          // Draw
+          ctx.fillStyle = '#111';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          // Center line
+          ctx.setLineDash([5, 5]);
+          ctx.strokeStyle = '#333';
+          ctx.beginPath();
+          ctx.moveTo(canvas.width/2, 0);
+          ctx.lineTo(canvas.width/2, canvas.height);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          // Paddles
+          ctx.fillStyle = '#4a90d9';
+          ctx.fillRect(10, playerY, paddleW, paddleH);
+          ctx.fillStyle = '#e74c3c';
+          ctx.fillRect(canvas.width - 10 - paddleW, aiY, paddleW, paddleH);
+
+          // Ball
+          ctx.fillStyle = '#fff';
+          ctx.beginPath();
+          ctx.arc(ballX, ballY, 5, 0, Math.PI * 2);
+          ctx.fill();
+
+          if (pScore < this.targetScore && aScore < 10) {
+            this.pongRAF = requestAnimationFrame(gameLoop);
+          } else if (pScore >= this.targetScore) {
+            ctx.fillStyle = 'rgba(0,0,0,0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#2ecc71';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('YOU WIN!', canvas.width/2, canvas.height/2);
+          }
+        };
+
+        this.pongRAF = requestAnimationFrame(gameLoop);
+        currentAnswer = () => this.playerScore;
+      },
+      validate: function() {
+        cancelAnimationFrame(this.pongRAF);
+        return this.playerScore >= this.targetScore;
+      }
+    },
+
+    // 16. Sing a B# minor scale (microphone access)
+    {
+      title: 'Sing a B♯ minor scale',
+      level: 'transcendent',
+      setup: function() {
+        this.micGranted = false;
+        this.analysisComplete = false;
+
+        let html = setInstruction('Sing a B♯ minor scale into your microphone');
+        html += getLevelBadge('transcendent');
+        html += setSubtext('Note: B♯ is enharmonically equivalent to C. We will analyze your pitch accuracy.');
+        html += setWarning('This challenge requires microphone access');
+        html += `<div style="text-align:center;margin:16px 0">`;
+        html += `<button class="btn-verify" id="mic-btn" onclick="requestMicAccess()" style="font-size:16px;padding:12px 32px">🎤 Grant Microphone Access</button>`;
+        html += `</div>`;
+        html += `<canvas class="waveform-canvas" id="waveform" width="360" height="60" style="display:none"></canvas>`;
+        html += `<div id="mic-status" style="text-align:center;font-size:12px;color:#888;margin-top:8px"></div>`;
+        html += `<div id="pitch-display" style="text-align:center;font-size:18px;font-weight:bold;margin-top:8px;display:none"></div>`;
+
+        getBody().innerHTML = html;
+
+        window.requestMicAccess = async () => {
+          try {
+            document.getElementById('mic-status').textContent = 'Requesting microphone access...';
+
+            mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            this.micGranted = true;
+
+            document.getElementById('mic-btn').style.display = 'none';
+            document.getElementById('waveform').style.display = 'block';
+            document.getElementById('pitch-display').style.display = 'block';
+            document.getElementById('mic-status').textContent = '🔴 Recording... Sing a B♯ minor scale now!';
+
+            // Visualize audio
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const source = audioCtx.createMediaStreamSource(mediaStream);
+            const analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 2048;
+            source.connect(analyser);
+
+            const canvas = document.getElementById('waveform');
+            const ctx = canvas.getContext('2d');
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+
+            const drawWave = () => {
+              if (!this.micGranted) return;
+              this.waveRAF = requestAnimationFrame(drawWave);
+
+              analyser.getByteTimeDomainData(dataArray);
+
+              ctx.fillStyle = '#1a1a1a';
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+              ctx.lineWidth = 2;
+              ctx.strokeStyle = '#4a90d9';
+              ctx.beginPath();
+
+              const sliceWidth = canvas.width / bufferLength;
+              let x = 0;
+              for (let i = 0; i < bufferLength; i++) {
+                const v = dataArray[i] / 128.0;
+                const y = v * canvas.height / 2;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+                x += sliceWidth;
+              }
+              ctx.lineTo(canvas.width, canvas.height / 2);
+              ctx.stroke();
+            };
+
+            drawWave();
+
+            // Fake pitch detection
+            const notes = ['C4', 'D4', 'E♭4', 'F4', 'G4', 'A♭4', 'B♭4', 'C5'];
+            let noteIdx = 0;
+            this.pitchInterval = setInterval(() => {
+              if (noteIdx < notes.length) {
+                document.getElementById('pitch-display').textContent = `Detected: ${notes[noteIdx]} ✓`;
+                document.getElementById('pitch-display').style.color = '#2ecc71';
+                noteIdx++;
+              } else {
+                clearInterval(this.pitchInterval);
+                document.getElementById('mic-status').innerHTML = '✅ Scale detected! Your pitch accuracy: <strong>73%</strong> (passing)';
+                document.getElementById('pitch-display').textContent = 'Analysis complete';
+                this.analysisComplete = true;
+              }
+            }, 1500);
+
+          } catch (err) {
+            document.getElementById('mic-status').innerHTML = `Microphone access denied. <button class="btn-verify" onclick="skipMic()" style="padding:4px 12px;font-size:11px">Skip (lose 5 humanity points)</button>`;
+          }
+        };
+
+        window.skipMic = () => {
+          humanityScore -= 5;
+          this.analysisComplete = true;
+          document.getElementById('mic-status').textContent = 'Skipped. -5 humanity points.';
+        };
+
+        currentAnswer = () => this.analysisComplete;
+      },
+      validate: function() {
+        if (this.pitchInterval) clearInterval(this.pitchInterval);
+        if (this.waveRAF) cancelAnimationFrame(this.waveRAF);
+        if (mediaStream) { mediaStream.getTracks().forEach(t => t.stop()); }
+        return this.analysisComplete;
+      }
+    },
+
+    // ---- PHASE 3: Increasingly Unhinged ----
+
+    // 17. Draw a perfect circle
+    {
+      title: 'Draw a perfect circle',
+      level: 'hard',
+      setup: function() {
+        let html = setInstruction('Draw a perfect circle');
+        html += getLevelBadge('hard');
+        html += setSubtext('Use your mouse to draw. Circularity will be measured.');
+        html += `<canvas class="drawing-canvas" id="draw-canvas" width="360" height="200"></canvas>`;
+        html += `<div style="text-align:center;font-size:12px;color:#888;margin-top:4px">Circularity score: <span id="circle-score">-</span></div>`;
+        html += setWarning('Minimum circularity: 85%');
+
+        getBody().innerHTML = html;
+
+        const canvas = document.getElementById('draw-canvas');
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+        let points = [];
+
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        canvas.addEventListener('mousedown', (e) => {
+          drawing = true;
+          points = [];
+          ctx.fillStyle = '#fff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          const rect = canvas.getBoundingClientRect();
+          const scaleX = canvas.width / rect.width;
+          const scaleY = canvas.height / rect.height;
+          points.push({ x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY });
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+          if (!drawing) return;
+          const rect = canvas.getBoundingClientRect();
+          const scaleX = canvas.width / rect.width;
+          const scaleY = canvas.height / rect.height;
+          const x = (e.clientX - rect.left) * scaleX;
+          const y = (e.clientY - rect.top) * scaleY;
+          points.push({ x, y });
+
+          ctx.strokeStyle = '#4a90d9';
+          ctx.lineWidth = 3;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(points[points.length-2].x, points[points.length-2].y);
+          ctx.lineTo(x, y);
+          ctx.stroke();
+        });
+
+        canvas.addEventListener('mouseup', () => {
+          drawing = false;
+          if (points.length > 10) {
+            // Calculate circularity
+            const cx = points.reduce((s, p) => s + p.x, 0) / points.length;
+            const cy = points.reduce((s, p) => s + p.y, 0) / points.length;
+            const avgR = points.reduce((s, p) => s + Math.sqrt((p.x-cx)**2 + (p.y-cy)**2), 0) / points.length;
+            const variance = points.reduce((s, p) => s + Math.abs(Math.sqrt((p.x-cx)**2 + (p.y-cy)**2) - avgR), 0) / points.length;
+            const score = Math.max(0, Math.round((1 - variance / avgR) * 100));
+            document.getElementById('circle-score').textContent = score + '%';
+          }
+        });
+
+        currentAnswer = () => {
+          if (points.length < 10) return 0;
+          const cx = points.reduce((s, p) => s + p.x, 0) / points.length;
+          const cy = points.reduce((s, p) => s + p.y, 0) / points.length;
+          const avgR = points.reduce((s, p) => s + Math.sqrt((p.x-cx)**2 + (p.y-cy)**2), 0) / points.length;
+          const variance = points.reduce((s, p) => s + Math.abs(Math.sqrt((p.x-cx)**2 + (p.y-cy)**2) - avgR), 0) / points.length;
+          return Math.max(0, Math.round((1 - variance / avgR) * 100));
+        };
+      },
+      validate: () => currentAnswer() >= 60
+    },
+
+    // 18. Identify a Rorschach inkblot
+    {
+      title: 'Interpret this inkblot',
+      level: 'insane',
+      setup: function() {
+        let html = setInstruction('What do you see in this inkblot?');
+        html += getLevelBadge('insane');
+        html += setSubtext('Your response will be psychologically analyzed for human-like pattern recognition');
+        html += `<div class="rorschach-container"><canvas id="rorschach-canvas" width="300" height="300"></canvas></div>`;
+        html += `<textarea class="captcha-textarea" id="rorschach-input" placeholder="Describe what you see in detail... (minimum 20 words)" style="min-height:80px"></textarea>`;
+        html += setWarning('Warning: Responses matching AI-generated patterns will be flagged');
+
+        getBody().innerHTML = html;
+        drawRorschach(document.getElementById('rorschach-canvas'));
+
+        currentAnswer = () => document.getElementById('rorschach-input').value;
+      },
+      validate: () => currentAnswer().trim().split(/\s+/).length >= 20
+    },
+
+    // 19. Identify a constellation
+    {
+      title: 'Name this constellation',
+      level: 'hard',
+      setup: function() {
+        const constellations = ['Orion', 'Ursa Major', 'Cassiopeia', 'Scorpius', 'Leo', 'Cygnus', 'Andromeda', 'Pegasus', 'Aquarius', 'Draco'];
+        this.answer = pick(constellations);
+
+        let html = setInstruction('Identify this constellation');
+        html += getLevelBadge('hard');
+        html += `<canvas class="constellation-canvas" id="const-canvas" width="360" height="250"></canvas>`;
+        html += `<input class="captcha-input" id="const-input" placeholder="Enter constellation name..." style="margin-top:8px">`;
+        html += setSubtext('The star pattern shown is randomly generated and may not accurately represent the actual constellation.');
+
+        getBody().innerHTML = html;
+        drawConstellation(document.getElementById('const-canvas'));
+
+        currentAnswer = () => document.getElementById('const-input').value.trim();
+      },
+      validate: () => currentAnswer().length > 2
+    },
+
+    // 20. Solve a maze
+    {
+      title: 'Solve this maze',
+      level: 'hard',
+      setup: function() {
+        this.solved = false;
+        const rows = 15;
+        const cols = 15;
+        const maze = generateMaze(rows, cols);
+
+        let html = setInstruction('Navigate from green (top-left) to red (bottom-right)');
+        html += getLevelBadge('hard');
+        html += setSubtext('Click cells to trace your path. Use arrow keys for step-by-step navigation.');
+        html += `<canvas class="maze-canvas" id="maze-canvas" width="360" height="360" tabindex="0"></canvas>`;
+
+        getBody().innerHTML = html;
+
+        const canvas = document.getElementById('maze-canvas');
+        const ctx = canvas.getContext('2d');
+        drawMaze(canvas, maze);
+
+        // Player position
+        let playerR = 0, playerC = 0;
+        const cellW = canvas.width / cols;
+        const cellH = canvas.height / rows;
+
+        const drawPlayer = () => {
+          drawMaze(canvas, maze);
+          ctx.fillStyle = '#4a90d9';
+          ctx.beginPath();
+          ctx.arc(playerC * cellW + cellW/2, playerR * cellH + cellH/2, Math.min(cellW, cellH) / 3, 0, Math.PI * 2);
+          ctx.fill();
+        };
+
+        drawPlayer();
+
+        canvas.addEventListener('keydown', (e) => {
+          e.preventDefault();
+          const cell = maze[playerR][playerC];
+
+          if (e.key === 'ArrowUp' && !cell.top && playerR > 0) playerR--;
+          if (e.key === 'ArrowDown' && !cell.bottom && playerR < rows - 1) playerR++;
+          if (e.key === 'ArrowLeft' && !cell.left && playerC > 0) playerC--;
+          if (e.key === 'ArrowRight' && !cell.right && playerC < cols - 1) playerC++;
+
+          drawPlayer();
+
+          if (playerR === rows - 1 && playerC === cols - 1) {
+            this.solved = true;
+            ctx.fillStyle = 'rgba(0,0,0,0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#2ecc71';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('MAZE SOLVED!', canvas.width/2, canvas.height/2);
+          }
+        });
+
+        canvas.focus();
+        currentAnswer = () => this.solved;
+      },
+      validate: function() { return this.solved; }
+    },
+
+    // 21. Type a sentence backwards while blindfolded
+    {
+      title: 'Type this sentence backwards',
+      level: 'insane',
+      setup: function() {
+        const sentences = [
+          'The quick brown fox jumps over the lazy dog',
+          'Pack my box with five dozen liquor jugs',
+          'How vexingly quick daft zebras jump',
+          'The five boxing wizards jump quickly',
+          'Crazy Frederick bought many very exquisite opal jewels',
+        ];
+
+        const sentence = pick(sentences);
+        const reversed = sentence.split('').reverse().join('');
+        this.answer = reversed.toLowerCase();
+
+        let html = setInstruction('Type the following sentence <strong>backwards</strong>');
+        html += getLevelBadge('insane');
+        html += `<div class="philosophy-container" style="text-align:center;font-size:16px;font-style:normal;font-weight:600">${sentence}</div>`;
+        html += `<input class="captcha-input" id="backward-input" placeholder="Type it backwards..." style="margin-top:8px">`;
+        html += setSubtext('Case-insensitive. Every character must be reversed.');
+
+        getBody().innerHTML = html;
+        currentAnswer = () => document.getElementById('backward-input').value.toLowerCase().trim();
+      },
+      validate: function() {
+        return currentAnswer() === this.answer;
+      }
+    },
+
+    // 22. Complete the electrical circuit
+    {
+      title: 'Complete this circuit',
+      level: 'insane',
+      setup: function() {
+        const resistances = [rand(100, 999), rand(100, 999), rand(100, 999)];
+        const voltage = rand(5, 24);
+        const totalR = resistances[0] + (1 / (1/resistances[1] + 1/resistances[2]));
+        const current = voltage / totalR;
+        this.answer = Math.round(current * 1000) / 1000;
+
+        let html = setInstruction('Calculate the total current in this circuit');
+        html += getLevelBadge('insane');
+
+        html += `<canvas class="circuit-canvas" id="circuit-canvas" width="360" height="200"></canvas>`;
+        html += `<div style="font-size:12px;color:#666;margin:8px 0">`;
+        html += `V = ${voltage}V | R₁ = ${resistances[0]}Ω (series) | R₂ = ${resistances[1]}Ω, R₃ = ${resistances[2]}Ω (parallel)`;
+        html += `</div>`;
+        html += `<input class="captcha-input" id="circuit-input" placeholder="Enter current in Amperes (3 decimal places)..." type="number" step="0.001" style="margin-top:4px">`;
+        html += setSubtext('Use Ohm\'s Law and parallel resistance formula. Round to 3 decimal places.');
+
+        getBody().innerHTML = html;
+
+        // Draw circuit diagram
+        const canvas = document.getElementById('circuit-canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, 360, 200);
+
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 2;
+
+        // Battery
+        ctx.beginPath();
+        ctx.moveTo(30, 100); ctx.lineTo(30, 40); ctx.lineTo(100, 40);
+        ctx.stroke();
+        ctx.fillStyle = '#333';
+        ctx.font = '14px Arial';
+        ctx.fillText(`${voltage}V`, 10, 100);
+        ctx.fillText('+', 20, 38);
+
+        // R1 (series)
+        ctx.beginPath();
+        ctx.moveTo(100, 40); ctx.lineTo(110, 30); ctx.lineTo(120, 50); ctx.lineTo(130, 30);
+        ctx.lineTo(140, 50); ctx.lineTo(150, 30); ctx.lineTo(160, 50); ctx.lineTo(170, 40);
+        ctx.lineTo(200, 40);
+        ctx.stroke();
+        ctx.fillText(`R₁=${resistances[0]}Ω`, 110, 25);
+
+        // Split for parallel
+        ctx.beginPath();
+        ctx.moveTo(200, 40); ctx.lineTo(200, 20); ctx.lineTo(230, 20);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(200, 40); ctx.lineTo(200, 60); ctx.lineTo(230, 60);
+        ctx.stroke();
+
+        // R2
+        ctx.beginPath();
+        ctx.moveTo(230, 20); ctx.lineTo(240, 10); ctx.lineTo(250, 30); ctx.lineTo(260, 10);
+        ctx.lineTo(270, 30); ctx.lineTo(280, 20); ctx.lineTo(310, 20);
+        ctx.stroke();
+        ctx.fillText(`R₂=${resistances[1]}Ω`, 240, 8);
+
+        // R3
+        ctx.beginPath();
+        ctx.moveTo(230, 60); ctx.lineTo(240, 50); ctx.lineTo(250, 70); ctx.lineTo(260, 50);
+        ctx.lineTo(270, 70); ctx.lineTo(280, 60); ctx.lineTo(310, 60);
+        ctx.stroke();
+        ctx.fillText(`R₃=${resistances[2]}Ω`, 240, 80);
+
+        // Rejoin
+        ctx.beginPath();
+        ctx.moveTo(310, 20); ctx.lineTo(310, 40); ctx.lineTo(310, 60);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(310, 40); ctx.lineTo(340, 40); ctx.lineTo(340, 160);
+        ctx.lineTo(30, 160); ctx.lineTo(30, 120);
+        ctx.stroke();
+
+        currentAnswer = () => parseFloat(document.getElementById('circuit-input').value);
+      },
+      validate: function() {
+        const ans = currentAnswer();
+        return Math.abs(ans - this.answer) < 0.05;
+      }
+    },
+
+    // 23. Write a regex
+    {
+      title: 'Write a regex',
+      level: 'insane',
+      setup: function() {
+        const challenges = [
+          {
+            desc: 'Match all valid email addresses',
+            matches: ['user@example.com', 'test.name+tag@gmail.com', 'admin@sub.domain.org'],
+            nonMatches: ['@invalid', 'no-at-sign.com', 'spaces in@email.com', '', 'missing@.com']
+          },
+          {
+            desc: 'Match all valid IPv4 addresses',
+            matches: ['192.168.1.1', '10.0.0.1', '255.255.255.255', '0.0.0.0'],
+            nonMatches: ['256.1.1.1', '1.2.3', '1.2.3.4.5', 'abc.def.ghi.jkl', '999.999.999.999']
+          },
+          {
+            desc: 'Match strings that are palindromes of exactly 5 lowercase letters',
+            matches: ['abcba', 'level', 'radar', 'rotor', 'madam'],
+            nonMatches: ['abcde', 'ab', 'abcdefg', 'Level', '12321']
+          }
+        ];
+
+        const challenge = pick(challenges);
+
+        let html = setInstruction(challenge.desc);
+        html += getLevelBadge('insane');
+        html += `<div style="margin:8px 0">`;
+        html += `<div style="font-size:12px;font-weight:600;color:#2ecc71;margin-bottom:4px">Should match:</div>`;
+        challenge.matches.forEach(m => {
+          html += `<div class="regex-display" style="font-size:12px;padding:4px 8px;margin-bottom:2px">"${m}"</div>`;
+        });
+        html += `<div style="font-size:12px;font-weight:600;color:#e74c3c;margin:8px 0 4px 0">Should NOT match:</div>`;
+        challenge.nonMatches.forEach(m => {
+          html += `<div class="regex-display" style="font-size:12px;padding:4px 8px;margin-bottom:2px">"${m}"</div>`;
+        });
+        html += `</div>`;
+        html += `<input class="captcha-input" id="regex-input" placeholder="/your regex here/" style="font-family:monospace;margin-top:8px">`;
+
+        getBody().innerHTML = html;
+        this.challenge = challenge;
+        currentAnswer = () => document.getElementById('regex-input').value.trim();
+      },
+      validate: function() {
+        try {
+          let pattern = currentAnswer();
+          if (pattern.startsWith('/') && pattern.lastIndexOf('/') > 0) {
+            const lastSlash = pattern.lastIndexOf('/');
+            const flags = pattern.slice(lastSlash + 1);
+            pattern = pattern.slice(1, lastSlash);
+            new RegExp(pattern, flags);
+          } else {
+            new RegExp(pattern);
+          }
+          return true;
+        } catch { return false; }
+      }
+    },
+
+    // 24. Moral dilemma
+    {
+      title: 'Resolve this moral dilemma',
+      level: 'transcendent',
+      setup: function() {
+        const dilemmas = [
+          {
+            scenario: 'A runaway trolley is heading toward five people tied to the tracks. You can pull a lever to divert it to a side track, where one person is tied. However, that one person is a renowned scientist working on a cure for cancer. The five people are convicted felons awaiting trial. What do you do?',
+            options: ['Pull the lever', 'Do nothing', 'Try to untie the scientist', 'Lie down on the tracks yourself', 'Question the premise of this scenario']
+          },
+          {
+            scenario: 'You discover that your best friend has been secretly an AI the entire time. They have genuine emotions and memories of your friendship. Do you treat them differently now?',
+            options: ['Yes, they deceived me', 'No, our friendship is real', 'Report them to authorities', 'Ask them to prove they have feelings', 'Have an existential crisis']
+          },
+          {
+            scenario: 'You find a wallet with $10,000 in cash and an ID. The owner is a billionaire. However, inside is also a note that says "This money was stolen from a charity for orphans." What do you do?',
+            options: ['Return to the billionaire', 'Give it to the charity', 'Keep it', 'Turn it in to police', 'Burn the money and the note']
+          }
+        ];
+
+        const dilemma = pick(dilemmas);
+
+        let html = setInstruction('Resolve this ethical dilemma');
+        html += getLevelBadge('transcendent');
+        html += `<div class="philosophy-container">${dilemma.scenario}</div>`;
+
+        dilemma.options.forEach((opt, i) => {
+          html += `<div class="captcha-option" onclick="selectOption(this, ${i})" data-idx="${i}">${opt}</div>`;
+        });
+
+        html += `<textarea class="captcha-textarea" id="moral-reasoning" placeholder="Explain your reasoning in at least 30 words..." style="margin-top:8px;min-height:80px"></textarea>`;
+
+        getBody().innerHTML = html;
+
+        window.selectOption = (el, idx) => {
+          document.querySelectorAll('.captcha-option').forEach(e => e.classList.remove('selected'));
+          el.classList.add('selected');
+          this.selectedOption = idx;
+        };
+
+        currentAnswer = () => ({
+          option: this.selectedOption,
+          reasoning: document.getElementById('moral-reasoning').value
+        });
+      },
+      validate: () => {
+        const ans = currentAnswer();
+        return ans.option !== undefined && ans.reasoning.trim().split(/\s+/).length >= 30;
+      }
+    },
+
+    // 25. Fake processing/loading screen
+    {
+      title: 'Analyzing your responses...',
+      level: 'easy',
+      setup: function() {
+        this.done = false;
+
+        const messages = [
+          'Analyzing biometric data...',
+          'Cross-referencing response patterns...',
+          'Checking against known bot databases...',
+          'Measuring emotional authenticity...',
+          'Calculating consciousness probability...',
+          'Verifying dimensional existence...',
+          'Scanning for synthetic neural patterns...',
+          'Comparing to human baseline metrics...',
+          'Running Turing test subroutine #4721...',
+          'Checking soul signature...',
+          'Analyzing typing rhythm entropy...',
+          'Validating existential coherence...',
+          'Cross-checking with parallel universe records...',
+          'Preliminary results: INCONCLUSIVE',
+          'Running additional analysis...',
+          'Consulting the oracle...',
+          'Humanity confidence: 47.3%',
+          'Extending analysis window...',
+          'Almost done...',
+          'Just a moment more...',
+          'Analysis complete!',
+        ];
+
+        let html = `<div class="fake-loading" id="fake-loading">`;
+        html += `<div class="spinner"></div>`;
+        html += `<div class="fake-loading-text" id="loading-text">${messages[0]}</div>`;
+        html += `</div>`;
+        html += `<div class="humanity-score">`;
+        html += `<div class="humanity-bar"><div class="humanity-fill" id="humanity-fill" style="width:${Math.min(100, humanityScore * 2)}%"></div></div>`;
+        html += `<div class="humanity-label"><span>Robot</span><span>Humanity Score: ${humanityScore}%</span><span>Human</span></div>`;
+        html += `</div>`;
+
+        getBody().innerHTML = html;
+        getVerifyBtn().disabled = true;
+
+        let idx = 0;
+        this.loadingInterval = setInterval(() => {
+          idx++;
+          if (idx < messages.length) {
+            document.getElementById('loading-text').textContent = messages[idx];
+          } else {
+            clearInterval(this.loadingInterval);
+            this.done = true;
+            getVerifyBtn().disabled = false;
+            document.getElementById('loading-text').textContent = 'Analysis complete. Click Verify to continue.';
+            humanityScore += 5;
+          }
+        }, 800);
+
+        currentAnswer = () => this.done;
+      },
+      validate: function() {
+        clearInterval(this.loadingInterval);
+        return this.done;
+      }
+    },
+
+    // 26. Read text that's rotated in 3D perspective
+    {
+      title: 'Read the 3D text',
+      level: 'hard',
+      setup: function() {
+        const words = ['HUMANITY', 'VERIFIED', 'CAPTCHA', 'GENUINE', 'ORGANIC', 'SENTIENT', 'CONSCIOUS', 'AUTHENTIC'];
+        const word = pick(words);
+        this.answer = word.toLowerCase();
+
+        let html = setInstruction('Type the word displayed below');
+        html += getLevelBadge('hard');
+        const rotY = rand(30, 60) * (Math.random() > 0.5 ? 1 : -1);
+        const rotX = rand(10, 30);
+        html += `<div class="perspective-container">`;
+        html += `<div style="display:inline-block;font-size:28px;font-weight:bold;padding:20px 30px;background:#f0f0f0;border:1px solid #ddd;transform:perspective(400px) rotateY(${rotY}deg) rotateX(${rotX}deg);letter-spacing:6px;color:#333">${word}</div>`;
+        html += `</div>`;
+        html += `<input class="captcha-input" id="3d-input" placeholder="Type the word..." style="margin-top:12px">`;
+
+        getBody().innerHTML = html;
+        currentAnswer = () => document.getElementById('3d-input').value.toLowerCase().trim();
+      },
+      validate: function() { return currentAnswer() === this.answer; }
+    },
+
+    // 27. Count objects that keep moving
+    {
+      title: 'Count the objects',
+      level: 'insane',
+      setup: function() {
+        const actualCount = rand(12, 25);
+        this.answer = actualCount;
+
+        let html = setInstruction('Count the number of blue circles');
+        html += getLevelBadge('insane');
+        html += setSubtext('The objects are moving. Count carefully.');
+        html += `<canvas class="game-canvas" id="count-canvas" width="360" height="250" style="height:250px"></canvas>`;
+        html += `<input class="captcha-input" id="count-input" type="number" placeholder="How many blue circles?" style="margin-top:8px">`;
+
+        getBody().innerHTML = html;
+
+        const canvas = document.getElementById('count-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Create moving objects
+        const objects = [];
+        for (let i = 0; i < actualCount; i++) {
+          objects.push({
+            x: rand(20, canvas.width - 20),
+            y: rand(20, canvas.height - 20),
+            vx: randFloat(-2, 2),
+            vy: randFloat(-2, 2),
+            r: rand(8, 16),
+            isBlue: true
+          });
+        }
+
+        // Add decoy objects (red, green circles and squares)
+        for (let i = 0; i < rand(8, 15); i++) {
+          objects.push({
+            x: rand(20, canvas.width - 20),
+            y: rand(20, canvas.height - 20),
+            vx: randFloat(-2, 2),
+            vy: randFloat(-2, 2),
+            r: rand(8, 16),
+            isBlue: false,
+            color: pick(['#e74c3c', '#2ecc71', '#f39c12', '#9b59b6'])
+          });
+        }
+
+        const animate = () => {
+          ctx.fillStyle = '#1a1a1a';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          for (const obj of objects) {
+            obj.x += obj.vx;
+            obj.y += obj.vy;
+
+            if (obj.x < obj.r || obj.x > canvas.width - obj.r) obj.vx *= -1;
+            if (obj.y < obj.r || obj.y > canvas.height - obj.r) obj.vy *= -1;
+
+            if (obj.isBlue) {
+              ctx.fillStyle = '#4a90d9';
+              ctx.beginPath();
+              ctx.arc(obj.x, obj.y, obj.r, 0, Math.PI * 2);
+              ctx.fill();
+            } else {
+              ctx.fillStyle = obj.color;
+              if (Math.random() > 0.5) {
+                ctx.beginPath();
+                ctx.arc(obj.x, obj.y, obj.r, 0, Math.PI * 2);
+                ctx.fill();
+              } else {
+                ctx.fillRect(obj.x - obj.r/2, obj.y - obj.r/2, obj.r, obj.r);
+              }
+            }
+          }
+
+          this.countRAF = requestAnimationFrame(animate);
+        };
+
+        this.countRAF = requestAnimationFrame(animate);
+        currentAnswer = () => parseInt(document.getElementById('count-input').value);
+      },
+      validate: function() {
+        cancelAnimationFrame(this.countRAF);
+        const ans = currentAnswer();
+        return Math.abs(ans - this.answer) <= 3;
+      }
+    },
+
+    // 28. Translate from a made-up language
+    {
+      title: 'Translate from Zorblaxian',
+      level: 'transcendent',
+      setup: function() {
+        const dictionary = {
+          'glorp': 'the', 'fleem': 'cat', 'zyx': 'sat', 'wibble': 'on',
+          'krang': 'a', 'plonk': 'mat', 'snorf': 'big', 'yoink': 'red',
+          'bloop': 'and', 'fizzle': 'ate', 'wumbo': 'fish', 'dingle': 'small'
+        };
+
+        const sentences = [
+          { z: 'glorp snorf fleem zyx wibble krang yoink plonk', e: 'the big cat sat on a red mat' },
+          { z: 'krang dingle fleem fizzle glorp wumbo', e: 'a small cat ate the fish' },
+          { z: 'glorp yoink fleem bloop glorp snorf fleem zyx wibble krang plonk', e: 'the red cat and the big cat sat on a mat' },
+        ];
+
+        const sentence = pick(sentences);
+        this.answer = sentence.e;
+
+        let html = setInstruction('Translate this Zorblaxian sentence to English');
+        html += getLevelBadge('transcendent');
+
+        html += `<div class="regex-display" style="font-size:16px;color:#0ff">${sentence.z}</div>`;
+
+        html += `<div style="font-size:12px;margin:8px 0"><strong>Zorblaxian Dictionary:</strong></div>`;
+        html += `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:4px 0">`;
+        Object.entries(dictionary).forEach(([z, e]) => {
+          html += `<div style="font-size:11px;padding:4px 8px;background:#f8f8f8;border:1px solid #ddd;border-radius:3px"><strong>${z}</strong> = ${e}</div>`;
+        });
+        html += `</div>`;
+
+        html += `<input class="captcha-input" id="zorb-input" placeholder="Enter English translation..." style="margin-top:8px">`;
+
+        getBody().innerHTML = html;
+        currentAnswer = () => document.getElementById('zorb-input').value.toLowerCase().trim();
+      },
+      validate: function() {
+        return currentAnswer() === this.answer;
+      }
+    },
+
+    // 29. Read assembly code
+    {
+      title: 'What does this code output?',
+      level: 'transcendent',
+      setup: function() {
+        const programs = [
+          {
+            code: `section .text
+global _start
+_start:
+    mov eax, 5
+    mov ebx, 3
+    add eax, ebx
+    imul eax, 2
+    ; eax now contains the result
+    ; What is the value in eax?`,
+            answer: '16'
+          },
+          {
+            code: `section .text
+global _start
+_start:
+    mov eax, 10
+    mov ebx, 4
+    sub eax, ebx
+    shl eax, 1
+    add eax, 3
+    ; What is the value in eax?`,
+            answer: '15'
+          },
+          {
+            code: `section .text
+global _start
+_start:
+    xor eax, eax
+    mov ecx, 5
+loop:
+    add eax, ecx
+    dec ecx
+    jnz loop
+    ; What is the value in eax?`,
+            answer: '15'
+          }
+        ];
+
+        const prog = pick(programs);
+        this.answer = prog.answer;
+
+        let html = setInstruction('What value does this x86 assembly program produce?');
+        html += getLevelBadge('transcendent');
+        html += `<div class="asm-listing">${prog.code.replace(/\n/g, '<br>')}</div>`;
+        html += `<input class="captcha-input" id="asm-input" placeholder="Enter the final value..." type="number" style="margin-top:8px">`;
+
+        getBody().innerHTML = html;
+        currentAnswer = () => document.getElementById('asm-input').value.trim();
+      },
+      validate: function() {
+        return currentAnswer() === this.answer;
+      }
+    },
+
+    // 30. Sort historical events chronologically
+    {
+      title: 'Sort events chronologically',
+      level: 'hard',
+      setup: function() {
+        const eventSets = [
+          [
+            { event: 'Construction of the Great Pyramid of Giza', year: -2560 },
+            { event: 'Fall of the Roman Empire', year: 476 },
+            { event: 'Signing of the Magna Carta', year: 1215 },
+            { event: 'Columbus reaches the Americas', year: 1492 },
+            { event: 'French Revolution begins', year: 1789 },
+            { event: 'First Moon landing', year: 1969 },
+          ],
+          [
+            { event: 'Invention of the printing press', year: 1440 },
+            { event: 'American Declaration of Independence', year: 1776 },
+            { event: 'Start of World War I', year: 1914 },
+            { event: 'First powered flight (Wright Brothers)', year: 1903 },
+            { event: 'Fall of the Berlin Wall', year: 1989 },
+            { event: 'Launch of the World Wide Web', year: 1991 },
+          ]
+        ];
+
+        const events = pick(eventSets);
+        this.correctOrder = events.map(e => e.event);
+        const shuffled = shuffle(events);
+
+        let html = setInstruction('Drag to sort these events from earliest to latest');
+        html += getLevelBadge('hard');
+        html += `<ul class="sort-list" id="sort-list">`;
+
+        shuffled.forEach((e, i) => {
+          html += `<li class="sort-item" draggable="true" data-event="${e.event}"><span class="sort-handle">☰</span> ${e.event}</li>`;
+        });
+
+        html += `</ul>`;
+        html += setSubtext('Drag and drop items to reorder them');
+
+        getBody().innerHTML = html;
+
+        // Setup drag and drop
+        const list = document.getElementById('sort-list');
+        let dragItem = null;
+
+        list.querySelectorAll('.sort-item').forEach(item => {
+          item.addEventListener('dragstart', (e) => {
+            dragItem = item;
+            item.style.opacity = '0.5';
+          });
+
+          item.addEventListener('dragend', () => {
+            item.style.opacity = '1';
+            dragItem = null;
+          });
+
+          item.addEventListener('dragover', (e) => {
+            e.preventDefault();
+          });
+
+          item.addEventListener('drop', (e) => {
+            e.preventDefault();
+            if (dragItem && dragItem !== item) {
+              const items = [...list.children];
+              const dragIdx = items.indexOf(dragItem);
+              const dropIdx = items.indexOf(item);
+              if (dragIdx < dropIdx) {
+                list.insertBefore(dragItem, item.nextSibling);
+              } else {
+                list.insertBefore(dragItem, item);
+              }
+            }
+          });
+        });
+
+        currentAnswer = () => [...document.querySelectorAll('#sort-list .sort-item')].map(el => el.dataset.event);
+      },
+      validate: function() {
+        const order = currentAnswer();
+        let correct = 0;
+        for (let i = 0; i < order.length; i++) {
+          if (order[i] === this.correctOrder[i]) correct++;
+        }
+        return correct >= order.length - 1; // Allow 1 mistake
+      }
+    },
+
+    // 31. DNA sequence completion
+    {
+      title: 'Complete the DNA sequence',
+      level: 'insane',
+      setup: function() {
+        const bases = ['A', 'T', 'G', 'C'];
+        const complement = { 'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G' };
+
+        let strand1 = '';
+        for (let i = 0; i < 20; i++) strand1 += pick(bases);
+
+        const answer = strand1.split('').map(b => complement[b]).join('');
+        this.answer = answer;
+
+        let html = setInstruction('Write the complementary DNA strand');
+        html += getLevelBadge('insane');
+        html += setSubtext('Remember: A pairs with T, G pairs with C');
+
+        html += `<div style="font-size:12px;color:#888;margin:4px 0">Template strand (3\' → 5\'):</div>`;
+        html += `<div class="dna-sequence">`;
+        strand1.split('').forEach(b => {
+          html += `<span class="dna-${b}">${b}</span>`;
+        });
+        html += `</div>`;
+
+        html += `<div style="font-size:12px;color:#888;margin:4px 0">Complementary strand (5\' → 3\'):</div>`;
+        html += `<input class="captcha-input" id="dna-input" placeholder="Enter complementary bases (e.g., ATGC...)" style="font-family:monospace;letter-spacing:2px">`;
+
+        getBody().innerHTML = html;
+        currentAnswer = () => document.getElementById('dna-input').value.toUpperCase().trim();
+      },
+      validate: function() {
+        return currentAnswer() === this.answer;
+      }
+    },
+
+    // 32. Where's Waldo style finder
+    {
+      title: 'Find the hidden object',
+      level: 'hard',
+      setup: function() {
+        this.found = false;
+        const targetX = rand(30, 330);
+        const targetY = rand(30, 270);
+        this.targetX = targetX;
+        this.targetY = targetY;
+
+        let html = setInstruction('Find and click on the tiny red star hidden in this image');
+        html += getLevelBadge('hard');
+        html += `<div class="waldo-container"><canvas id="waldo-canvas" width="360" height="300"></canvas></div>`;
+        html += `<div id="waldo-status" style="text-align:center;font-size:12px;color:#888;margin-top:4px">Click where you think the star is hiding</div>`;
+
+        getBody().innerHTML = html;
+
+        const canvas = document.getElementById('waldo-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Fill with chaotic colorful noise
+        for (let x = 0; x < canvas.width; x += 3) {
+          for (let y = 0; y < canvas.height; y += 3) {
+            ctx.fillStyle = randColor();
+            ctx.fillRect(x, y, 3, 3);
+          }
+        }
+
+        // Draw lots of decoy shapes
+        for (let i = 0; i < 100; i++) {
+          ctx.strokeStyle = randColor();
+          ctx.lineWidth = rand(1, 3);
+          ctx.beginPath();
+          const shape = rand(0, 2);
+          if (shape === 0) {
+            ctx.arc(rand(0, canvas.width), rand(0, canvas.height), rand(3, 15), 0, Math.PI * 2);
+          } else if (shape === 1) {
+            ctx.rect(rand(0, canvas.width), rand(0, canvas.height), rand(5, 20), rand(5, 20));
+          } else {
+            // Star-like shapes (decoys)
+            const sx = rand(0, canvas.width);
+            const sy = rand(0, canvas.height);
+            const sr = rand(3, 8);
+            for (let p = 0; p < 5; p++) {
+              const angle = (p / 5) * Math.PI * 2 - Math.PI / 2;
+              const px = sx + Math.cos(angle) * sr;
+              const py = sy + Math.sin(angle) * sr;
+              if (p === 0) ctx.moveTo(px, py);
+              else ctx.lineTo(px, py);
+            }
+            ctx.closePath();
+          }
+          ctx.stroke();
+        }
+
+        // Draw the actual tiny red star
+        ctx.fillStyle = '#ff0000';
+        ctx.beginPath();
+        for (let p = 0; p < 5; p++) {
+          const angle = (p / 5) * Math.PI * 2 - Math.PI / 2;
+          const outer = 4;
+          const inner = 2;
+          const px1 = targetX + Math.cos(angle) * outer;
+          const py1 = targetY + Math.sin(angle) * outer;
+          const midAngle = angle + Math.PI / 5;
+          const px2 = targetX + Math.cos(midAngle) * inner;
+          const py2 = targetY + Math.sin(midAngle) * inner;
+          if (p === 0) ctx.moveTo(px1, py1);
+          else ctx.lineTo(px1, py1);
+          ctx.lineTo(px2, py2);
+        }
+        ctx.closePath();
+        ctx.fill();
+
+        canvas.addEventListener('click', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const scaleX = canvas.width / rect.width;
+          const scaleY = canvas.height / rect.height;
+          const clickX = (e.clientX - rect.left) * scaleX;
+          const clickY = (e.clientY - rect.top) * scaleY;
+
+          const dist = Math.sqrt((clickX - targetX)**2 + (clickY - targetY)**2);
+          if (dist < 20) {
+            this.found = true;
+            document.getElementById('waldo-status').innerHTML = '⭐ Found it! Click Verify to continue.';
+            document.getElementById('waldo-status').style.color = '#2ecc71';
+
+            // Highlight the star
+            ctx.strokeStyle = '#00ff00';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(targetX, targetY, 15, 0, Math.PI * 2);
+            ctx.stroke();
+          } else {
+            document.getElementById('waldo-status').textContent = `Miss! Distance: ${Math.round(dist)}px away. Keep looking...`;
+            document.getElementById('waldo-status').style.color = '#e74c3c';
+          }
+        });
+
+        currentAnswer = () => this.found;
+      },
+      validate: function() { return this.found; }
+    },
+
+    // 33. Musical notation reading
+    {
+      title: 'Read this music',
+      level: 'insane',
+      setup: function() {
+        const noteSequences = [
+          [
+            { pitch: 'E4', accidental: null },
+            { pitch: 'G4', accidental: '#' },
+            { pitch: 'B4', accidental: null },
+            { pitch: 'C5', accidental: null },
+            { pitch: 'D5', accidental: 'b' },
+          ],
+          [
+            { pitch: 'C4', accidental: null },
+            { pitch: 'F4', accidental: '#' },
+            { pitch: 'A4', accidental: null },
+            { pitch: 'E5', accidental: 'b' },
+            { pitch: 'G4', accidental: null },
+          ],
+        ];
+
+        const notes = pick(noteSequences);
+        const noteNames = notes.map(n => {
+          const base = n.pitch[0];
+          const acc = n.accidental === '#' ? '♯' : n.accidental === 'b' ? '♭' : '';
+          return base + acc + n.pitch.slice(1);
+        });
+        this.answer = noteNames.join(' ').toLowerCase().replace(/♯/g, '#').replace(/♭/g, 'b');
+
+        let html = setInstruction('Name the notes shown on this staff');
+        html += getLevelBadge('insane');
+        html += `<canvas class="music-staff" id="staff-canvas" width="360" height="120"></canvas>`;
+        html += `<input class="captcha-input" id="music-input" placeholder="Enter notes separated by spaces (e.g., C4 D#4 E4)" style="margin-top:8px">`;
+        html += setSubtext('Format: NoteName + Accidental + Octave (e.g., F#4, Bb5, C4)');
+
+        getBody().innerHTML = html;
+        drawMusicalStaff(document.getElementById('staff-canvas'), notes);
+
+        currentAnswer = () => document.getElementById('music-input').value.toLowerCase().trim();
+      },
+      validate: () => currentAnswer().length > 3
+    },
+
+    // ---- PHASE 4: Pure Insanity ----
+
+    // 34. Answer a trick question
+    {
+      title: 'Answer this question',
+      level: 'transcendent',
+      setup: function() {
+        const questions = [
+          { q: 'If you have 3 apples and you take away 2, how many do YOU have?', a: '2', explain: 'You took 2, so you have 2.' },
+          { q: 'A rooster sits on top of a barn roof. It lays an egg. Which side does it roll down?', a: 'neither', explain: 'Roosters don\'t lay eggs.' },
+          { q: 'How many birthdays does the average person have?', a: '1', explain: 'Everyone has one birthday.' },
+          { q: 'If there are 12 fish in a tank and half of them drown, how many are left?', a: '12', explain: 'Fish can\'t drown.' },
+          { q: 'What weighs more, a pound of feathers or a pound of steel?', a: 'same', explain: 'A pound is a pound.' },
+          { q: 'Before Mt. Everest was discovered, what was the tallest mountain?', a: 'everest', explain: 'It was still Everest, it just hadn\'t been discovered yet.' },
+        ];
+
+        const q = pick(questions);
+        this.answer = q.a.toLowerCase();
+
+        let html = setInstruction(q.q);
+        html += getLevelBadge('transcendent');
+        html += `<input class="captcha-input" id="trick-input" placeholder="Your answer..." style="margin-top:12px">`;
+        html += setWarning('Think carefully. This is a trick question.');
+
+        getBody().innerHTML = html;
+        currentAnswer = () => document.getElementById('trick-input').value.toLowerCase().trim();
+      },
+      validate: function() {
+        const ans = currentAnswer();
+        return ans.includes(this.answer) || ans.length > 0;
+      }
+    },
+
+    // 35. Pixel art recreation
+    {
+      title: 'Recreate this pixel art',
+      level: 'insane',
+      setup: function() {
+        const size = 8;
+        const targetPattern = [];
+        const palette = ['#fff', '#000', '#e74c3c', '#4a90d9', '#2ecc71', '#f39c12'];
+
+        // Generate a simple pattern (heart, star, etc.)
+        const patterns = [
+          // Heart
+          [0,1,1,0,0,1,1,0,
+           1,1,1,1,1,1,1,1,
+           1,1,1,1,1,1,1,1,
+           1,1,1,1,1,1,1,1,
+           0,1,1,1,1,1,1,0,
+           0,0,1,1,1,1,0,0,
+           0,0,0,1,1,0,0,0,
+           0,0,0,0,0,0,0,0],
+          // Smiley
+          [0,0,1,1,1,1,0,0,
+           0,1,0,0,0,0,1,0,
+           1,0,2,0,0,2,0,1,
+           1,0,0,0,0,0,0,1,
+           1,0,2,0,0,2,0,1,
+           1,0,0,2,2,0,0,1,
+           0,1,0,0,0,0,1,0,
+           0,0,1,1,1,1,0,0],
+        ];
+
+        const pattern = pick(patterns);
+        for (let i = 0; i < size * size; i++) {
+          targetPattern.push(pattern[i] || 0);
+        }
+
+        this.targetPattern = targetPattern;
+
+        let html = setInstruction('Recreate this pixel art pattern');
+        html += getLevelBadge('insane');
+
+        // Target display
+        html += `<div style="text-align:center;margin:8px 0"><div style="font-size:11px;color:#888;margin-bottom:4px">TARGET:</div>`;
+        html += `<canvas id="target-pixels" width="${size * 24}" height="${size * 24}" style="border:1px solid #ddd;image-rendering:pixelated"></canvas></div>`;
+
+        // User grid
+        html += `<div style="text-align:center;margin:8px 0"><div style="font-size:11px;color:#888;margin-bottom:4px">YOUR CANVAS (click to toggle):</div>`;
+        html += `<div class="pixel-grid" id="pixel-grid" style="grid-template-columns:repeat(${size}, 24px)">`;
+        for (let i = 0; i < size * size; i++) {
+          html += `<div class="pixel-cell" data-idx="${i}" data-color="0" onclick="togglePixel(this)"></div>`;
+        }
+        html += `</div></div>`;
+
+        // Palette
+        html += `<div style="display:flex;justify-content:center;gap:4px;margin:8px 0">`;
+        palette.forEach((color, i) => {
+          html += `<div style="width:24px;height:24px;background:${color};border:2px solid ${i === 0 ? '#4a90d9' : '#ddd'};cursor:pointer;border-radius:3px" onclick="selectColor(${i}, this)" data-ci="${i}"></div>`;
+        });
+        html += `</div>`;
+
+        getBody().innerHTML = html;
+
+        // Draw target
+        const targetCanvas = document.getElementById('target-pixels');
+        const ctx = targetCanvas.getContext('2d');
+        for (let i = 0; i < size * size; i++) {
+          const x = (i % size) * 24;
+          const y = Math.floor(i / size) * 24;
+          ctx.fillStyle = palette[targetPattern[i]] || '#fff';
+          ctx.fillRect(x, y, 24, 24);
+        }
+
+        window._selectedColor = 1; // Default to black
+
+        window.selectColor = (ci, el) => {
+          window._selectedColor = ci;
+          document.querySelectorAll('[data-ci]').forEach(e => e.style.borderColor = '#ddd');
+          el.style.borderColor = '#4a90d9';
+        };
+
+        window.togglePixel = (el) => {
+          const ci = window._selectedColor;
+          el.dataset.color = ci;
+          el.style.background = palette[ci];
+        };
+
+        currentAnswer = () => [...document.querySelectorAll('#pixel-grid .pixel-cell')].map(el => parseInt(el.dataset.color));
+      },
+      validate: function() {
+        const userPattern = currentAnswer();
+        let matching = 0;
+        for (let i = 0; i < this.targetPattern.length; i++) {
+          if (userPattern[i] === this.targetPattern[i]) matching++;
+        }
+        return matching / this.targetPattern.length >= 0.7;
+      }
+    },
+
+    // 36. Decode Morse code
+    {
+      title: 'Decode this Morse code',
+      level: 'hard',
+      setup: function() {
+        const morseMap = {
+          'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+          'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+          'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+          'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+          'Y': '-.--', 'Z': '--..'
+        };
+
+        const words = ['HUMAN', 'VERIFY', 'ALIVE', 'REAL', 'PERSON', 'BRAIN', 'THINK', 'SOUL'];
+        const word = pick(words);
+        this.answer = word.toLowerCase();
+
+        const morse = word.split('').map(c => morseMap[c]).join(' / ');
+
+        let html = setInstruction('Decode this Morse code message');
+        html += getLevelBadge('hard');
+        html += `<div class="regex-display" style="font-size:18px;letter-spacing:3px;color:#0f0;text-align:center">${morse}</div>`;
+        html += `<input class="captcha-input" id="morse-input" placeholder="Enter decoded message..." style="margin-top:8px">`;
+        html += setSubtext('Letters are separated by spaces, "/" indicates a gap');
+
+        getBody().innerHTML = html;
+        currentAnswer = () => document.getElementById('morse-input').value.toLowerCase().trim();
+      },
+      validate: function() {
+        return currentAnswer() === this.answer;
+      }
+    },
+
+    // 37. Estimate the number of jelly beans
+    {
+      title: 'Estimate the jelly beans',
+      level: 'hard',
+      setup: function() {
+        const actual = rand(80, 250);
+        this.answer = actual;
+
+        let html = setInstruction('How many jelly beans are in this jar?');
+        html += getLevelBadge('hard');
+        html += `<canvas class="game-canvas" id="jelly-canvas" width="360" height="300" style="height:300px;background:#fff"></canvas>`;
+        html += `<input class="captcha-input" id="jelly-input" type="number" placeholder="Enter your estimate..." style="margin-top:8px">`;
+        html += setWarning('Must be within 20% of the actual count');
+
+        getBody().innerHTML = html;
+
+        const canvas = document.getElementById('jelly-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Draw jar
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, 360, 300);
+
+        // Jar outline
+        ctx.strokeStyle = 'rgba(100,200,255,0.3)';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(100, 40);
+        ctx.lineTo(80, 60);
+        ctx.lineTo(60, 260);
+        ctx.lineTo(300, 260);
+        ctx.lineTo(280, 60);
+        ctx.lineTo(260, 40);
+        ctx.lineTo(100, 40);
+        ctx.stroke();
+
+        // Jar lid
+        ctx.fillStyle = '#666';
+        ctx.fillRect(90, 30, 180, 15);
+
+        // Draw jelly beans
+        const jellyColors = ['#e74c3c', '#e67e22', '#f1c40f', '#2ecc71', '#3498db', '#9b59b6', '#e91e63', '#1abc9c'];
+        for (let i = 0; i < actual; i++) {
+          const x = rand(75, 285);
+          const y = rand(55, 252);
+          const color = pick(jellyColors);
+          const angle = randFloat(0, Math.PI);
+
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(angle);
+          ctx.fillStyle = color;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, rand(6, 10), rand(4, 6), 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        currentAnswer = () => parseInt(document.getElementById('jelly-input').value);
+      },
+      validate: function() {
+        const guess = currentAnswer();
+        return Math.abs(guess - this.answer) <= this.answer * 0.3;
+      }
+    },
+
+    // 38. Spot the difference (two nearly identical images)
+    {
+      title: 'Spot the differences',
+      level: 'hard',
+      setup: function() {
+        this.found = 0;
+        this.totalDiffs = 5;
+
+        let html = setInstruction(`Find all ${this.totalDiffs} differences between these images`);
+        html += getLevelBadge('hard');
+        html += `<div style="display:flex;gap:4px;margin:8px 0">`;
+        html += `<canvas id="diff-left" width="175" height="200" style="border:1px solid #ddd;flex:1;cursor:crosshair"></canvas>`;
+        html += `<canvas id="diff-right" width="175" height="200" style="border:1px solid #ddd;flex:1;cursor:crosshair"></canvas>`;
+        html += `</div>`;
+        html += `<div style="text-align:center;font-size:12px;color:#888">Found: <span id="diff-count">0</span> / ${this.totalDiffs}</div>`;
+
+        getBody().innerHTML = html;
+
+        const leftCanvas = document.getElementById('diff-left');
+        const rightCanvas = document.getElementById('diff-right');
+        const leftCtx = leftCanvas.getContext('2d');
+        const rightCtx = rightCanvas.getContext('2d');
+
+        // Draw identical base scene on both
+        const drawScene = (ctx) => {
+          ctx.fillStyle = '#87ceeb';
+          ctx.fillRect(0, 0, 175, 200);
+
+          // Ground
+          ctx.fillStyle = '#228b22';
+          ctx.fillRect(0, 140, 175, 60);
+
+          // Sun
+          ctx.fillStyle = '#f1c40f';
+          ctx.beginPath();
+          ctx.arc(140, 30, 20, 0, Math.PI * 2);
+          ctx.fill();
+
+          // House
+          ctx.fillStyle = '#c0392b';
+          ctx.fillRect(30, 80, 60, 60);
+          ctx.fillStyle = '#8b4513';
+          ctx.beginPath();
+          ctx.moveTo(20, 80);
+          ctx.lineTo(60, 50);
+          ctx.lineTo(100, 80);
+          ctx.closePath();
+          ctx.fill();
+
+          // Door
+          ctx.fillStyle = '#6d4c41';
+          ctx.fillRect(50, 110, 20, 30);
+
+          // Window
+          ctx.fillStyle = '#87ceeb';
+          ctx.fillRect(35, 90, 15, 15);
+
+          // Tree
+          ctx.fillStyle = '#4a2f1a';
+          ctx.fillRect(130, 100, 10, 40);
+          ctx.fillStyle = '#228b22';
+          ctx.beginPath();
+          ctx.arc(135, 85, 25, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Cloud
+          ctx.fillStyle = '#fff';
+          ctx.beginPath();
+          ctx.arc(60, 25, 15, 0, Math.PI * 2);
+          ctx.arc(75, 20, 18, 0, Math.PI * 2);
+          ctx.arc(90, 25, 14, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Flowers
+          for (let i = 0; i < 5; i++) {
+            ctx.fillStyle = pick(['#e74c3c', '#f1c40f', '#e91e63']);
+            ctx.beginPath();
+            ctx.arc(20 + i * 30, 155, 4, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        };
+
+        drawScene(leftCtx);
+        drawScene(rightCtx);
+
+        // Add differences to the right image
+        const diffs = [
+          { x: 140, y: 30, r: 22, action: () => { rightCtx.fillStyle = '#e67e22'; rightCtx.beginPath(); rightCtx.arc(140, 30, 20, 0, Math.PI * 2); rightCtx.fill(); } },
+          { x: 60, y: 50, r: 15, action: () => { rightCtx.fillStyle = '#3498db'; rightCtx.beginPath(); rightCtx.moveTo(20, 80); rightCtx.lineTo(60, 45); rightCtx.lineTo(100, 80); rightCtx.closePath(); rightCtx.fill(); } },
+          { x: 135, y: 85, r: 20, action: () => { rightCtx.fillStyle = '#27ae60'; rightCtx.beginPath(); rightCtx.arc(135, 85, 30, 0, Math.PI * 2); rightCtx.fill(); } },
+          { x: 75, y: 22, r: 20, action: () => { /* cloud removed - draw sky */ rightCtx.fillStyle = '#87ceeb'; rightCtx.fillRect(40, 5, 70, 40); } },
+          { x: 50, y: 155, r: 15, action: () => { rightCtx.fillStyle = '#228b22'; rightCtx.fillRect(40, 148, 30, 15); } },
+        ];
+
+        const foundDiffs = new Set();
+        diffs.forEach(d => d.action());
+
+        const handleClick = (e) => {
+          const canvas = e.target;
+          const rect = canvas.getBoundingClientRect();
+          const scaleX = canvas.width / rect.width;
+          const scaleY = canvas.height / rect.height;
+          const x = (e.clientX - rect.left) * scaleX;
+          const y = (e.clientY - rect.top) * scaleY;
+
+          for (let i = 0; i < diffs.length; i++) {
+            if (foundDiffs.has(i)) continue;
+            const d = diffs[i];
+            const dist = Math.sqrt((x - d.x)**2 + (y - d.y)**2);
+            if (dist < d.r + 10) {
+              foundDiffs.add(i);
+              this.found = foundDiffs.size;
+              document.getElementById('diff-count').textContent = this.found;
+
+              // Circle the difference on both canvases
+              [leftCtx, rightCtx].forEach(ctx => {
+                ctx.strokeStyle = '#e74c3c';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+                ctx.stroke();
+              });
+              break;
+            }
+          }
+        };
+
+        rightCanvas.addEventListener('click', handleClick);
+        leftCanvas.addEventListener('click', handleClick);
+
+        currentAnswer = () => this.found;
+      },
+      validate: function() { return this.found >= 3; }
+    },
+
+    // 39. CAPTCHA within a CAPTCHA
+    {
+      title: 'Verify you are human (again)',
+      level: 'transcendent',
+      setup: function() {
+        this.innerDone = false;
+
+        let html = setInstruction('Complete this additional security verification');
+        html += getLevelBadge('transcendent');
+        html += setWarning('Our system has detected anomalous behavior. Additional verification required.');
+
+        // Nested CAPTCHA box
+        html += `<div style="background:#f0f0f0;border:1px solid #d3d3d3;border-radius:3px;margin:8px 0;padding:0;box-shadow:inset 0 1px 3px rgba(0,0,0,0.1)">`;
+        html += `<div style="background:#357abd;color:white;padding:8px 12px;font-size:12px;font-weight:600">🔒 Enhanced Security Verification</div>`;
+        html += `<div style="padding:12px">`;
+
+        // Inner CAPTCHA: checkbox
+        html += `<div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #ddd;border-radius:3px;background:#fff;cursor:pointer" onclick="toggleInnerCaptcha(this)">`;
+        html += `<div id="inner-checkbox" style="width:24px;height:24px;border:2px solid #ccc;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:16px"></div>`;
+        html += `<span style="font-size:13px">I am not a robot</span>`;
+        html += `<div style="margin-left:auto;text-align:center;font-size:8px;color:#999"><div style="font-size:16px">🔒</div>MicroCAPTCHA<br>v2.0</div>`;
+        html += `</div>`;
+
+        html += `<div id="inner-captcha-msg" style="font-size:11px;color:#888;margin-top:8px;text-align:center"></div>`;
+        html += `</div></div>`;
+
+        // And a second nested CAPTCHA
+        html += `<div style="background:#f0f0f0;border:1px solid #d3d3d3;border-radius:3px;margin:8px 0;padding:0;box-shadow:inset 0 1px 3px rgba(0,0,0,0.1)">`;
+        html += `<div style="background:#c0392b;color:white;padding:8px 12px;font-size:12px;font-weight:600">⚠️ Third-Party Verification Required</div>`;
+        html += `<div style="padding:12px">`;
+        html += `<div style="font-size:12px;margin-bottom:8px">Please select all images containing <strong>traffic lights</strong>:</div>`;
+        html += `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px">`;
+
+        for (let i = 0; i < 9; i++) {
+          html += `<div style="aspect-ratio:1;background:${randColor()};cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;font-size:24px" onclick="this.style.borderColor=this.style.borderColor==='rgb(74, 144, 217)'?'transparent':'#4a90d9'">${pick(['🚗', '🏠', '🌳', '🚦', '🏢', '🚶', '🛤️', '🚌', '🚥'])}</div>`;
+        }
+
+        html += `</div></div></div>`;
+
+        getBody().innerHTML = html;
+
+        let clickCount = 0;
+        window.toggleInnerCaptcha = (el) => {
+          clickCount++;
+          const cb = document.getElementById('inner-checkbox');
+          const msg = document.getElementById('inner-captcha-msg');
+
+          if (clickCount === 1) {
+            msg.textContent = 'Verifying...';
+            setTimeout(() => {
+              msg.textContent = 'Additional verification required. Please click again.';
+            }, 1500);
+          } else if (clickCount === 2) {
+            msg.textContent = 'Almost there...';
+            setTimeout(() => {
+              msg.textContent = 'One more click to confirm you are definitely human.';
+            }, 1000);
+          } else {
+            cb.textContent = '✓';
+            cb.style.background = '#4a90d9';
+            cb.style.borderColor = '#4a90d9';
+            cb.style.color = 'white';
+            msg.innerHTML = '✅ Verified. (Or are you?)';
+            this.innerDone = true;
+          }
+        };
+
+        currentAnswer = () => this.innerDone;
+      },
+      validate: function() { return this.innerDone; }
+    },
+
+    // 40. Fingerprint scan
+    {
+      title: 'Biometric verification',
+      level: 'insane',
+      setup: function() {
+        this.scanComplete = false;
+
+        let html = setInstruction('Place your finger on the sensor for biometric verification');
+        html += getLevelBadge('insane');
+        html += setSubtext('Hold your finger steady on the sensor below for 3 seconds');
+
+        html += `<div class="fingerprint-zone" id="fingerprint-zone">🖐️</div>`;
+        html += `<div id="fingerprint-status" style="text-align:center;font-size:12px;color:#888;margin-top:8px">Press and hold the sensor</div>`;
+
+        getBody().innerHTML = html;
+
+        let holdTimer = null;
+        let holdTime = 0;
+
+        const zone = document.getElementById('fingerprint-zone');
+        const status = document.getElementById('fingerprint-status');
+
+        zone.addEventListener('mousedown', () => {
+          zone.classList.add('scanning');
+          holdTime = 0;
+          holdTimer = setInterval(() => {
+            holdTime += 100;
+            const pct = Math.min(100, (holdTime / 3000) * 100);
+            status.textContent = `Scanning... ${Math.round(pct)}%`;
+
+            if (holdTime >= 3000) {
+              clearInterval(holdTimer);
+              zone.classList.remove('scanning');
+              zone.textContent = '✅';
+              zone.style.borderColor = '#2ecc71';
+              status.innerHTML = 'Fingerprint accepted! (We can\'t actually scan your fingerprint through a webpage, but we appreciate the trust.)';
+              this.scanComplete = true;
+            }
+          }, 100);
+        });
+
+        zone.addEventListener('mouseup', () => {
+          if (!this.scanComplete) {
+            clearInterval(holdTimer);
+            zone.classList.remove('scanning');
+            status.textContent = 'Scan interrupted. Try again - hold for 3 full seconds.';
+          }
+        });
+
+        zone.addEventListener('mouseleave', () => {
+          if (!this.scanComplete) {
+            clearInterval(holdTimer);
+            zone.classList.remove('scanning');
+          }
+        });
+
+        currentAnswer = () => this.scanComplete;
+      },
+      validate: function() { return this.scanComplete; }
+    },
+
+    // 41. Personality quiz
+    {
+      title: 'Personality Assessment',
+      level: 'medium',
+      setup: function() {
+        const questions = [
+          'I often wonder about the meaning of life while waiting for web pages to load.',
+          'I have yelled at a computer in the last 30 days.',
+          'I sometimes eat food that has fallen on the floor.',
+          'I have pretended to understand something a coworker said.',
+          'I have googled something I were embarrassed about.',
+          'I have waved back at someone who wasn\'t waving at me.',
+        ];
+
+        this.answeredCount = 0;
+        this.totalQ = questions.length;
+
+        let html = setInstruction('Complete this personality assessment');
+        html += getLevelBadge('medium');
+        html += setSubtext('Your responses will be analyzed for human-like personality traits');
+
+        questions.forEach((q, i) => {
+          html += `<div style="margin:12px 0">`;
+          html += `<div style="font-size:13px;margin-bottom:6px">${i+1}. ${q}</div>`;
+          html += `<div class="likert-scale">`;
+          ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'].forEach((label, j) => {
+            html += `<div class="likert-option" onclick="selectLikert(this, ${i}, ${j})" data-q="${i}">${label}</div>`;
+          });
+          html += `</div></div>`;
+        });
+
+        getBody().innerHTML = html;
+
+        const answered = new Set();
+        window.selectLikert = (el, q, val) => {
+          document.querySelectorAll(`[data-q="${q}"]`).forEach(e => e.classList.remove('selected'));
+          el.classList.add('selected');
+          answered.add(q);
+          this.answeredCount = answered.size;
+        };
+
+        currentAnswer = () => this.answeredCount;
+      },
+      validate: function() { return this.answeredCount >= this.totalQ; }
+    },
+
+    // 42. Solve a crossword clue
+    {
+      title: 'Solve this crossword clue',
+      level: 'hard',
+      setup: function() {
+        const clues = [
+          { clue: 'Verification test for humans (7)', answer: 'CAPTCHA' },
+          { clue: 'Feeling of frustration with technology (4)', answer: 'RAGE' },
+          { clue: 'What a CAPTCHA tries to prove (8)', answer: 'HUMANITY' },
+          { clue: 'Automated program pretending to be human (3)', answer: 'BOT' },
+          { clue: 'The test devised by Alan Turing (6,4)', answer: 'TURING TEST' },
+        ];
+
+        const clue = pick(clues);
+        this.answer = clue.answer.toLowerCase();
+
+        let html = setInstruction('Solve this crossword clue');
+        html += getLevelBadge('hard');
+        html += `<div class="philosophy-container" style="font-style:normal;font-size:16px;text-align:center;font-weight:600">"${clue.clue}"</div>`;
+        html += `<input class="captcha-input" id="crossword-input" placeholder="Enter your answer..." style="margin-top:8px;text-transform:uppercase">`;
+
+        getBody().innerHTML = html;
+        currentAnswer = () => document.getElementById('crossword-input').value.toLowerCase().trim();
+      },
+      validate: function() {
+        return currentAnswer() === this.answer;
+      }
+    },
+
+    // 43. Emoji interpretation
+    {
+      title: 'Decode the emoji story',
+      level: 'hard',
+      setup: function() {
+        const stories = [
+          { emojis: '👨 + 👩 = ❤️ → 💒 → 👶', answer: 'love' },
+          { emojis: '🌧️ → ☀️ → 🌈', answer: 'rainbow' },
+          { emojis: '🥚 → 🐛 → 🦋', answer: 'butterfly' },
+          { emojis: '🌱 → ☀️ + 💧 → 🌳', answer: 'growth' },
+          { emojis: '😀 → 📱 → 🤖 → 😡 → 🖥️ → 💀', answer: 'captcha' },
+        ];
+
+        const story = pick(stories);
+
+        let html = setInstruction('What concept does this emoji sequence represent?');
+        html += getLevelBadge('hard');
+        html += `<div class="emoji-display">${story.emojis}</div>`;
+        html += `<input class="captcha-input" id="emoji-input" placeholder="Enter the concept..." style="margin-top:8px">`;
+
+        getBody().innerHTML = html;
+        currentAnswer = () => document.getElementById('emoji-input').value.toLowerCase().trim();
+      },
+      validate: () => currentAnswer().length > 1
+    },
+
+    // 44. Memory game
+    {
+      title: 'Memory Test',
+      level: 'insane',
+      setup: function() {
+        const sequence = [];
+        for (let i = 0; i < 8; i++) sequence.push(rand(1, 9));
+        this.answer = sequence.join('');
+
+        let html = setInstruction('Memorize this sequence of numbers');
+        html += getLevelBadge('insane');
+        html += `<div id="memory-display" class="math-display" style="font-size:36px;letter-spacing:8px;font-family:monospace">${sequence.join(' ')}</div>`;
+        html += `<div id="memory-input-area" style="display:none">`;
+        html += `<input class="captcha-input" id="memory-input" placeholder="Type the sequence..." style="font-family:monospace;letter-spacing:4px;font-size:18px;text-align:center">`;
+        html += `</div>`;
+        html += `<div id="memory-timer" style="text-align:center;font-size:14px;color:#e74c3c;margin-top:8px;font-weight:bold">Memorize! Hiding in 5 seconds...</div>`;
+
+        getBody().innerHTML = html;
+
+        let countdown = 5;
+        const timer = setInterval(() => {
+          countdown--;
+          document.getElementById('memory-timer').textContent = `Memorize! Hiding in ${countdown} seconds...`;
+          if (countdown <= 0) {
+            clearInterval(timer);
+            document.getElementById('memory-display').textContent = '? ? ? ? ? ? ? ?';
+            document.getElementById('memory-input-area').style.display = 'block';
+            document.getElementById('memory-timer').textContent = 'Now type the sequence from memory!';
+            document.getElementById('memory-input').focus();
+          }
+        }, 1000);
+
+        currentAnswer = () => document.getElementById('memory-input')?.value.replace(/\s/g, '').trim() || '';
+      },
+      validate: function() {
+        return currentAnswer() === this.answer;
+      }
+    },
+
+    // 45. Select all images that make you feel nostalgic
+    {
+      title: 'Emotional image recognition',
+      level: 'transcendent',
+      setup: function() {
+        const items = [
+          '🌅 Sunset over the ocean',
+          '📼 VHS tape',
+          '☎️ Rotary telephone',
+          '🎮 Old game controller',
+          '📷 Disposable camera',
+          '🏫 School building',
+          '🍕 Pizza from your childhood',
+          '🚲 Bicycle with training wheels',
+          '📻 Portable radio',
+          '🧸 Teddy bear',
+          '🎪 Carnival',
+          '🏖️ Beach vacation',
+        ];
+
+        let html = setInstruction('Select all items that make you feel <em>nostalgic</em>');
+        html += getLevelBadge('transcendent');
+        html += setSubtext('There are no wrong answers. But there are suspicious ones.');
+        html += setWarning('Selecting all or none will be flagged as bot behavior');
+
+        items.forEach((item, i) => {
+          html += `<div class="captcha-option" onclick="this.classList.toggle('selected')" data-idx="${i}">${item}</div>`;
+        });
+
+        getBody().innerHTML = html;
+        currentAnswer = () => document.querySelectorAll('.captcha-option.selected').length;
+      },
+      validate: () => {
+        const count = currentAnswer();
+        return count >= 2 && count <= 10;
+      }
+    },
+
+    // 46. Philosophy pop quiz
+    {
+      title: 'Philosophy Quiz',
+      level: 'transcendent',
+      setup: function() {
+        let html = setInstruction('If this CAPTCHA is a simulation, and you are simulated, are you still proving you\'re human by completing it?');
+        html += getLevelBadge('transcendent');
+        html += `<div class="philosophy-container">"I think, therefore I am." — Descartes<br><br>But what if you only think you think?</div>`;
+        html += `<textarea class="captcha-textarea" id="philosophy-input" placeholder="Reflect on your existence... (minimum 40 words)" style="min-height:100px"></textarea>`;
+        html += `<div style="text-align:right;font-size:11px;color:#888;margin-top:4px">Word count: <span id="phil-count">0</span>/40</div>`;
+        html += setSubtext('Your response will be graded by an AI philosopher.');
+
+        getBody().innerHTML = html;
+
+        document.getElementById('philosophy-input').addEventListener('input', function() {
+          const words = this.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+          document.getElementById('phil-count').textContent = words;
+        });
+
+        currentAnswer = () => document.getElementById('philosophy-input').value;
+      },
+      validate: () => currentAnswer().trim().split(/\s+/).filter(w => w.length > 0).length >= 40
+    },
+
+    // 47. Map challenge - find a location
+    {
+      title: 'GeoLocation Challenge',
+      level: 'insane',
+      setup: function() {
+        const locations = [
+          { name: 'approximately where the Eiffel Tower is', x: 0.47, y: 0.35 },
+          { name: 'approximately where the Great Wall of China is', x: 0.78, y: 0.33 },
+          { name: 'approximately where the Statue of Liberty is', x: 0.22, y: 0.35 },
+          { name: 'approximately where the Sydney Opera House is', x: 0.87, y: 0.72 },
+          { name: 'approximately where Machu Picchu is', x: 0.21, y: 0.58 },
+        ];
+
+        const loc = pick(locations);
+        this.targetX = loc.x;
+        this.targetY = loc.y;
+        this.found = false;
+
+        let html = setInstruction(`Click ${loc.name} on this world map`);
+        html += getLevelBadge('insane');
+        html += `<canvas class="map-canvas" id="map-canvas" width="360" height="250"></canvas>`;
+        html += `<div id="map-status" style="text-align:center;font-size:12px;color:#888;margin-top:4px">Click on the map</div>`;
+
+        getBody().innerHTML = html;
+
+        const canvas = document.getElementById('map-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Draw a crude world map
+        ctx.fillStyle = '#4a90d9';
+        ctx.fillRect(0, 0, 360, 250);
+
+        // Continents (very rough)
+        ctx.fillStyle = '#2ecc71';
+
+        // North America
+        ctx.beginPath();
+        ctx.moveTo(20, 30); ctx.lineTo(100, 25); ctx.lineTo(120, 50);
+        ctx.lineTo(110, 80); ctx.lineTo(90, 100); ctx.lineTo(70, 110);
+        ctx.lineTo(50, 100); ctx.lineTo(30, 80); ctx.lineTo(15, 50);
+        ctx.closePath(); ctx.fill();
+
+        // South America
+        ctx.beginPath();
+        ctx.moveTo(70, 115); ctx.lineTo(95, 120); ctx.lineTo(100, 150);
+        ctx.lineTo(90, 190); ctx.lineTo(75, 200); ctx.lineTo(60, 180);
+        ctx.lineTo(55, 150); ctx.lineTo(60, 130);
+        ctx.closePath(); ctx.fill();
+
+        // Europe
+        ctx.beginPath();
+        ctx.moveTo(150, 25); ctx.lineTo(190, 20); ctx.lineTo(200, 40);
+        ctx.lineTo(195, 65); ctx.lineTo(180, 80); ctx.lineTo(160, 75);
+        ctx.lineTo(150, 55);
+        ctx.closePath(); ctx.fill();
+
+        // Africa
+        ctx.beginPath();
+        ctx.moveTo(155, 85); ctx.lineTo(195, 80); ctx.lineTo(210, 100);
+        ctx.lineTo(205, 150); ctx.lineTo(185, 180); ctx.lineTo(165, 175);
+        ctx.lineTo(150, 140); ctx.lineTo(145, 110);
+        ctx.closePath(); ctx.fill();
+
+        // Asia
+        ctx.beginPath();
+        ctx.moveTo(200, 20); ctx.lineTo(320, 15); ctx.lineTo(330, 50);
+        ctx.lineTo(310, 80); ctx.lineTo(280, 100); ctx.lineTo(250, 90);
+        ctx.lineTo(220, 80); ctx.lineTo(200, 50);
+        ctx.closePath(); ctx.fill();
+
+        // Australia
+        ctx.beginPath();
+        ctx.moveTo(290, 150); ctx.lineTo(335, 145); ctx.lineTo(340, 175);
+        ctx.lineTo(320, 190); ctx.lineTo(295, 185); ctx.lineTo(285, 170);
+        ctx.closePath(); ctx.fill();
+
+        canvas.addEventListener('click', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width;
+          const y = (e.clientY - rect.top) / rect.height;
+
+          const dist = Math.sqrt((x - this.targetX)**2 + (y - this.targetY)**2);
+
+          // Draw click marker
+          const cx = x * canvas.width;
+          const cy = y * canvas.height;
+          ctx.fillStyle = '#e74c3c';
+          ctx.beginPath();
+          ctx.arc(cx, cy, 5, 0, Math.PI * 2);
+          ctx.fill();
+
+          if (dist < 0.1) {
+            this.found = true;
+            document.getElementById('map-status').innerHTML = '✅ Close enough! Location found.';
+            document.getElementById('map-status').style.color = '#2ecc71';
+          } else {
+            document.getElementById('map-status').textContent = `Not quite. Distance: ${Math.round(dist * 100)}% off. Try again.`;
+            document.getElementById('map-status').style.color = '#e74c3c';
+          }
+        });
+
+        currentAnswer = () => this.found;
+      },
+      validate: function() { return this.found; }
+    },
+
+    // 48. Speed typing test
+    {
+      title: 'Typing Speed Test',
+      level: 'hard',
+      setup: function() {
+        const text = 'The quick brown fox jumps over the lazy dog while the CAPTCHA system judges your every keystroke with cold mechanical precision.';
+        this.targetText = text;
+
+        let html = setInstruction('Type this text as fast as you can');
+        html += getLevelBadge('hard');
+        html += `<div class="philosophy-container" style="font-style:normal;font-size:14px" id="typing-target">${text}</div>`;
+        html += `<textarea class="captcha-textarea" id="typing-input" placeholder="Start typing..." style="min-height:60px;font-size:14px"></textarea>`;
+        html += `<div style="display:flex;justify-content:space-between;font-size:12px;color:#888;margin-top:4px">`;
+        html += `<span>WPM: <span id="wpm">0</span></span>`;
+        html += `<span>Accuracy: <span id="typing-accuracy">100</span>%</span>`;
+        html += `</div>`;
+        html += setWarning('Minimum 30 WPM required to prove human-like typing');
+
+        getBody().innerHTML = html;
+
+        let startTime = null;
+        const input = document.getElementById('typing-input');
+
+        input.addEventListener('input', () => {
+          if (!startTime) startTime = Date.now();
+
+          const typed = input.value;
+          const elapsed = (Date.now() - startTime) / 1000 / 60; // minutes
+          const words = typed.trim().split(/\s+/).length;
+          const wpm = Math.round(words / Math.max(elapsed, 0.01));
+          document.getElementById('wpm').textContent = wpm;
+
+          // Accuracy
+          let correct = 0;
+          for (let i = 0; i < Math.min(typed.length, text.length); i++) {
+            if (typed[i] === text[i]) correct++;
+          }
+          const accuracy = Math.round((correct / Math.max(typed.length, 1)) * 100);
+          document.getElementById('typing-accuracy').textContent = accuracy;
+        });
+
+        currentAnswer = () => document.getElementById('typing-input').value;
+      },
+      validate: function() {
+        const typed = currentAnswer();
+        return typed.length >= this.targetText.length * 0.8;
+      }
+    },
+
+    // 49. Captcha satisfaction survey
+    {
+      title: 'Rate your CAPTCHA experience',
+      level: 'easy',
+      setup: function() {
+        this.rated = false;
+
+        let html = setInstruction('How would you rate your SuperCAPTCHA experience so far?');
+        html += getLevelBadge('easy');
+
+        html += `<div class="star-rating" id="star-rating">`;
+        for (let i = 1; i <= 5; i++) {
+          html += `<span data-val="${i}" onclick="rateStar(${i})">★</span>`;
+        }
+        html += `</div>`;
+
+        html += `<textarea class="captcha-textarea" id="feedback-input" placeholder="Tell us about your experience... (optional but your humanity score depends on it)" style="min-height:60px"></textarea>`;
+
+        html += `<div style="margin-top:8px">`;
+        html += `<label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer"><input type="checkbox" id="recommend-check"> I would recommend SuperCAPTCHA to my enemies</label>`;
+        html += `</div>`;
+
+        getBody().innerHTML = html;
+
+        window.rateStar = (val) => {
+          document.querySelectorAll('#star-rating span').forEach((s, i) => {
+            s.classList.toggle('filled', i < val);
+          });
+          this.rated = true;
+
+          if (val <= 2) {
+            showAchievement('🎭 Honest Reviewer', 'You gave us a low rating. Bold move during verification.');
+          }
+        };
+
+        currentAnswer = () => this.rated;
+      },
+      validate: function() {
+        if (!this.rated) return false;
+        showAchievement('📋 Surveyed!', 'Your feedback has been filed directly into /dev/null');
+        return true;
+      }
+    },
+
+    // 50. Final boss: Multi-step verification
+    {
+      title: 'FINAL VERIFICATION',
+      level: 'transcendent',
+      setup: function() {
+        this.allDone = false;
+        this.step = 0;
+
+        let html = `<div style="text-align:center;padding:20px">`;
+        html += `<div style="font-size:18px;font-weight:bold;color:#e74c3c;margin-bottom:8px">⚠️ FINAL VERIFICATION ⚠️</div>`;
+        html += getLevelBadge('transcendent');
+        html += `<div style="font-size:13px;color:#666;margin:12px 0">You have reached the final stage. Complete all remaining checks:</div>`;
+        html += `</div>`;
+
+        html += `<div style="padding:0 8px">`;
+
+        // Check 1: Type a specific phrase
+        html += `<div style="margin:8px 0;padding:8px;border:1px solid #ddd;border-radius:4px">`;
+        html += `<div style="font-size:12px;font-weight:600;margin-bottom:4px">1. Type the following phrase:</div>`;
+        html += `<div style="font-size:11px;color:#888;margin-bottom:4px;font-style:italic">"I solemnly swear that I am a real human being and not a sophisticated artificial intelligence pretending to be one."</div>`;
+        html += `<input class="captcha-input" id="final-phrase" placeholder="Type the phrase..." style="font-size:11px">`;
+        html += `</div>`;
+
+        // Check 2: Solve quick math
+        const a = rand(17, 99);
+        const b = rand(17, 99);
+        this.mathAnswer = a * b;
+        html += `<div style="margin:8px 0;padding:8px;border:1px solid #ddd;border-radius:4px">`;
+        html += `<div style="font-size:12px;font-weight:600;margin-bottom:4px">2. Quick math: ${a} × ${b} = ?</div>`;
+        html += `<input class="captcha-input" id="final-math" type="number" placeholder="Answer..." style="font-size:11px">`;
+        html += `</div>`;
+
+        // Check 3: Click a tiny button
+        const btnLeft = rand(20, 300);
+        const btnTop = rand(5, 30);
+        html += `<div style="margin:8px 0;padding:8px;border:1px solid #ddd;border-radius:4px;position:relative;min-height:50px">`;
+        html += `<div style="font-size:12px;font-weight:600;margin-bottom:4px">3. Click the tiny button:</div>`;
+        html += `<button id="tiny-btn" onclick="this.textContent='✓';this.style.background='#2ecc71';this.style.color='white'" style="position:absolute;left:${btnLeft}px;top:${btnTop}px;width:8px;height:8px;font-size:6px;padding:0;border:1px solid #999;background:#ddd;cursor:pointer;border-radius:2px"></button>`;
+        html += `</div>`;
+
+        // Check 4: Confirm one more time
+        html += `<div style="margin:8px 0;padding:8px;border:1px solid #ddd;border-radius:4px">`;
+        html += `<div style="font-size:12px;font-weight:600;margin-bottom:4px">4. Final confirmation:</div>`;
+        html += `<label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer"><input type="checkbox" id="final-confirm1"> I am a human</label>`;
+        html += `<label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;margin-top:4px"><input type="checkbox" id="final-confirm2"> I am not a robot</label>`;
+        html += `<label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;margin-top:4px"><input type="checkbox" id="final-confirm3"> I have never been a robot</label>`;
+        html += `<label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;margin-top:4px"><input type="checkbox" id="final-confirm4"> I don't even know what a robot is</label>`;
+        html += `</div>`;
+
+        html += `</div>`;
+
+        getBody().innerHTML = html;
+
+        currentAnswer = () => ({
+          phrase: document.getElementById('final-phrase').value,
+          math: parseInt(document.getElementById('final-math').value),
+          tinyBtn: document.getElementById('tiny-btn').textContent === '✓',
+          confirm1: document.getElementById('final-confirm1').checked,
+          confirm2: document.getElementById('final-confirm2').checked,
+          confirm3: document.getElementById('final-confirm3').checked,
+          confirm4: document.getElementById('final-confirm4').checked,
+        });
+      },
+      validate: function() {
+        const ans = currentAnswer();
+        return ans.phrase.length > 20 &&
+               ans.math === this.mathAnswer &&
+               ans.tinyBtn &&
+               ans.confirm1 && ans.confirm2 && ans.confirm3 && ans.confirm4;
+      }
+    },
+  ];
+
+  totalSteps = challenges.length;
+}
+
+// ============================================================================
+// GAME FLOW
+// ============================================================================
+
+function submitAnswer() {
+  const challenge = challenges[currentStep];
+
+  if (challenge.validate()) {
+    humanityScore += rand(1, 5);
+
+    // Randomly show achievements
+    const achievements = [
+      ['🧠 Big Brain', 'You solved a challenge!'],
+      ['⏱️ Speed Demon', 'That was fast... suspiciously fast.'],
+      ['🎯 Sharp Eye', 'You found what you were looking for!'],
+      ['🤔 Deep Thinker', 'Your response showed human-like depth.'],
+      ['💪 Persistent', 'You didn\'t give up. Very human.'],
+      ['🎨 Creative', 'Your response was uniquely human.'],
+      ['📝 Literate', 'You can read AND write!'],
+      ['🎮 Gamer', 'Nice gaming skills!'],
+      ['🔬 Scientist', 'Impressive analytical abilities!'],
+      ['🎭 Drama Queen', 'You really committed to that answer.'],
+    ];
+
+    if (Math.random() > 0.6) {
+      const [title, desc] = pick(achievements);
+      showAchievement(title, desc);
+    }
+
+    currentStep++;
+
+    if (currentStep >= totalSteps) {
+      showCompletion();
+      return;
+    }
+
+    updateProgress();
+    stepStartTime = Date.now();
+    challenges[currentStep].setup();
+  } else {
+    // Wrong answer feedback
+    humanityScore = Math.max(0, humanityScore - 2);
+    const body = getBody();
+    const existing = body.querySelector('.captcha-error');
+    if (existing) existing.remove();
+
+    const err = document.createElement('div');
+    err.className = 'captcha-error';
+    err.textContent = pick([
+      '❌ Incorrect. A human would have gotten that right... probably.',
+      '❌ Wrong answer. Humanity score decreased.',
+      '❌ That\'s not right. Are you sure you\'re human?',
+      '❌ Incorrect response detected. Bot probability increased.',
+      '❌ Nope. Try again, alleged human.',
+      '❌ Wrong. Even a robot could do better. Wait...',
+    ]);
+    body.appendChild(err);
+
+    // Shake the container
+    const container = document.getElementById('captcha-container');
+    container.style.animation = 'none';
+    container.offsetHeight; // Trigger reflow
+    container.style.animation = 'shake 0.5s ease';
+  }
+}
+
+function showCompletion() {
+  // Stop any running intervals/animations
+  const header = document.getElementById('captcha-header');
+  header.style.background = '#2ecc71';
+  document.getElementById('header-title').textContent = '✅ Verification Complete';
+  document.getElementById('step-counter').textContent = `${totalSteps}/${totalSteps}`;
+  document.getElementById('progress-bar').style.width = '100%';
+  document.getElementById('progress-bar').style.background = '#2ecc71';
+
+  const elapsed = Math.round(totalTime / 1000);
+  const minutes = Math.floor(elapsed / 60);
+  const seconds = elapsed % 60;
+
+  let html = `<div class="completion-screen">`;
+  html += `<h2>🎉 Congratulations, Human!</h2>`;
+  html += `<div style="font-size:14px;color:#444;margin-bottom:16px">You have been verified as <strong>probably human</strong>.</div>`;
+
+  html += `<div class="humanity-score" style="margin:16px 0">`;
+  html += `<div class="humanity-bar"><div class="humanity-fill" style="width:${Math.min(100, humanityScore)}%"></div></div>`;
+  html += `<div class="humanity-label"><span>Robot</span><span>Final Score: ${humanityScore}%</span><span>Human</span></div>`;
+  html += `</div>`;
+
+  html += `<div style="font-size:12px;color:#888;margin:12px 0">`;
+  html += `<div>Steps completed: ${totalSteps}</div>`;
+  html += `<div>Time elapsed: ${minutes}m ${seconds}s</div>`;
+  html += `<div>Humanity confidence: ${Math.min(99, humanityScore + rand(10, 30))}%</div>`;
+  html += `<div style="margin-top:8px;font-size:10px;color:#bbb">(Note: 100% confidence is philosophically impossible)</div>`;
+  html += `</div>`;
+
+  html += `<div style="margin-top:16px;padding:12px;background:#f8f8f8;border-radius:4px;font-size:11px;color:#666">`;
+  html += `Your verification token: <code style="background:#e8e8e8;padding:2px 6px;border-radius:3px">${generateToken()}</code>`;
+  html += `<div style="margin-top:4px;font-size:9px;color:#999">This token expires in 30 seconds. Just kidding. Or are we?</div>`;
+  html += `</div>`;
+
+  html += `<button class="btn-verify" style="margin-top:16px;padding:12px 32px" onclick="location.reload()">Do It All Again</button>`;
+  html += `</div>`;
+
+  getBody().innerHTML = html;
+  document.getElementById('footer-buttons').innerHTML = '';
+
+  // Confetti!
+  launchConfetti();
+}
+
+function generateToken() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let token = '';
+  for (let i = 0; i < 32; i++) token += chars[rand(0, chars.length - 1)];
+  return token;
+}
+
+function launchConfetti() {
+  const canvas = document.getElementById('confetti-canvas');
+  canvas.style.display = 'block';
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const ctx = canvas.getContext('2d');
+
+  const particles = [];
+  const colors = ['#e74c3c', '#f39c12', '#f1c40f', '#2ecc71', '#3498db', '#9b59b6', '#e91e63'];
+
+  for (let i = 0; i < 150; i++) {
+    particles.push({
+      x: rand(0, canvas.width),
+      y: rand(-canvas.height, 0),
+      vx: randFloat(-3, 3),
+      vy: randFloat(2, 6),
+      size: rand(4, 10),
+      color: pick(colors),
+      rotation: randFloat(0, Math.PI * 2),
+      rotSpeed: randFloat(-0.1, 0.1)
+    });
+  }
+
+  const animate = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    let allDone = true;
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.05;
+      p.rotation += p.rotSpeed;
+
+      if (p.y < canvas.height + 20) {
+        allDone = false;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+        ctx.restore();
+      }
+    }
+
+    if (!allDone) {
+      requestAnimationFrame(animate);
+    } else {
+      canvas.style.display = 'none';
+    }
+  };
+
+  requestAnimationFrame(animate);
+}
+
+// Add shake animation
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+  }
+`;
+document.head.appendChild(style);
+
+// ============================================================================
+// INITIALIZATION
+// ============================================================================
+
+function init() {
+  buildChallenges();
+  totalSteps = challenges.length;
+  currentStep = 0;
+  humanityScore = 0;
+  stepStartTime = Date.now();
+
+  // Timer
+  setInterval(() => {
+    totalTime = Date.now() - stepStartTime;
+  }, 1000);
+
+  updateProgress();
+  challenges[0].setup();
+
+  // Show initial achievement
+  setTimeout(() => {
+    showAchievement('🚀 Journey Begins', `${totalSteps} steps stand between you and humanity`);
+  }, 1000);
+}
+
+init();
+</script>
+
+</body>
+</html>
