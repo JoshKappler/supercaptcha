@@ -573,7 +573,7 @@
 .pp-note--a, .pp-note--b { opacity: 0; --ty: calc(-28 * var(--pt)); --sc: .97; transition: opacity .35s var(--ease), --ty .35s var(--ease), --sc .35s var(--ease), --sx .35s var(--ease); }
 .pp-exp, .pp-menu { opacity: 0; --sc: .9; pointer-events: none; transition: opacity .2s var(--ease), --sc .25s var(--ease); }
 .pp-menu { --sc: .6; }
-.pp-ctl { transition: opacity .3s var(--ease); }
+.pp-ctl { transition: opacity .3s var(--ease) .2s; }
 .pp-dim { transition: opacity .3s var(--ease); }
 
 .iphone__screen[data-state="arrived"] .pp-note--a,
@@ -582,29 +582,33 @@
   opacity: 1; --ty: 0px; --sc: 1;
   transition: opacity .25s var(--ease), --ty .45s var(--spring), --sc .45s var(--spring), --sx .4s var(--ease);
 }
+/* Back from the long-press view: the banner returns only after the card and menu are gone, its text already swapped. */
+.iphone__screen[data-state="approved"] .pp-note--a { transition: opacity .25s var(--ease) .2s, --ty .45s var(--spring) .2s, --sc .45s var(--spring) .2s, --sx .4s var(--ease); }
+.iphone__screen[data-state="approved"] .pp-note--a :is(.pp-note__msg, .pp-note__t) { transition: opacity .15s var(--ease); }
 .iphone__screen[data-state="arrived"][data-press] .pp-note--a { --sc: .965; transition: --sc .3s var(--ease); }
 .iphone__screen[data-state="arrived"][data-press] .pp-tint::after { background: rgba(255, 255, 255, .08); }
-.iphone__screen[data-state="expanded"] .pp-note--a { opacity: 0; --ty: 0px; --sc: 1.02; transition: opacity .16s var(--ease), --sc .2s var(--ease); }
+.iphone__screen[data-state="expanded"] .pp-note--a { opacity: 0; --ty: 0px; --sc: 1.02; transition: opacity .1s var(--ease), --sc .1s var(--ease); }
 .iphone__screen[data-state="approved"] .pp-note--a .pp-note__msg--req,
 .iphone__screen[data-state="next"] .pp-note--a .pp-note__msg--req { opacity: 0; }
 .iphone__screen[data-state="approved"] .pp-note--a .pp-note__msg--done,
 .iphone__screen[data-state="next"] .pp-note--a .pp-note__msg--done { opacity: 1; }
 /* The next request lands on top and the approved one folds into the iOS group stack behind it. */
 .iphone__screen[data-state="next"] .pp-note--a { --sx: .902; }
-.iphone__screen[data-state="next"] .pp-note--a .pp-note__content { opacity: 0; }
+.iphone__screen[data-state="next"] .pp-note--a .pp-note__content { opacity: 0; visibility: hidden; transition: opacity .1s var(--ease), visibility 0s .1s; }
 .iphone__screen[data-state="next"] .pp-note--b {
   opacity: 1; --ty: 0px; --sc: 1;
-  transition: opacity .25s var(--ease), --ty .45s var(--spring), --sc .45s var(--spring);
+  transition: opacity .25s var(--ease) .1s, --ty .45s var(--spring) .1s, --sc .45s var(--spring) .1s;
 }
 
 .iphone__screen[data-state="expanded"] .pp-dim { opacity: 1; }
-.iphone__screen[data-state="expanded"] .pp-ctl { opacity: 0; }
+.iphone__screen[data-state="expanded"] .pp-ctl { opacity: 0; transition: opacity .12s var(--ease); }
+/* Long-press entry in sequence: banner out, then the card, then the menu once the card has settled. */
 .iphone__screen[data-state="expanded"] .pp-exp,
 .iphone__screen[data-state="expanded"] .pp-menu {
   opacity: 1; --sc: 1;
-  transition: opacity .2s var(--ease), --sc .45s var(--spring);
+  transition: opacity .18s var(--ease) .1s, --sc .45s var(--spring) .1s;
 }
-.iphone__screen[data-state="expanded"] .pp-menu { transition: opacity .2s var(--ease) .06s, --sc .45s var(--spring) .06s; }
+.iphone__screen[data-state="expanded"] .pp-menu { transition: opacity .2s var(--ease) .5s, --sc .4s var(--spring) .5s; }
 .iphone__screen[data-state="expanded"][data-tap] .pp-row--approve::before { opacity: 1; }
 
 .iphone__screen.is-instant,
