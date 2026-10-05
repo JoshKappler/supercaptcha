@@ -11,7 +11,7 @@ document.querySelectorAll('[data-copy]').forEach((btn) => {
   });
 });
 
-// The second phone rests on the open request (copy from the original demo and ledger) and follows the step nearest the middle of the screen while you scroll.
+// The second phone rests on Approved (copy from the original demo and ledger) and follows the step nearest the middle of the screen while you scroll.
 const flowEl = document.querySelector('.phone2');
 if (flowEl && window.PusharyPhone) {
   const phone = PusharyPhone.mount(flowEl, {
@@ -23,9 +23,9 @@ if (flowEl && window.PusharyPhone) {
     request: 'Wants to run bun run db:migrate. Hold to approve or deny.',
     approved: 'Approved from your lock screen. Codex keeps going.'
   });
-  phone.setState('expanded');
+  phone.setState('approved');
   const steps = [...document.querySelectorAll('.steps-flow li')];
-  let current = 'expanded';
+  let current = 'approved';
   let queued = false;
   const pick = () => {
     queued = false;
@@ -37,7 +37,7 @@ if (flowEl && window.PusharyPhone) {
       const d = Math.abs(r.top + r.height / 2 - mid);
       if (r.bottom > 0 && r.top < innerHeight && d < dist) { dist = d; best = li; }
     }
-    const next = best ? best.dataset.state : 'expanded';
+    const next = best ? best.dataset.state : 'approved';
     if (next !== current) { current = next; phone.setState(next); }
   };
   addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(pick); } }, { passive: true });
