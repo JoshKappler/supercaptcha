@@ -30,10 +30,9 @@
     [4300, 'approved'], [8100, 'next'], [9700, 'locked']
   ];
   var LOOP_MS = 10000;
-  var VERSION = '4';
+  var VERSION = '3';
   var uid = 0;
   var batch = null;
-  var clock = { phones: [], raf: 0 };
 
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
@@ -82,13 +81,13 @@
       '<div class="pp-dim"></div>' +
       glass('pp-exp', '<div class="pp-exp__inner"><div class="pp-exp__head">' + app + '<div class="pp-exp__meta"><div class="pp-exp__row"><div class="pp-exp__title">' +
         esc(o.agent) + ' &middot; ' + esc(o.repo) + '</div><div class="pp-exp__now">now</div></div><div class="pp-exp__time">Approval request</div></div></div>' +
-        '<div class="pp-exp__body"><div class="pp-exp__line">Wants to run <span class="pp-exp__cmd">' + esc(o.command) +
-        '</span>.</div><div class="pp-exp__meta2">' + esc(o.detail) + '</div></div></div>') +
+        '<div class="pp-exp__body">Wants to run this command:<div class="pp-exp__cmd"><span>$ </span>' + esc(o.command) +
+        '</div><div class="pp-exp__meta2">' + esc(o.detail) + '</div></div></div>') +
       glass('pp-menu', '<div class="pp-menu__rows"><div class="pp-row pp-row--approve"><span class="pp-icon pp-i-check"></span>Approve</div>' +
         '<div class="pp-row pp-row--deny"><span class="pp-icon pp-i-x"></span>Deny</div></div>') +
       '<div class="pp-sheen"></div><div class="pp-oled"></div>' +
       '</div>' +
-      '<div class="iphone__island"></div><div class="iphone__tone"><i></i><i></i><i></i></div><div class="iphone__light"><i></i><i></i><i></i></div>' +
+      '<div class="iphone__island"></div><div class="iphone__tone"><i></i><i></i></div><div class="iphone__light"><i></i><i></i><i></i></div>' +
       '</div>';
   }
 
@@ -135,6 +134,7 @@
     this.el = el;
     this.o = opts;
     this.id = 'pp' + (++uid);
+    this.timers = [];
     this.playing = false;
     this.cache = {};
     this.screen = el.querySelector('.iphone__screen');
@@ -169,7 +169,7 @@
       this.el.appendChild(svg);
     }
     var self = this, defs = '';
-    var kinds = { note: [408, 77, 22, 22, 2], exp: [408, 116, 26, 24, 18], menu: [280, 104, 32, 26, 18], ctl: [58, 58, 29, 15, 1.2] };
+    var kinds = { note: [408, 77, 22, 22, 2], exp: [408, 169, 26, 24, 12], menu: [280, 104, 32, 26, 12], ctl: [58, 58, 29, 15, 1.2] };
     Object.keys(kinds).forEach(function (k) {
       var g = kinds[k], m = 8 * pt;
       var w = g[0] * pt, h = g[1] * pt, key = k + Math.round(w) + 'x' + Math.round(h);
@@ -202,35 +202,20 @@
     s.classList.remove('is-instant');
   };
 
-  /* One frame clock drives every playing phone, so phones started together change state in the same frame. */
-  function tick(now) {
-    clock.phones.forEach(function (p) { p.step(now); });
-    clock.raf = clock.phones.length ? requestAnimationFrame(tick) : 0;
-  }
-
-  Phone.prototype.play = function (start) {
+  Phone.prototype.play = function () {
     if (this.reduced) return this;
     this.pause();
     this.playing = true;
-    this.start = typeof start === 'number' ? start : performance.now();
-    this.at = -1;
     this.reset();
-    clock.phones.push(this);
-    if (!clock.raf) clock.raf = requestAnimationFrame(tick);
+    var self = this;
+    TIMELINE.forEach(function (e) { self.timers.push(setTimeout(function () { self.apply(e[1]); }, e[0])); });
+    this.timers.push(setTimeout(function () { self.play(); }, LOOP_MS));
     return this;
   };
 
-  Phone.prototype.step = function (now) {
-    var t = Math.max(0, now - this.start) % LOOP_MS, i = -1;
-    while (i + 1 < TIMELINE.length && TIMELINE[i + 1][0] <= t) i++;
-    if (i < this.at) { this.reset(); this.at = -1; }
-    for (var k = this.at + 1; k <= i; k++) this.apply(TIMELINE[k][1]);
-    this.at = i;
-  };
-
   Phone.prototype.pause = function () {
-    var i = clock.phones.indexOf(this);
-    if (i >= 0) clock.phones.splice(i, 1);
+    this.timers.forEach(clearTimeout);
+    this.timers = [];
     this.playing = false;
     return this;
   };
@@ -275,7 +260,7 @@
       wp.src = new URL('assets/wallpaper-' + p.o.color + '.webp', BASE).href;
       if (wp.decode) waits.push(wp.decode().catch(function () {}));
     });
-    var go = function () { var now = performance.now(); phones.forEach(function (p) { p.play(now); }); };
+    var go = function () { phones.forEach(function (p) { p.play(); }); };
     Promise.all(waits).then(go, go);
   }
 
