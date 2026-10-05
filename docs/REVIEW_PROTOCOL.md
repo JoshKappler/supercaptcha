@@ -13,7 +13,9 @@ other's scores. This keeps the judgment about what the page actually looks like.
    Fix any errors file before reviewing; reviewers should not burn a round on broken assets.
    Reviewers get the hero frames and the part slices, not `*-full.png`: a single full-page
    capture can drop or repeat content on pages that use backdrop blur, while the slices
-   render correctly. The full images stay on disk for reference.
+   render correctly. The full images stay on disk for reference. Slices are captured with
+   reduced motion, so they show each section's resting state. `webkit-hero-2500ms.png` is
+   the hero in WebKit (Safari's engine) and goes to reviewers too.
 2. Launch three reviewers **in parallel, in one message**, each a fresh `general-purpose`
    Agent (separate contexts). Give each the prompt below with its persona filled in.
    Optionally run them on different models (`model` param) to diversify taste.

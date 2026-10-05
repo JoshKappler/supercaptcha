@@ -6,3 +6,8 @@ vendor/*
 original/site/
 reviews/*/attempt-draft/
 reviews/*/attempt-*/*.png
+
+# Apple bezel PNGs: shown locally, never committed (Apple license).
+shared/iphone/private/
+versions/*/assets/iphone/private/
+explorations/*/private/

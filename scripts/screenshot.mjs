@@ -33,6 +33,7 @@ for (const [label, viewport, isMobile] of [
   page.on('pageerror', (e) => errors.push(String(e)));
   page.on('requestfailed', (r) => errors.push(`request failed: ${r.url()}`));
   await page.goto(url, { waitUntil: 'networkidle' });
+  await page.evaluate(() => document.fonts.ready);
   let elapsed = 0;
   for (const t of [500, 2500, 5000]) {
     await page.waitForTimeout(t - elapsed); elapsed = t;
@@ -48,19 +49,38 @@ for (const [label, viewport, isMobile] of [
   const png = await page.screenshot({ path: full, fullPage: true }); shots.push(full);
   const fullWidth = png.readUInt32BE(16) / (isMobile ? 3 : 2);
   if (fullWidth > viewport.width) errors.push(`full page renders ${fullWidth}px wide at ${viewport.width}px`);
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+  if (overflow) errors.push(`horizontal overflow at ${viewport.width}px`);
+  await ctx.close();
   // The full image is too tall to read once a viewer downscales it, so also save it in slices.
-  const total = await page.evaluate(() => document.documentElement.scrollHeight);
+  // Slices use reduced motion so no section is caught halfway through a reveal.
+  const still = await browser.newContext({ viewport, isMobile, hasTouch: isMobile, deviceScaleFactor: isMobile ? 3 : 2, colorScheme: 'dark', reducedMotion: 'reduce' });
+  const sp = await still.newPage();
+  sp.on('pageerror', (e) => errors.push(`reduced motion: ${e}`));
+  await sp.goto(url, { waitUntil: 'networkidle' });
+  await sp.evaluate(() => document.fonts.ready);
+  await sp.waitForTimeout(800);
+  const total = await sp.evaluate(() => document.documentElement.scrollHeight);
   const sliceH = viewport.height * 2;
   for (let y = 0, i = 1; y < total - 50; y += sliceH, i++) {
     const f = path.join(outDir, `${label}-part-${String(i).padStart(2, '0')}.png`);
-    await page.screenshot({ path: f, fullPage: true, clip: { x: 0, y, width: viewport.width, height: Math.min(sliceH, total - y) } });
+    await sp.screenshot({ path: f, fullPage: true, animations: 'disabled', clip: { x: 0, y, width: viewport.width, height: Math.min(sliceH, total - y) } });
     shots.push(f);
   }
-  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
-  if (overflow) errors.push(`horizontal overflow at ${viewport.width}px`);
+  await still.close();
   if (errors.length) fs.writeFileSync(path.join(outDir, `${label}-errors.txt`), errors.join('\n'));
-  await ctx.close();
 }
+// Pushary's buyers read it in Safari, so also capture the hero in WebKit when it is installed.
+try {
+  const { webkit } = await import('playwright');
+  const wk = await webkit.launch();
+  const wp = await wk.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2, colorScheme: 'dark' });
+  await wp.goto(url, { waitUntil: 'networkidle' });
+  await wp.waitForTimeout(2500);
+  const f = path.join(outDir, 'webkit-hero-2500ms.png');
+  await wp.screenshot({ path: f }); shots.push(f);
+  await wk.close();
+} catch (e) { console.error(`webkit capture skipped: ${e.message.split('\n')[0]}`); }
 await browser.close();
 server.close();
 console.log(shots.map((s) => path.relative('.', s)).join('\n'));
