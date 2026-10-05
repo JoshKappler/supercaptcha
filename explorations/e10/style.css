@@ -1,0 +1,152 @@
+@font-face {
+  font-family: "Mona Sans";
+  src: url("assets/fonts/MonaSansVF.woff2") format("woff2");
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+:root {
+  color-scheme: dark;
+  --bg: #0b0402;
+  --ink: #fbf3ee;
+  --mute: #c4b2a8;
+  --line: rgb(251 243 238 / 0.12);
+  --accent: #ffb582;
+  --phone-font: "Mona Sans";
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --wp:
+    linear-gradient(to bottom, rgb(11 4 2 / 0) calc(100% - 200px), #0b0402),
+    linear-gradient(118deg, rgb(255 196 150 / 0) 40%, rgb(255 196 150 / 0.3) 53%, rgb(255 196 150 / 0) 61%),
+    linear-gradient(142deg, rgb(255 120 40 / 0) 56%, rgb(255 120 40 / 0.45) 71%, rgb(255 120 40 / 0) 86%),
+    linear-gradient(158deg, #070302 0%, #1b0803 30%, #5f1f06 50%, #c64d10 70%, #ff8a3f 86%, #ffc290 100%);
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 17px/1.55 "Mona Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+a { color: inherit; }
+
+.hero { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; }
+.wallpaper { position: absolute; inset: 0; z-index: -1; background: var(--wp); }
+.wallpaper::after, .phone .wall::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("assets/img/grain.png") repeat;
+  background-size: 160px;
+  opacity: 0.18;
+  mix-blend-mode: overlay;
+}
+
+.bar {
+  height: 88px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 18px; line-height: 1.2; text-decoration: none; font-stretch: 112%; }
+.brand img { border-radius: 7px; background: #fff; }
+nav { display: flex; gap: 28px; font-size: 15px; line-height: 1.4; }
+nav a { text-decoration: none; color: var(--mute); transition: color 160ms ease; }
+nav a:hover { color: var(--ink); }
+
+.hero-in {
+  max-width: 1344px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: 72px;
+}
+.copy { padding-top: 96px; }
+h1 {
+  margin: 0;
+  font-size: clamp(40px, 5.5vw, 80px);
+  font-weight: 290;
+  font-stretch: 125%;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  max-width: 13ch;
+  text-wrap: balance;
+}
+.lede { margin: 36px 0 0; font-size: 20px; line-height: 1.5; color: var(--mute); max-width: 32ch; }
+.cta {
+  display: inline-flex;
+  align-items: center;
+  height: 54px;
+  margin-top: 40px;
+  padding: 0 30px;
+  border-radius: 99px;
+  background: var(--accent);
+  color: #2a0e02;
+  font-weight: 600;
+  font-stretch: 110%;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform 160ms ease;
+}
+.cta:hover { transform: translateY(-1px); }
+.price { margin: 20px 0 0; font-size: 14px; line-height: 1.6; color: var(--mute); }
+
+.device { padding-top: 24px; position: relative; z-index: 1; }
+.device .phone { width: 400px; transition: transform 1100ms var(--ease); }
+.device .phone .bezel { transition: opacity 900ms ease 150ms; }
+.phone .wall {
+  background: var(--wp);
+  background-size: var(--wp-size, cover);
+  background-position: var(--wp-pos, 0 0);
+}
+.motion .device .phone:not(.grown) { transform: scale(1.07); }
+.motion .device .phone:not(.grown) .bezel { opacity: 0; }
+
+.flow {
+  max-width: 1344px;
+  margin: 0 auto;
+  padding: 144px 48px 160px;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 72px;
+}
+h2 {
+  margin: 0;
+  font-size: clamp(34px, 3.6vw, 52px);
+  font-weight: 300;
+  font-stretch: 125%;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.flow-head p { margin: 20px 0 0; font-size: 18px; line-height: 1.5; color: var(--mute); }
+.steps { list-style: none; margin: 0; padding: 0; }
+.steps li {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 32px;
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
+}
+.steps li:last-child { border-bottom: 1px solid var(--line); }
+h3 { margin: 0; font-size: 26px; font-weight: 400; font-stretch: 118%; line-height: 1.2; letter-spacing: -0.01em; }
+.steps p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--mute); max-width: 40ch; }
+
+@media (max-width: 1300px) { .wide-only { display: none; } }
+@media (max-width: 1000px) {
+  .bar { padding: 0 20px; height: 68px; }
+  .hero-in { grid-template-columns: 1fr; padding: 0 20px; gap: 40px; }
+  .copy { padding-top: 32px; }
+  .device { justify-self: center; padding-bottom: 48px; }
+  .device .phone { width: min(300px, 76vw); }
+  .flow { grid-template-columns: 1fr; padding: 96px 20px; gap: 40px; }
+  .steps li { grid-template-columns: 1fr; gap: 10px; padding: 24px 0; }
+  h3 { font-size: 22px; }
+  .lede { font-size: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .device .phone, .device .phone .bezel, .cta { transition: none; }
+}

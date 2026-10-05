@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Pushary: approve your AI agents from your phone</title>
+  <meta name="description" content="Your AI agents stop when they need permission. Approve from your phone in one tap so they keep working.">
+  <link rel="preload" href="assets/fonts/Geist.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="phone.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-in">
+      <a class="brand" href="https://pushary.com/"><img src="assets/img/logo.webp" alt="" width="22" height="22">Pushary</a>
+      <nav aria-label="Main">
+        <a href="https://pushary.com/#demo">How it works</a>
+        <a href="https://pushary.com/partners">For agent builders</a>
+        <a href="https://pushary.com/docs">Docs</a>
+        <a href="https://pushary.com/sign-in">Sign in</a>
+        <a class="nav-cta" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-top">
+        <h1>Your agent froze, waiting for your&nbsp;yes.</h1>
+        <div class="hero-side">
+          <p class="lede">Pushary sends the question to your phone. Tap Approve and it keeps working.</p>
+          <a class="cta" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
+        </div>
+      </div>
+      <div class="rig">
+        <div class="wrap rig-in">
+          <div class="term" role="img" aria-label="Terminal: the agent pauses on git push origin main and sends the question to your phone">
+            <div class="term-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="term-title">~/billing</span></div>
+            <pre class="term-body"><span class="dim">$</span> claude "ship the billing webhook"
+<span class="dim">  read   src/billing/webhook.ts</span>
+<span class="dim">  edit   src/billing/webhook.ts</span>
+<span class="dim">  run    bun run test        passed</span>
+
+  run    git push origin main
+<span class="ask">  needs your yes, sent to your phone</span>
+<span class="dim">  waiting</span><span class="caret" aria-hidden="true"></span></pre>
+          </div>
+          <span class="wire" aria-hidden="true"></span>
+          <figure class="phone" aria-label="iPhone lock screen: Claude Code wants to run git push origin main, with Approve and Deny">
+            <div class="screen">
+              <div class="wall"></div>
+              <div class="status" aria-hidden="true">
+                <i class="glyph" style="--src:url(assets/icons/cell-signal-full-fill.svg)"></i>
+                <i class="glyph" style="--src:url(assets/icons/wifi-high-fill.svg)"></i>
+                <i class="glyph bat" style="--src:url(assets/icons/battery-full-fill.svg)"></i>
+              </div>
+              <i class="glyph ls-lock" style="--src:url(assets/icons/lock-simple-fill.svg)" aria-hidden="true"></i>
+              <p class="ls-date">Wednesday, March 5</p>
+              <p class="ls-time">9:14</p>
+              <div class="notif">
+                <div class="n-card">
+                  <img src="assets/img/logo.webp" alt="">
+                  <p class="n-title">Claude Code</p>
+                  <span class="n-when">now</span>
+                  <p class="n-body">Wants to run git push origin main</p>
+                </div>
+                <div class="n-actions"><span>Approve</span><span class="deny">Deny</span></div>
+              </div>
+              <span class="qa left"><i class="glyph" style="--src:url(assets/icons/flashlight-fill.svg)"></i></span>
+              <span class="qa right"><i class="glyph" style="--src:url(assets/icons/camera-fill.svg)"></i></span>
+              <span class="home-ind"></span>
+              <div class="vignette"></div>
+            </div>
+            <img class="bezel" src="../../vendor/apple-bezels/Bezel-iPhone-17/PNG/iPhone%2017%20Pro%20Max/iPhone%2017%20Pro%20Max%20-%20Cosmic%20Orange%20-%20Portrait.png" alt="">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="rules" aria-labelledby="rules-h">
+      <div class="wrap rules-in">
+        <div class="rules-copy">
+          <h2 id="rules-h">Set the rules once. Approve only what matters.</h2>
+          <p class="rules-lede">YOLO mode approves everything, including the rm and the deploy. Pushary auto-runs only the safe steps and pings you for the ones you cannot undo.</p>
+          <dl class="policy">
+            <div><dt>Auto-approve the safe stuff</dt><dd>Low-risk steps you can undo. Allow them once and stop seeing them.</dd></div>
+            <div><dt>The risky ones come to you</dt><dd>Deleting, deploying, spending money, anything you cannot undo. These go to your phone.</dd></div>
+            <div><dt>You set the wait time</dt><dd>If you do not answer, your rule decides: deny, or hand it back to the terminal.</dd></div>
+          </dl>
+        </div>
+        <div class="ledger">
+          <div class="ledger-head"><h3>Decision ledger</h3><span>212 today</span></div>
+          <table>
+            <thead><tr><th scope="col">Step</th><th scope="col">Answer</th><th scope="col">From</th><th scope="col" class="num">When</th></tr></thead>
+            <tbody>
+              <tr><td><code>rm -rf ./dist</code></td><td>Denied</td><td>Phone</td><td class="num">2m</td></tr>
+              <tr><td><code>vercel deploy --prod</code></td><td class="ok">Approved</td><td>Phone</td><td class="num">6m</td></tr>
+              <tr><td><code>bun run db:migrate</code></td><td class="ok">Approved</td><td>Slack</td><td class="num">14m</td></tr>
+              <tr><td><code>cat src/auth/session.ts</code></td><td>Auto</td><td>Policy</td><td class="num">15m</td></tr>
+              <tr><td><code>DELETE /v1/customers/:id</code></td><td>Denied</td><td>Mac</td><td class="num">22m</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

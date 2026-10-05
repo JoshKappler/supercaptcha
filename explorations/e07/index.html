@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0d0306">
+<title>Pushary: approve your AI agents from your phone</title>
+<meta name="description" content="Your AI agents stop when they need permission. Approve from your phone in one tap so they keep working.">
+<link rel="preload" href="assets/fonts/marcellus-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/phone.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<section class="hero" aria-labelledby="h1">
+  <canvas class="grain" aria-hidden="true"></canvas>
+  <header class="nav">
+    <a class="brand" href="https://pushary.com/"><img src="assets/img/logo.webp" alt="" width="24" height="24">Pushary</a>
+    <nav class="links" aria-label="Main">
+      <a href="https://pushary.com/#demo">How it works</a>
+      <a href="https://pushary.com/partners">For agent builders</a>
+      <a href="https://pushary.com/docs">Docs</a>
+    </nav>
+    <a class="signin" href="https://pushary.com/sign-in">Sign in</a>
+  </header>
+  <div class="hero-in">
+    <div class="copy">
+      <h1 id="h1">Your agent froze, waiting for your yes.</h1>
+      <p class="lede">Pushary sends the question to your phone. Tap Approve and it keeps working.</p>
+      <a class="btn" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
+      <p class="fine">$9.99/mo after a 3-day free trial. Pushary sends the step that needs you, not your codebase.</p>
+    </div>
+    <figure class="phone" aria-label="iPhone lock screen with a Pushary notification: Claude Code wants to run git push origin main. Approve or Deny.">
+      <div class="screen">
+        <div class="ios-status"><i></i><i></i><i class="batt"></i></div>
+        <div class="ios-date">Wednesday, March 5</div>
+        <div class="ios-time">9:14</div>
+        <div class="ios-stack">
+          <div class="ios-notif"><img src="assets/img/logo.webp" alt=""><div><b>Claude Code</b><p>Wants to run git push origin main</p></div><time>now</time></div>
+          <div class="ios-actions"><span>Approve</span><span class="deny">Deny</span></div>
+        </div>
+        <div class="ios-tool left"><i></i></div>
+        <div class="ios-tool right"><i></i></div>
+        <div class="ios-home"></div>
+      </div>
+      <img class="bezel" src="../../vendor/apple-bezels/Bezel-iPhone-18/PNG/iPhone 18 Pro Max/iPhone 18 Pro Max - Burgundy - Portrait.png" alt="" width="1470" height="3000">
+    </figure>
+  </div>
+</section>
+
+<main>
+  <section class="flow" id="demo" aria-labelledby="h2">
+    <div class="flow-head">
+      <h2 id="h2">One approval, start to finish, in twenty seconds.</h2>
+    </div>
+    <ol class="steps">
+      <li>
+        <h3>Your agent asks.</h3>
+        <p>It pauses at a step that needs your call: run a command, change a file, or pick between options.</p>
+      </li>
+      <li>
+        <h3>Your phone buzzes.</h3>
+        <p>Only when a decision is needed, not for every step. Approve or deny right from the notification, or open it to pick an option or type a reply.</p>
+      </li>
+      <li>
+        <h3>It keeps going.</h3>
+        <p>Your answer flows straight back to the agent. When the task finishes, you get a ping for that too.</p>
+      </li>
+    </ol>
+  </section>
+</main>
+<script type="module" src="assets/js/grain.js"></script>
+</body>
+</html>

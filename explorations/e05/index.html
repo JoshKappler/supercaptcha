@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0b0b0c">
+<title>Pushary: approve your AI agents from your phone</title>
+<meta name="description" content="Your AI agents stop when they need permission. Approve from your phone in one tap so they keep working.">
+<link rel="preload" href="assets/fonts/sora-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/phone.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="nav wrap">
+  <a class="brand" href="https://pushary.com/"><img src="assets/img/logo.webp" alt="" width="24" height="24">Pushary</a>
+  <nav class="links" aria-label="Main">
+    <a href="https://pushary.com/#demo">How it works</a>
+    <a href="https://pushary.com/partners">For agent builders</a>
+    <a href="https://pushary.com/docs">Docs</a>
+  </nav>
+  <a class="signin" href="https://pushary.com/sign-in">Sign in</a>
+</header>
+
+<main class="wrap">
+  <section class="grid hero" aria-labelledby="h1">
+    <div class="cell c-lead">
+      <h1 id="h1">Your agent froze, waiting for your yes.</h1>
+      <p class="lede">Pushary sends the question to your phone. Tap Approve and it keeps working.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
+        <p class="fine">$9.99/mo after a 3-day free trial.<br>Pushary sends the step that needs you, not your codebase.</p>
+      </div>
+    </div>
+    <div class="cell c-phone">
+      <figure class="phone" aria-label="iPhone lock screen with a Pushary notification: Claude Code wants to run git push origin main. Approve or Deny.">
+        <div class="screen">
+          <div class="ios-status"><i></i><i></i><i class="batt"></i></div>
+          <div class="ios-date">Wednesday, March 5</div>
+          <div class="ios-time">9:14</div>
+          <div class="ios-stack">
+            <div class="ios-notif"><img src="assets/img/logo.webp" alt=""><div><b>Claude Code</b><p>Wants to run git push origin main</p></div><time>now</time></div>
+            <div class="ios-actions"><span>Approve</span><span class="deny">Deny</span></div>
+          </div>
+          <div class="ios-tool left"><i></i></div>
+          <div class="ios-tool right"><i></i></div>
+          <div class="ios-home"></div>
+        </div>
+        <img class="bezel" src="../../vendor/apple-bezels/Bezel-iPhone-17/PNG/iPhone 17 Pro Max/iPhone 17 Pro Max - Cosmic Orange - Portrait.png" alt="" width="1470" height="3000">
+      </figure>
+    </div>
+    <div class="cell c-works">
+      <p class="cell-k">Works with</p>
+      <ul class="agents">
+        <li>Claude Code</li><li>Codex</li><li>Cursor</li><li>Antigravity CLI</li><li>Hermes</li><li>any MCP agent</li>
+      </ul>
+    </div>
+    <div class="cell c-tap">
+      <p class="num">1 tap</p>
+      <p>to approve or deny, right from the lock screen.</p>
+    </div>
+  </section>
+
+  <section class="grid rules" id="rules" aria-labelledby="h2">
+    <div class="cell r-head">
+      <h2 id="h2">Set the rules once. Approve only what matters.</h2>
+      <p>YOLO mode approves everything, including the <code>rm</code> and the deploy. Pushary runs the safe steps on its own and pings you for the ones you cannot undo.</p>
+    </div>
+    <div class="cell r-risky">
+      <h3>The risky ones come to you</h3>
+      <p>Deleting, deploying, spending money, anything you cannot undo. These go to your phone.</p>
+    </div>
+    <div class="cell r-ledger">
+      <h3>Every answer is saved</h3>
+      <table class="ledger">
+        <tbody>
+          <tr><td><code>rm -rf ./dist</code></td><td class="no">Denied</td><td>Phone</td><td>2m</td></tr>
+          <tr><td><code>vercel deploy --prod</code></td><td class="yes">Approved</td><td>Phone</td><td>6m</td></tr>
+          <tr><td><code>bun run db:migrate</code></td><td class="yes">Approved</td><td>Slack</td><td>14m</td></tr>
+          <tr><td><code>cat src/auth/session.ts</code></td><td>Auto</td><td>Policy</td><td>15m</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cell r-safe">
+      <h3>Auto-approve the safe stuff</h3>
+      <p>Low-risk steps you can undo. Allow them once and stop seeing them.</p>
+    </div>
+    <div class="cell r-wait">
+      <p class="num">30s</p>
+      <h3>You set the wait time</h3>
+      <p>No answer? Your rule decides: deny, or hand it back to the terminal.</p>
+    </div>
+    <div class="cell r-setup">
+      <h3>Set up in under two minutes</h3>
+      <p class="cmd"><code>npx pushary@latest setup</code></p>
+      <p>Finds the agents on your computer and connects them all to your phone.</p>
+    </div>
+  </section>
+</main>
+</body>
+</html>

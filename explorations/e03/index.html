@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#06070a">
+  <title>Pushary: approve your AI agents from your phone</title>
+  <meta name="description" content="Your AI agents stop when they need permission. Approve from your phone in one tap so they keep working.">
+  <link rel="preload" href="assets/fonts/instrument-sans-500.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="phone.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="light" aria-hidden="true"><span class="cool"></span><span class="warm"></span></div>
+  <header class="nav">
+    <a class="brand" href="https://pushary.com/"><img src="assets/img/logo.webp" alt="" width="24" height="24">Pushary</a>
+    <nav aria-label="Main">
+      <a href="https://pushary.com/#demo">How it works</a>
+      <a href="https://pushary.com/partners">For agent builders</a>
+      <a href="https://pushary.com/docs">Docs</a>
+      <a href="https://pushary.com/sign-in">Sign in</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="copy">
+        <h1>Your agent froze, waiting for your&nbsp;yes.</h1>
+        <p class="lede">Pushary sends the question to your phone. Tap Approve and it keeps working.</p>
+        <a class="cta" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
+      </div>
+      <figure class="phone" aria-label="iPhone lock screen: Claude Code wants to run git push origin main, with Approve and Deny">
+        <div class="screen">
+          <div class="wall"></div>
+          <div class="status" aria-hidden="true">
+            <i class="glyph" style="--src:url(assets/icons/cell-signal-full-fill.svg)"></i>
+            <i class="glyph" style="--src:url(assets/icons/wifi-high-fill.svg)"></i>
+            <i class="glyph bat" style="--src:url(assets/icons/battery-full-fill.svg)"></i>
+          </div>
+          <i class="glyph ls-lock" style="--src:url(assets/icons/lock-simple-fill.svg)" aria-hidden="true"></i>
+          <p class="ls-date">Wednesday, March 5</p>
+          <p class="ls-time">9:14</p>
+          <div class="notif">
+            <div class="n-card">
+              <img src="assets/img/logo.webp" alt="">
+              <p class="n-title">Claude Code</p>
+              <span class="n-when">now</span>
+              <p class="n-body">Wants to run git push origin main</p>
+            </div>
+            <div class="n-actions"><span>Approve</span><span class="deny">Deny</span></div>
+          </div>
+          <span class="qa left"><i class="glyph" style="--src:url(assets/icons/flashlight-fill.svg)"></i></span>
+          <span class="qa right"><i class="glyph" style="--src:url(assets/icons/camera-fill.svg)"></i></span>
+          <span class="home-ind"></span>
+          <div class="vignette"></div>
+        </div>
+        <img class="bezel" src="../../vendor/apple-bezels/Bezel-iPhone-17/PNG/iPhone%2017%20Pro%20Max/iPhone%2017%20Pro%20Max%20-%20Cosmic%20Orange%20-%20Portrait.png" alt="">
+      </figure>
+    </section>
+
+    <section class="day" aria-labelledby="day-h">
+      <h2 id="day-h">Walk away. Come back to finished&nbsp;work.</h2>
+      <table class="tl">
+        <thead>
+          <tr><th scope="col"><span class="sr">Time</span></th><th scope="col">Without Pushary</th><th scope="col">With Pushary</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">9:12</th>
+            <td>Hand off a long task. Walk away.</td>
+            <td>Hand off the same task. Walk away for real.</td>
+          </tr>
+          <tr>
+            <th scope="row">9:14</th>
+            <td>The agent reaches a step it should not take alone. It stops and waits.</td>
+            <td>Your phone buzzes. Approve the change before it goes live? You tap yes.</td>
+          </tr>
+          <tr>
+            <th scope="row">9:51</th>
+            <td>You come back. It has not moved in 37 minutes.</td>
+            <td>You come back. The task finished half an hour ago.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="close">
+        <p class="close-line">Your agent should not wait 37 minutes for a single&nbsp;yes.</p>
+        <a class="cta" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
+      </div>
+    </section>
+  </main>
+  <script src="light.js"></script>
+</body>
+</html>

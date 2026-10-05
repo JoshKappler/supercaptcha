@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050407">
+<title>Pushary: approve your AI agents from your phone</title>
+<meta name="description" content="Your AI agents stop when they need permission. Approve from your phone in one tap so they keep working.">
+<link rel="preload" href="assets/fonts/MonaSansMonoVF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/phone.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="https://pushary.com/"><img src="assets/img/logo.webp" alt="" width="22" height="22">Pushary</a>
+  <nav class="links" aria-label="Main">
+    <a href="https://pushary.com/#demo">How it works</a>
+    <a href="https://pushary.com/partners">For agent builders</a>
+    <a href="https://pushary.com/docs">Docs</a>
+  </nav>
+  <a class="signin" href="https://pushary.com/sign-in">Sign in</a>
+  <a class="nav-cta" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="h1">
+    <div class="copy">
+      <h1 id="h1">Your agent froze, waiting for your yes.</h1>
+      <p class="lede">Pushary sends the question to your phone. Tap Approve and it keeps working.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
+        <p class="fine">$9.99/mo after a 3-day free trial.</p>
+      </div>
+      <dl class="stats mirror">
+        <div><dt>agents, one setup</dt><dd>6+</dd></div>
+        <div><dt>to approve or deny</dt><dd>1 tap</dd></div>
+        <div><dt>one-command setup</dt><dd>&lt;&nbsp;2 min</dd></div>
+        <div><dt>iPhone, Android, Mac, Windows, Linux</dt><dd>Any device</dd></div>
+      </dl>
+    </div>
+    <figure class="phone" aria-label="iPhone lock screen with a Pushary notification: Claude Code wants to run git push origin main. Approve or Deny.">
+      <div class="screen">
+        <div class="ios-status"><i></i><i></i><i class="batt"></i></div>
+        <div class="ios-date">Wednesday, March 5</div>
+        <div class="ios-time">9:14</div>
+        <div class="ios-stack">
+          <div class="ios-notif"><img src="assets/img/logo.webp" alt=""><div><b>Claude Code</b><p>Wants to run git push origin main</p></div><time>now</time></div>
+          <div class="ios-actions"><span>Approve</span><span class="deny">Deny</span></div>
+        </div>
+        <div class="ios-tool left"><i></i></div>
+        <div class="ios-tool right"><i></i></div>
+        <div class="ios-home"></div>
+      </div>
+      <img class="bezel" src="../../vendor/apple-bezels/Bezel-iPhone-17/PNG/iPhone 17 Pro Max/iPhone 17 Pro Max - Cosmic Orange - Portrait.png" alt="" width="1470" height="3000">
+    </figure>
+  </section>
+
+  <section class="panel-sec" aria-labelledby="h2">
+    <div class="panel-copy">
+      <h2 id="h2">Every agent in one place.</h2>
+      <p>See which one is waiting on you, what the others are doing, and every answer you gave.</p>
+    </div>
+    <div class="console mirror" role="group" aria-label="Pushary control panel, sample state">
+      <div class="col">
+        <h3>Waiting for you</h3>
+        <article class="job waiting">
+          <p class="job-t">Ship the billing webhook</p>
+          <p class="job-m">Codex <span>now</span></p>
+          <p class="cmd">git push origin main</p>
+          <div class="job-a">
+            <span class="timer">auto-deny 30s</span>
+            <span class="b-deny">Deny</span>
+            <span class="b-ok">Approve</span>
+          </div>
+        </article>
+        <h3>Working</h3>
+        <article class="job">
+          <p class="job-t">Refactor the auth module</p>
+          <p class="job-m">Claude Code <span>4m</span></p>
+          <p class="cmd">src/auth/session.ts</p>
+        </article>
+        <article class="job">
+          <p class="job-t">Nightly data sync</p>
+          <p class="job-m">Hermes <span>12m</span></p>
+          <p class="cmd">bun run test</p>
+        </article>
+      </div>
+      <div class="col ledger">
+        <h3>Decision ledger</h3>
+        <table>
+          <thead><tr><th scope="col">Step</th><th scope="col">Answer</th><th scope="col">From</th><th scope="col">When</th></tr></thead>
+          <tbody>
+            <tr><td>rm -rf ./dist</td><td class="no">Denied</td><td>Phone</td><td>2m</td></tr>
+            <tr><td>vercel deploy --prod</td><td>Approved</td><td>Phone</td><td>6m</td></tr>
+            <tr><td>bun run db:migrate</td><td>Approved</td><td>Slack</td><td>14m</td></tr>
+            <tr><td>cat src/auth/session.ts</td><td class="dim">Auto</td><td>Policy</td><td>15m</td></tr>
+            <tr><td>DELETE /v1/customers/:id</td><td class="no">Denied</td><td>Mac</td><td>22m</td></tr>
+          </tbody>
+        </table>
+        <a class="more" href="https://pushary.com/ai-agent-audit-trail">View the full ledger</a>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

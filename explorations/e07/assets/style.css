@@ -1,0 +1,129 @@
+@font-face {
+  font-family: "Marcellus";
+  src: url(fonts/marcellus-400.woff2) format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+:root {
+  --bg: #0d0306;
+  --rule: rgba(255, 226, 226, 0.12);
+  --ink: #f7ecea;
+  --ink-2: #d2b9b7;
+  --ink-3: #b49896;
+  --accent: #f1b3a8;
+  --gutter: max(48px, (100vw - 1216px) / 2);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Marcellus", Georgia, serif;
+  font-size: 17px;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  overflow: clip;
+  background: linear-gradient(180deg, #0d0306 0%, #1e050c 55%, #3a0a15 100%);
+}
+.grain { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 600ms ease-out; }
+.grain.on { opacity: 1; }
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  height: 76px;
+  padding-inline: var(--gutter);
+}
+.brand { display: flex; align-items: center; gap: 10px; font-size: 19px; letter-spacing: 0.02em; }
+.brand img { border-radius: 6px; }
+.links { display: flex; gap: 30px; font-size: 15px; color: var(--ink-2); }
+.links a:hover, .signin:hover { color: var(--ink); }
+.signin { margin-left: auto; font-size: 15px; color: var(--ink-2); }
+
+.hero-in {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 64px;
+  padding: 40px var(--gutter) 64px;
+  min-height: calc(100svh - 76px);
+}
+.copy { padding-bottom: 24px; max-width: 640px; }
+h1 {
+  margin: 0;
+  font-size: clamp(48px, 6.6vw, 100px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+.lede { margin: 28px 0 36px; font-size: 21px; line-height: 1.45; color: var(--ink-2); max-width: 28ch; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #2a0710;
+  font-size: 17px;
+  letter-spacing: 0.02em;
+  transition: background-color 160ms ease-out;
+}
+.btn:hover { background: #f7c8bf; }
+.fine { margin: 18px 0 0; font-size: 14px; color: var(--ink-3); max-width: 44ch; }
+.hero .phone {
+  --phone-w: 330px;
+  --wall:
+    linear-gradient(115deg, rgba(232, 150, 150, 0.5) 0%, rgba(200, 80, 100, 0) 36%),
+    linear-gradient(205deg, rgba(150, 40, 60, 0) 50%, rgba(170, 52, 72, 0.5) 72%, rgba(40, 6, 14, 0) 92%),
+    linear-gradient(172deg, #8c2a3e 0%, #5a1424 34%, #2a0811 66%, #12030a 100%);
+  filter: drop-shadow(0 30px 40px rgba(10, 0, 3, 0.55)) drop-shadow(0 8px 12px rgba(10, 0, 3, 0.4));
+}
+
+.flow { padding: 136px var(--gutter) 152px; display: grid; grid-template-columns: 5fr 7fr; gap: 64px; }
+h2 {
+  margin: 0;
+  font-size: clamp(34px, 3.6vw, 52px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  max-width: 13ch;
+  text-wrap: balance;
+}
+.steps { list-style: none; margin: 0; padding: 0; }
+.steps li {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 32px 0;
+  border-top: 1px solid var(--rule);
+}
+.steps li:last-child { border-bottom: 1px solid var(--rule); }
+.steps h3 { margin: 0; font-size: 30px; font-weight: 400; line-height: 1.15; letter-spacing: -0.005em; }
+.steps p { margin: 4px 0 0; color: var(--ink-2); font-size: 17px; line-height: 1.6; }
+
+@media (max-width: 900px) {
+  :root { --gutter: 20px; }
+  .links { display: none; }
+  .nav { height: 64px; }
+  .hero-in { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 24px; padding-bottom: 0; min-height: 0; }
+  .copy { padding-bottom: 0; }
+  h1 { font-size: clamp(42px, 12vw, 64px); }
+  .lede { font-size: 19px; margin: 22px 0 28px; }
+  .hero .phone { --phone-w: min(300px, 78vw); justify-self: center; margin-bottom: -30%; }
+  .flow { grid-template-columns: 1fr; gap: 40px; padding: 88px var(--gutter) 96px; }
+  .steps li { grid-template-columns: 1fr; gap: 10px; padding: 26px 0; }
+  .steps h3 { font-size: 26px; }
+}
