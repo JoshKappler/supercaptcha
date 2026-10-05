@@ -13,15 +13,15 @@
     color: 'cosmic-orange',
     sheen: 'on',
     autoplay: true,
-    date: 'Mon October 5',
+    date: 'Monday, October 5',
     clock: '9:41',
     agent: 'Claude Code',
     repo: 'api-gateway',
     command: 'git push origin main',
     detail: '3 commits ahead of origin/main',
-    request: 'Wants to run git push origin main. Hold to approve or deny.',
-    approved: 'Approved from your lock screen. Pushed 3 commits to origin/main.',
-    next: 'Wants to run npm run deploy:staging. Hold to approve or deny.'
+    request: 'Wants to run git push origin main. 3 commits ahead of origin/main.',
+    approved: 'Approved. Pushed 3 commits to origin/main.',
+    next: 'Wants to run npm run deploy:staging. Tests passed on CI.'
   };
   /* Timeline in ms: arrive, read, long-press, expand, read, tap Approve, update, next lands, reset. */
   var TIMELINE = [
@@ -30,6 +30,7 @@
   ];
   var LOOP_MS = 10000;
   var uid = 0;
+  var batch = null;
 
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
@@ -40,11 +41,11 @@
       inner + '<div class="pp-rim"></div></div>';
   }
 
-  function note(cls, o, msgs) {
+  function note(cls, o, msgs, extra) {
     return glass('pp-note ' + cls,
       '<div class="pp-note__content"><div class="pp-app"><img src="' + BASE.href + 'assets/pushary-logo.webp" alt=""></div>' +
       '<div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title">' + esc(o.agent) + ' &middot; ' + esc(o.repo) +
-      '</span><span class="pp-note__time">now</span></div><div class="pp-note__msgs">' + msgs + '</div></div></div>');
+      '</span><span class="pp-note__time">now</span></div><div class="pp-note__msgs">' + msgs + '</div>' + (extra || '') + '</div></div>');
   }
 
   function template(o, id) {
@@ -58,30 +59,31 @@
       '<div class="iphone__screen" data-state="expanded">' +
       '<div class="pp-wall iphone__wp"></div><div class="pp-shade"></div>' +
       '<div class="pp-status"><span class="pp-cell"><i></i><i></i><i></i><i></i></span>' +
-      '<span class="pp-icon pp-i-wifi pp-wifi"></span><span class="pp-battery"></span><span class="pp-hint"></span></div>' +
-      '<div class="pp-island"></div>' +
+      '<span class="pp-icon pp-i-wifi pp-wifi"></span><span class="pp-battery"></span></div>' +
       '<div class="pp-date">' + esc(o.date) + '</div>' +
-      '<svg class="pp-clock" viewBox="0 0 440 230" aria-hidden="true"><defs><filter id="' + id + '-clock" x="-5%" y="-10%" width="110%" height="120%" color-interpolation-filters="sRGB">' +
+      '<svg class="pp-clock" viewBox="0 0 440 260" aria-hidden="true"><defs><filter id="' + id + '-clock" x="-5%" y="-10%" width="110%" height="120%" color-interpolation-filters="sRGB">' +
       '<feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="b"/>' +
       '<feSpecularLighting in="b" surfaceScale="2.6" specularConstant="1.15" specularExponent="18" lighting-color="#fff" result="s"><feDistantLight azimuth="235" elevation="42"/></feSpecularLighting>' +
       '<feComposite in="s" in2="SourceAlpha" operator="in" result="si"/>' +
       '<feComposite in="SourceGraphic" in2="si" operator="arithmetic" k2="1" k3=".75"/></filter></defs>' +
-      '<text x="220" y="201" text-anchor="middle" filter="url(#' + id + '-clock)">' + esc(o.clock) + '</text></svg>' +
+      '<text x="220" y="234" text-anchor="middle" filter="url(#' + id + '-clock)">' + esc(o.clock) + '</text></svg>' +
       glass('pp-ctl pp-ctl--left', '<span class="pp-icon pp-i-flashlight"></span>') +
       glass('pp-ctl pp-ctl--right', '<span class="pp-icon pp-i-camera"></span>') +
       '<div class="pp-home"></div>' +
       note('pp-note--a', o, '<span class="pp-note__msg pp-note__msg--req">' + esc(o.request) +
-        '</span><span class="pp-note__msg pp-note__msg--done">' + esc(o.approved) + '</span>') +
+        '</span><span class="pp-note__msg pp-note__msg--done">' + esc(o.approved) + '</span>',
+        '<span class="pp-badge"><span class="pp-icon pp-i-ok"></span></span>') +
       note('pp-note--b', o, '<span class="pp-note__msg">' + esc(o.next) + '</span>') +
       '<div class="pp-dim"></div>' +
-      '<div class="pp-exp"><div class="pp-exp__head">' + app + '<div class="pp-exp__meta"><div class="pp-exp__title">' +
-      esc(o.agent) + ' &middot; ' + esc(o.repo) + '</div><div class="pp-exp__time">now</div></div></div>' +
-      '<div class="pp-exp__body">Wants to run this command:<div class="pp-exp__cmd"><span>$ </span>' + esc(o.command) +
-      '</div><div class="pp-exp__meta2">' + esc(o.detail) + '</div></div></div>' +
+      glass('pp-exp', '<div class="pp-exp__inner"><div class="pp-exp__head">' + app + '<div class="pp-exp__meta"><div class="pp-exp__title">' +
+        esc(o.agent) + ' &middot; ' + esc(o.repo) + '</div><div class="pp-exp__time">now</div></div></div>' +
+        '<div class="pp-exp__body">Wants to run this command:<div class="pp-exp__cmd"><span>$ </span>' + esc(o.command) +
+        '</div><div class="pp-exp__meta2">' + esc(o.detail) + '</div></div></div>') +
       glass('pp-menu', '<div class="pp-menu__rows"><div class="pp-row pp-row--approve"><span class="pp-icon pp-i-check"></span>Approve</div>' +
         '<div class="pp-row pp-row--deny"><span class="pp-icon pp-i-x"></span>Deny</div></div>') +
       '<div class="pp-sheen"></div><div class="pp-oled"></div>' +
       '</div>' +
+      '<div class="iphone__island"></div><div class="iphone__light"><i></i><i></i><i></i></div>' +
       '</div>';
   }
 
@@ -163,7 +165,7 @@
       this.el.appendChild(svg);
     }
     var self = this, defs = '';
-    var kinds = { note: [408, 77, 22, 22, 2], menu: [250, 104, 32, 26, 1.6], ctl: [58, 58, 29, 15, 1.2] };
+    var kinds = { note: [408, 77, 22, 22, 2], exp: [408, 169, 26, 24, 12], menu: [280, 104, 32, 26, 12], ctl: [58, 58, 29, 15, 1.2] };
     Object.keys(kinds).forEach(function (k) {
       var g = kinds[k], m = 8 * pt;
       var w = g[0] * pt, h = g[1] * pt, key = k + Math.round(w) + 'x' + Math.round(h);
@@ -174,7 +176,7 @@
         '<feDisplacementMap in="b" in2="map" scale="' + (g[3] * pt * 1.8).toFixed(2) + '" xChannelSelector="R" yChannelSelector="G"/></filter>';
     });
     svg.innerHTML = defs;
-    [['.pp-note', 'note'], ['.pp-menu', 'menu'], ['.pp-ctl', 'ctl']].forEach(function (p) {
+    [['.pp-note', 'note'], ['.pp-exp', 'exp'], ['.pp-menu', 'menu'], ['.pp-ctl', 'ctl']].forEach(function (p) {
       self.el.querySelectorAll(p[0] + ' > .pp-refract').forEach(function (r) { r.style.filter = 'url(#' + self.id + '-' + p[1] + ')'; });
     });
   };
@@ -240,18 +242,31 @@
     if (!el.querySelector('.iphone__device') || options) el.innerHTML = template(o, 'pp' + (uid + 1));
     var phone = el.__pusharyPhone = new Phone(el, o);
     if (o.autoplay) {
-      var go = function () { phone.play(); };
-      var wp = new Image();
-      wp.src = new URL('assets/wallpaper-' + o.color + '.webp', BASE).href;
-      Promise.all([document.fonts ? document.fonts.ready : 0, wp.decode ? wp.decode().catch(function () {}) : 0]).then(go, go);
+      if (batch) batch.push(phone);
+      else startTogether([phone]);
     }
     return phone;
+  }
+
+  function startTogether(phones) {
+    var waits = [document.fonts ? document.fonts.ready : 0];
+    phones.forEach(function (p) {
+      var wp = new Image();
+      wp.src = new URL('assets/wallpaper-' + p.o.color + '.webp', BASE).href;
+      if (wp.decode) waits.push(wp.decode().catch(function () {}));
+    });
+    var go = function () { phones.forEach(function (p) { p.play(); }); };
+    Promise.all(waits).then(go, go);
   }
 
   window.PusharyPhone = { mount: mount, template: function (o) { return template(readOptions(document.createElement('div'), o), 'pp0'); } };
 
   function auto() {
+    batch = [];
     document.querySelectorAll('.iphone:not([data-manual])').forEach(function (el) { mount(el); });
+    var phones = batch;
+    batch = null;
+    if (phones.length) startTogether(phones);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', auto); else auto();
 })();
