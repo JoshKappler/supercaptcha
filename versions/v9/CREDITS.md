@@ -6,8 +6,12 @@ Grown from sketch e01. Copy, links and prices come from the pushary.com scrape (
 |---|---|---|
 | `assets/fonts/InterVariable.woff2` | rsms/inter, `docs/font-files/InterVariable.woff2` | SIL OFL 1.1 |
 | `assets/fonts/GeistMono-Variable.woff2` | vercel/geist-font, `packages/next/dist/fonts/geist-mono/` | SIL OFL 1.1 |
-| `assets/icons/copy-simple.svg`, `check.svg` (regular), `apple-logo-fill.svg`, `google-play-logo-fill.svg` (fill) | phosphor-icons/core, `assets/` | MIT, Copyright (c) 2023 Phosphor Icons |
+| `assets/icons/copy-simple.svg`, `check.svg`, `list.svg`, `x.svg`, `device-mobile.svg`, `laptop.svg`, `slack-logo.svg`, `browser.svg`, `list-checks.svg` (regular), `apple-logo-fill.svg`, `google-play-logo-fill.svg`, `play-fill.svg` (fill) | phosphor-icons/core, `assets/` | MIT, Copyright (c) 2023 Phosphor Icons |
 | `assets/img/logo.webp` | pushary.com scrape, `original/site/pushary.com/_next/image__P3VybD0lMkZsb2dvLndlYnAm.html` (the `/logo.webp` image) | Pushary's own mark |
+| `assets/img/agents/{claude,codex,cursor,gemini,hermes,antigravity}.webp` | pushary.com scrape, `original/site/pushary.com/_next/image__*` (the `/claude.webp`, `/codex.webp`, `/cursor.webp`, `/gemini.webp`, `/hermes.webp`, `/antigravity.webp` images the home page shows) | Agent makers' marks as shown on pushary.com |
+| `assets/img/agents/vscode.svg`, `opencode.svg` | pushary.com scrape, `original/site/pushary.com/{vscode,opencode}__*.svg` | Agent makers' marks as shown on pushary.com |
+| `assets/img/hacker-news.webp`, `assets/img/product-hunt-top-post-light.svg` | pushary.com scrape (`/hacker-news.webp`, `badges/product-hunt-top-post-light.svg`) | Badges as shown on pushary.com |
+| `assets/img/founder.webp` | Cropped from the founder video poster in the pushary.com scrape (`/home-demo-poster.webp`), a square crop of the founder's portrait | Pushary's own image |
 
 ## Shared iPhone (`assets/iphone/`, copied by `scripts/sync-phone.sh`)
 
