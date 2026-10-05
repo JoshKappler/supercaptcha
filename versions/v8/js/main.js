@@ -1,7 +1,8 @@
-/* The phone shows the decision; the island shows the agent's side of it. */
+/* The phone shows the decision; the island and the terminal show the agent's side of it. */
 (function () {
   'use strict';
   var island = document.querySelector('.island');
+  var lines = document.querySelector('.term-lines');
   var el = document.getElementById('phone');
   var phone = window.PusharyPhone && PusharyPhone.mount(el, { clock: '9:14' });
   var screen = el.querySelector('.iphone__screen');
@@ -9,7 +10,9 @@
   var inView = true;
 
   function sync() {
-    island.setAttribute('data-s', inView ? (MAP[screen.getAttribute('data-state')] || 'ask') : 'work');
+    var s = MAP[screen.getAttribute('data-state')] || 'ask';
+    island.setAttribute('data-s', inView ? s : 'work');
+    lines.setAttribute('data-s', s);
   }
 
   if (phone && screen) {
@@ -26,6 +29,9 @@
       }, { threshold: 0.15 }).observe(el);
     }
   }
+
+  var el2 = document.getElementById('phone2');
+  if (el2 && window.PusharyPhone) PusharyPhone.mount(el2, { clock: '9:14', autoplay: false }).setState('approved');
 
   var copy = document.querySelector('.copy-btn');
   if (copy && navigator.clipboard) {
