@@ -51,7 +51,7 @@ for (const [label, viewport, isMobile] of [
   // The full image is too tall to read once a viewer downscales it, so also save it in slices.
   const total = await page.evaluate(() => document.documentElement.scrollHeight);
   const sliceH = viewport.height * 2;
-  for (let y = 0, i = 1; y < total; y += sliceH, i++) {
+  for (let y = 0, i = 1; y < total - 50; y += sliceH, i++) {
     const f = path.join(outDir, `${label}-part-${String(i).padStart(2, '0')}.png`);
     await page.screenshot({ path: f, fullPage: true, clip: { x: 0, y, width: viewport.width, height: Math.min(sliceH, total - y) } });
     shots.push(f);
