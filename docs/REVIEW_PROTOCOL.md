@@ -15,7 +15,10 @@ other's scores. This keeps the judgment about what the page actually looks like.
    capture can drop or repeat content on pages that use backdrop blur, while the slices
    render correctly. The full images stay on disk for reference. Slices are captured with
    reduced motion, so they show each section's resting state. `webkit-hero-2500ms.png` is
-   the hero in WebKit (Safari's engine) and goes to reviewers too.
+   the hero in WebKit (Safari's engine), for the builder only: Playwright's Windows WebKit
+   ignores variable font axes, so it is not shown to reviewers.
+   Reviewers also answer two yes/no gates: is glass visible without being told where, and
+   which template does the page resemble ("none" is the goal).
 2. Launch three reviewers **in parallel, in one message**, each a fresh `general-purpose`
    Agent (separate contexts). Give each the prompt below with its persona filled in.
    Optionally run them on different models (`model` param) to diversify taste.
