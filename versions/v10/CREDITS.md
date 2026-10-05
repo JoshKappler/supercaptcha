@@ -17,7 +17,9 @@ Copy, links and prices come from the pushary.com home page scrape (`original/hom
 
 ## Example data
 
-The control panel shows example data, labelled on the page: the tasks "Ship the billing webhook", "Refactor the auth module" and "Nightly data sync", the counts (3, 212, 174, 38), the ledger rows and their times. They come from the illustrative panel on pushary.com and are not real usage.
+The control panel shows example data, labelled on the page: the tasks "Ship the billing webhook", "Refactor the auth module" and "Nightly data sync", the counts (3, 212, 174, 38), the ledger rows and their times. They come from the illustrative panel on pushary.com and are not real usage. The ledger row `DELETE /customers/:id` is shortened from the original `DELETE /v1/customers/:id`.
+
+The second phone (See the whole flow) shows example copy set through the component options: Codex in `app` asking to run `bun run db:migrate`, "Inspected schema, 8 tables", and "Approved from your lock screen. Codex keeps going." The agent, folder, command and detail come from the original pushary.com demo and ledger; none of it is real data.
 
 ## Shared iPhone component credits
 
