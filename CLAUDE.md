@@ -17,12 +17,10 @@ no access to its source repo. So:
 
 ## Status at handoff
 
-- Done: repo cleared (the old SuperCAPTCHA `index.html` was removed), scripts written and
-  tested locally, design packages identified and verified reachable on GitHub, brief and
-  review protocol written, public facts about Pushary collected in `docs/PUBLIC_CONTENT.md`.
-- **Not done: the scrape.** The previous cloud session's network policy blocked
-  `pushary.com` (proxy returned 403 on CONNECT, WebFetch also blocked). GitHub, npm and
-  Google Fonts were reachable. Nothing in `original/` yet.
+- Done (4 October 2026): scrape and audit in `original/` (the raw network dump stays on disk,
+  gitignored), all six versions built and reviewed, results in `versions/README.md`, per-attempt
+  logs in `reviews/vN/log.md`. v3 and v6 passed; v1, v2, v4 and v5 used all four attempts.
+- Commit each version before a review round; v4's best attempt was lost by editing it uncommitted.
 
 ## Step 0: check access
 
