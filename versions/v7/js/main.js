@@ -14,9 +14,10 @@
 
   const heroEl = document.getElementById('phone-hero');
   const flowEl = document.getElementById('phone-flow');
+  let flow = null;
   if (window.PusharyPhone) {
     PusharyPhone.mount(heroEl, Object.assign({ autoplay: true }, copy));
-    var flow = PusharyPhone.mount(flowEl, Object.assign({ autoplay: false }, copy));
+    flow = PusharyPhone.mount(flowEl, Object.assign({ autoplay: false }, copy)).setState('approved');
   }
 
   // Line from the terminal's "needs your yes" row to the flow phone's notification.
@@ -27,7 +28,7 @@
   const NOTE_Y = 0.78;
   const NOTE_X = 41 / 490;
   const align = () => {
-    if (!wide.matches) return;
+    if (!wide.matches) { flowPhone.style.marginTop = ''; return; }
     flowPhone.style.marginTop = '0px';
     const a = ask.getBoundingClientRect();
     const t = termWrap.getBoundingClientRect();
@@ -46,33 +47,32 @@
   if (reduced) return;
   root.classList.add('js');
 
-  // Scroll moves the page light from cool to warm and lights one step at a time.
-  const steps = [...document.querySelectorAll('.step')];
-  let current = null;
+  // Scroll crossfades the page light from cool to warm.
   let queued = false;
-  const update = () => {
+  const light = () => {
     queued = false;
     const max = root.scrollHeight - innerHeight;
     root.style.setProperty('--p', (max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0).toFixed(3));
-    const mid = innerHeight * 0.55;
-    let best = steps[0];
-    let dist = Infinity;
-    for (const s of steps) {
-      const r = s.getBoundingClientRect();
-      const d = Math.abs(r.top + r.height / 2 - mid);
-      if (d < dist) { dist = d; best = s; }
-    }
-    if (best !== current) {
-      steps.forEach((s) => s.classList.toggle('on', s === best));
-      current = best;
-      if (flow) flow.setState(best.dataset.state);
-    }
   };
   addEventListener('scroll', () => {
-    if (!queued) { queued = true; requestAnimationFrame(update); }
+    if (!queued) { queued = true; requestAnimationFrame(light); }
   }, { passive: true });
-  addEventListener('resize', update);
-  update();
+  light();
+
+  // While the flow is on screen, the steps light one at a time and the phone follows.
+  const steps = [...document.querySelectorAll('.step')];
+  let i = 0;
+  let timer = null;
+  const show = () => {
+    steps.forEach((s, k) => s.classList.toggle('on', k === i));
+    if (flow) flow.setState(steps[i].dataset.state);
+    i = (i + 1) % steps.length;
+  };
+  steps[steps.length - 1].classList.add('on');
+  new IntersectionObserver(([e]) => {
+    clearInterval(timer);
+    if (e.isIntersecting) { i = 0; show(); timer = setInterval(show, 3200); }
+  }, { threshold: 0.35 }).observe(flowSection);
 })();
 
 document.querySelectorAll('.copy').forEach((b) => {

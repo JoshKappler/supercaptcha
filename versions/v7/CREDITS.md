@@ -3,8 +3,13 @@
 | File | Source | License |
 |---|---|---|
 | `assets/fonts/instrument-sans-400.woff2`, `instrument-sans-500.woff2` | Instrument Sans (Google Fonts build), copied from the OFL font folder of Kevin-Liu-01/Prototemplate, `public/fonts/google/`. Only the OFL font files were taken from that repo | SIL OFL 1.1 |
-| `assets/fonts/GeistMono-Regular.woff2` | vercel/geist-font, `fonts/GeistMono/webfonts/` | SIL OFL 1.1 |
+| `assets/fonts/GeistMono-Medium.woff2` | vercel/geist-font, `fonts/GeistMono/webfonts/` | SIL OFL 1.1 |
 | `assets/img/logo.webp` | pushary.com scrape, `original/site/pushary.com/_next/image__P3VybD0lMkZsb2dvLndlYnAm.html` (the `/logo.webp` image) | Pushary brand asset, used as the product's own logo |
+| `assets/img/agents/{claude,codex,cursor,antigravity,gemini,hermes}.webp` | pushary.com scrape, `original/site/pushary.com/_next/image__*` (the `/claude.webp`, `/codex.webp`, `/cursor.webp`, `/antigravity.webp`, `/gemini.webp`, `/hermes.webp` images) | Agent marks as shown on pushary.com |
+| `assets/img/agents/opencode.svg`, `vscode.svg` | pushary.com scrape, `original/site/pushary.com/opencode__*.svg`, `vscode__*.svg` | Agent marks as shown on pushary.com |
+| `assets/img/hacker-news.webp` | pushary.com scrape, `/hacker-news.webp` | As shown on pushary.com |
+| `assets/img/product-hunt-top-post-light.svg`, `app-store.svg`, `google-play.svg` | pushary.com scrape, `original/site/pushary.com/badges/` | Badges as shown on pushary.com |
+| `assets/img/founder.webp` | Cropped and resized from the founder video poster in the pushary.com scrape (`/home-demo-poster.webp`); it links to the founder's Loom video from the same page | Pushary's own image |
 
 ## Shared iPhone (`assets/iphone/`, copied by `scripts/sync-phone.sh`)
 
