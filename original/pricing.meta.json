@@ -1,0 +1,238 @@
+{
+  "title": "Pricing | Pushary",
+  "description": "Approve your AI agents from your phone. Paid plans from $9.99/month with a 3-day free trial. Cancel anytime.",
+  "headings": [
+    "H1: Approvals from your phone, from $9.99 a month.",
+    "H2: Agent",
+    "H2: Agent Pro",
+    "H2: Team",
+    "H2: Agent",
+    "H2: Agent Pro",
+    "H2: Team",
+    "H2: Partner plans",
+    "H3: Partner Launch",
+    "H3: Partner Growth",
+    "H3: Partner Scale",
+    "H3: Enterprise",
+    "H2: Common Questions",
+    "H3: Do customers need an app?",
+    "H3: Does it actually move the needle?",
+    "H3: How does the HubSpot integration work?",
+    "H3: Is setup hard?",
+    "H3: Can I brand it?",
+    "H3: Can I try Pushary before committing?",
+    "H3: What if I go over limits?",
+    "H3: What infrastructure powers Pushary?",
+    "H3: Product",
+    "H3: Agent control",
+    "H3: Company",
+    "H3: Social",
+    "H3: Legal"
+  ],
+  "links": [
+    {
+      "text": "Pushary",
+      "href": "https://pushary.com/"
+    },
+    {
+      "text": "How it works",
+      "href": "https://pushary.com/#demo"
+    },
+    {
+      "text": "For agent builders",
+      "href": "https://pushary.com/partners"
+    },
+    {
+      "text": "Docs",
+      "href": "https://pushary.com/docs"
+    },
+    {
+      "text": "Sign in",
+      "href": "https://pushary.com/sign-in"
+    },
+    {
+      "text": "Start 3-day free trial",
+      "href": "https://pushary.com/sign-up?from=agent"
+    },
+    {
+      "text": "Start 3-day free trial",
+      "href": "https://pushary.com/sign-up?from=agent&plan=agent_pro"
+    },
+    {
+      "text": "Start 3-day free trial",
+      "href": "https://pushary.com/sign-up?from=agent&plan=team"
+    },
+    {
+      "text": "Start 3-day free trial",
+      "href": "https://pushary.com/sign-up?from=agent"
+    },
+    {
+      "text": "Start 3-day free trial",
+      "href": "https://pushary.com/sign-up?from=agent&plan=agent_pro"
+    },
+    {
+      "text": "Start 3-day free trial",
+      "href": "https://pushary.com/sign-up?from=agent&plan=team"
+    },
+    {
+      "text": "See the Mac app",
+      "href": "https://pushary.com/mac-notch-app"
+    },
+    {
+      "text": "See the Partner plan",
+      "href": "https://pushary.com/partners"
+    },
+    {
+      "text": "Start with Partner",
+      "href": "https://pushary.com/sign-up?from=agent&plan=partner_launch"
+    },
+    {
+      "text": "Start with Partner",
+      "href": "https://pushary.com/sign-up?from=agent&plan=partner_growth"
+    },
+    {
+      "text": "Start with Partner",
+      "href": "https://pushary.com/sign-up?from=agent&plan=partner_scale"
+    },
+    {
+      "text": "Contact Sales",
+      "href": "mailto:business@pushary.com?subject=Pushary%20Partner%20Enterprise"
+    },
+    {
+      "text": "Let's talk",
+      "href": "mailto:business@pushary.com"
+    },
+    {
+      "text": "",
+      "href": "https://www.producthunt.com/products/pushary?utm_source=badge-top-post-badge&utm_medium=badge&utm_campaign=badge-pushary-4"
+    },
+    {
+      "text": "",
+      "href": "https://apps.apple.com/us/app/pushary/id6785677563"
+    },
+    {
+      "text": "",
+      "href": "https://play.google.com/store/apps/details?id=com.pushary.app"
+    },
+    {
+      "text": "Features",
+      "href": "https://pushary.com/#features"
+    },
+    {
+      "text": "Pricing",
+      "href": "https://pushary.com/pricing"
+    },
+    {
+      "text": "Download app",
+      "href": "https://pushary.com/download"
+    },
+    {
+      "text": "FAQ",
+      "href": "https://pushary.com/#faq"
+    },
+    {
+      "text": "Get Started",
+      "href": "https://pushary.com/sign-up"
+    },
+    {
+      "text": "Human-in-the-loop",
+      "href": "https://pushary.com/human-in-the-loop"
+    },
+    {
+      "text": "For agent builders",
+      "href": "https://pushary.com/partners"
+    },
+    {
+      "text": "Compare",
+      "href": "https://pushary.com/vs"
+    },
+    {
+      "text": "Control panel",
+      "href": "https://pushary.com/ai-agent-control-panel"
+    },
+    {
+      "text": "Permission policies",
+      "href": "https://pushary.com/ai-agent-permission-policy"
+    },
+    {
+      "text": "Audit trail",
+      "href": "https://pushary.com/ai-agent-audit-trail"
+    },
+    {
+      "text": "Kill switch",
+      "href": "https://pushary.com/ai-agent-kill-switch"
+    },
+    {
+      "text": "Mac app",
+      "href": "https://pushary.com/mac-notch-app"
+    },
+    {
+      "text": "Claude Code notifications",
+      "href": "https://pushary.com/claude-code-notifications"
+    },
+    {
+      "text": "Best control tools",
+      "href": "https://pushary.com/best-ai-agent-control-tools"
+    },
+    {
+      "text": "About",
+      "href": "https://pushary.com/about"
+    },
+    {
+      "text": "Blog",
+      "href": "https://pushary.com/blog"
+    },
+    {
+      "text": "Contact",
+      "href": "mailto:business@pushary.com"
+    },
+    {
+      "text": "Twitter",
+      "href": "https://twitter.com/aadilbuilds"
+    },
+    {
+      "text": "GitHub",
+      "href": "https://github.com/Pushary"
+    },
+    {
+      "text": "Discord",
+      "href": "https://discord.gg/9v3VvUByrr"
+    },
+    {
+      "text": "Security",
+      "href": "https://pushary.com/security"
+    },
+    {
+      "text": "Privacy",
+      "href": "https://pushary.com/privacy"
+    },
+    {
+      "text": "Terms",
+      "href": "https://pushary.com/terms"
+    }
+  ],
+  "fontFamilies": [
+    "GeistSans, \"GeistSans Fallback\", ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+    "GeistSans, \"GeistSans Fallback\", ui-sans-serif, sans-serif",
+    "GeistMono, ui-monospace, SFMono-Regular, \"Roboto Mono\", Menlo, Monaco, \"Liberation Mono\", \"DejaVu Sans Mono\", \"Courier New\", monospace, ui-monospace, SFMono-Regular, \"SF Mono\", Menlo, Monaco, Consolas, monospace"
+  ],
+  "textColors": [
+    "oklch(0.18 0.02 195)",
+    "rgba(0, 0, 0, 0)",
+    "lab(36.5206 -9.79298 -3.00534)",
+    "oklch(0.42 0.1 195)",
+    "lab(97.7338 -1.62986 -0.507653)",
+    "oklab(0.18 -0.0193185 -0.00517639 / 0.8)"
+  ],
+  "backgroundColors": [
+    "oklab(0.946017 0.0000430942 0.0000189543 / 0.5)",
+    "oklch(0.97 0.006 195)",
+    "oklab(0.97 -0.00579555 -0.00155292 / 0.15)",
+    "lab(93.1045 -1.95599 -0.608993)",
+    "lab(98.8723 -0.977963 -0.304723)",
+    "oklch(0.42 0.1 195)",
+    "oklab(0.449998 -0.0289801 -0.00775418 / 0.3)",
+    "rgb(0, 0, 0)"
+  ],
+  "text": "Pushary\nHow it works\nFor agent builders\nDocs\n🇬🇧\nEnglish\nSign in\nGet Started\n\nPRICING\n\nApprovals from your phone, from $9.99 a month.\n\nOne plan covers all your agents. The phone app and the Mac app are included.\n\n3-day free trial\nCancel anytime\nSwitch plans whenever\nMOST POPULAR\nAgent\n\nFor one person, every agent\n\n$9.99\nper month\n5K notifications/month\nEvery agent you run\nApprove, deny, or answer from your phone\nMac app included\nPermission policies\nFull MCP and API access\n30-day history\nStart 3-day free trial\nAgent Pro\n\nFor power users and small teams\n\n$19.99\nper month\nUnlimited notifications\nBudgets\nPriority support\nPolicy Autopilot suggestions\n90-day history\nEverything in Agent\nStart 3-day free trial\nTeam\n\nFor teams that need a shared record\n\n$59.99\nper month\nEverything in Agent Pro\nUp to 10 members\nShared audit trail with export\nWeekly team digest\n365-day history\nInvite your security team\nStart 3-day free trial\n\nEvery agent plan includes Pushary Isle, the Mac app. Your agents' questions show up in your Mac's notch. See the Mac app\n\nPartner plans\n\nFor companies that ship an AI agent. Your users approve what it does from their phone. See the Partner plan\n\nPick the size that fits your product. Existing Partner customers keep their terms.\n\nPartner Launch\n\nApprovals inside your product\n\n$99\nper month\nYour users approve what your agent does\nUp to 5K of your users\n25K approval requests a month\nUp to 3 members\n90 days of answer history\nEvery answer sent to your server\nTypeScript, Python, REST and MCP\nStart with Partner\nPartner Growth\n\nApprovals inside your product\n\n$299\nper month\nYour users approve what your agent does\nUp to 25K of your users\n100K approval requests a month\nUp to 10 members\n365 days of answer history\nEvery answer sent to your server\nTypeScript, Python, REST and MCP\nPriority support\nStart with Partner\nPartner Scale\n\nApprovals inside your product\n\n$799\nper month\nYour users approve what your agent does\nUp to 100K of your users\n500K approval requests a month\nUp to 25 members\n730 days of answer history\nEvery answer sent to your server\nTypeScript, Python, REST and MCP\nPriority support\nStart with Partner\nEnterprise\n\nCustom agreement\n\nCustom\nlet's talk\nYour users approve what your agent does\nEvery answer sent to your server\nTypeScript, Python, REST and MCP\nContact Sales\n\nYour first trial covers 100 of your users and 100 approval requests for 3 days. Paid limits start when billing starts. Retries and extra devices don't count as extra requests. Plain notifications without a question aren't included. No automatic overage charges.\n\nAll paid plans include a 3-day free trial. Cancel anytime.\n\nNeed custom limits? Let's talk\n\nCommon Questions\nDo customers need an app?\nDoes it actually move the needle?\nHow does the HubSpot integration work?\nIs setup hard?\nCan I brand it?\nCan I try Pushary before committing?\nWhat if I go over limits?\nWhat infrastructure powers Pushary?\nPushary\n\nThe decision layer for AI agents\n\nProduct\nFeatures\nPricing\nDownload app\nFAQ\nGet Started\nHuman-in-the-loop\nFor agent builders\nCompare\nAgent control\nControl panel\nPermission policies\nAudit trail\nKill switch\nMac app\nClaude Code notifications\nBest control tools\nCompany\nAbout\nBlog\nContact\nSocial\nTwitter\nGitHub\nDiscord\nLegal\nSecurity\nPrivacy\nTerms\n© 2026 RalphNex OÜ. All rights reserved\nNarva mnt 7-652, Kesklinna linnaosa, 10117 Tallinn, Harju maakond, Estonia\nYour Privacy Choices\n🇬🇧\nEnglish"
+}

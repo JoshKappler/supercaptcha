@@ -1,0 +1,330 @@
+{
+  "title": "Pushary Documentation",
+  "description": "Pushary sends your AI agent's questions and approvals to your phone. Set it up with one command, then approve, deny or answer from anywhere.",
+  "headings": [
+    "H1: Pushary Documentation",
+    "H2: Pick what you want to do\nCopy Anchor Link",
+    "H3: Use Pushary with my own agents",
+    "H3: Build approvals into my product",
+    "H2: Most used pages\nCopy Anchor Link",
+    "H3: Supported agents",
+    "H3: Claude Code setup",
+    "H3: Policies",
+    "H3: REST API",
+    "H3: Pricing and limits",
+    "H3: Troubleshooting",
+    "H2: Building a website instead?\nCopy Anchor Link",
+    "H3: On this page"
+  ],
+  "links": [
+    {
+      "text": "PusharyDocs",
+      "href": "https://pushary.com/"
+    },
+    {
+      "text": "Pushary\nDocs",
+      "href": "https://pushary.com/"
+    },
+    {
+      "text": "Dashboard",
+      "href": "https://pushary.com/dashboard"
+    },
+    {
+      "text": "Pricing",
+      "href": "https://pushary.com/pricing"
+    },
+    {
+      "text": "Pushary Documentation",
+      "href": "https://pushary.com/docs"
+    },
+    {
+      "text": "Overview",
+      "href": "https://pushary.com/docs/agents"
+    },
+    {
+      "text": "Quickstart",
+      "href": "https://pushary.com/docs/agents/quickstart"
+    },
+    {
+      "text": "Receiving notifications",
+      "href": "https://pushary.com/docs/agents/receiving-notifications"
+    },
+    {
+      "text": "Supported agents",
+      "href": "https://pushary.com/docs/agents/supported-agents"
+    },
+    {
+      "text": "Get your API key",
+      "href": "https://pushary.com/docs/agents/api-key"
+    },
+    {
+      "text": "How it works",
+      "href": "https://pushary.com/docs/agents/how-it-works"
+    },
+    {
+      "text": "Human in the loop",
+      "href": "https://pushary.com/docs/agents/human-in-the-loop"
+    },
+    {
+      "text": "Use cases and prompts",
+      "href": "https://pushary.com/docs/agents/use-cases"
+    },
+    {
+      "text": "FAQ",
+      "href": "https://pushary.com/docs/agents/faq"
+    },
+    {
+      "text": "Mac app (Pushary Isle)",
+      "href": "https://pushary.com/docs/agents/mac-app"
+    },
+    {
+      "text": "Claude Code setup",
+      "href": "https://pushary.com/docs/agents/guides/claude-code"
+    },
+    {
+      "text": "Codex setup",
+      "href": "https://pushary.com/docs/agents/guides/codex"
+    },
+    {
+      "text": "Gemini CLI setup",
+      "href": "https://pushary.com/docs/agents/guides/gemini-cli"
+    },
+    {
+      "text": "Antigravity CLI setup",
+      "href": "https://pushary.com/docs/agents/guides/antigravity-cli"
+    },
+    {
+      "text": "Cursor setup",
+      "href": "https://pushary.com/docs/agents/guides/cursor"
+    },
+    {
+      "text": "Hermes Agent setup",
+      "href": "https://pushary.com/docs/agents/guides/hermes"
+    },
+    {
+      "text": "fx setup",
+      "href": "https://pushary.com/docs/agents/guides/fx"
+    },
+    {
+      "text": "Windsurf and other MCP agents",
+      "href": "https://pushary.com/docs/agents/guides/windsurf-other"
+    },
+    {
+      "text": "Lovable",
+      "href": "https://pushary.com/docs/agents/guides/lovable"
+    },
+    {
+      "text": "Claude.ai, Claude Desktop, and Cowork",
+      "href": "https://pushary.com/docs/agents/guides/claude-desktop"
+    },
+    {
+      "text": "ChatGPT",
+      "href": "https://pushary.com/docs/agents/guides/chatgpt"
+    },
+    {
+      "text": "ChatGPT decision events",
+      "href": "https://pushary.com/docs/agents/guides/chatgpt-events"
+    },
+    {
+      "text": "Langdock",
+      "href": "https://pushary.com/docs/agents/guides/langdock"
+    },
+    {
+      "text": "Langflow",
+      "href": "https://pushary.com/docs/agents/guides/langflow"
+    },
+    {
+      "text": "Connect any agent",
+      "href": "https://pushary.com/docs/agents/connect-any-agent"
+    },
+    {
+      "text": "Permission policies",
+      "href": "https://pushary.com/docs/agents/policies"
+    },
+    {
+      "text": "When you don't answer",
+      "href": "https://pushary.com/docs/agents/unanswered"
+    },
+    {
+      "text": "Multi-agent control panel",
+      "href": "https://pushary.com/docs/agents/control-panel"
+    },
+    {
+      "text": "Kill switch",
+      "href": "https://pushary.com/docs/agents/kill-switch"
+    },
+    {
+      "text": "Audit trail and export",
+      "href": "https://pushary.com/docs/agents/audit-log"
+    },
+    {
+      "text": "Build approvals into your agent",
+      "href": "https://pushary.com/docs/agents/build/quickstart"
+    },
+    {
+      "text": "Vercel AI SDK",
+      "href": "https://pushary.com/docs/agents/build/vercel-ai-sdk"
+    },
+    {
+      "text": "LangGraph",
+      "href": "https://pushary.com/docs/agents/build/langgraph"
+    },
+    {
+      "text": "OpenAI Agents SDK",
+      "href": "https://pushary.com/docs/agents/build/openai-agents"
+    },
+    {
+      "text": "Hosted OpenAI Agents API",
+      "href": "https://pushary.com/docs/agents/build/hosted-openai-agents"
+    },
+    {
+      "text": "Mastra",
+      "href": "https://pushary.com/docs/agents/build/mastra"
+    },
+    {
+      "text": "Claude Agent SDK",
+      "href": "https://pushary.com/docs/agents/build/claude-agent-sdk"
+    },
+    {
+      "text": "Framework adapters",
+      "href": "https://pushary.com/docs/agents/adapters"
+    },
+    {
+      "text": "Embed human approval in your product",
+      "href": "https://pushary.com/docs/agents/embed"
+    },
+    {
+      "text": "Test your integration",
+      "href": "https://pushary.com/docs/agents/embed-testing"
+    },
+    {
+      "text": "CLI reference",
+      "href": "https://pushary.com/docs/agents/reference/cli"
+    },
+    {
+      "text": "CLI changelog",
+      "href": "https://pushary.com/docs/agents/reference/cli-changelog"
+    },
+    {
+      "text": "Pushary REST API reference",
+      "href": "https://pushary.com/docs/agents/reference/api"
+    },
+    {
+      "text": "Available tools",
+      "href": "https://pushary.com/docs/agents/reference/tools"
+    },
+    {
+      "text": "Troubleshooting",
+      "href": "https://pushary.com/docs/agents/reference/troubleshooting"
+    },
+    {
+      "text": "Pricing and limits",
+      "href": "https://pushary.com/docs/pricing-and-limits"
+    },
+    {
+      "text": "Changelog",
+      "href": "https://pushary.com/docs/changelog"
+    },
+    {
+      "text": "quickstart",
+      "href": "https://pushary.com/docs/agents/quickstart"
+    },
+    {
+      "text": "Pick what you want to do",
+      "href": "https://pushary.com/docs#pick-what-you-want-to-do"
+    },
+    {
+      "text": "Use Pushary with my own agents\n\nClaude Code, Codex, Cursor, Gemini CLI, Hermes and others ask you before risky steps. You answer on your phone or your Mac. One command sets it up.",
+      "href": "https://pushary.com/docs/agents/quickstart"
+    },
+    {
+      "text": "Build approvals into my product\n\nYour product's agent asks your users before a refund, an email or a delete. They tap Approve or Deny on their phone.",
+      "href": "https://pushary.com/docs/agents/build/quickstart"
+    },
+    {
+      "text": "Most used pages",
+      "href": "https://pushary.com/docs#most-used-pages"
+    },
+    {
+      "text": "Supported agents\n\nEvery agent Pushary works with, and what it can enforce for each one.",
+      "href": "https://pushary.com/docs/agents/supported-agents"
+    },
+    {
+      "text": "Claude Code setup\n\nApprove Claude Code's shell commands and edits from your phone.",
+      "href": "https://pushary.com/docs/agents/guides/claude-code"
+    },
+    {
+      "text": "Policies\n\nDecide which actions run on their own and which ask you first.",
+      "href": "https://pushary.com/docs/agents/policies"
+    },
+    {
+      "text": "REST API\n\nSend a notification or ask a question with one HTTP call.",
+      "href": "https://pushary.com/docs/agents/reference/api"
+    },
+    {
+      "text": "Pricing and limits\n\nWhat each plan costs and the limits that apply.",
+      "href": "https://pushary.com/docs/pricing-and-limits"
+    },
+    {
+      "text": "Troubleshooting\n\nPhone did not buzz? Agent did not ask? Start here.",
+      "href": "https://pushary.com/docs/agents/reference/troubleshooting"
+    },
+    {
+      "text": "Building a website instead?",
+      "href": "https://pushary.com/docs#building-a-website-instead"
+    },
+    {
+      "text": "Push API for websites",
+      "href": "https://pushary.com/docs/web-push"
+    },
+    {
+      "text": "changelog",
+      "href": "https://pushary.com/docs/changelog"
+    },
+    {
+      "text": "Overview\n\nPush notifications, permission approvals and human in the loop for AI agents. Approve risky actions and answer your agent's questions from your phone.",
+      "href": "https://pushary.com/docs/agents"
+    },
+    {
+      "text": "Pick what you want to do",
+      "href": "https://pushary.com/docs#pick-what-you-want-to-do"
+    },
+    {
+      "text": "Most used pages",
+      "href": "https://pushary.com/docs#most-used-pages"
+    },
+    {
+      "text": "Building a website instead?",
+      "href": "https://pushary.com/docs#building-a-website-instead"
+    }
+  ],
+  "fontFamilies": [
+    "GeistSans, \"GeistSans Fallback\", ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+    "GeistSans, \"GeistSans Fallback\", ui-sans-serif, sans-serif",
+    "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"
+  ],
+  "textColors": [
+    "oklch(0.18 0.02 195)",
+    "rgba(0, 0, 0, 0)",
+    "rgb(10, 10, 10)",
+    "rgb(115, 115, 115)",
+    "rgb(23, 23, 23)",
+    "oklab(0.144787 0.00000661612 0.00000289828 / 0.9)",
+    "rgb(36, 41, 46)",
+    "rgb(111, 66, 193)",
+    "rgb(3, 47, 98)",
+    "lab(36.5206 -9.79298 -3.00534)"
+  ],
+  "backgroundColors": [
+    "oklab(0.946017 0.0000430942 0.0000189543 / 0.5)",
+    "oklab(0.970081 0.0000441968 0.0000194311 / 0.8)",
+    "rgb(241, 241, 241)",
+    "rgb(245, 245, 245)",
+    "oklab(0.204606 0.00000937283 0.00000408292 / 0.1)",
+    "rgba(209, 209, 209, 0.5)",
+    "lab(98.8723 -0.977963 -0.304723)",
+    "oklab(0.939998 -0.00580451 -0.00153095 / 0.4)",
+    "rgb(23, 23, 23)"
+  ],
+  "text": "Pushary\nDocs\nSearch\nCtrl\nK\nDashboard\nPricing\nPushary Documentation\nAI Agents\nOverview\n\nUse it yourself\n\nQuickstart\nReceiving notifications\nSupported agents\nGet your API key\nHow it works\nHuman in the loop\nUse cases and prompts\nFAQ\n\nSetup guides\n\nMac app (Pushary Isle)\nClaude Code setup\nCodex setup\nGemini CLI setup\nAntigravity CLI setup\nCursor setup\nHermes Agent setup\nfx setup\nWindsurf and other MCP agents\nLovable\nClaude.ai, Claude Desktop, and Cowork\nChatGPT\nChatGPT decision events\nLangdock\nLangflow\nConnect any agent\n\nControl and safety\n\nPermission policies\nWhen you don't answer\nMulti-agent control panel\nKill switch\nAudit trail and export\n\nBuild it into your agent\n\nBuild approvals into your agent\nVercel AI SDK\nLangGraph\nOpenAI Agents SDK\nHosted OpenAI Agents API\nMastra\nClaude Agent SDK\nFramework adapters\nEmbed human approval in your product\nTest your integration\n\nReference\n\nCLI reference\nCLI changelog\nPushary REST API reference\nAvailable tools\nTroubleshooting\nPricing and limits\nChangelog\n\nPush API (websites)\nPushary Documentation\n\nPushary sends your AI agent's questions and approvals to your phone. Set it up with one command, then approve, deny or answer from anywhere.\n\nCopy Markdown\nOpen\n\nPushary is the decision layer for AI agents. When an agent like Claude Code, Codex or Cursor needs a yes before a risky step, Pushary sends the question to your phone or your Mac. You tap Approve or Deny and the agent keeps working. If you build agents, your users can approve your agent's actions the same way.\n\nCopy Text\nnpx pushary@latest setup\n\nRun it on the computer where your agent runs. It finds your agents, connects them, saves your API key and pairs your phone. The quickstart walks through each step.\n\nPick what you want to do\nCopy Anchor Link\nUse Pushary with my own agents\n\nClaude Code, Codex, Cursor, Gemini CLI, Hermes and others ask you before risky steps. You answer on your phone or your Mac. One command sets it up.\n\nBuild approvals into my product\n\nYour product's agent asks your users before a refund, an email or a delete. They tap Approve or Deny on their phone.\n\nMost used pages\nCopy Anchor Link\nSupported agents\n\nEvery agent Pushary works with, and what it can enforce for each one.\n\nClaude Code setup\n\nApprove Claude Code's shell commands and edits from your phone.\n\nPolicies\n\nDecide which actions run on their own and which ask you first.\n\nREST API\n\nSend a notification or ask a question with one HTTP call.\n\nPricing and limits\n\nWhat each plan costs and the limits that apply.\n\nTroubleshooting\n\nPhone did not buzz? Agent did not ask? Start here.\n\nBuilding a website instead?\nCopy Anchor Link\n\nIf you run a website or store and want to send push notifications to your visitors, see the Push API for websites. It is a separate product on the same account.\n\nSee what changed recently in the changelog.\n\nWas this page helpful?\nYes\nNo\n\nOverview\n\nPush notifications, permission approvals and human in the loop for AI agents. Approve risky actions and answer your agent's questions from your phone.\n\nOn this page\nPick what you want to do\nMost used pages\nBuilding a website instead?"
+}

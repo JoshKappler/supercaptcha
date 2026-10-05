@@ -1,0 +1,466 @@
+{
+  "title": "Approve Your AI Agents From Your Phone | Pushary",
+  "description": "Your AI agents stop when they need permission. Approve from your phone in one tap so they keep working. For Claude Code, Codex, Cursor, and any MCP agent.",
+  "headings": [
+    "H1: Your agent froze, waiting for your yes.",
+    "H2: Walk away. Come back to finished work.",
+    "H2: What is Pushary?",
+    "H2: See the whole flow",
+    "H2: Set the rules once. Approve only what matters.",
+    "H3: Your agent control panel",
+    "H2: One command sets up every agent.",
+    "H2: Questions, answered",
+    "H2: I kept coming back to an agent that had been waiting the whole time",
+    "H2: What people running agents tell us",
+    "H2: Send the next yes to your phone.",
+    "H3: Product",
+    "H3: Agent control",
+    "H3: Company",
+    "H3: Social",
+    "H3: Legal"
+  ],
+  "links": [
+    {
+      "text": "Pushary",
+      "href": "https://pushary.com/"
+    },
+    {
+      "text": "How it works",
+      "href": "https://pushary.com/#demo"
+    },
+    {
+      "text": "For agent builders",
+      "href": "https://pushary.com/partners"
+    },
+    {
+      "text": "Docs",
+      "href": "https://pushary.com/docs"
+    },
+    {
+      "text": "Sign in",
+      "href": "https://pushary.com/sign-in"
+    },
+    {
+      "text": "",
+      "href": "https://pushary.com/sign-up?from=agent"
+    },
+    {
+      "text": "Start your trial",
+      "href": "https://pushary.com/sign-up?from=agent"
+    },
+    {
+      "text": "",
+      "href": "https://www.producthunt.com/products/pushary?utm_source=badge-top-post-badge&utm_medium=badge&utm_campaign=badge-pushary-4"
+    },
+    {
+      "text": "Start your trial",
+      "href": "https://pushary.com/sign-up?from=agent"
+    },
+    {
+      "text": "Claude Code",
+      "href": "https://pushary.com/docs/agents/guides/claude-code"
+    },
+    {
+      "text": "Codex",
+      "href": "https://pushary.com/docs/agents/guides/codex"
+    },
+    {
+      "text": "Cursor",
+      "href": "https://pushary.com/docs/agents/guides/cursor"
+    },
+    {
+      "text": "Antigravity CLI",
+      "href": "https://pushary.com/docs/agents/guides/antigravity-cli"
+    },
+    {
+      "text": "Gemini CLI",
+      "href": "https://pushary.com/docs/agents/guides/gemini-cli"
+    },
+    {
+      "text": "Hermes Agent",
+      "href": "https://pushary.com/docs/agents/guides/hermes"
+    },
+    {
+      "text": "VS Code",
+      "href": "https://pushary.com/docs/agents/supported-agents"
+    },
+    {
+      "text": "OpenCode",
+      "href": "https://pushary.com/docs/agents/supported-agents"
+    },
+    {
+      "text": "Windsurf or another MCP client? Connect it by hand",
+      "href": "https://pushary.com/docs/agents/guides/windsurf-other"
+    },
+    {
+      "text": "The Pushary app",
+      "href": "https://pushary.com/download"
+    },
+    {
+      "text": "Start your trial",
+      "href": "https://pushary.com/sign-up?from=agent"
+    },
+    {
+      "text": "Get the phone and Mac apps",
+      "href": "https://pushary.com/download"
+    },
+    {
+      "text": "AgentPays",
+      "href": "https://agentpays.dev/"
+    },
+    {
+      "text": "Portality",
+      "href": "https://portality.co/"
+    },
+    {
+      "text": "AI Plaza",
+      "href": "https://ai-plaza.io/"
+    },
+    {
+      "text": "Start your trial",
+      "href": "https://pushary.com/sign-up?from=agent"
+    },
+    {
+      "text": "See Pushary for agent builders",
+      "href": "https://pushary.com/partners"
+    },
+    {
+      "text": "Claude Code notifications",
+      "href": "https://pushary.com/claude-code-notifications"
+    },
+    {
+      "text": "Claude Cowork notifications",
+      "href": "https://pushary.com/claude-cowork-notifications"
+    },
+    {
+      "text": "ChatGPT notifications",
+      "href": "https://pushary.com/chatgpt-notifications"
+    },
+    {
+      "text": "Cursor notifications",
+      "href": "https://pushary.com/cursor-notifications"
+    },
+    {
+      "text": "Codex notifications",
+      "href": "https://pushary.com/codex-notifications"
+    },
+    {
+      "text": "Gemini CLI notifications",
+      "href": "https://pushary.com/gemini-cli-notifications"
+    },
+    {
+      "text": "Windsurf notifications",
+      "href": "https://pushary.com/windsurf-notifications"
+    },
+    {
+      "text": "Hermes notifications",
+      "href": "https://pushary.com/hermes-notifications"
+    },
+    {
+      "text": "GitHub Copilot notifications",
+      "href": "https://pushary.com/github-copilot-notifications"
+    },
+    {
+      "text": "Cline notifications",
+      "href": "https://pushary.com/cline-notifications"
+    },
+    {
+      "text": "Warp notifications",
+      "href": "https://pushary.com/warp-notifications"
+    },
+    {
+      "text": "Kilo Code notifications",
+      "href": "https://pushary.com/kilo-code-notifications"
+    },
+    {
+      "text": "Zed notifications",
+      "href": "https://pushary.com/zed-notifications"
+    },
+    {
+      "text": "Continue notifications",
+      "href": "https://pushary.com/continue-notifications"
+    },
+    {
+      "text": "Lovable notifications",
+      "href": "https://pushary.com/lovable-notifications"
+    },
+    {
+      "text": "MCP notifications",
+      "href": "https://pushary.com/mcp-notifications"
+    },
+    {
+      "text": "AI agent control panel",
+      "href": "https://pushary.com/ai-agent-control-panel"
+    },
+    {
+      "text": "Mac notch app",
+      "href": "https://pushary.com/mac-notch-app"
+    },
+    {
+      "text": "Permission policy",
+      "href": "https://pushary.com/ai-agent-permission-policy"
+    },
+    {
+      "text": "Audit trail",
+      "href": "https://pushary.com/ai-agent-audit-trail"
+    },
+    {
+      "text": "Kill switch",
+      "href": "https://pushary.com/ai-agent-kill-switch"
+    },
+    {
+      "text": "Permission control",
+      "href": "https://pushary.com/ai-agent-permission-control"
+    },
+    {
+      "text": "Approve AI tasks",
+      "href": "https://pushary.com/approve-ai-tasks"
+    },
+    {
+      "text": "Manage agents remotely",
+      "href": "https://pushary.com/manage-ai-agents-remotely"
+    },
+    {
+      "text": "Run multiple AI agents",
+      "href": "https://pushary.com/run-multiple-ai-agents"
+    },
+    {
+      "text": "Session receipts",
+      "href": "https://pushary.com/receipts"
+    },
+    {
+      "text": "Embed human approval",
+      "href": "https://pushary.com/agent-notifications-integration"
+    },
+    {
+      "text": "Slack approvals",
+      "href": "https://pushary.com/slack"
+    },
+    {
+      "text": "Best AI agent control tools",
+      "href": "https://pushary.com/best-ai-agent-control-tools"
+    },
+    {
+      "text": "AI agent glossary",
+      "href": "https://pushary.com/ai-agent-glossary"
+    },
+    {
+      "text": "Compare alternatives",
+      "href": "https://pushary.com/vs"
+    },
+    {
+      "text": "Human in the loop for AI agents, explained",
+      "href": "https://pushary.com/blog/human-in-the-loop-for-ai-agents"
+    },
+    {
+      "text": "Run an AI agent overnight, stay in control",
+      "href": "https://pushary.com/blog/run-ai-agent-overnight"
+    },
+    {
+      "text": "Claude Code hooks explained",
+      "href": "https://pushary.com/blog/claude-code-hooks-explained"
+    },
+    {
+      "text": "Skip permissions in Claude Code safely",
+      "href": "https://pushary.com/claude-code-dangerously-skip-permissions"
+    },
+    {
+      "text": "Skip permissions in Codex safely",
+      "href": "https://pushary.com/codex-dangerously-skip-permissions"
+    },
+    {
+      "text": "What permissions should an AI agent have?",
+      "href": "https://pushary.com/blog/what-permissions-should-an-ai-agent-have"
+    },
+    {
+      "text": "Is it safe to run an AI agent unattended?",
+      "href": "https://pushary.com/blog/is-it-safe-to-run-an-ai-agent-unattended"
+    },
+    {
+      "text": "All guides and updates",
+      "href": "https://pushary.com/blog"
+    },
+    {
+      "text": "Running e-commerce or marketing?\nExplore push notifications",
+      "href": "https://pushary.com/push-notifications"
+    },
+    {
+      "text": "",
+      "href": "https://www.producthunt.com/products/pushary?utm_source=badge-top-post-badge&utm_medium=badge&utm_campaign=badge-pushary-4"
+    },
+    {
+      "text": "",
+      "href": "https://apps.apple.com/us/app/pushary/id6785677563"
+    },
+    {
+      "text": "",
+      "href": "https://play.google.com/store/apps/details?id=com.pushary.app"
+    },
+    {
+      "text": "Features",
+      "href": "https://pushary.com/#features"
+    },
+    {
+      "text": "Pricing",
+      "href": "https://pushary.com/pricing"
+    },
+    {
+      "text": "Download app",
+      "href": "https://pushary.com/download"
+    },
+    {
+      "text": "FAQ",
+      "href": "https://pushary.com/#faq"
+    },
+    {
+      "text": "Get Started",
+      "href": "https://pushary.com/sign-up"
+    },
+    {
+      "text": "Human-in-the-loop",
+      "href": "https://pushary.com/human-in-the-loop"
+    },
+    {
+      "text": "For agent builders",
+      "href": "https://pushary.com/partners"
+    },
+    {
+      "text": "Compare",
+      "href": "https://pushary.com/vs"
+    },
+    {
+      "text": "Control panel",
+      "href": "https://pushary.com/ai-agent-control-panel"
+    },
+    {
+      "text": "Permission policies",
+      "href": "https://pushary.com/ai-agent-permission-policy"
+    },
+    {
+      "text": "Audit trail",
+      "href": "https://pushary.com/ai-agent-audit-trail"
+    },
+    {
+      "text": "Kill switch",
+      "href": "https://pushary.com/ai-agent-kill-switch"
+    },
+    {
+      "text": "Mac app",
+      "href": "https://pushary.com/mac-notch-app"
+    },
+    {
+      "text": "Claude Code notifications",
+      "href": "https://pushary.com/claude-code-notifications"
+    },
+    {
+      "text": "Best control tools",
+      "href": "https://pushary.com/best-ai-agent-control-tools"
+    },
+    {
+      "text": "About",
+      "href": "https://pushary.com/about"
+    },
+    {
+      "text": "Blog",
+      "href": "https://pushary.com/blog"
+    },
+    {
+      "text": "Contact",
+      "href": "mailto:business@pushary.com"
+    },
+    {
+      "text": "Twitter",
+      "href": "https://twitter.com/aadilbuilds"
+    },
+    {
+      "text": "GitHub",
+      "href": "https://github.com/Pushary"
+    },
+    {
+      "text": "Discord",
+      "href": "https://discord.gg/9v3VvUByrr"
+    },
+    {
+      "text": "Security",
+      "href": "https://pushary.com/security"
+    },
+    {
+      "text": "Privacy",
+      "href": "https://pushary.com/privacy"
+    },
+    {
+      "text": "Terms",
+      "href": "https://pushary.com/terms"
+    },
+    {
+      "text": "Start your trial",
+      "href": "https://pushary.com/sign-up?from=agent"
+    }
+  ],
+  "fontFamilies": [
+    "GeistSans, \"GeistSans Fallback\", ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+    "GeistSans, \"GeistSans Fallback\", ui-sans-serif, sans-serif",
+    "GeistMono, ui-monospace, SFMono-Regular, \"Roboto Mono\", Menlo, Monaco, \"Liberation Mono\", \"DejaVu Sans Mono\", \"Courier New\", monospace, ui-monospace, SFMono-Regular, \"SF Mono\", Menlo, Monaco, Consolas, monospace",
+    "-apple-system, BlinkMacSystemFont, \"SF Pro Text\", \"Helvetica Neue\", system-ui, sans-serif",
+    "GeistPixelSquare, \"Geist Mono\", ui-monospace, SFMono-Regular, \"Roboto Mono\", Menlo, Monaco, \"Liberation Mono\", \"DejaVu Sans Mono\", \"Courier New\", monospace, ui-monospace, monospace",
+    "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"
+  ],
+  "textColors": [
+    "oklch(0.18 0.02 195)",
+    "rgba(0, 0, 0, 0)",
+    "lab(36.5206 -9.79298 -3.00534)",
+    "lab(97.7338 -1.62986 -0.507653)",
+    "oklab(0.449998 -0.0289801 -0.00775418 / 0.7)",
+    "oklab(0.449998 -0.0289801 -0.00775418 / 0.6)",
+    "rgb(255, 255, 255)",
+    "oklab(0.999994 0.0000455678 0.0000200868 / 0.9)",
+    "oklab(0.999994 0.0000455678 0.0000200868 / 0.55)",
+    "lab(5.43069 -4.69358 -1.61925)",
+    "oklab(0.18 -0.0193185 -0.00517639 / 0.85)",
+    "oklch(0.42 0.1 195)",
+    "oklab(0.18 -0.0193185 -0.00517639 / 0.8)",
+    "oklab(0.18 -0.0193185 -0.00517639 / 0.75)",
+    "lab(42.6062 53.7334 32.9016)",
+    "oklab(0.449998 -0.0289801 -0.00775418 / 0.8)",
+    "oklab(0.449998 -0.0289801 -0.00775418 / 0.4)",
+    "oklab(0.449998 -0.0289801 -0.00775418 / 0.5)",
+    "lab(47.2709 42.9082 69.2966)",
+    "lab(45.5382 69.8881 46.2994)",
+    "oklab(0.18 -0.0193185 -0.00517639 / 0.9)",
+    "oklab(0.979998 -0.00483856 -0.00127125 / 0.8)",
+    "oklab(0.979998 -0.00483856 -0.00127125 / 0.9)"
+  ],
+  "backgroundColors": [
+    "oklch(0.97 0.006 195)",
+    "oklab(0.97 -0.00579555 -0.00155292 / 0.15)",
+    "lab(93.1045 -1.95599 -0.608993)",
+    "oklch(0.42 0.1 195)",
+    "oklab(0.42 -0.0965926 -0.0258819 / 0.07)",
+    "lab(98.8723 -0.977963 -0.304723)",
+    "oklab(0.939998 -0.00580451 -0.00153095 / 0.4)",
+    "oklab(0.18 -0.0193185 -0.00517639 / 0.7)",
+    "oklab(0.42 -0.0965926 -0.0258819 / 0.4)",
+    "oklab(0.42 -0.0965926 -0.0258819 / 0.1)",
+    "rgb(58, 58, 63)",
+    "rgb(5, 5, 6)",
+    "oklab(0.999994 0.0000455678 0.0000200868 / 0.15)",
+    "rgba(0, 0, 0, 0.3)",
+    "rgb(0, 0, 0)",
+    "rgb(255, 255, 255)",
+    "oklab(0.999994 0.0000455678 0.0000200868 / 0.45)",
+    "oklab(0.989998 -0.00290748 -0.000753343 / 0.95)",
+    "oklab(0.999905 -0.000975937 -0.000235379 / 0.95)",
+    "lab(90.8275 -3.26031 -1.01392)",
+    "oklab(0.555999 -0.00000530481 0.000012964 / 0.35)",
+    "oklab(0.939998 -0.00580451 -0.00153095 / 0.15)",
+    "rgb(250, 248, 240)",
+    "oklab(0.42 -0.0965926 -0.0258819 / 0.3)",
+    "oklab(0 0 0 / 0.1)",
+    "lab(72.7183 31.8672 97.9407)",
+    "lab(66.9756 -58.27 19.5419)",
+    "oklab(0.550008 0.199362 0.0929854 / 0.1)",
+    "oklab(0.939998 -0.00580451 -0.00153095 / 0.2)",
+    "oklab(0.97 -0.00579555 -0.00155292 / 0.95)"
+  ],
+  "text": "Pushary\nHow it works\nFor agent builders\nDocs\n🇬🇧\nEnglish\nSign in\nYour agent froze, waiting for your yes.\n\nPushary sends the question to your phone. Tap Approve and it keeps working.\n\nStart your trial\n\nPushary sends the step that needs you, not your codebase.\n\nClaude Code\nCodex\nCursor\nHermes\n$ codex exec \"add migration\"\ninspected schema, 8 tables\ngenerated the migration plan\nask_user(which adapter?)\nMCP tool\n└ pg selected, migrated\n$ \n\nWednesday, March 5\n\n9:14\n\nAgents working. Nothing needs you.\n\nCodex\nnow\nWhich database adapter?\npg\nmysql\nsqlite\nTap Approve to try it\nReplay\nWORKS WITH\nClaude Code\nCodex\nAntigravity CLI\nHermes\nCursor\nFeatured on Hacker News\n6+\nagents, one setup\n1 tap\nto approve or deny\nAny device\niPhone, Android, Mac, Windows, Linux\n< 2 min\none-command setup\nWalk away. Come back to finished work.\n\nWITHOUT PUSHARY\n\n9:12\n\nHand off a long task. Walk away.\n\n9:14\n\nThe agent reaches a step it should not take alone. It stops and waits.\n\n9:51\n\nYou come back. It has not moved in 37 minutes.\n\nWITH PUSHARY\n\n9:12\n\nHand off the same task. Walk away for real.\n\n9:14\n\nYour phone buzzes. Approve the change before it goes live? You tap yes.\n\n9:51\n\nYou come back. The task finished half an hour ago.\n\nYour agent should not wait 37 minutes for a single yes.\n\nStart your trial\nWhat is Pushary?\n\nPushary is the control panel for AI agents. When your agent needs a yes, Pushary sends the question to your phone, your Mac, Slack or the web app. You approve or deny, and every answer is saved. Works with Claude Code, Codex, Cursor, Hermes, Windsurf, and any MCP agent.\n\nYour AI agents send permission requests to Pushary, which delivers them to your phone, your Mac's notch, Slack, the web app, and an audit trail.\n\nYOUR AGENTS\n\nClaude Code\nCodex\nCursor\nAntigravity CLI\nHermes\nPUSHARY\nYour phone\nYour Mac\nSlack\nWeb app\nAudit trail\n\nWHERE IT REACHES YOU\n\n+ any MCP agent, wired the same way\n\nHOW IT WORKS\n\nSee the whole flow\n\nOne approval, start to finish, in 20 seconds.\n\n01\nYour agent asks. It pauses at a step that needs your call. Run a command, change a file, or pick between options.\n02\nYour phone buzzes. When a decision is needed, not for every step. Approve or deny right from the notification, or open it to pick an option or type a reply.\n03\nIt keeps going. Your answer flows straight back to the agent. When the task finishes, you get a ping for that too.\n\nSTAY IN CONTROL\n\nSet the rules once. Approve only what matters.\n\nYOLO mode approves everything, including the rm and the deploy. Pushary auto-runs only the safe steps and pings you for the ones you cannot undo.\n\nAuto-approve the safe stuff\n\nLow-risk steps you can undo. Allow them once and stop seeing them.\n\nThe risky ones come to you\n\nDeleting, deploying, spending money, anything you cannot undo. These go to your phone.\n\nYou set the wait time\n\nSet how long each step waits. If you do not answer, your rule decides: deny, or hand it back to the terminal.\n\nYour agent control panel\n\nEvery agent in one place. See which one is waiting on you, plus the full audit trail.\n\nAgent\n/\nOverview\nLive\n\n3\n\nagents active\n\n212\n\nasked today\n\n174\n\nauto-cleared\n\n38\n\nyou answered\n\nWaiting for you\n\n1\n\nShip the billing webhook\n\nCodex\n·\nnow\n\ngit push origin main\n\nauto-deny 30s\n\nApprove\nDeny\n\nWorking\n\n2\n\nRefactor the auth module\n\nClaude Code\n·\n4m\n\nsrc/auth/session.ts\n\nNightly data sync\n\nHermes\n·\n12m\n\nbun run test\n\nDecision ledger\n\n212 today\nrm -rf ./dist\nDenied\nPhone\n2m\nvercel deploy --prod\nApproved\nPhone\n6m\nbun run db:migrate\nApproved\nSlack\n14m\ncat src/auth/session.ts\nAuto\nPolicy\n15m\nDELETE /v1/customers/:id\nDenied\nMac\n22m\nView the full ledger\nOne command sets up every agent.\n\nIt finds the agents on your computer and connects them all to your phone, in under two minutes.\n\nterminal\nnpx pushary@latest setup\n\nWORKS WITH YOUR AGENT\n\nClaude Code\nCodex\nCursor\nAntigravity CLI\nGemini CLI\nHermes Agent\nVS Code\nOpenCode\nWindsurf or another MCP client? Connect it by hand\nWorks on Mac, Windows and Linux.\n\nOn a Mac? The Pushary app can set it up for you, no terminal needed.\n\n01\nStart your trial.\n02\nRun the command on your computer.\n03\nScan the QR code with your phone. Done.\nStart your trial\n\n$9.99/mo after a 3-day free trial. Cancel anytime.\n\nAlready have an account? Get the phone and Mac apps\n\nQuestions, answered\nCan I approve an AI agent from my phone?\nHow much does it cost?\nIs my code sent to Pushary's servers?\nHow long does it take to set up?\nHow is this different from YOLO mode or auto-approve?\nWhat AI agents work with Pushary?\nHow do I get notified when Claude Code needs permission?\nWhat are permission hooks?\nWhat is human-in-the-loop for AI agents?\nWhat question types does Pushary support?\n\nWHY I BUILT THIS\n\nI kept coming back to an agent that had been waiting the whole time\n\nI would kick off a task, switch to something else, and come back to find the agent had paused for a yes 40 minutes earlier. So I built Pushary to move that decision to my phone. The agent asks, I tap, and the work keeps going while I am away. This is the 2 minute version.\n\nAadil Ghani · Founder, Pushary\n\nWhat people running agents tell us\nI instantly related with the pain of coming back to my Claude Code and seeing \"waiting for your permission\" instead of \"your task is completed.\"\nReagan McCullough · AgentPays\nYour tool really helped me improve my Cursor workflow and notifies me when the agent needs me or when it has finished a task. I don't know why this problem wasn't solved by someone already.\nAndreas Kuoppa · Portality\nI love your vision of speeding AI agents up by unblocking the stuck permission screen and eventually learning from your permission behaviour based on the context. This is gonna go big very soon.\nTakanari · AI Plaza\nSend the next yes to your phone.\n\nThe next long task can finish while you are away. One tap and the agent keeps working.\n\nStart your trial\n\n$9.99/mo after a 3-day free trial. Cancel anytime.\n\nPushary sends the step that needs you, not your codebase.\n\nBuilding an AI agent for your own customers? Let them approve what it does, from their phone. See Pushary for agent builders\n\nWORKS WITH YOUR AGENT\n\nClaude Code notifications\nClaude Cowork notifications\nChatGPT notifications\nCursor notifications\nCodex notifications\nGemini CLI notifications\nWindsurf notifications\nHermes notifications\nGitHub Copilot notifications\nCline notifications\nWarp notifications\nKilo Code notifications\nZed notifications\nContinue notifications\nLovable notifications\nMCP notifications\n\nSTAY IN CONTROL\n\nAI agent control panel\nMac notch app\nPermission policy\nAudit trail\nKill switch\nPermission control\nApprove AI tasks\nManage agents remotely\nRun multiple AI agents\nSession receipts\nEmbed human approval\nSlack approvals\nBest AI agent control tools\nAI agent glossary\nCompare alternatives\n\nGUIDES\n\nHuman in the loop for AI agents, explained\nRun an AI agent overnight, stay in control\nClaude Code hooks explained\nSkip permissions in Claude Code safely\nSkip permissions in Codex safely\nWhat permissions should an AI agent have?\nIs it safe to run an AI agent unattended?\nAll guides and updates\nRunning e-commerce or marketing?\nExplore push notifications\nPushary\n\nThe decision layer for AI agents\n\nProduct\nFeatures\nPricing\nDownload app\nFAQ\nGet Started\nHuman-in-the-loop\nFor agent builders\nCompare\nAgent control\nControl panel\nPermission policies\nAudit trail\nKill switch\nMac app\nClaude Code notifications\nBest control tools\nCompany\nAbout\nBlog\nContact\nSocial\nTwitter\nGitHub\nDiscord\nLegal\nSecurity\nPrivacy\nTerms\n© 2026 RalphNex OÜ. All rights reserved\nNarva mnt 7-652, Kesklinna linnaosa, 10117 Tallinn, Harju maakond, Estonia\nYour Privacy Choices\n🇬🇧\nEnglish\nLight\ntheme"
+}

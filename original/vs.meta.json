@@ -1,0 +1,322 @@
+{
+  "title": "Pushary vs Happy, Omnara, HumanLayer & More (2026)",
+  "description": "How Pushary compares to other ways to control AI agents: Happy, Omnara, HumanLayer, Conductor, and more. Honest, feature-by-feature, with where each one wins.",
+  "headings": [
+    "H1: How Pushary compares",
+    "H2: Controlling AI agents",
+    "H3: Pushary vs ClickUp, Trello, Zapier, Asana",
+    "H3: Pushary vs Happy",
+    "H3: Pushary vs Omnara",
+    "H3: Pushary vs HumanLayer",
+    "H3: Pushary vs Knock",
+    "H3: Pushary vs Courier",
+    "H3: Pushary vs Novu",
+    "H3: Pushary vs Svix",
+    "H3: Pushary vs Conductor",
+    "H3: Pushary vs Vibe Island",
+    "H3: Pushary vs Forge Remote",
+    "H3: Pushary vs Claude Code Notifier",
+    "H3: Pushary vs ntfy",
+    "H3: Pushary vs Pushover",
+    "H3: Pushary vs Pushcut",
+    "H3: Pushary vs Claude Code Remote Control",
+    "H3: Pushary vs Claude Cowork Notifications",
+    "H2: E-commerce web push",
+    "H3: Pushary vs OneSignal",
+    "H3: Pushary vs PushEngage",
+    "H2: See it for yourself"
+  ],
+  "links": [
+    {
+      "text": "Pushary",
+      "href": "https://pushary.com/"
+    },
+    {
+      "text": "Try Pushary",
+      "href": "https://pushary.com/sign-up?from=ai-coding"
+    },
+    {
+      "text": "Read: Best tools to control AI agents",
+      "href": "https://pushary.com/best-ai-agent-control-tools"
+    },
+    {
+      "text": "Pushary vs ClickUp, Trello, Zapier, Asana\n\nThose tools manage human work. Pushary approves an autonomous agent's actions from your phone, with per-tool policy and an audit trail.",
+      "href": "https://pushary.com/approve-ai-tasks"
+    },
+    {
+      "text": "Pushary vs Happy\n\nHappy is a free, open-source, end-to-end-encrypted mirror of Claude Code and Codex. Pushary adds policy, audit, and cross-vendor support.",
+      "href": "https://pushary.com/vs/happy"
+    },
+    {
+      "text": "Pushary vs Omnara\n\nOmnara mirrors your full session through a daemon. Pushary minimizes readable decision data and encrypts synced transcripts on your machine for your phone and documented compliance recovery.",
+      "href": "https://pushary.com/vs/omnara"
+    },
+    {
+      "text": "Pushary vs HumanLayer\n\nHumanLayer today is an AI coding IDE for orchestrating agent sessions; its classic approvals SDK is deprecated. Pushary is live human-in-the-loop for the agents you run and ship.",
+      "href": "https://pushary.com/vs/humanlayer"
+    },
+    {
+      "text": "Pushary vs Knock\n\nKnock is notification infrastructure whose agent approval flow you assemble from webhooks. Pushary is the managed decision loop: one blocking call, fail-closed.",
+      "href": "https://pushary.com/vs/knock"
+    },
+    {
+      "text": "Pushary vs Courier\n\nCourier sends across every channel and has no primitive that waits on a human. Pushary blocks until a person decides, and records it.",
+      "href": "https://pushary.com/vs/courier"
+    },
+    {
+      "text": "Pushary vs Novu\n\nNovu posts approve/deny cards inside its chat-agent conversations. Pushary is a standalone decision loop any agent can call, with select and free-text answers.",
+      "href": "https://pushary.com/vs/novu"
+    },
+    {
+      "text": "Pushary vs Svix\n\nSvix moves webhooks between machines. Pushary gets a decision from a person, on their phone, back to a waiting agent.",
+      "href": "https://pushary.com/vs/svix"
+    },
+    {
+      "text": "Pushary vs Conductor\n\nConductor runs parallel agents on your Mac. Pushary lets you approve and unblock them from your phone, on any OS.",
+      "href": "https://pushary.com/vs/conductor"
+    },
+    {
+      "text": "Pushary vs Vibe Island\n\nVibe Island is a local-only Dynamic Island for your agents, and a good one. Pushary Isle is the same notch plus the phone, a policy engine and an audit trail, at a fifth of the memory.",
+      "href": "https://pushary.com/vs/vibe-island"
+    },
+    {
+      "text": "Pushary vs Forge Remote\n\nForge Remote risk-scores each action in a native app. Pushary adds author-once policy, an audit trail, and any-MCP support.",
+      "href": "https://pushary.com/vs/forge-remote"
+    },
+    {
+      "text": "Pushary vs Claude Code Notifier\n\nClaude Code Notifier is a macOS notifier. Pushary adds human-in-the-loop, policy, and cross-platform support.",
+      "href": "https://pushary.com/vs/claude-code-notifier"
+    },
+    {
+      "text": "Pushary vs ntfy\n\nntfy is a free, open-source notification pipe. Pushary adds ask-and-wait approvals, per-tool policy, and an audit trail, and installs into the agents.",
+      "href": "https://pushary.com/vs/ntfy"
+    },
+    {
+      "text": "Pushary vs Pushover\n\nPushover is a simple, one-time-fee alert pipe. Pushary adds the agent approval loop, policy, and an exportable audit trail.",
+      "href": "https://pushary.com/vs/pushover"
+    },
+    {
+      "text": "Pushary vs Pushcut\n\nPushcut builds actionable iOS notifications. Pushary is the cross-platform, agent-native approval layer with policy and audit.",
+      "href": "https://pushary.com/vs/pushcut"
+    },
+    {
+      "text": "Pushary vs Claude Code Remote Control\n\nAnthropic's Remote Control is first-party and Claude-only. Pushary is the cross-vendor control plane with per-tool policy and an audit trail.",
+      "href": "https://pushary.com/vs/claude-code-remote-control"
+    },
+    {
+      "text": "Pushary vs Claude Cowork Notifications\n\nCowork's built-in loop covers Cowork through the Claude app. Pushary is one inbox for every agent, with lock screen answers and an audit trail.",
+      "href": "https://pushary.com/vs/claude-cowork"
+    },
+    {
+      "text": "Happy alternative",
+      "href": "https://pushary.com/happy-alternative"
+    },
+    {
+      "text": "Omnara alternative",
+      "href": "https://pushary.com/omnara-alternative"
+    },
+    {
+      "text": "Pushary vs OneSignal\n\nHow Pushary compares to OneSignal for web push notifications.",
+      "href": "https://pushary.com/vs/onesignal"
+    },
+    {
+      "text": "Pushary vs PushEngage\n\nHow Pushary compares to PushEngage for e-commerce push.",
+      "href": "https://pushary.com/vs/pushengage"
+    },
+    {
+      "text": "Start your trial",
+      "href": "https://pushary.com/sign-up?from=ai-coding"
+    },
+    {
+      "text": "Claude Code",
+      "href": "https://pushary.com/claude-code-notifications"
+    },
+    {
+      "text": "Cursor",
+      "href": "https://pushary.com/cursor-notifications"
+    },
+    {
+      "text": "Codex",
+      "href": "https://pushary.com/codex-notifications"
+    },
+    {
+      "text": "Gemini CLI",
+      "href": "https://pushary.com/gemini-cli-notifications"
+    },
+    {
+      "text": "Hermes notifications",
+      "href": "https://pushary.com/hermes-notifications"
+    },
+    {
+      "text": "Claude Cowork",
+      "href": "https://pushary.com/claude-cowork-notifications"
+    },
+    {
+      "text": "All agents",
+      "href": "https://pushary.com/"
+    },
+    {
+      "text": "Control panel",
+      "href": "https://pushary.com/ai-agent-control-panel"
+    },
+    {
+      "text": "Permission policies",
+      "href": "https://pushary.com/ai-agent-permission-policy"
+    },
+    {
+      "text": "Audit trail",
+      "href": "https://pushary.com/ai-agent-audit-trail"
+    },
+    {
+      "text": "Kill switch",
+      "href": "https://pushary.com/ai-agent-kill-switch"
+    },
+    {
+      "text": "Claude Code skip permissions",
+      "href": "https://pushary.com/claude-code-dangerously-skip-permissions"
+    },
+    {
+      "text": "Codex skip permissions",
+      "href": "https://pushary.com/codex-dangerously-skip-permissions"
+    },
+    {
+      "text": "Cursor skip permissions",
+      "href": "https://pushary.com/cursor-dangerously-skip-permissions"
+    },
+    {
+      "text": "Gemini skip permissions",
+      "href": "https://pushary.com/gemini-dangerously-skip-permissions"
+    },
+    {
+      "text": "Permission control",
+      "href": "https://pushary.com/ai-agent-permission-control"
+    },
+    {
+      "text": "Best control tools",
+      "href": "https://pushary.com/best-ai-agent-control-tools"
+    },
+    {
+      "text": "Approve AI tasks",
+      "href": "https://pushary.com/approve-ai-tasks"
+    },
+    {
+      "text": "Human-in-the-loop",
+      "href": "https://pushary.com/human-in-the-loop"
+    },
+    {
+      "text": "Vercel AI SDK",
+      "href": "https://pushary.com/human-in-the-loop-vercel-ai-sdk"
+    },
+    {
+      "text": "LangGraph",
+      "href": "https://pushary.com/human-in-the-loop-langgraph"
+    },
+    {
+      "text": "CrewAI",
+      "href": "https://pushary.com/human-in-the-loop-crewai"
+    },
+    {
+      "text": "MCP",
+      "href": "https://pushary.com/human-in-the-loop-mcp"
+    },
+    {
+      "text": "Partner plan",
+      "href": "https://pushary.com/partners"
+    },
+    {
+      "text": "Embed approvals",
+      "href": "https://pushary.com/agent-notifications-integration"
+    },
+    {
+      "text": "vs HumanLayer",
+      "href": "https://pushary.com/vs/humanlayer"
+    },
+    {
+      "text": "vs Omnara",
+      "href": "https://pushary.com/vs/omnara"
+    },
+    {
+      "text": "vs Conductor",
+      "href": "https://pushary.com/vs/conductor"
+    },
+    {
+      "text": "All comparisons",
+      "href": "https://pushary.com/vs"
+    },
+    {
+      "text": "Docs",
+      "href": "https://pushary.com/docs"
+    },
+    {
+      "text": "Blog",
+      "href": "https://pushary.com/blog"
+    },
+    {
+      "text": "Glossary",
+      "href": "https://pushary.com/ai-agent-glossary"
+    },
+    {
+      "text": "Pricing",
+      "href": "https://pushary.com/pricing"
+    },
+    {
+      "text": "Phone app",
+      "href": "https://pushary.com/download"
+    },
+    {
+      "text": "Mac app",
+      "href": "https://pushary.com/mac-notch-app"
+    },
+    {
+      "text": "Agent Approval Index",
+      "href": "https://pushary.com/agent-approval-index"
+    },
+    {
+      "text": "Manage agents remotely",
+      "href": "https://pushary.com/manage-ai-agents-remotely"
+    },
+    {
+      "text": "Notifications not working",
+      "href": "https://pushary.com/claude-code-notifications-not-working"
+    },
+    {
+      "text": "Support",
+      "href": "https://pushary.com/support"
+    },
+    {
+      "text": "Privacy",
+      "href": "https://pushary.com/privacy"
+    },
+    {
+      "text": "Terms",
+      "href": "https://pushary.com/terms"
+    },
+    {
+      "text": "Security",
+      "href": "https://pushary.com/security"
+    }
+  ],
+  "fontFamilies": [
+    "GeistSans, \"GeistSans Fallback\", ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+    "GeistSans, \"GeistSans Fallback\", ui-sans-serif, sans-serif",
+    "GeistMono, ui-monospace, SFMono-Regular, \"Roboto Mono\", Menlo, Monaco, \"Liberation Mono\", \"DejaVu Sans Mono\", \"Courier New\", monospace, ui-monospace, SFMono-Regular, \"SF Mono\", Menlo, Monaco, Consolas, monospace"
+  ],
+  "textColors": [
+    "oklch(0.18 0.02 195)",
+    "rgba(0, 0, 0, 0)",
+    "oklab(0.18 -0.0193185 -0.00517639 / 0.9)",
+    "lab(36.5206 -9.79298 -3.00534)",
+    "oklab(0.42 -0.0965926 -0.0258819 / 0.8)",
+    "lab(97.7338 -1.62986 -0.507653)",
+    "oklab(0.449998 -0.0289801 -0.00775418 / 0.7)",
+    "oklab(0.18 -0.0193185 -0.00517639 / 0.8)",
+    "oklab(0.449998 -0.0289801 -0.00775418 / 0.5)"
+  ],
+  "backgroundColors": [
+    "oklab(0.97 -0.00579555 -0.00155292 / 0.6)",
+    "lab(98.8723 -0.977963 -0.304723)",
+    "oklch(0.42 0.1 195)",
+    "oklab(0.939998 -0.00580451 -0.00153095 / 0.3)"
+  ],
+  "text": "Pushary\nTry Pushary\n\nCOMPARISONS\n\nHow Pushary compares\n\nThere are many ways to keep an eye on AI agents. These are honest, feature-by-feature breakdowns that say plainly where each tool wins and who it is for. Not sure where to start? Read the roundup of the whole category.\n\nRead: Best tools to control AI agents\nControlling AI agents\nPushary vs ClickUp, Trello, Zapier, Asana\n\nThose tools manage human work. Pushary approves an autonomous agent's actions from your phone, with per-tool policy and an audit trail.\n\nPushary vs Happy\n\nHappy is a free, open-source, end-to-end-encrypted mirror of Claude Code and Codex. Pushary adds policy, audit, and cross-vendor support.\n\nPushary vs Omnara\n\nOmnara mirrors your full session through a daemon. Pushary minimizes readable decision data and encrypts synced transcripts on your machine for your phone and documented compliance recovery.\n\nPushary vs HumanLayer\n\nHumanLayer today is an AI coding IDE for orchestrating agent sessions; its classic approvals SDK is deprecated. Pushary is live human-in-the-loop for the agents you run and ship.\n\nPushary vs Knock\n\nKnock is notification infrastructure whose agent approval flow you assemble from webhooks. Pushary is the managed decision loop: one blocking call, fail-closed.\n\nPushary vs Courier\n\nCourier sends across every channel and has no primitive that waits on a human. Pushary blocks until a person decides, and records it.\n\nPushary vs Novu\n\nNovu posts approve/deny cards inside its chat-agent conversations. Pushary is a standalone decision loop any agent can call, with select and free-text answers.\n\nPushary vs Svix\n\nSvix moves webhooks between machines. Pushary gets a decision from a person, on their phone, back to a waiting agent.\n\nPushary vs Conductor\n\nConductor runs parallel agents on your Mac. Pushary lets you approve and unblock them from your phone, on any OS.\n\nPushary vs Vibe Island\n\nVibe Island is a local-only Dynamic Island for your agents, and a good one. Pushary Isle is the same notch plus the phone, a policy engine and an audit trail, at a fifth of the memory.\n\nPushary vs Forge Remote\n\nForge Remote risk-scores each action in a native app. Pushary adds author-once policy, an audit trail, and any-MCP support.\n\nPushary vs Claude Code Notifier\n\nClaude Code Notifier is a macOS notifier. Pushary adds human-in-the-loop, policy, and cross-platform support.\n\nPushary vs ntfy\n\nntfy is a free, open-source notification pipe. Pushary adds ask-and-wait approvals, per-tool policy, and an audit trail, and installs into the agents.\n\nPushary vs Pushover\n\nPushover is a simple, one-time-fee alert pipe. Pushary adds the agent approval loop, policy, and an exportable audit trail.\n\nPushary vs Pushcut\n\nPushcut builds actionable iOS notifications. Pushary is the cross-platform, agent-native approval layer with policy and audit.\n\nPushary vs Claude Code Remote Control\n\nAnthropic's Remote Control is first-party and Claude-only. Pushary is the cross-vendor control plane with per-tool policy and an audit trail.\n\nPushary vs Claude Cowork Notifications\n\nCowork's built-in loop covers Cowork through the Claude app. Pushary is one inbox for every agent, with lock screen answers and an audit trail.\n\nSwitching from a specific tool? Happy alternative · Omnara alternative\n\nE-commerce web push\nPushary vs OneSignal\n\nHow Pushary compares to OneSignal for web push notifications.\n\nPushary vs PushEngage\n\nHow Pushary compares to PushEngage for e-commerce push.\n\nSee it for yourself\n\nSet your guardrails once, approve from your phone, and keep an exportable audit trail. Works with Claude Code, Codex, Cursor, Hermes, and any MCP client. 3-day free trial.\n\nStart your trial\nAGENTS\nClaude Code\nCursor\nCodex\nGemini CLI\nHermes notifications\nClaude Cowork\nAll agents\nCONTROL\nControl panel\nPermission policies\nAudit trail\nKill switch\nClaude Code skip permissions\nCodex skip permissions\nCursor skip permissions\nGemini skip permissions\nPermission control\nBest control tools\nApprove AI tasks\nFOR AGENT BUILDERS\nHuman-in-the-loop\nVercel AI SDK\nLangGraph\nCrewAI\nMCP\nPartner plan\nEmbed approvals\nCOMPARE\nvs HumanLayer\nvs Omnara\nvs Conductor\nAll comparisons\nRESOURCES\nDocs\nBlog\nGlossary\nPricing\nPhone app\nMac app\nAgent Approval Index\nManage agents remotely\nNotifications not working\nSupport\nPrivacy\nTerms\nSecurity\nYour Privacy Choices\n© 2026 Pushary"
+}

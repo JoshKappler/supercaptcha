@@ -1,0 +1,142 @@
+Pushary
+Docs
+Search
+Ctrl
+K
+Dashboard
+Pricing
+Pushary Documentation
+AI Agents
+Overview
+
+Use it yourself
+
+Quickstart
+Receiving notifications
+Supported agents
+Get your API key
+How it works
+Human in the loop
+Use cases and prompts
+FAQ
+
+Setup guides
+
+Mac app (Pushary Isle)
+Claude Code setup
+Codex setup
+Gemini CLI setup
+Antigravity CLI setup
+Cursor setup
+Hermes Agent setup
+fx setup
+Windsurf and other MCP agents
+Lovable
+Claude.ai, Claude Desktop, and Cowork
+ChatGPT
+ChatGPT decision events
+Langdock
+Langflow
+Connect any agent
+
+Control and safety
+
+Permission policies
+When you don't answer
+Multi-agent control panel
+Kill switch
+Audit trail and export
+
+Build it into your agent
+
+Build approvals into your agent
+Vercel AI SDK
+LangGraph
+OpenAI Agents SDK
+Hosted OpenAI Agents API
+Mastra
+Claude Agent SDK
+Framework adapters
+Embed human approval in your product
+Test your integration
+
+Reference
+
+CLI reference
+CLI changelog
+Pushary REST API reference
+Available tools
+Troubleshooting
+Pricing and limits
+Changelog
+
+Push API (websites)
+Pushary Documentation
+
+Pushary sends your AI agent's questions and approvals to your phone. Set it up with one command, then approve, deny or answer from anywhere.
+
+Copy Markdown
+Open
+
+Pushary is the decision layer for AI agents. When an agent like Claude Code, Codex or Cursor needs a yes before a risky step, Pushary sends the question to your phone or your Mac. You tap Approve or Deny and the agent keeps working. If you build agents, your users can approve your agent's actions the same way.
+
+Copy Text
+npx pushary@latest setup
+
+Run it on the computer where your agent runs. It finds your agents, connects them, saves your API key and pairs your phone. The quickstart walks through each step.
+
+Pick what you want to do
+Copy Anchor Link
+Use Pushary with my own agents
+
+Claude Code, Codex, Cursor, Gemini CLI, Hermes and others ask you before risky steps. You answer on your phone or your Mac. One command sets it up.
+
+Build approvals into my product
+
+Your product's agent asks your users before a refund, an email or a delete. They tap Approve or Deny on their phone.
+
+Most used pages
+Copy Anchor Link
+Supported agents
+
+Every agent Pushary works with, and what it can enforce for each one.
+
+Claude Code setup
+
+Approve Claude Code's shell commands and edits from your phone.
+
+Policies
+
+Decide which actions run on their own and which ask you first.
+
+REST API
+
+Send a notification or ask a question with one HTTP call.
+
+Pricing and limits
+
+What each plan costs and the limits that apply.
+
+Troubleshooting
+
+Phone did not buzz? Agent did not ask? Start here.
+
+Building a website instead?
+Copy Anchor Link
+
+If you run a website or store and want to send push notifications to your visitors, see the Push API for websites. It is a separate product on the same account.
+
+See what changed recently in the changelog.
+
+Was this page helpful?
+Yes
+No
+
+Overview
+
+Push notifications, permission approvals and human in the loop for AI agents. Approve risky actions and answer your agent's questions from your phone.
+
+On this page
+Pick what you want to do
+Most used pages
+Building a website instead?

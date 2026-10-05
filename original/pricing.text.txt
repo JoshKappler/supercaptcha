@@ -1,0 +1,176 @@
+Pushary
+How it works
+For agent builders
+Docs
+🇬🇧
+English
+Sign in
+Get Started
+
+PRICING
+
+Approvals from your phone, from $9.99 a month.
+
+One plan covers all your agents. The phone app and the Mac app are included.
+
+3-day free trial
+Cancel anytime
+Switch plans whenever
+MOST POPULAR
+Agent
+
+For one person, every agent
+
+$9.99
+per month
+5K notifications/month
+Every agent you run
+Approve, deny, or answer from your phone
+Mac app included
+Permission policies
+Full MCP and API access
+30-day history
+Start 3-day free trial
+Agent Pro
+
+For power users and small teams
+
+$19.99
+per month
+Unlimited notifications
+Budgets
+Priority support
+Policy Autopilot suggestions
+90-day history
+Everything in Agent
+Start 3-day free trial
+Team
+
+For teams that need a shared record
+
+$59.99
+per month
+Everything in Agent Pro
+Up to 10 members
+Shared audit trail with export
+Weekly team digest
+365-day history
+Invite your security team
+Start 3-day free trial
+
+Every agent plan includes Pushary Isle, the Mac app. Your agents' questions show up in your Mac's notch. See the Mac app
+
+Partner plans
+
+For companies that ship an AI agent. Your users approve what it does from their phone. See the Partner plan
+
+Pick the size that fits your product. Existing Partner customers keep their terms.
+
+Partner Launch
+
+Approvals inside your product
+
+$99
+per month
+Your users approve what your agent does
+Up to 5K of your users
+25K approval requests a month
+Up to 3 members
+90 days of answer history
+Every answer sent to your server
+TypeScript, Python, REST and MCP
+Start with Partner
+Partner Growth
+
+Approvals inside your product
+
+$299
+per month
+Your users approve what your agent does
+Up to 25K of your users
+100K approval requests a month
+Up to 10 members
+365 days of answer history
+Every answer sent to your server
+TypeScript, Python, REST and MCP
+Priority support
+Start with Partner
+Partner Scale
+
+Approvals inside your product
+
+$799
+per month
+Your users approve what your agent does
+Up to 100K of your users
+500K approval requests a month
+Up to 25 members
+730 days of answer history
+Every answer sent to your server
+TypeScript, Python, REST and MCP
+Priority support
+Start with Partner
+Enterprise
+
+Custom agreement
+
+Custom
+let's talk
+Your users approve what your agent does
+Every answer sent to your server
+TypeScript, Python, REST and MCP
+Contact Sales
+
+Your first trial covers 100 of your users and 100 approval requests for 3 days. Paid limits start when billing starts. Retries and extra devices don't count as extra requests. Plain notifications without a question aren't included. No automatic overage charges.
+
+All paid plans include a 3-day free trial. Cancel anytime.
+
+Need custom limits? Let's talk
+
+Common Questions
+Do customers need an app?
+Does it actually move the needle?
+How does the HubSpot integration work?
+Is setup hard?
+Can I brand it?
+Can I try Pushary before committing?
+What if I go over limits?
+What infrastructure powers Pushary?
+Pushary
+
+The decision layer for AI agents
+
+Product
+Features
+Pricing
+Download app
+FAQ
+Get Started
+Human-in-the-loop
+For agent builders
+Compare
+Agent control
+Control panel
+Permission policies
+Audit trail
+Kill switch
+Mac app
+Claude Code notifications
+Best control tools
+Company
+About
+Blog
+Contact
+Social
+Twitter
+GitHub
+Discord
+Legal
+Security
+Privacy
+Terms
+© 2026 RalphNex OÜ. All rights reserved
+Narva mnt 7-652, Kesklinna linnaosa, 10117 Tallinn, Harju maakond, Estonia
+Your Privacy Choices
+🇬🇧
+English

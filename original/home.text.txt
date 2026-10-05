@@ -1,0 +1,392 @@
+Pushary
+How it works
+For agent builders
+Docs
+🇬🇧
+English
+Sign in
+Your agent froze, waiting for your yes.
+
+Pushary sends the question to your phone. Tap Approve and it keeps working.
+
+Start your trial
+
+Pushary sends the step that needs you, not your codebase.
+
+Claude Code
+Codex
+Cursor
+Hermes
+$ codex exec "add migration"
+inspected schema, 8 tables
+generated the migration plan
+ask_user(which adapter?)
+MCP tool
+└ pg selected, migrated
+$ 
+
+Wednesday, March 5
+
+9:14
+
+Agents working. Nothing needs you.
+
+Codex
+now
+Which database adapter?
+pg
+mysql
+sqlite
+Tap Approve to try it
+Replay
+WORKS WITH
+Claude Code
+Codex
+Antigravity CLI
+Hermes
+Cursor
+Featured on Hacker News
+6+
+agents, one setup
+1 tap
+to approve or deny
+Any device
+iPhone, Android, Mac, Windows, Linux
+< 2 min
+one-command setup
+Walk away. Come back to finished work.
+
+WITHOUT PUSHARY
+
+9:12
+
+Hand off a long task. Walk away.
+
+9:14
+
+The agent reaches a step it should not take alone. It stops and waits.
+
+9:51
+
+You come back. It has not moved in 37 minutes.
+
+WITH PUSHARY
+
+9:12
+
+Hand off the same task. Walk away for real.
+
+9:14
+
+Your phone buzzes. Approve the change before it goes live? You tap yes.
+
+9:51
+
+You come back. The task finished half an hour ago.
+
+Your agent should not wait 37 minutes for a single yes.
+
+Start your trial
+What is Pushary?
+
+Pushary is the control panel for AI agents. When your agent needs a yes, Pushary sends the question to your phone, your Mac, Slack or the web app. You approve or deny, and every answer is saved. Works with Claude Code, Codex, Cursor, Hermes, Windsurf, and any MCP agent.
+
+Your AI agents send permission requests to Pushary, which delivers them to your phone, your Mac's notch, Slack, the web app, and an audit trail.
+
+YOUR AGENTS
+
+Claude Code
+Codex
+Cursor
+Antigravity CLI
+Hermes
+PUSHARY
+Your phone
+Your Mac
+Slack
+Web app
+Audit trail
+
+WHERE IT REACHES YOU
+
++ any MCP agent, wired the same way
+
+HOW IT WORKS
+
+See the whole flow
+
+One approval, start to finish, in 20 seconds.
+
+01
+Your agent asks. It pauses at a step that needs your call. Run a command, change a file, or pick between options.
+02
+Your phone buzzes. When a decision is needed, not for every step. Approve or deny right from the notification, or open it to pick an option or type a reply.
+03
+It keeps going. Your answer flows straight back to the agent. When the task finishes, you get a ping for that too.
+
+STAY IN CONTROL
+
+Set the rules once. Approve only what matters.
+
+YOLO mode approves everything, including the rm and the deploy. Pushary auto-runs only the safe steps and pings you for the ones you cannot undo.
+
+Auto-approve the safe stuff
+
+Low-risk steps you can undo. Allow them once and stop seeing them.
+
+The risky ones come to you
+
+Deleting, deploying, spending money, anything you cannot undo. These go to your phone.
+
+You set the wait time
+
+Set how long each step waits. If you do not answer, your rule decides: deny, or hand it back to the terminal.
+
+Your agent control panel
+
+Every agent in one place. See which one is waiting on you, plus the full audit trail.
+
+Agent
+/
+Overview
+Live
+
+3
+
+agents active
+
+212
+
+asked today
+
+174
+
+auto-cleared
+
+38
+
+you answered
+
+Waiting for you
+
+1
+
+Ship the billing webhook
+
+Codex
+·
+now
+
+git push origin main
+
+auto-deny 30s
+
+Approve
+Deny
+
+Working
+
+2
+
+Refactor the auth module
+
+Claude Code
+·
+4m
+
+src/auth/session.ts
+
+Nightly data sync
+
+Hermes
+·
+12m
+
+bun run test
+
+Decision ledger
+
+212 today
+rm -rf ./dist
+Denied
+Phone
+2m
+vercel deploy --prod
+Approved
+Phone
+6m
+bun run db:migrate
+Approved
+Slack
+14m
+cat src/auth/session.ts
+Auto
+Policy
+15m
+DELETE /v1/customers/:id
+Denied
+Mac
+22m
+View the full ledger
+One command sets up every agent.
+
+It finds the agents on your computer and connects them all to your phone, in under two minutes.
+
+terminal
+npx pushary@latest setup
+
+WORKS WITH YOUR AGENT
+
+Claude Code
+Codex
+Cursor
+Antigravity CLI
+Gemini CLI
+Hermes Agent
+VS Code
+OpenCode
+Windsurf or another MCP client? Connect it by hand
+Works on Mac, Windows and Linux.
+
+On a Mac? The Pushary app can set it up for you, no terminal needed.
+
+01
+Start your trial.
+02
+Run the command on your computer.
+03
+Scan the QR code with your phone. Done.
+Start your trial
+
+$9.99/mo after a 3-day free trial. Cancel anytime.
+
+Already have an account? Get the phone and Mac apps
+
+Questions, answered
+Can I approve an AI agent from my phone?
+How much does it cost?
+Is my code sent to Pushary's servers?
+How long does it take to set up?
+How is this different from YOLO mode or auto-approve?
+What AI agents work with Pushary?
+How do I get notified when Claude Code needs permission?
+What are permission hooks?
+What is human-in-the-loop for AI agents?
+What question types does Pushary support?
+
+WHY I BUILT THIS
+
+I kept coming back to an agent that had been waiting the whole time
+
+I would kick off a task, switch to something else, and come back to find the agent had paused for a yes 40 minutes earlier. So I built Pushary to move that decision to my phone. The agent asks, I tap, and the work keeps going while I am away. This is the 2 minute version.
+
+Aadil Ghani · Founder, Pushary
+
+What people running agents tell us
+I instantly related with the pain of coming back to my Claude Code and seeing "waiting for your permission" instead of "your task is completed."
+Reagan McCullough · AgentPays
+Your tool really helped me improve my Cursor workflow and notifies me when the agent needs me or when it has finished a task. I don't know why this problem wasn't solved by someone already.
+Andreas Kuoppa · Portality
+I love your vision of speeding AI agents up by unblocking the stuck permission screen and eventually learning from your permission behaviour based on the context. This is gonna go big very soon.
+Takanari · AI Plaza
+Send the next yes to your phone.
+
+The next long task can finish while you are away. One tap and the agent keeps working.
+
+Start your trial
+
+$9.99/mo after a 3-day free trial. Cancel anytime.
+
+Pushary sends the step that needs you, not your codebase.
+
+Building an AI agent for your own customers? Let them approve what it does, from their phone. See Pushary for agent builders
+
+WORKS WITH YOUR AGENT
+
+Claude Code notifications
+Claude Cowork notifications
+ChatGPT notifications
+Cursor notifications
+Codex notifications
+Gemini CLI notifications
+Windsurf notifications
+Hermes notifications
+GitHub Copilot notifications
+Cline notifications
+Warp notifications
+Kilo Code notifications
+Zed notifications
+Continue notifications
+Lovable notifications
+MCP notifications
+
+STAY IN CONTROL
+
+AI agent control panel
+Mac notch app
+Permission policy
+Audit trail
+Kill switch
+Permission control
+Approve AI tasks
+Manage agents remotely
+Run multiple AI agents
+Session receipts
+Embed human approval
+Slack approvals
+Best AI agent control tools
+AI agent glossary
+Compare alternatives
+
+GUIDES
+
+Human in the loop for AI agents, explained
+Run an AI agent overnight, stay in control
+Claude Code hooks explained
+Skip permissions in Claude Code safely
+Skip permissions in Codex safely
+What permissions should an AI agent have?
+Is it safe to run an AI agent unattended?
+All guides and updates
+Running e-commerce or marketing?
+Explore push notifications
+Pushary
+
+The decision layer for AI agents
+
+Product
+Features
+Pricing
+Download app
+FAQ
+Get Started
+Human-in-the-loop
+For agent builders
+Compare
+Agent control
+Control panel
+Permission policies
+Audit trail
+Kill switch
+Mac app
+Claude Code notifications
+Best control tools
+Company
+About
+Blog
+Contact
+Social
+Twitter
+GitHub
+Discord
+Legal
+Security
+Privacy
+Terms
+© 2026 RalphNex OÜ. All rights reserved
+Narva mnt 7-652, Kesklinna linnaosa, 10117 Tallinn, Harju maakond, Estonia
+Your Privacy Choices
+🇬🇧
+English
+Light
+theme
