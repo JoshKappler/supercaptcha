@@ -26,3 +26,16 @@ Blocking issues: comparison header runs together on mobile; terminal says waitin
 | C | 7 | Fixes fonts and separators; repeats itself, leaves right columns empty, cheap video thumbnail and faint banding |
 Result: FAIL (min 7). Glass visible: yes (3/3). Template named: Linear/Vercel dark SaaS (3/3).
 Blocking issues: second phone copies the hero and sits off center on mobile; price and CTA four times; founder thumbnail; background banding; inconsistent agent list; orange glow under the phone.
+
+## Attempt 4 (commit 68bf82b)
+| Reviewer | Score | Verdict |
+|---|---|---|
+| A | 8 | Disciplined single-typeface page with a convincing iOS device and a subtle cool-to-warm light shift; a repeated phone, loud wallpaper and cheap badges keep it below top tier |
+| B | 8 | Clean and disciplined with a convincing lock-screen hero and a strong CTA; a weak mid-page, a thin trust row and faint glass |
+| C | 7 | Clean and consistent; the middle is a stack of identical hairline lists and a few pieces look like placeholders |
+Result: FAIL (min 7). Glass visible: yes (3/3). Template named: Linear/Vercel dark SaaS (3/3).
+Blocking issues: wireframe-like diagram; second phone repeats the hero; agent icons three times and the same row list six times; video card with no thumbnail; low-contrast terminal rows and Deny label.
+
+## Final
+Not passed after four attempts. Kept attempt 4 (8/8/7), the highest total. Two of three
+reviewers passed it; the hostile critic held at 7 on repetition below the hero.
