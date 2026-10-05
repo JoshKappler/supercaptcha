@@ -35,11 +35,13 @@
   --m0: #c0501e; --m1: #e2692a; --m2: #ee8240; --m3: #f49a5c;
   --m4: #fdd3b2; --m5: #ec8a4e; --m6: #b04a1d; --m7: #6e2610;
   --btn-a: #f39352; --btn-b: #c4561f;
+  --floor: 255, 128, 60;
 }
 .iphone[data-color="burgundy"] {
   --m0: #341d21; --m1: #412529; --m2: #4f2f35; --m3: #5f3c42;
   --m4: #cf9da5; --m5: #81565d; --m6: #2a1619; --m7: #1c0e10;
   --btn-a: #8a5a62; --btn-b: #3a2024;
+  --floor: 210, 70, 100;
 }
 
 .iphone__device {
@@ -60,16 +62,27 @@
   height: calc(2959 * var(--u));
   border-radius: calc(218 * var(--u));
 }
+.iphone__shadow::before {
+  content: "";
+  position: absolute;
+  left: -8%;
+  right: -8%;
+  bottom: calc(-150 * var(--u));
+  height: calc(260 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(var(--floor), .38), rgba(var(--floor), 0));
+  filter: blur(calc(18 * var(--u)));
+}
 .iphone__shadow::after {
   content: "";
   position: absolute;
   left: 9%;
   right: 9%;
-  bottom: calc(-34 * var(--u));
-  height: calc(70 * var(--u));
+  bottom: calc(-26 * var(--u));
+  height: calc(60 * var(--u));
   border-radius: 50%;
-  background: rgba(0, 0, 0, .75);
-  filter: blur(calc(26 * var(--u)));
+  background: rgba(0, 0, 0, .95);
+  filter: blur(calc(18 * var(--u)));
 }
 .iphone__shadow {
   box-shadow:
@@ -181,9 +194,9 @@
 .iphone[data-frame="png"][data-sheen="off"] .iphone__btn:not(.iphone__btn--camera) { display: none; }
 
 /* Light across the band in both frame modes: key light upper left, shade toward the far corner, a chamfer line. */
-.iphone__light { --r: 218; }
-.iphone[data-frame="png"] .iphone__light { --r: 236; }
-.iphone__light i {
+.iphone__light, .iphone__tone { --r: 218; }
+.iphone[data-frame="png"] :is(.iphone__light, .iphone__tone) { --r: 236; }
+.iphone__light i, .iphone__tone i {
   position: absolute;
   z-index: 2;
   left: calc(29 * var(--u));
@@ -221,6 +234,32 @@
   mix-blend-mode: soft-light;
 }
 .iphone[data-sheen="off"] .iphone__light { display: none; }
+.iphone__tone i:nth-child(1) {
+  border-width: calc(8 * var(--u));
+  background: linear-gradient(rgba(60, 20, 10, .42), rgba(60, 20, 10, .42));
+  mix-blend-mode: multiply;
+}
+.iphone__tone i:nth-child(2) {
+  left: calc(48 * var(--u));
+  top: calc(39 * var(--u));
+  width: calc(1373 * var(--u));
+  height: calc(2921 * var(--u));
+  border-width: calc(2.5 * var(--u));
+  border-radius: calc((var(--r) - 19) * var(--u));
+  background: linear-gradient(#000, #000);
+  opacity: .7;
+}
+.iphone__bezel::before {
+  content: "";
+  position: absolute;
+  left: calc(420 * var(--u));
+  top: 0;
+  width: calc(530 * var(--u));
+  height: calc(7 * var(--u));
+  border-radius: 0 0 calc(14 * var(--u)) calc(14 * var(--u));
+  background: #000;
+  box-shadow: 0 calc(1 * var(--u)) 0 #3e3c3c;
+}
 
 /* One seamless black capsule over the island region, drawn above the PNG. */
 .iphone__island {
@@ -322,8 +361,8 @@
 
 .pp-icon { display: inline-block; background: currentColor; -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat; }
 .pp-i-wifi { --icon: url("assets/icons/wifi.svg"); }
-.pp-i-flashlight { --icon: url("assets/icons/flashlight-fill.svg"); }
-.pp-i-camera { --icon: url("assets/icons/camera-fill.svg"); }
+.pp-i-flashlight { --icon: url("assets/icons/flashlight-bold.svg"); }
+.pp-i-camera { --icon: url("assets/icons/camera-bold.svg"); }
 .pp-i-check { --icon: url("assets/icons/check-circle.svg"); }
 .pp-i-x { --icon: url("assets/icons/x-circle.svg"); }
 
@@ -337,16 +376,18 @@
   font-size: calc(20 * var(--pt));
   line-height: calc(26 * var(--pt));
   font-weight: 500;
-  color: rgb(170, 170, 170);
-  mix-blend-mode: plus-lighter;
+  color: var(--date-c);
 }
-.pp-clock { position: absolute; left: 0; top: 0; width: 100%; height: calc(260 * var(--pt)); overflow: visible; mix-blend-mode: plus-lighter; }
+.pp-clock { position: absolute; left: 0; top: 0; width: 100%; height: calc(260 * var(--pt)); overflow: visible; }
+.pp-clock stop:first-child { stop-color: var(--clock-a); }
+.pp-clock stop:last-child { stop-color: var(--clock-b); }
+.iphone__screen { --clock-a: rgba(255, 228, 206, .84); --clock-b: rgba(255, 196, 160, .7); --date-c: rgba(255, 230, 212, .88); }
+.iphone[data-color="burgundy"] .iphone__screen { --clock-a: rgba(255, 218, 230, .84); --clock-b: rgba(240, 168, 188, .7); --date-c: rgba(255, 224, 232, .88); }
 .pp-clock text {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter Display iPhone", sans-serif;
   font-size: 152px;
   font-weight: 600;
   letter-spacing: -3px;
-  fill: rgba(255, 255, 255, .42);
 }
 
 /* ---------- Glass (kube.io refraction over a clone of the wallpaper) ---------- */
@@ -378,48 +419,40 @@
 }
 .pp-refract::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, var(--dim)); }
 .pp-tint { position: absolute; inset: 0; border-radius: inherit; }
-.pp-tint::before { content: ""; position: absolute; inset: 0; background: rgba(248, 248, 248, .12); mix-blend-mode: luminosity; }
-.pp-tint::after { content: ""; position: absolute; inset: 0; background: rgba(12, 8, 6, var(--tint, .2)); }
-/* Specular rim: bright where the light hits (upper left, lower right), dark hairline elsewhere. */
+.pp-tint::before { content: ""; position: absolute; inset: 0; background: rgba(255, 255, 255, .2); mix-blend-mode: luminosity; }
+.pp-tint::after { content: ""; position: absolute; inset: 0; background: rgba(20, 12, 10, var(--tint, .12)); }
+/* Specular edge: light catches the top edge and fades out down the sides; no stroke elsewhere. */
 .pp-rim {
   position: absolute;
   inset: 0;
   border-radius: inherit;
   padding: calc(1.1 * var(--pt));
-  background: linear-gradient(135deg, rgba(255, 255, 255, .78) 0%, rgba(255, 255, 255, .16) 22%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .14) 78%, rgba(255, 255, 255, .5) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .7) 0, rgba(255, 255, 255, .22) calc(12 * var(--pt)), rgba(255, 255, 255, 0) 55%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
   pointer-events: none;
-}
-.pp-rim::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 calc(10 * var(--pt)) calc(14 * var(--pt)) calc(-12 * var(--pt)) rgba(255, 255, 255, .22);
 }
 .pp-glass::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow:
-    inset 0 calc(-6 * var(--pt)) calc(12 * var(--pt)) calc(-8 * var(--pt)) rgba(0, 0, 0, .28),
-    inset 0 0 0 calc(.5 * var(--pt)) rgba(255, 255, 255, .1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, 0) calc(16 * var(--pt)));
+  box-shadow: inset 0 calc(-6 * var(--pt)) calc(12 * var(--pt)) calc(-8 * var(--pt)) rgba(0, 0, 0, .18);
   pointer-events: none;
 }
 
 /* Lock screen controls: 58 pt glass circles, 46 pt from the edges, 50 pt from the bottom. */
-.pp-ctl { --gy: 848; --gw: 58; --gh: 58; --gr: 29; --tint: .08; }
+.pp-ctl { --gy: 848; --gw: 58; --gh: 58; --gr: 29; --tint: .02; }
 .pp-ctl--left { --gx: 46; }
 .pp-ctl--right { --gx: 336; }
 .pp-ctl .pp-icon {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: calc(23 * var(--pt));
-  height: calc(23 * var(--pt));
+  width: calc(24 * var(--pt));
+  height: calc(24 * var(--pt));
   transform: translate(-50%, -50%);
   color: #fff;
 }
@@ -436,8 +469,8 @@
 
 /* ---------- Notifications (iOS 27 kit: 370 pt at 402 pt canvas, here 408 at 440) ---------- */
 .pp-note { --gx: 16; --gw: 408; --gh: 77; --gr: 22; transform-origin: 50% 100%; }
-.pp-note--a { --gy: 749; }
-.pp-note--b { --gy: 741; }
+.pp-note--a { --gy: 738; }
+.pp-note--b { --gy: 730; }
 .pp-app {
   position: absolute;
   left: calc(14 * var(--pt));
@@ -465,24 +498,16 @@
   mix-blend-mode: plus-lighter;
   transition: opacity .3s var(--ease);
 }
-.pp-note__msg--done { opacity: 0; padding-right: calc(44 * var(--pt)); }
-.pp-badge {
-  position: absolute;
-  right: 0;
-  top: calc(20 * var(--pt));
-  width: calc(34 * var(--pt));
-  height: calc(34 * var(--pt));
-  border-radius: calc(9 * var(--pt));
-  background: #30d158;
-  color: #fff;
-  opacity: 0;
-  transform: scale(.6);
-  transition: opacity .25s var(--ease), transform .45s var(--spring);
-}
-.pp-badge .pp-icon { position: absolute; inset: 24%; }
+.pp-note__msg--done { opacity: 0; }
+.pp-note__title { display: grid; }
+.pp-note__t { grid-area: 1 / 1; overflow: hidden; text-overflow: ellipsis; transition: opacity .3s var(--ease); }
+.pp-note__t--done { opacity: 0; }
+.pp-note__t--done .pp-icon { width: calc(12 * var(--pt)); height: calc(12 * var(--pt)); margin-right: calc(4 * var(--pt)); vertical-align: calc(-1 * var(--pt)); color: #32d74b; }
 .pp-i-ok { --icon: url("assets/icons/check-bold.svg"); }
-.iphone__screen[data-state="approved"] .pp-note--a .pp-badge,
-.iphone__screen[data-state="next"] .pp-note--a .pp-badge { opacity: 1; transform: none; }
+.iphone__screen[data-state="approved"] .pp-note--a .pp-note__t--req,
+.iphone__screen[data-state="next"] .pp-note--a .pp-note__t--req { opacity: 0; }
+.iphone__screen[data-state="approved"] .pp-note--a .pp-note__t--done,
+.iphone__screen[data-state="next"] .pp-note--a .pp-note__t--done { opacity: 1; }
 .pp-note__content { transition: opacity .25s var(--ease); }
 
 /* Long-press view: solid #111 card (radius 26) plus a separate glass menu (250 pt, radius 32). */
@@ -493,12 +518,15 @@
   background: rgba(0, 0, 0, .42);
   opacity: 0;
 }
-.pp-exp { z-index: 2; --gx: 16; --gy: 605; --gw: 408; --gh: 169; --gr: 26; --dim: .5; --tint: .3; transform-origin: 50% 100%; }
+.pp-exp { z-index: 2; --gx: 16; --gy: 605; --gw: 408; --gh: 169; --gr: 26; --dim: .5; --tint: .18; transform-origin: 50% 100%; }
 .pp-exp__inner { position: relative; }
 .pp-exp__head { position: relative; height: calc(66 * var(--pt)); }
 .pp-exp__head .pp-app { left: calc(14 * var(--pt)); top: calc(14 * var(--pt)); width: calc(38 * var(--pt)); height: calc(38 * var(--pt)); }
 .pp-exp__meta { position: absolute; left: calc(64 * var(--pt)); top: calc(15 * var(--pt)); right: calc(14 * var(--pt)); }
 .pp-exp__title { font-size: calc(15 * var(--pt)); line-height: calc(17 * var(--pt)); font-weight: 600; }
+.pp-exp__row { display: flex; gap: calc(6 * var(--pt)); }
+.pp-exp__row .pp-exp__title { flex: 1; min-width: 0; }
+.pp-exp__now { font-size: calc(15 * var(--pt)); line-height: calc(17 * var(--pt)); color: rgb(153, 153, 153); mix-blend-mode: plus-lighter; }
 .pp-exp__time { margin-top: calc(1 * var(--pt)); font-size: calc(13 * var(--pt)); line-height: calc(17 * var(--pt)); color: rgba(235, 235, 245, .6); }
 .pp-exp__body { padding: 0 calc(14 * var(--pt)) calc(14 * var(--pt)); font-size: calc(15 * var(--pt)); line-height: calc(18 * var(--pt)); }
 .pp-exp__cmd {
@@ -506,7 +534,7 @@
   padding: calc(9 * var(--pt)) calc(11 * var(--pt));
   border-radius: calc(12 * var(--pt));
   background: rgba(255, 255, 255, .08);
-  font-family: ui-monospace, "SF Mono", "Geist Mono iPhone", monospace;
+  font-family: "SF Mono", "Geist Mono iPhone", ui-monospace, monospace;
   font-size: calc(14 * var(--pt));
   line-height: calc(18 * var(--pt));
   color: rgba(255, 255, 255, .95);
@@ -517,7 +545,7 @@
 .pp-exp__cmd span { color: rgba(235, 235, 245, .45); }
 .pp-exp__meta2 { font-size: calc(13 * var(--pt)); line-height: calc(17 * var(--pt)); color: rgba(235, 235, 245, .6); }
 
-.pp-menu { z-index: 2; --gx: 16; --gy: 784; --gw: 280; --gh: 104; --gr: 32; --dim: .5; --tint: .22; transform-origin: 0 0; }
+.pp-menu { z-index: 2; --gx: 16; --gy: 784; --gw: 280; --gh: 104; --gr: 32; --dim: .5; --tint: .12; transform-origin: 0 0; }
 .pp-menu__rows { position: absolute; inset: 0; padding: calc(20 * var(--pt)) calc(26 * var(--pt)); display: grid; gap: calc(20 * var(--pt)); }
 .pp-row {
   position: relative;
@@ -586,13 +614,25 @@
 }
 
 /* ---------- Screen glass sheen and OLED falloff ---------- */
-.pp-oled { position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 calc(14 * var(--pt)) rgba(0, 0, 0, .3); pointer-events: none; }
-.pp-sheen {
+.pp-oled { position: absolute; z-index: 4; inset: 0; border-radius: inherit; box-shadow: inset 0 0 calc(14 * var(--pt)) rgba(0, 0, 0, .3); pointer-events: none; }
+.pp-sheen { position: absolute; z-index: 4; inset: 0; border-radius: inherit; pointer-events: none; }
+.pp-sheen::before {
+  content: "";
   position: absolute;
   inset: 0;
-  pointer-events: none;
   background:
-    linear-gradient(125deg, rgba(255, 255, 255, 0) 14%, rgba(255, 255, 255, .08) 27%, rgba(255, 255, 255, .03) 38%, rgba(255, 255, 255, 0) 46%),
-    linear-gradient(135deg, rgba(255, 255, 255, .06) 0%, rgba(255, 255, 255, 0) 40%);
+    linear-gradient(118deg, rgba(255, 255, 255, 0) 6%, rgba(255, 255, 255, .16) 19%, rgba(255, 255, 255, .07) 30%, rgba(255, 255, 255, 0) 41%),
+    linear-gradient(160deg, rgba(255, 255, 255, .07) 0%, rgba(255, 255, 255, 0) 30%);
+  -webkit-mask: linear-gradient(180deg, #000 0%, #000 30%, transparent 62%);
+  mask: linear-gradient(180deg, #000 0%, #000 30%, transparent 62%);
+}
+.pp-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset calc(1.6 * var(--pt)) calc(1.6 * var(--pt)) 0 calc(-.3 * var(--pt)) rgba(255, 255, 255, .55);
+  -webkit-mask: linear-gradient(140deg, #000 0%, rgba(0, 0, 0, .5) 45%, transparent 75%);
+  mask: linear-gradient(140deg, #000 0%, rgba(0, 0, 0, .5) 45%, transparent 75%);
 }
 .iphone[data-sheen="off"] .pp-sheen { display: none; }

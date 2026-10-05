@@ -18,7 +18,7 @@ iPhone 17 Pro Max (Cosmic Orange) or 18 Pro Max (Burgundy) on an iOS 27 lock scr
 
 ## JS API
 
-- `const phone = PusharyPhone.mount(el, options)`; options: `model`, `color`, `sheen`, `autoplay`, `date`, `clock`, `agent`, `repo`, `command`, `detail`, `request`, `approved`, `next`.
+- `const phone = PusharyPhone.mount(el, options)`; options: `model`, `color`, `sheen`, `autoplay`, `date`, `clock`, `agent`, `repo`, `command`, `detail`, `request`, `approvedTitle`, `approved`, `next`.
 - `phone.play()` loops the 10 s flow, `phone.pause()` stops it, `phone.setState(s)` stops it and shows `locked`, `arrived`, `expanded`, `approved` or `next` (use this to drive the phone from scroll).
 
 ## Copying into a version
