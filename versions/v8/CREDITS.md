@@ -4,10 +4,9 @@
 |---|---|---|
 | `assets/fonts/InterVariable.woff2` | rsms/inter, `docs/font-files/` (copied from `explorations/e09`) | SIL OFL 1.1 |
 | `assets/img/logo.webp` | Pushary logo from the pushary.com scrape (`/logo.webp`) | Pushary's own mark |
-| `assets/logos/claude.webp`, `codex.webp`, `cursor.webp`, `gemini.webp`, `hermes.webp`, `antigravity.webp`, `hacker-news.webp` | pushary.com scrape, `original/site/pushary.com/_next/image__*` (`/claude.webp` and so on) | Marks of their owners, shown as on pushary.com |
+| `assets/logos/claude.webp`, `codex.webp`, `cursor.webp`, `gemini.webp`, `hermes.webp`, `antigravity.webp` | pushary.com scrape, `original/site/pushary.com/_next/image__*` (`/claude.webp` and so on) | Marks of their owners, shown as on pushary.com |
 | `assets/logos/vscode.svg`, `opencode.svg` | pushary.com scrape, `original/site/pushary.com/vscode__*.svg`, `opencode__*.svg` | Marks of their owners |
-| `assets/logos/product-hunt.svg`, `assets/img/app-store.svg`, `assets/img/google-play.svg` | pushary.com scrape, `original/site/pushary.com/badges/` | Product Hunt, Apple and Google badges as used on pushary.com |
-| `assets/img/founder-demo-poster.webp` | pushary.com scrape, `/home-demo-poster.webp` (poster of the founder video); links to the scraped Loom embed URL | Pushary's own image |
+| `assets/img/app-store.svg`, `assets/img/google-play.svg` | pushary.com scrape, `original/site/pushary.com/badges/` | Apple and Google badges as used on pushary.com |
 | `assets/icons/play-fill.svg` (fill), `list.svg`, `x.svg` (regular) | phosphor-icons/core, `assets/` | MIT, Copyright (c) 2023 Phosphor Icons |
 | `assets/iphone/` | The shared iPhone component from `shared/iphone/`, copied by `scripts/sync-phone.sh`; entries below | see below |
 
@@ -27,7 +26,7 @@
 
 ## Example content
 
-Everything in the phones, the island and the hero terminal ("Example session") is demo copy, not real data: the sender "Claude Code",
+Everything in the phones, the island and the terminal ("Example session") is demo copy, not real data: the sender "Claude Code",
 the repo `api-gateway`, the commands `git push origin main` and `npm run deploy:staging`,
 "3 commits", `claude "ship the release"`, the date and the time 9:14. The control panel (tasks and
 decision ledger) is labelled "Example data" on the page and comes from the example panel on pushary.com.

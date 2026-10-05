@@ -31,7 +31,7 @@
   }
 
   var el2 = document.getElementById('phone2');
-  if (el2 && window.PusharyPhone) PusharyPhone.mount(el2, { clock: '9:14', autoplay: false }).setState('approved');
+  if (el2 && window.PusharyPhone) PusharyPhone.mount(el2, { clock: '9:14', autoplay: false }).setState('next');
 
   var copy = document.querySelector('.copy-btn');
   if (copy && navigator.clipboard) {

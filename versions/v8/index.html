@@ -35,6 +35,7 @@
 </header>
 
 <div class="island" data-s="ask" aria-hidden="true">
+  <div class="isl-rim"></div>
   <div class="isl-body"></div>
   <div class="isl-state isl-work">
     <span class="spin"></span>
@@ -69,36 +70,11 @@
       </div>
     </div>
 
-    <div class="trust">
-      <p class="works"><span class="works-k">Works with</span>
-        <span class="agent"><img src="assets/logos/claude.webp" alt="" width="16" height="16">Claude Code</span>
-        <span class="agent"><img src="assets/logos/codex.webp" alt="" width="16" height="16">Codex</span>
-        <span class="agent"><img src="assets/logos/cursor.webp" alt="" width="16" height="16">Cursor</span>
-        <span class="agent"><img src="assets/logos/antigravity.webp" alt="" width="16" height="16">Antigravity CLI</span>
-        <span class="agent"><img src="assets/logos/hermes.webp" alt="" width="16" height="16">Hermes</span>
-        <span class="agent">any MCP agent</span>
-      </p>
-      <p class="featured"><span class="hn"><img src="assets/logos/hacker-news.webp" alt="" width="18" height="18">Featured on Hacker News</span>
-        <a class="ph" href="https://www.producthunt.com/products/pushary?utm_source=badge-top-post-badge&amp;utm_medium=badge&amp;utm_campaign=badge-pushary-4"><img src="assets/logos/product-hunt.svg" alt="Pushary on Product Hunt: top post badge" width="148" height="32"></a>
-      </p>
-    </div>
+    <p class="trust">
+      <span class="marks"><img src="assets/logos/claude.webp" alt="" width="18" height="18"><img src="assets/logos/codex.webp" alt="" width="18" height="18"><img src="assets/logos/cursor.webp" alt="" width="18" height="18"><img src="assets/logos/antigravity.webp" alt="" width="18" height="18"><img src="assets/logos/hermes.webp" alt="" width="18" height="18"></span>
+      <span>Works with Claude Code, Codex, Cursor, Antigravity CLI, Hermes and any MCP agent. Featured on Hacker News and <a href="https://www.producthunt.com/products/pushary?utm_source=badge-top-post-badge&amp;utm_medium=badge&amp;utm_campaign=badge-pushary-4">Product&nbsp;Hunt</a>.</span>
+    </p>
 
-    <figure class="term" aria-label="Example terminal session: Claude Code pauses on git push origin main and asks your phone.">
-      <div class="term-bar"><img src="assets/logos/claude.webp" alt="" width="14" height="14"><span>Claude Code</span><span class="term-path">~/api-gateway</span><span class="term-tag">Example session</span></div>
-      <ol class="term-lines" data-s="ask">
-        <li class="t-cmd"><span class="t-p">$</span> claude "ship the release"</li>
-        <li class="t-ok">✓ tests passed, 3 commits ready on main</li>
-        <li class="slot">
-          <span class="t-cur l-work">▍</span>
-          <span class="t-ask l-ask"><b class="q">?</b> git push origin main <em>asked your phone</em></span>
-          <span class="t-ok l-done">✓ git push origin main <em>approved on your phone</em></span>
-        </li>
-        <li class="slot">
-          <span class="t-ok l-done1">✓ pushed 3 commits to origin/main</span>
-          <span class="t-ask l-ask2"><b class="q">?</b> npm run deploy:staging <em>asked your phone</em></span>
-        </li>
-      </ol>
-    </figure>
 
     <div class="device">
       <div class="iphone" id="phone" data-manual data-model="17-pro-max" data-color="cosmic-orange" data-sheen="on" role="img" aria-label="iPhone lock screen. A Pushary notification says Claude Code wants to run git push origin main, with Approve and Deny."><!--phone:hero--><div class="iphone__device" data-pp="3"><div class="iphone__shadow"></div><i class="iphone__btn iphone__btn--action"></i><i class="iphone__btn iphone__btn--vol-up"></i><i class="iphone__btn iphone__btn--vol-down"></i><i class="iphone__btn iphone__btn--side"></i><i class="iphone__btn iphone__btn--camera"></i><div class="iphone__metal"></div><div class="iphone__bezel"></div><div class="iphone__screen" data-state="expanded"><div class="pp-wall iphone__wp"></div><div class="pp-shade"></div><div class="pp-status"><span class="pp-cell"><i></i><i></i><i></i><i></i></span><span class="pp-icon pp-i-wifi pp-wifi"></span><span class="pp-battery"></span></div><div class="pp-date">Monday, October 5</div><svg class="pp-clock" viewBox="0 0 440 260" aria-hidden="true"><defs><linearGradient id="pphero-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0"/><stop offset="1"/></linearGradient><filter id="pphero-clock" x="-5%" y="-10%" width="110%" height="120%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="b"/><feSpecularLighting in="b" surfaceScale="2.6" specularConstant="1.15" specularExponent="18" lighting-color="#fff" result="s"><feDistantLight azimuth="270" elevation="48"/></feSpecularLighting><feComposite in="s" in2="SourceAlpha" operator="in" result="si"/><feComposite in="SourceGraphic" in2="si" operator="arithmetic" k2="1" k3=".4"/></filter></defs><text x="220" y="234" text-anchor="middle" fill="url(#pphero-fill)" filter="url(#pphero-clock)">9:14</text></svg><div class="pp-glass pp-ctl pp-ctl--left"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><span class="pp-icon pp-i-flashlight"></span><div class="pp-rim"></div></div><div class="pp-glass pp-ctl pp-ctl--right"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><span class="pp-icon pp-i-camera"></span><div class="pp-rim"></div></div><div class="pp-home"></div><div class="pp-glass pp-note pp-note--a"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-note__content"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title"><span class="pp-note__t pp-note__t--req">Claude Code &middot; api-gateway</span><span class="pp-note__t pp-note__t--done"><span class="pp-icon pp-i-ok"></span>Approved &middot; api-gateway</span></span><span class="pp-note__time">now</span></div><div class="pp-note__msgs"><span class="pp-note__msg pp-note__msg--req">Wants to run git push origin main. 3 commits ahead of origin/main.</span><span class="pp-note__msg pp-note__msg--done">Claude Code pushed 3 commits to origin/main and is running the next step.</span></div></div></div><div class="pp-rim"></div></div><div class="pp-glass pp-note pp-note--b"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-note__content"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title"><span class="pp-note__t pp-note__t--req">Claude Code &middot; api-gateway</span></span><span class="pp-note__time">now</span></div><div class="pp-note__msgs"><span class="pp-note__msg">Wants to run npm run deploy:staging. Tests passed on CI.</span></div></div></div><div class="pp-rim"></div></div><div class="pp-dim"></div><div class="pp-glass pp-exp"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-exp__inner"><div class="pp-exp__head"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-exp__meta"><div class="pp-exp__row"><div class="pp-exp__title">Claude Code &middot; api-gateway</div><div class="pp-exp__now">now</div></div><div class="pp-exp__time">Approval request</div></div></div><div class="pp-exp__body">Wants to run this command:<div class="pp-exp__cmd"><span>$ </span>git push origin main</div><div class="pp-exp__meta2">3 commits ahead of origin/main</div></div></div><div class="pp-rim"></div></div><div class="pp-glass pp-menu"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-menu__rows"><div class="pp-row pp-row--approve"><span class="pp-icon pp-i-check"></span>Approve</div><div class="pp-row pp-row--deny"><span class="pp-icon pp-i-x"></span>Deny</div></div><div class="pp-rim"></div></div><div class="pp-sheen"></div><div class="pp-oled"></div></div><div class="iphone__island"></div><div class="iphone__tone"><i></i><i></i></div><div class="iphone__light"><i></i><i></i><i></i></div></div><!--/phone--></div>
@@ -106,7 +82,25 @@
   </section>
 
   <section class="band walk" aria-labelledby="walk-h">
-    <h2 id="walk-h">Walk away. Come back to finished&nbsp;work.</h2>
+    <div class="walk-head">
+      <h2 id="walk-h">Walk away. Come back to finished&nbsp;work.</h2>
+      <figure class="term" aria-label="Example terminal session: Claude Code pauses on git push origin main and asks your phone.">
+        <div class="term-bar"><img src="assets/logos/claude.webp" alt="" width="14" height="14"><span>Claude Code</span><span class="term-path">~/api-gateway</span><span class="term-tag">Example session</span></div>
+        <ol class="term-lines" data-s="ask">
+          <li class="t-cmd"><span class="t-p">$</span> claude "ship the release"</li>
+          <li class="slot">
+            <span class="t-ok l-a">✓ tests passed, 3 commits ready on main</span>
+            <span class="t-ok l-b">✓ git push origin main <em>approved on your phone</em></span>
+          </li>
+          <li class="slot">
+            <span class="t-cur l-work">▍</span>
+            <span class="t-ask l-ask"><b class="q">?</b> git push origin main <em>asked your phone</em></span>
+            <span class="t-ok l-done">✓ pushed 3 commits to origin/main</span>
+            <span class="t-ask l-ask2"><b class="q">?</b> npm run deploy:staging <em>asked your phone</em></span>
+          </li>
+        </ol>
+      </figure>
+    </div>
     <div class="cols">
       <div class="col without">
         <h3>Without Pushary</h3>
@@ -172,7 +166,7 @@
       <a class="watch" href="https://www.youtube.com/watch?v=Vm8biwQK73Q"><span class="ico ico-play"></span>Watch the whole flow in 20&nbsp;seconds</a>
     </div>
     <div class="how-phone">
-      <div class="iphone" id="phone2" data-manual data-model="17-pro-max" data-color="cosmic-orange" data-sheen="on" role="img" aria-label="iPhone lock screen after approval: Pushary confirms the push went through."><!--phone:flow--><div class="iphone__device" data-pp="3"><div class="iphone__shadow"></div><i class="iphone__btn iphone__btn--action"></i><i class="iphone__btn iphone__btn--vol-up"></i><i class="iphone__btn iphone__btn--vol-down"></i><i class="iphone__btn iphone__btn--side"></i><i class="iphone__btn iphone__btn--camera"></i><div class="iphone__metal"></div><div class="iphone__bezel"></div><div class="iphone__screen" data-state="approved"><div class="pp-wall iphone__wp"></div><div class="pp-shade"></div><div class="pp-status"><span class="pp-cell"><i></i><i></i><i></i><i></i></span><span class="pp-icon pp-i-wifi pp-wifi"></span><span class="pp-battery"></span></div><div class="pp-date">Monday, October 5</div><svg class="pp-clock" viewBox="0 0 440 260" aria-hidden="true"><defs><linearGradient id="ppflow-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0"/><stop offset="1"/></linearGradient><filter id="ppflow-clock" x="-5%" y="-10%" width="110%" height="120%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="b"/><feSpecularLighting in="b" surfaceScale="2.6" specularConstant="1.15" specularExponent="18" lighting-color="#fff" result="s"><feDistantLight azimuth="270" elevation="48"/></feSpecularLighting><feComposite in="s" in2="SourceAlpha" operator="in" result="si"/><feComposite in="SourceGraphic" in2="si" operator="arithmetic" k2="1" k3=".4"/></filter></defs><text x="220" y="234" text-anchor="middle" fill="url(#ppflow-fill)" filter="url(#ppflow-clock)">9:14</text></svg><div class="pp-glass pp-ctl pp-ctl--left"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><span class="pp-icon pp-i-flashlight"></span><div class="pp-rim"></div></div><div class="pp-glass pp-ctl pp-ctl--right"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><span class="pp-icon pp-i-camera"></span><div class="pp-rim"></div></div><div class="pp-home"></div><div class="pp-glass pp-note pp-note--a"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-note__content"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title"><span class="pp-note__t pp-note__t--req">Claude Code &middot; api-gateway</span><span class="pp-note__t pp-note__t--done"><span class="pp-icon pp-i-ok"></span>Approved &middot; api-gateway</span></span><span class="pp-note__time">now</span></div><div class="pp-note__msgs"><span class="pp-note__msg pp-note__msg--req">Wants to run git push origin main. 3 commits ahead of origin/main.</span><span class="pp-note__msg pp-note__msg--done">Claude Code pushed 3 commits to origin/main and is running the next step.</span></div></div></div><div class="pp-rim"></div></div><div class="pp-glass pp-note pp-note--b"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-note__content"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title"><span class="pp-note__t pp-note__t--req">Claude Code &middot; api-gateway</span></span><span class="pp-note__time">now</span></div><div class="pp-note__msgs"><span class="pp-note__msg">Wants to run npm run deploy:staging. Tests passed on CI.</span></div></div></div><div class="pp-rim"></div></div><div class="pp-dim"></div><div class="pp-glass pp-exp"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-exp__inner"><div class="pp-exp__head"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-exp__meta"><div class="pp-exp__row"><div class="pp-exp__title">Claude Code &middot; api-gateway</div><div class="pp-exp__now">now</div></div><div class="pp-exp__time">Approval request</div></div></div><div class="pp-exp__body">Wants to run this command:<div class="pp-exp__cmd"><span>$ </span>git push origin main</div><div class="pp-exp__meta2">3 commits ahead of origin/main</div></div></div><div class="pp-rim"></div></div><div class="pp-glass pp-menu"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-menu__rows"><div class="pp-row pp-row--approve"><span class="pp-icon pp-i-check"></span>Approve</div><div class="pp-row pp-row--deny"><span class="pp-icon pp-i-x"></span>Deny</div></div><div class="pp-rim"></div></div><div class="pp-sheen"></div><div class="pp-oled"></div></div><div class="iphone__island"></div><div class="iphone__tone"><i></i><i></i></div><div class="iphone__light"><i></i><i></i><i></i></div></div><!--/phone--></div>
+      <div class="iphone" id="phone2" data-manual data-model="17-pro-max" data-color="cosmic-orange" data-sheen="on" role="img" aria-label="iPhone lock screen after approval: the push went through and the next request, npm run deploy:staging, has arrived."><!--phone:flow--><div class="iphone__device" data-pp="3"><div class="iphone__shadow"></div><i class="iphone__btn iphone__btn--action"></i><i class="iphone__btn iphone__btn--vol-up"></i><i class="iphone__btn iphone__btn--vol-down"></i><i class="iphone__btn iphone__btn--side"></i><i class="iphone__btn iphone__btn--camera"></i><div class="iphone__metal"></div><div class="iphone__bezel"></div><div class="iphone__screen" data-state="next"><div class="pp-wall iphone__wp"></div><div class="pp-shade"></div><div class="pp-status"><span class="pp-cell"><i></i><i></i><i></i><i></i></span><span class="pp-icon pp-i-wifi pp-wifi"></span><span class="pp-battery"></span></div><div class="pp-date">Monday, October 5</div><svg class="pp-clock" viewBox="0 0 440 260" aria-hidden="true"><defs><linearGradient id="ppflow-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0"/><stop offset="1"/></linearGradient><filter id="ppflow-clock" x="-5%" y="-10%" width="110%" height="120%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="b"/><feSpecularLighting in="b" surfaceScale="2.6" specularConstant="1.15" specularExponent="18" lighting-color="#fff" result="s"><feDistantLight azimuth="270" elevation="48"/></feSpecularLighting><feComposite in="s" in2="SourceAlpha" operator="in" result="si"/><feComposite in="SourceGraphic" in2="si" operator="arithmetic" k2="1" k3=".4"/></filter></defs><text x="220" y="234" text-anchor="middle" fill="url(#ppflow-fill)" filter="url(#ppflow-clock)">9:14</text></svg><div class="pp-glass pp-ctl pp-ctl--left"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><span class="pp-icon pp-i-flashlight"></span><div class="pp-rim"></div></div><div class="pp-glass pp-ctl pp-ctl--right"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><span class="pp-icon pp-i-camera"></span><div class="pp-rim"></div></div><div class="pp-home"></div><div class="pp-glass pp-note pp-note--a"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-note__content"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title"><span class="pp-note__t pp-note__t--req">Claude Code &middot; api-gateway</span><span class="pp-note__t pp-note__t--done"><span class="pp-icon pp-i-ok"></span>Approved &middot; api-gateway</span></span><span class="pp-note__time">now</span></div><div class="pp-note__msgs"><span class="pp-note__msg pp-note__msg--req">Wants to run git push origin main. 3 commits ahead of origin/main.</span><span class="pp-note__msg pp-note__msg--done">Claude Code pushed 3 commits to origin/main and is running the next step.</span></div></div></div><div class="pp-rim"></div></div><div class="pp-glass pp-note pp-note--b"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-note__content"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title"><span class="pp-note__t pp-note__t--req">Claude Code &middot; api-gateway</span></span><span class="pp-note__time">now</span></div><div class="pp-note__msgs"><span class="pp-note__msg">Wants to run npm run deploy:staging. Tests passed on CI.</span></div></div></div><div class="pp-rim"></div></div><div class="pp-dim"></div><div class="pp-glass pp-exp"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-exp__inner"><div class="pp-exp__head"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-exp__meta"><div class="pp-exp__row"><div class="pp-exp__title">Claude Code &middot; api-gateway</div><div class="pp-exp__now">now</div></div><div class="pp-exp__time">Approval request</div></div></div><div class="pp-exp__body">Wants to run this command:<div class="pp-exp__cmd"><span>$ </span>git push origin main</div><div class="pp-exp__meta2">3 commits ahead of origin/main</div></div></div><div class="pp-rim"></div></div><div class="pp-glass pp-menu"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-menu__rows"><div class="pp-row pp-row--approve"><span class="pp-icon pp-i-check"></span>Approve</div><div class="pp-row pp-row--deny"><span class="pp-icon pp-i-x"></span>Deny</div></div><div class="pp-rim"></div></div><div class="pp-sheen"></div><div class="pp-oled"></div></div><div class="iphone__island"></div><div class="iphone__tone"><i></i><i></i></div><div class="iphone__light"><i></i><i></i><i></i></div></div><!--/phone--></div>
     </div>
   </section>
 
@@ -246,7 +240,6 @@
       </ol>
       <div class="buy">
         <a class="cta" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
-        <p class="price"><strong>$9.99/mo</strong> after a <span class="nw">3-day</span> free trial. Cancel anytime.</p>
       </div>
       <p class="note">Already have an account? <a href="https://pushary.com/download">Get the phone and Mac apps</a></p>
     </div>
@@ -270,7 +263,7 @@
   <section class="band faq" id="faq" aria-labelledby="faq-h">
     <div class="faq-side">
       <h2 id="faq-h">Questions, answered</h2>
-      <p class="plan"><strong>$9.99 a month</strong> for the Agent plan, after a <span class="nw">3-day</span> free trial. One plan covers every agent you run. <a href="https://pushary.com/pricing">See all plans</a></p>
+      <p class="plan">One plan covers every agent you run, and the phone and Mac apps are included. <a href="https://pushary.com/pricing">See all plans</a></p>
       <p class="ask">Something else? <a href="https://pushary.com/docs">Read the docs</a> or <a href="mailto:business@pushary.com">email us</a>.</p>
     </div>
     <div class="qs">
@@ -288,14 +281,11 @@
   </section>
 
   <section class="band founder" id="founder" aria-labelledby="founder-h">
-    <a class="video" href="https://www.loom.com/embed/ca5ad617d5a6460ba40a9039781e1144" aria-label="Watch: why I built Pushary, a 2-minute founder demo">
-      <img src="assets/img/founder-demo-poster.webp" alt="" width="2026" height="1140">
-      <span class="play"><span class="ico ico-play"></span>2:11</span>
-    </a>
+    <h2 id="founder-h">I kept coming back to an agent that had been waiting the whole&nbsp;time.</h2>
     <div class="founder-body">
-      <h2 id="founder-h">I kept coming back to an agent that had been waiting the whole&nbsp;time.</h2>
       <p>I would kick off a task, switch to something else, and come back to find the agent had paused for a yes 40 minutes earlier. So I built Pushary to move that decision to my phone. The agent asks, I tap, and the work keeps going while I am away. This is the 2 minute&nbsp;version.</p>
       <p class="who">Aadil Ghani, founder of Pushary</p>
+      <a class="watch" href="https://www.loom.com/embed/ca5ad617d5a6460ba40a9039781e1144"><span class="play-dot"><span class="ico ico-play"></span></span>Watch the 2 minute version <span class="dur">2:11</span></a>
     </div>
   </section>
 
@@ -332,12 +322,11 @@
         <a href="https://play.google.com/store/apps/details?id=com.pushary.app"><img src="assets/img/google-play.svg" alt="Get it on Google Play" height="36"></a>
       </p>
     </div>
-    <nav class="cols5" aria-label="Footer">
-      <div><p class="list-k">Product</p><ul><li><a href="https://pushary.com/#features">Features</a></li><li><a href="https://pushary.com/pricing">Pricing</a></li><li><a href="https://pushary.com/download">Download app</a></li><li><a href="https://pushary.com/#faq">FAQ</a></li><li><a href="https://pushary.com/sign-up">Get Started</a></li><li><a href="https://pushary.com/human-in-the-loop"><span class="nw">Human-in-the-loop</span></a></li><li><a href="https://pushary.com/partners">For agent builders</a></li><li><a href="https://pushary.com/vs">Compare</a></li></ul></div>
-      <div><p class="list-k">Agent control</p><ul><li><a href="https://pushary.com/ai-agent-control-panel">Control panel</a></li><li><a href="https://pushary.com/ai-agent-permission-policy">Permission policies</a></li><li><a href="https://pushary.com/ai-agent-audit-trail">Audit trail</a></li><li><a href="https://pushary.com/ai-agent-kill-switch">Kill switch</a></li><li><a href="https://pushary.com/mac-notch-app">Mac app</a></li><li><a href="https://pushary.com/claude-code-notifications">Claude Code notifications</a></li><li><a href="https://pushary.com/best-ai-agent-control-tools">Best control tools</a></li></ul></div>
-      <div><p class="list-k">Company</p><ul><li><a href="https://pushary.com/about">About</a></li><li><a href="https://pushary.com/blog">Blog</a></li><li><a href="mailto:business@pushary.com">Contact</a></li></ul></div>
-      <div><p class="list-k">Social</p><ul><li><a href="https://twitter.com/aadilbuilds">Twitter</a></li><li><a href="https://github.com/Pushary">GitHub</a></li><li><a href="https://discord.gg/9v3VvUByrr">Discord</a></li></ul></div>
-      <div><p class="list-k">Legal</p><ul><li><a href="https://pushary.com/security">Security</a></li><li><a href="https://pushary.com/privacy">Privacy</a></li><li><a href="https://pushary.com/terms">Terms</a></li></ul></div>
+    <nav class="cols4" aria-label="Footer">
+      <div><p class="list-k">Product</p><ul><li><a href="https://pushary.com/#features">Features</a></li><li><a href="https://pushary.com/pricing">Pricing</a></li><li><a href="https://pushary.com/download">Download app</a></li><li><a href="https://pushary.com/#faq">FAQ</a></li><li><a href="https://pushary.com/sign-up">Get Started</a></li><li><a href="https://pushary.com/vs">Compare</a></li></ul></div>
+      <div><p class="list-k">Agent control</p><ul><li><a href="https://pushary.com/ai-agent-control-panel">Control panel</a></li><li><a href="https://pushary.com/ai-agent-permission-policy">Permission policies</a></li><li><a href="https://pushary.com/ai-agent-audit-trail">Audit trail</a></li><li><a href="https://pushary.com/ai-agent-kill-switch">Kill switch</a></li><li><a href="https://pushary.com/mac-notch-app">Mac app</a></li><li><a href="https://pushary.com/human-in-the-loop"><span class="nw">Human-in-the-loop</span></a></li></ul></div>
+      <div><p class="list-k">Company</p><ul><li><a href="https://pushary.com/about">About</a></li><li><a href="https://pushary.com/blog">Blog</a></li><li><a href="mailto:business@pushary.com">Contact</a></li><li><a href="https://pushary.com/partners">For agent builders</a></li><li><a href="https://pushary.com/claude-code-notifications">Claude Code notifications</a></li><li><a href="https://pushary.com/best-ai-agent-control-tools">Best control tools</a></li></ul></div>
+      <div><p class="list-k">Social and legal</p><ul><li><a href="https://twitter.com/aadilbuilds">Twitter</a></li><li><a href="https://github.com/Pushary">GitHub</a></li><li><a href="https://discord.gg/9v3VvUByrr">Discord</a></li><li><a href="https://pushary.com/security">Security</a></li><li><a href="https://pushary.com/privacy">Privacy</a></li><li><a href="https://pushary.com/terms">Terms</a></li></ul></div>
     </nav>
   </div>
 
