@@ -70,7 +70,7 @@
   bottom: calc(-150 * var(--u));
   height: calc(260 * var(--u));
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(var(--floor), .26), rgba(var(--floor), 0));
+  background: radial-gradient(closest-side, rgba(var(--floor), .38), rgba(var(--floor), 0));
   filter: blur(calc(18 * var(--u)));
 }
 .iphone__shadow::after {
@@ -382,7 +382,7 @@
 .pp-clock stop:first-child { stop-color: var(--clock-a); }
 .pp-clock stop:last-child { stop-color: var(--clock-b); }
 .iphone__screen { --clock-a: rgba(255, 228, 206, .84); --clock-b: rgba(255, 196, 160, .7); --date-c: rgba(255, 230, 212, .88); }
-.iphone[data-color="burgundy"] .iphone__screen { --clock-a: rgba(255, 226, 233, .84); --clock-b: rgba(244, 182, 196, .7); --date-c: rgba(255, 228, 234, .88); }
+.iphone[data-color="burgundy"] .iphone__screen { --clock-a: rgba(255, 218, 230, .84); --clock-b: rgba(240, 168, 188, .7); --date-c: rgba(255, 224, 232, .88); }
 .pp-clock text {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter Display iPhone", sans-serif;
   font-size: 152px;
@@ -631,7 +631,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow: inset calc(1.2 * var(--pt)) calc(1.2 * var(--pt)) 0 calc(-.2 * var(--pt)) rgba(255, 255, 255, .42);
+  box-shadow: inset calc(1.6 * var(--pt)) calc(1.6 * var(--pt)) 0 calc(-.3 * var(--pt)) rgba(255, 255, 255, .55);
   -webkit-mask: linear-gradient(140deg, #000 0%, rgba(0, 0, 0, .5) 45%, transparent 75%);
   mask: linear-gradient(140deg, #000 0%, rgba(0, 0, 0, .5) 45%, transparent 75%);
 }

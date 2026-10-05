@@ -20,7 +20,8 @@
     command: 'git push origin main',
     detail: '3 commits ahead of origin/main',
     request: 'Wants to run git push origin main. 3 commits ahead of origin/main.',
-    approved: 'Approved. Pushed 3 commits to origin/main.',
+    approvedTitle: 'Approved',
+    approved: 'Claude Code pushed 3 commits to origin/main and is running the next step.',
     next: 'Wants to run npm run deploy:staging. Tests passed on CI.'
   };
   /* Timeline in ms: arrive, read, long-press, expand, read, tap Approve, update, next lands, reset. */
@@ -29,6 +30,7 @@
     [4300, 'approved'], [8100, 'next'], [9700, 'locked']
   ];
   var LOOP_MS = 10000;
+  var VERSION = '3';
   var uid = 0;
   var batch = null;
 
@@ -41,16 +43,19 @@
       inner + '<div class="pp-rim"></div></div>';
   }
 
-  function note(cls, o, msgs, extra) {
+  function note(cls, o, msgs, done) {
+    var title = '<span class="pp-note__t pp-note__t--req">' + esc(o.agent) + ' &middot; ' + esc(o.repo) + '</span>' +
+      (done ? '<span class="pp-note__t pp-note__t--done"><span class="pp-icon pp-i-ok"></span>' + esc(o.approvedTitle) +
+        ' &middot; ' + esc(o.repo) + '</span>' : '');
     return glass('pp-note ' + cls,
       '<div class="pp-note__content"><div class="pp-app"><img src="' + BASE.href + 'assets/pushary-logo.webp" alt=""></div>' +
-      '<div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title">' + esc(o.agent) + ' &middot; ' + esc(o.repo) +
-      '</span><span class="pp-note__time">now</span></div><div class="pp-note__msgs">' + msgs + '</div>' + (extra || '') + '</div></div>');
+      '<div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title">' + title +
+      '</span><span class="pp-note__time">now</span></div><div class="pp-note__msgs">' + msgs + '</div></div></div>');
   }
 
   function template(o, id) {
     var app = '<div class="pp-app"><img src="' + BASE.href + 'assets/pushary-logo.webp" alt=""></div>';
-    return '<div class="iphone__device">' +
+    return '<div class="iphone__device" data-pp="' + VERSION + '">' +
       '<div class="iphone__shadow"></div>' +
       '<i class="iphone__btn iphone__btn--action"></i><i class="iphone__btn iphone__btn--vol-up"></i>' +
       '<i class="iphone__btn iphone__btn--vol-down"></i><i class="iphone__btn iphone__btn--side"></i>' +
@@ -61,29 +66,28 @@
       '<div class="pp-status"><span class="pp-cell"><i></i><i></i><i></i><i></i></span>' +
       '<span class="pp-icon pp-i-wifi pp-wifi"></span><span class="pp-battery"></span></div>' +
       '<div class="pp-date">' + esc(o.date) + '</div>' +
-      '<svg class="pp-clock" viewBox="0 0 440 260" aria-hidden="true"><defs><filter id="' + id + '-clock" x="-5%" y="-10%" width="110%" height="120%" color-interpolation-filters="sRGB">' +
+      '<svg class="pp-clock" viewBox="0 0 440 260" aria-hidden="true"><defs><linearGradient id="' + id + '-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0"/><stop offset="1"/></linearGradient><filter id="' + id + '-clock" x="-5%" y="-10%" width="110%" height="120%" color-interpolation-filters="sRGB">' +
       '<feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="b"/>' +
-      '<feSpecularLighting in="b" surfaceScale="2.6" specularConstant="1.15" specularExponent="18" lighting-color="#fff" result="s"><feDistantLight azimuth="235" elevation="42"/></feSpecularLighting>' +
+      '<feSpecularLighting in="b" surfaceScale="2.6" specularConstant="1.15" specularExponent="18" lighting-color="#fff" result="s"><feDistantLight azimuth="270" elevation="48"/></feSpecularLighting>' +
       '<feComposite in="s" in2="SourceAlpha" operator="in" result="si"/>' +
-      '<feComposite in="SourceGraphic" in2="si" operator="arithmetic" k2="1" k3=".75"/></filter></defs>' +
-      '<text x="220" y="234" text-anchor="middle" filter="url(#' + id + '-clock)">' + esc(o.clock) + '</text></svg>' +
+      '<feComposite in="SourceGraphic" in2="si" operator="arithmetic" k2="1" k3=".4"/></filter></defs>' +
+      '<text x="220" y="234" text-anchor="middle" fill="url(#' + id + '-fill)" filter="url(#' + id + '-clock)">' + esc(o.clock) + '</text></svg>' +
       glass('pp-ctl pp-ctl--left', '<span class="pp-icon pp-i-flashlight"></span>') +
       glass('pp-ctl pp-ctl--right', '<span class="pp-icon pp-i-camera"></span>') +
       '<div class="pp-home"></div>' +
       note('pp-note--a', o, '<span class="pp-note__msg pp-note__msg--req">' + esc(o.request) +
-        '</span><span class="pp-note__msg pp-note__msg--done">' + esc(o.approved) + '</span>',
-        '<span class="pp-badge"><span class="pp-icon pp-i-ok"></span></span>') +
+        '</span><span class="pp-note__msg pp-note__msg--done">' + esc(o.approved) + '</span>', true) +
       note('pp-note--b', o, '<span class="pp-note__msg">' + esc(o.next) + '</span>') +
       '<div class="pp-dim"></div>' +
-      glass('pp-exp', '<div class="pp-exp__inner"><div class="pp-exp__head">' + app + '<div class="pp-exp__meta"><div class="pp-exp__title">' +
-        esc(o.agent) + ' &middot; ' + esc(o.repo) + '</div><div class="pp-exp__time">now</div></div></div>' +
+      glass('pp-exp', '<div class="pp-exp__inner"><div class="pp-exp__head">' + app + '<div class="pp-exp__meta"><div class="pp-exp__row"><div class="pp-exp__title">' +
+        esc(o.agent) + ' &middot; ' + esc(o.repo) + '</div><div class="pp-exp__now">now</div></div><div class="pp-exp__time">Approval request</div></div></div>' +
         '<div class="pp-exp__body">Wants to run this command:<div class="pp-exp__cmd"><span>$ </span>' + esc(o.command) +
         '</div><div class="pp-exp__meta2">' + esc(o.detail) + '</div></div></div>') +
       glass('pp-menu', '<div class="pp-menu__rows"><div class="pp-row pp-row--approve"><span class="pp-icon pp-i-check"></span>Approve</div>' +
         '<div class="pp-row pp-row--deny"><span class="pp-icon pp-i-x"></span>Deny</div></div>') +
       '<div class="pp-sheen"></div><div class="pp-oled"></div>' +
       '</div>' +
-      '<div class="iphone__island"></div><div class="iphone__light"><i></i><i></i><i></i></div>' +
+      '<div class="iphone__island"></div><div class="iphone__tone"><i></i><i></i></div><div class="iphone__light"><i></i><i></i><i></i></div>' +
       '</div>';
   }
 
@@ -239,7 +243,8 @@
     el.setAttribute('data-model', o.model);
     el.setAttribute('data-color', o.color);
     el.setAttribute('data-sheen', o.sheen);
-    if (!el.querySelector('.iphone__device') || options) el.innerHTML = template(o, 'pp' + (uid + 1));
+    var dev = el.querySelector('.iphone__device');
+    if (!dev || dev.getAttribute('data-pp') !== VERSION || options) el.innerHTML = template(o, 'pp' + (uid + 1));
     var phone = el.__pusharyPhone = new Phone(el, o);
     if (o.autoplay) {
       if (batch) batch.push(phone);

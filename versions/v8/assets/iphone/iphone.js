@@ -21,7 +21,7 @@
     detail: '3 commits ahead of origin/main',
     request: 'Wants to run git push origin main. 3 commits ahead of origin/main.',
     approvedTitle: 'Approved',
-    approved: 'Pushed 3 commits to origin/main.',
+    approved: 'Claude Code pushed 3 commits to origin/main and is running the next step.',
     next: 'Wants to run npm run deploy:staging. Tests passed on CI.'
   };
   /* Timeline in ms: arrive, read, long-press, expand, read, tap Approve, update, next lands, reset. */
