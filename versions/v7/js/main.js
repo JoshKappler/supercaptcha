@@ -17,7 +17,7 @@
   let flow = null;
   if (window.PusharyPhone) {
     PusharyPhone.mount(heroEl, Object.assign({ autoplay: true }, copy));
-    flow = PusharyPhone.mount(flowEl, Object.assign({ autoplay: false }, copy)).setState('approved');
+    flow = PusharyPhone.mount(flowEl, Object.assign({ autoplay: false }, copy)).setState('arrived');
   }
 
   // Line from the terminal's "needs your yes" row to the flow phone's notification.
@@ -28,6 +28,7 @@
   const NOTE_Y = 0.78;
   const NOTE_X = 41 / 490;
   const align = () => {
+    termWrap.style.marginTop = '';
     if (!wide.matches) { flowPhone.style.marginTop = ''; return; }
     flowPhone.style.marginTop = '0px';
     const a = ask.getBoundingClientRect();
@@ -36,7 +37,10 @@
     const dev = flowEl.getBoundingClientRect();
     const askY = a.top + a.height / 2;
     const pad = parseFloat(getComputedStyle(flowSection).paddingTop);
-    flowPhone.style.marginTop = (askY - s.top - pad - dev.height * NOTE_Y) + 'px';
+    const shift = askY - s.top - pad - dev.height * NOTE_Y;
+    // A negative shift would lift the phone into the section above, so lower the terminal instead.
+    if (shift < 0) termWrap.style.marginTop = (parseFloat(getComputedStyle(termWrap).marginTop) - shift) + 'px';
+    flowPhone.style.marginTop = Math.max(0, shift) + 'px';
     termWrap.style.setProperty('--wire-y', (askY - t.top) + 'px');
     termWrap.style.setProperty('--wire-w', (dev.left + dev.width * NOTE_X - t.right) + 'px');
   };
@@ -63,11 +67,11 @@
   const steps = [...document.querySelectorAll('.step')];
   let i = 0;
   let timer = null;
-  const later = document.querySelector('.term .later');
+  const term = document.querySelector('.term');
   const show = () => {
     const state = steps[i].dataset.state;
     steps.forEach((s, k) => s.classList.toggle('on', k === i));
-    later.classList.toggle('wait', state !== 'approved');
+    term.classList.toggle('done', state === 'approved');
     if (flow) flow.setState(state);
     i = (i + 1) % steps.length;
   };

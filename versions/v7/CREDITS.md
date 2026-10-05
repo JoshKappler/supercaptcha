@@ -9,7 +9,6 @@
 | `assets/img/agents/opencode.svg`, `vscode.svg` | pushary.com scrape, `original/site/pushary.com/opencode__*.svg`, `vscode__*.svg` | Agent marks as shown on pushary.com |
 | `assets/img/hacker-news.webp` | pushary.com scrape, `/hacker-news.webp` | As shown on pushary.com |
 | `assets/img/app-store.svg`, `google-play.svg` | pushary.com scrape, `original/site/pushary.com/badges/` | Badges as shown on pushary.com |
-| `assets/img/founder-video.webp` | Resized from the founder video poster in the pushary.com scrape (`/home-demo-poster.webp`), shown dimmed as a video card that links to the founder's Loom video from the same page | Pushary's own image |
 | `assets/img/product-hunt-medal.svg` | The medal mark extracted unchanged from `original/site/pushary.com/badges/product-hunt-top-post-light.svg` | Badge artwork as shown on pushary.com |
 
 ## Shared iPhone (`assets/iphone/`, copied by `scripts/sync-phone.sh`)

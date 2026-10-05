@@ -51,12 +51,14 @@
         <div class="trust-row">
           <p class="trust-h">Works with</p>
           <ul class="logos">
-            <li title="Claude Code"><span class="tile"><img src="assets/img/agents/claude.webp" alt="Claude Code" width="18" height="18"></span></li>
-            <li title="Codex"><span class="tile"><img src="assets/img/agents/codex.webp" alt="Codex" width="18" height="18"></span></li>
-            <li title="Cursor"><span class="tile"><img src="assets/img/agents/cursor.webp" alt="Cursor" width="18" height="18"></span></li>
-            <li title="Antigravity CLI"><span class="tile"><img src="assets/img/agents/antigravity.webp" alt="Antigravity CLI" width="18" height="18"></span></li>
-            <li title="Gemini CLI"><span class="tile"><img src="assets/img/agents/gemini.webp" alt="Gemini CLI" width="18" height="18"></span></li>
-            <li title="Hermes"><span class="tile"><img src="assets/img/agents/hermes.webp" alt="Hermes" width="18" height="18"></span></li>
+            <li title="Claude Code"><span class="tile"><img src="assets/img/agents/claude.webp" alt="Claude Code" width="22" height="22"></span></li>
+            <li title="Codex"><span class="tile"><img src="assets/img/agents/codex.webp" alt="Codex" width="22" height="22"></span></li>
+            <li title="Cursor"><span class="tile"><img src="assets/img/agents/cursor.webp" alt="Cursor" width="22" height="22"></span></li>
+            <li title="Antigravity CLI"><span class="tile"><img src="assets/img/agents/antigravity.webp" alt="Antigravity CLI" width="22" height="22"></span></li>
+            <li title="Gemini CLI"><span class="tile"><img src="assets/img/agents/gemini.webp" alt="Gemini CLI" width="22" height="22"></span></li>
+            <li title="Hermes Agent"><span class="tile"><img src="assets/img/agents/hermes.webp" alt="Hermes Agent" width="22" height="22"></span></li>
+            <li title="VS Code"><span class="tile"><img src="assets/img/agents/vscode.svg" alt="VS Code" width="22" height="22"></span></li>
+            <li title="OpenCode"><span class="tile"><img src="assets/img/agents/opencode.svg" alt="OpenCode" width="22" height="22"></span></li>
           </ul>
           <p class="more-agents">and any MCP agent</p>
         </div>
@@ -87,13 +89,7 @@
           <p role="cell"><span class="tl-l">With Pushary</span>You come back. The task finished half an hour ago.</p>
         </div>
       </div>
-      <div class="close">
-        <h2 class="close-line">Your agent should not wait 37 minutes for a single&nbsp;yes.</h2>
-        <div class="act">
-          <a class="btn" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
-          <p class="price">$9.99/mo after a <span class="nw">3-day</span> free trial. Cancel anytime.</p>
-        </div>
-      </div>
+      <p class="pull">Your agent should not wait 37 minutes for a single&nbsp;yes.</p>
     </section>
 
     <section class="block wrap g what" aria-labelledby="what-h">
@@ -105,11 +101,14 @@
         <p class="dg-h dg-h-l">Your agents</p>
         <p class="dg-h dg-h-r">Where it reaches you</p>
         <ul class="dg-l">
-          <li><span class="tile"><img src="assets/img/agents/claude.webp" alt="" width="18" height="18"></span>Claude Code</li>
-          <li><span class="tile"><img src="assets/img/agents/codex.webp" alt="" width="18" height="18"></span>Codex</li>
-          <li><span class="tile"><img src="assets/img/agents/cursor.webp" alt="" width="18" height="18"></span>Cursor</li>
-          <li><span class="tile"><img src="assets/img/agents/antigravity.webp" alt="" width="18" height="18"></span>Antigravity CLI</li>
-          <li><span class="tile"><img src="assets/img/agents/hermes.webp" alt="" width="18" height="18"></span>Hermes</li>
+          <li><span class="tile"><img src="assets/img/agents/claude.webp" alt="" width="22" height="22"></span>Claude Code</li>
+          <li><span class="tile"><img src="assets/img/agents/codex.webp" alt="" width="22" height="22"></span>Codex</li>
+          <li><span class="tile"><img src="assets/img/agents/cursor.webp" alt="" width="22" height="22"></span>Cursor</li>
+          <li><span class="tile"><img src="assets/img/agents/antigravity.webp" alt="" width="22" height="22"></span>Antigravity CLI</li>
+          <li><span class="tile"><img src="assets/img/agents/gemini.webp" alt="" width="22" height="22"></span>Gemini CLI</li>
+          <li><span class="tile"><img src="assets/img/agents/hermes.webp" alt="" width="22" height="22"></span>Hermes Agent</li>
+          <li><span class="tile"><img src="assets/img/agents/vscode.svg" alt="" width="22" height="22"></span>VS Code</li>
+          <li><span class="tile"><img src="assets/img/agents/opencode.svg" alt="" width="22" height="22"></span>OpenCode</li>
         </ul>
         <div class="dg-m"><span class="dg-node"><img src="assets/img/logo.webp" alt="" width="28" height="28">Pushary</span></div>
         <ul class="dg-r">
@@ -128,6 +127,20 @@
       <div class="flow-main">
         <h2 id="flow-h">See the whole flow</h2>
         <p class="body">One approval, start to finish, in 20 seconds.</p>
+        <ol class="steps">
+          <li class="step" data-state="arrived">
+            <h3>Your agent asks.</h3>
+            <p>It pauses at a step that needs your call: run a command, change a file, or pick between options.</p>
+          </li>
+          <li class="step" data-state="expanded">
+            <h3>Your phone buzzes.</h3>
+            <p>Only when a decision is needed, not for every step. Approve or deny from the notification, or open it to pick an option or type a reply.</p>
+          </li>
+          <li class="step" data-state="approved">
+            <h3>It keeps going.</h3>
+            <p>Your answer flows straight back to the agent. When the task finishes, you get a ping for that too.</p>
+          </li>
+        </ol>
         <figure class="term-wrap">
           <div class="term" role="img" aria-label="Example terminal session: Claude Code runs tests, pauses on git push origin main, sends the question to your phone, and pushes once you approve">
             <div class="term-bar"><span></span><span></span><span></span><em>~/billing</em></div>
@@ -145,22 +158,8 @@
         </figure>
       </div>
       <div class="flow-phone">
-        <div class="iphone" id="phone-flow" data-model="17-pro-max" data-color="cosmic-orange" data-sheen="on" data-manual role="img" aria-label="The same request after you tap Approve: Approved. Pushed 3 commits to origin/main."><!-- phone:flow --><div class="iphone__device" data-pp="3"><div class="iphone__shadow"></div><i class="iphone__btn iphone__btn--action"></i><i class="iphone__btn iphone__btn--vol-up"></i><i class="iphone__btn iphone__btn--vol-down"></i><i class="iphone__btn iphone__btn--side"></i><i class="iphone__btn iphone__btn--camera"></i><div class="iphone__metal"></div><div class="iphone__bezel"></div><div class="iphone__screen" data-state="approved"><div class="pp-wall iphone__wp"></div><div class="pp-shade"></div><div class="pp-status"><span class="pp-cell"><i></i><i></i><i></i><i></i></span><span class="pp-icon pp-i-wifi pp-wifi"></span><span class="pp-battery"></span></div><div class="pp-date">Monday, October 5</div><svg class="pp-clock" viewBox="0 0 440 260" aria-hidden="true"><defs><linearGradient id="v7b-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0"/><stop offset="1"/></linearGradient><filter id="v7b-clock" x="-5%" y="-10%" width="110%" height="120%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="b"/><feSpecularLighting in="b" surfaceScale="2.6" specularConstant="1.15" specularExponent="18" lighting-color="#fff" result="s"><feDistantLight azimuth="270" elevation="48"/></feSpecularLighting><feComposite in="s" in2="SourceAlpha" operator="in" result="si"/><feComposite in="SourceGraphic" in2="si" operator="arithmetic" k2="1" k3=".4"/></filter></defs><text x="220" y="234" text-anchor="middle" fill="url(#v7b-fill)" filter="url(#v7b-clock)">9:14</text></svg><div class="pp-glass pp-ctl pp-ctl--left"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><span class="pp-icon pp-i-flashlight"></span><div class="pp-rim"></div></div><div class="pp-glass pp-ctl pp-ctl--right"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><span class="pp-icon pp-i-camera"></span><div class="pp-rim"></div></div><div class="pp-home"></div><div class="pp-glass pp-note pp-note--a"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-note__content"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title"><span class="pp-note__t pp-note__t--req">Claude Code &middot; billing</span><span class="pp-note__t pp-note__t--done"><span class="pp-icon pp-i-ok"></span>Approved &middot; billing</span></span><span class="pp-note__time">now</span></div><div class="pp-note__msgs"><span class="pp-note__msg pp-note__msg--req">Wants to run git push origin main. 3 commits ahead of origin/main.</span><span class="pp-note__msg pp-note__msg--done">Approved. Pushed 3 commits to origin/main.</span></div></div></div><div class="pp-rim"></div></div><div class="pp-glass pp-note pp-note--b"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-note__content"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title"><span class="pp-note__t pp-note__t--req">Claude Code &middot; billing</span></span><span class="pp-note__time">now</span></div><div class="pp-note__msgs"><span class="pp-note__msg">Wants to run npm run deploy:staging. Tests passed on CI.</span></div></div></div><div class="pp-rim"></div></div><div class="pp-dim"></div><div class="pp-glass pp-exp"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-exp__inner"><div class="pp-exp__head"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-exp__meta"><div class="pp-exp__row"><div class="pp-exp__title">Claude Code &middot; billing</div><div class="pp-exp__now">now</div></div><div class="pp-exp__time">Approval request</div></div></div><div class="pp-exp__body">Wants to run this command:<div class="pp-exp__cmd"><span>$ </span>git push origin main</div><div class="pp-exp__meta2">3 commits ahead of origin/main</div></div></div><div class="pp-rim"></div></div><div class="pp-glass pp-menu"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-menu__rows"><div class="pp-row pp-row--approve"><span class="pp-icon pp-i-check"></span>Approve</div><div class="pp-row pp-row--deny"><span class="pp-icon pp-i-x"></span>Deny</div></div><div class="pp-rim"></div></div><div class="pp-sheen"></div><div class="pp-oled"></div></div><div class="iphone__island"></div><div class="iphone__tone"><i></i><i></i></div><div class="iphone__light"><i></i><i></i><i></i></div></div><!-- /phone:flow --></div>
+        <div class="iphone" id="phone-flow" data-model="17-pro-max" data-color="cosmic-orange" data-sheen="on" data-manual role="img" aria-label="The request arriving on the lock screen: Claude Code wants to run git push origin main, 3 commits ahead of origin/main."><!-- phone:flow --><div class="iphone__device" data-pp="3"><div class="iphone__shadow"></div><i class="iphone__btn iphone__btn--action"></i><i class="iphone__btn iphone__btn--vol-up"></i><i class="iphone__btn iphone__btn--vol-down"></i><i class="iphone__btn iphone__btn--side"></i><i class="iphone__btn iphone__btn--camera"></i><div class="iphone__metal"></div><div class="iphone__bezel"></div><div class="iphone__screen" data-state="arrived"><div class="pp-wall iphone__wp"></div><div class="pp-shade"></div><div class="pp-status"><span class="pp-cell"><i></i><i></i><i></i><i></i></span><span class="pp-icon pp-i-wifi pp-wifi"></span><span class="pp-battery"></span></div><div class="pp-date">Monday, October 5</div><svg class="pp-clock" viewBox="0 0 440 260" aria-hidden="true"><defs><linearGradient id="v7b-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0"/><stop offset="1"/></linearGradient><filter id="v7b-clock" x="-5%" y="-10%" width="110%" height="120%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="b"/><feSpecularLighting in="b" surfaceScale="2.6" specularConstant="1.15" specularExponent="18" lighting-color="#fff" result="s"><feDistantLight azimuth="270" elevation="48"/></feSpecularLighting><feComposite in="s" in2="SourceAlpha" operator="in" result="si"/><feComposite in="SourceGraphic" in2="si" operator="arithmetic" k2="1" k3=".4"/></filter></defs><text x="220" y="234" text-anchor="middle" fill="url(#v7b-fill)" filter="url(#v7b-clock)">9:14</text></svg><div class="pp-glass pp-ctl pp-ctl--left"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><span class="pp-icon pp-i-flashlight"></span><div class="pp-rim"></div></div><div class="pp-glass pp-ctl pp-ctl--right"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><span class="pp-icon pp-i-camera"></span><div class="pp-rim"></div></div><div class="pp-home"></div><div class="pp-glass pp-note pp-note--a"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-note__content"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title"><span class="pp-note__t pp-note__t--req">Claude Code &middot; billing</span><span class="pp-note__t pp-note__t--done"><span class="pp-icon pp-i-ok"></span>Approved &middot; billing</span></span><span class="pp-note__time">now</span></div><div class="pp-note__msgs"><span class="pp-note__msg pp-note__msg--req">Wants to run git push origin main. 3 commits ahead of origin/main.</span><span class="pp-note__msg pp-note__msg--done">Approved. Pushed 3 commits to origin/main.</span></div></div></div><div class="pp-rim"></div></div><div class="pp-glass pp-note pp-note--b"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-note__content"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title"><span class="pp-note__t pp-note__t--req">Claude Code &middot; billing</span></span><span class="pp-note__time">now</span></div><div class="pp-note__msgs"><span class="pp-note__msg">Wants to run npm run deploy:staging. Tests passed on CI.</span></div></div></div><div class="pp-rim"></div></div><div class="pp-dim"></div><div class="pp-glass pp-exp"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-exp__inner"><div class="pp-exp__head"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-exp__meta"><div class="pp-exp__row"><div class="pp-exp__title">Claude Code &middot; billing</div><div class="pp-exp__now">now</div></div><div class="pp-exp__time">Approval request</div></div></div><div class="pp-exp__body">Wants to run this command:<div class="pp-exp__cmd"><span>$ </span>git push origin main</div><div class="pp-exp__meta2">3 commits ahead of origin/main</div></div></div><div class="pp-rim"></div></div><div class="pp-glass pp-menu"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-menu__rows"><div class="pp-row pp-row--approve"><span class="pp-icon pp-i-check"></span>Approve</div><div class="pp-row pp-row--deny"><span class="pp-icon pp-i-x"></span>Deny</div></div><div class="pp-rim"></div></div><div class="pp-sheen"></div><div class="pp-oled"></div></div><div class="iphone__island"></div><div class="iphone__tone"><i></i><i></i></div><div class="iphone__light"><i></i><i></i><i></i></div></div><!-- /phone:flow --></div>
       </div>
-      <ol class="steps">
-        <li class="step" data-state="arrived">
-          <h3>Your agent asks.</h3>
-          <p>It pauses at a step that needs your call: run a command, change a file, or pick between options.</p>
-        </li>
-        <li class="step" data-state="expanded">
-          <h3>Your phone buzzes.</h3>
-          <p>Only when a decision is needed, not for every step. Approve or deny from the notification, or open it to pick an option or type a reply.</p>
-        </li>
-        <li class="step" data-state="approved">
-          <h3>It keeps going.</h3>
-          <p>Your answer flows straight back to the agent. When the task finishes, you get a ping for that too.</p>
-        </li>
-      </ol>
     </section>
 
     <section class="block wrap g rules" id="features" aria-labelledby="rules-h">
@@ -212,7 +211,7 @@
               <span class="tile"><img src="assets/img/agents/hermes.webp" alt="" width="18" height="18"></span>
               <div>
                 <p class="job-t">Nightly data sync</p>
-                <p class="job-m">Hermes, 12m</p>
+                <p class="job-m">Hermes Agent, 12m</p>
                 <p class="mono">bun run test</p>
               </div>
             </div>
@@ -260,9 +259,11 @@
         <p class="small">Windsurf or another MCP client? <a href="https://pushary.com/docs/agents/guides/windsurf-other">Connect it by hand</a></p>
       </div>
       <div class="plan">
-        <p class="plan-price"><b>$9.99</b> a month after a <span class="nw">3-day</span> free trial. Cancel anytime.</p>
-        <p class="plan-facts">One plan covers every agent you run: 5,000 notifications a month, the phone app and the Mac app. <a href="https://pushary.com/pricing">See all plans</a></p>
-        <div class="act">
+        <div class="plan-l">
+          <p class="plan-price"><b>$9.99</b> a month after a <span class="nw">3-day</span> free trial. Cancel anytime.</p>
+          <p class="plan-facts">One plan covers every agent you run: 5,000 notifications a month, the phone app and the Mac app. <a href="https://pushary.com/pricing">See all plans</a></p>
+        </div>
+        <div class="plan-r">
           <a class="btn" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
           <p class="price">Already have an account? <a href="https://pushary.com/download">Get the phone and Mac apps</a></p>
         </div>
@@ -341,8 +342,7 @@
         <p class="sig">Aadil Ghani, founder of Pushary</p>
       </div>
       <a class="video" href="https://www.loom.com/embed/ca5ad617d5a6460ba40a9039781e1144">
-        <img src="assets/img/founder-video.webp" alt="" width="960" height="540">
-        <span class="video-cap"><span class="play" aria-hidden="true"></span><span>Watch the 2 minute version</span><span class="len">2:11</span></span>
+        <span class="play" aria-hidden="true"></span><span class="video-t">Watch the 2 minute version</span><span class="len">2:11</span>
       </a>
     </section>
 
