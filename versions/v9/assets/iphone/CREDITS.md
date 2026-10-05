@@ -3,7 +3,8 @@
 | File | Source | License |
 |---|---|---|
 | `assets/Inter-Regular.woff2`, `assets/Inter-Medium.woff2`, `assets/Inter-SemiBold.woff2`, `assets/InterDisplay-SemiBold.woff2` | rsms/inter, `docs/font-files/` | SIL OFL 1.1 |
-| `assets/icons/flashlight-fill.svg`, `camera-fill.svg`, `check-circle-fill.svg` (fill), `check-circle.svg`, `x-circle.svg` (regular) | phosphor-icons/core, `raw/` and `assets/` | MIT, Copyright (c) 2023 Phosphor Icons |
+| `assets/GeistMono-Variable.woff2` | vercel/geist-font, `packages/next/dist/fonts/geist-mono/` | SIL OFL 1.1 |
+| `assets/icons/flashlight-bold.svg`, `camera-bold.svg`, `check-bold.svg` (bold), `check-circle.svg`, `x-circle.svg` (regular) | phosphor-icons/core, `assets/` | MIT, Copyright (c) 2023 Phosphor Icons |
 | `assets/icons/wifi.svg` | lucide-icons/lucide, `icons/wifi.svg` | ISC, Copyright (c) 2026 Lucide Icons and Contributors |
 | `assets/pushary-logo.webp` | Scraped from pushary.com (`original/site/pushary.com/_next/image__P3VybD0lMkZsb2dvLndlYnAm.html`, `/logo.webp`) | Pushary's own mark |
 | `assets/wallpaper-cosmic-orange.webp`, `assets/wallpaper-burgundy.webp` | Rendered offline from Paper Shaders' `warp` fragment shader (paper-design/shaders, `packages/shaders/src/shaders/warp.ts`) with custom colors; no photos, no AI imagery | Shader: Apache-2.0 (NOTICE: "Powered by Paper Shaders: https://shaders.paper.design"). The renders are original output. |
