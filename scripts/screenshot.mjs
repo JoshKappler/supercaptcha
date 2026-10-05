@@ -45,7 +45,17 @@ for (const [label, viewport, isMobile] of [
   });
   await page.waitForTimeout(600);
   const full = path.join(outDir, `${label}-full.png`);
-  await page.screenshot({ path: full, fullPage: true }); shots.push(full);
+  const png = await page.screenshot({ path: full, fullPage: true }); shots.push(full);
+  const fullWidth = png.readUInt32BE(16) / (isMobile ? 3 : 2);
+  if (fullWidth > viewport.width) errors.push(`full page renders ${fullWidth}px wide at ${viewport.width}px`);
+  // The full image is too tall to read once a viewer downscales it, so also save it in slices.
+  const total = await page.evaluate(() => document.documentElement.scrollHeight);
+  const sliceH = viewport.height * 2;
+  for (let y = 0, i = 1; y < total; y += sliceH, i++) {
+    const f = path.join(outDir, `${label}-part-${String(i).padStart(2, '0')}.png`);
+    await page.screenshot({ path: f, fullPage: true, clip: { x: 0, y, width: viewport.width, height: Math.min(sliceH, total - y) } });
+    shots.push(f);
+  }
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
   if (overflow) errors.push(`horizontal overflow at ${viewport.width}px`);
   if (errors.length) fs.writeFileSync(path.join(outDir, `${label}-errors.txt`), errors.join('\n'));

@@ -7,7 +7,8 @@ other's scores. This keeps the judgment about what the page actually looks like.
 ## Procedure per attempt
 
 1. `node scripts/screenshot.mjs versions/vN <attempt>` produces in `reviews/vN/attempt-<attempt>/`:
-   `desktop-hero-{500,2500,5000}ms.png`, `desktop-full.png`, the same for `mobile-*`,
+   `desktop-hero-{500,2500,5000}ms.png`, `desktop-full.png`, `desktop-part-NN.png` (the full
+   page in slices two screens tall, readable after downscaling), the same for `mobile-*`,
    and `*-errors.txt` if there were JS errors, failed requests or horizontal overflow.
    Fix any errors file before reviewing; reviewers should not burn a round on broken assets.
 2. Launch three reviewers **in parallel, in one message**, each a fresh `general-purpose`

@@ -5,3 +5,4 @@ vendor/*
 # Raw scrape: third-party bundles, fonts and tracker payloads. Kept on disk, not published.
 original/site/
 reviews/*/attempt-draft/
+reviews/*/attempt-*/*.png
