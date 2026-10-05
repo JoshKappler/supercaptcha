@@ -17,3 +17,12 @@ Blocking issues: no visual moment after the hero; unfinished "What is Pushary?" 
 | C | 7 | Disciplined and cohesive; loud foreign elements and an island pill that barely reads |
 Result: FAIL (min 7). Glass visible: yes (3/3). Template named: Linear-style dark SaaS (3/3).
 Blocking issues: bright founder video poster; white Product Hunt sticker; crowded hero left column; island pill invisible on near-black; body and heading "a" differ; second phone repeats the hero; broken mobile hub diagram.
+
+## Attempt 3 (commit 67f81a3)
+| Reviewer | Score | Verdict |
+|---|---|---|
+| A | 7 | Disciplined and consistent, the phone and Island sell the idea; saturated device, a crowded nav pill and hierarchy slips |
+| B | 8 | Restrained and Apple-like with a clear value prop; weak glass outside the phone, a repeated wallpaper and thin trust |
+| C | 7 | Convincing hero, then a long flat run of left-headline, right-paragraph rows |
+Result: FAIL (min 7). Glass visible: yes (3/3). Template named: Linear/Vercel dark SaaS (3/3).
+Blocking issues: repeated section layout below the hero; Island pill crowds the nav and reads as a flat chip; second phone repeats the hero; dead hero gap; small control panel heading; empty FAQ column.

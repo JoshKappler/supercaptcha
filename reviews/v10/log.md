@@ -17,3 +17,12 @@ Blocking issues: hero crop cuts through the flashlight and camera buttons on mob
 | C | 7 | Coherent with a believable phone; a messy mid-animation frame, doubled hairlines, a light thumbnail and a mobile hero without the phone |
 Result: FAIL (min 7). Glass visible: yes (3/3). Template named: none (A), Linear-style or Framer app template (B, C).
 Blocking issues: the shared phone's long-press transition shows the collapsed card, expanded card and menu at once (a component defect, fixed in shared/iphone); bright founder thumbnail; doubled hairlines; phone below the first mobile screen; one heading in the text face.
+
+## Attempt 3 (commit 67f81a3)
+| Reviewer | Score | Verdict |
+|---|---|---|
+| A | 8 | Confident and restrained, the lock-screen hero reads as a real iPhone; the metal rim and lower layout fall short of apple.com |
+| B | 8 | The wallpaper hero, one-family type and quiet hairlines fix all three problems; a few hierarchy and mobile details |
+| C | 7 | Cohesive with a strong hero; two body faces, dead columns, an orange under-glow and a murky backdrop behind the copy |
+Result: FAIL (min 7). Glass visible: yes (3/3). Template named: Framer app template (A, C), none specific (B).
+Blocking issues: lead paragraphs use a different "a" from other body text; orange glow under the second phone; floating setup CTA and empty founder column; stranded 37 minutes line; muddy hero backdrop behind the trust row.

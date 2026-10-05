@@ -17,3 +17,12 @@ Blocking issues: light shift invisible in stills; timeline numerals in a differe
 | C | 7 | Mostly coherent; a mobile table bug, a column grid that changes per section and a few cheap details |
 Result: FAIL (min 7). Glass visible: yes (3/3). Template named: Linear-style dark SaaS (3/3).
 Blocking issues: comparison header runs together on mobile; terminal says waiting while the phone says approved; no shared column grid; washed-out Product Hunt badge and broken mobile trust row; low-res founder still; detached CTA in the 37 minutes band.
+
+## Attempt 3 (commit 2b4f6ad)
+| Reviewer | Score | Verdict |
+|---|---|---|
+| A | 7 | Disciplined type and a believable lock-screen flow; a repeated phone, an off-center mobile device, a murky video card and a copper underglow |
+| B | 8 | Clear and confident with a convincing hero; a low-contrast primary CTA, repeated CTAs and a long text-heavy middle |
+| C | 7 | Fixes fonts and separators; repeats itself, leaves right columns empty, cheap video thumbnail and faint banding |
+Result: FAIL (min 7). Glass visible: yes (3/3). Template named: Linear/Vercel dark SaaS (3/3).
+Blocking issues: second phone copies the hero and sits off center on mobile; price and CTA four times; founder thumbnail; background banding; inconsistent agent list; orange glow under the phone.
