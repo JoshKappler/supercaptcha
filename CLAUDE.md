@@ -20,6 +20,9 @@ no access to its source repo. So:
 - Done (4 October 2026): scrape and audit in `original/` (the raw network dump stays on disk,
   gitignored), all six versions built and reviewed, results in `versions/README.md`, per-attempt
   logs in `reviews/vN/log.md`. v3 and v6 passed; v1, v2, v4 and v5 used all four attempts.
+- Done (5 October 2026): round 2 in `docs/ROUND_2.md`. Twelve sketches in `explorations/`,
+  v7 to v10 built on the shared iPhone in `shared/iphone`, all four stopped at four attempts.
+  The Apple bezel PNGs stay in gitignored `private/` folders and are never committed.
 - Commit each version before a review round; v4's best attempt was lost by editing it uncommitted.
 
 ## Step 0: check access
