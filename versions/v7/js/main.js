@@ -63,9 +63,12 @@
   const steps = [...document.querySelectorAll('.step')];
   let i = 0;
   let timer = null;
+  const later = document.querySelector('.term .later');
   const show = () => {
+    const state = steps[i].dataset.state;
     steps.forEach((s, k) => s.classList.toggle('on', k === i));
-    if (flow) flow.setState(steps[i].dataset.state);
+    later.classList.toggle('wait', state !== 'approved');
+    if (flow) flow.setState(state);
     i = (i + 1) % steps.length;
   };
   steps[steps.length - 1].classList.add('on');

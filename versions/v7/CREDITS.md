@@ -8,8 +8,9 @@
 | `assets/img/agents/{claude,codex,cursor,antigravity,gemini,hermes}.webp` | pushary.com scrape, `original/site/pushary.com/_next/image__*` (the `/claude.webp`, `/codex.webp`, `/cursor.webp`, `/antigravity.webp`, `/gemini.webp`, `/hermes.webp` images) | Agent marks as shown on pushary.com |
 | `assets/img/agents/opencode.svg`, `vscode.svg` | pushary.com scrape, `original/site/pushary.com/opencode__*.svg`, `vscode__*.svg` | Agent marks as shown on pushary.com |
 | `assets/img/hacker-news.webp` | pushary.com scrape, `/hacker-news.webp` | As shown on pushary.com |
-| `assets/img/product-hunt-top-post-light.svg`, `app-store.svg`, `google-play.svg` | pushary.com scrape, `original/site/pushary.com/badges/` | Badges as shown on pushary.com |
-| `assets/img/founder.webp` | Cropped and resized from the founder video poster in the pushary.com scrape (`/home-demo-poster.webp`); it links to the founder's Loom video from the same page | Pushary's own image |
+| `assets/img/app-store.svg`, `google-play.svg` | pushary.com scrape, `original/site/pushary.com/badges/` | Badges as shown on pushary.com |
+| `assets/img/founder-video.webp` | Resized from the founder video poster in the pushary.com scrape (`/home-demo-poster.webp`), shown dimmed as a video card that links to the founder's Loom video from the same page | Pushary's own image |
+| `assets/img/product-hunt-medal.svg` | The medal mark extracted unchanged from `original/site/pushary.com/badges/product-hunt-top-post-light.svg` | Badge artwork as shown on pushary.com |
 
 ## Shared iPhone (`assets/iphone/`, copied by `scripts/sync-phone.sh`)
 
