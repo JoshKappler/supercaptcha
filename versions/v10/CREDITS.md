@@ -6,9 +6,12 @@
 | `assets/fonts/MonaSansMonoVF.woff2` | github/mona-sans, `fonts/webfonts/variable/MonaSansMonoVF[wght].woff2` | SIL OFL 1.1 |
 | `assets/img/grain.png` | Kevin Liu, Glyphfield `public/shader-grain.png` | MIT, Copyright (c) 2026 Kevin Liu (full notice below) |
 | `assets/img/logo.webp` | Pushary logo from the pushary.com scrape (`/logo.webp`) | Pushary's own mark |
+| `assets/img/logos/claude.webp`, `codex.webp`, `cursor.webp`, `hermes.webp`, `antigravity.webp`, `hacker-news.webp` | Agent and Hacker News marks as served by pushary.com (`original/site/pushary.com/_next/image__*.html`, decoded WebP) | Trademarks of their owners, shown as on pushary.com |
+| `assets/img/product-hunt-top-post-light.svg`, `app-store.svg`, `google-play.svg` | pushary.com scrape, `original/site/pushary.com/badges/` | Product Hunt, Apple and Google badges as used on pushary.com |
+| `assets/img/founder-video-poster.webp` | pushary.com scrape, `/home-demo-poster.webp` (poster of the founder video, linked to its Loom embed URL from the page's structured data) | Pushary's own image |
 | `assets/iphone/` | The shared iPhone component (`shared/iphone/`), copied by `scripts/sync-phone.sh`; its entries follow | See below |
 
-The hero backdrop reuses the phone's own wallpaper (`assets/iphone/assets/wallpaper-cosmic-orange.webp`), mirrored around the screen and dimmed, so the page continues the lock screen.
+The hero backdrop and the final call to action reuse the phone's own wallpaper (`assets/iphone/assets/wallpaper-cosmic-orange.webp`), dimmed, so the page continues the lock screen. The Product Hunt badge is shown with a CSS grayscale and invert filter to sit on the dark page.
 
 Copy, links and prices come from the pushary.com home page scrape (`original/home.text.txt`, `original/home.meta.json`), tightened.
 
