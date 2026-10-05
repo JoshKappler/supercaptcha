@@ -26,3 +26,17 @@ Blocking issues: Product Hunt sticker; founder still caught mid-word; mobile hub
 | C | 7 | Clean and consistent; the phone reads as a flat render, an orange floor glow, and long runs of identical hairline lists |
 Result: FAIL (min 7). Glass visible: yes (3/3). Template named: Linear/Framer dark SaaS (3/3).
 Blocking issues: orange floor glow; founder thumbnail; pricing under the FAQ heading; second phone repeats the hero; footer link farm; identical hairline lists through the middle.
+
+## Attempt 4 (commit 2101e07)
+| Reviewer | Score | Verdict |
+|---|---|---|
+| A | 7 | Restrained and consistent with a convincing lock screen; an off-grid hero, a neon-like frame rim and a placeholder video card |
+| B | 7 | Clear headline and a convincing phone; a text-heavy middle, weak trust signals and rough edges |
+| C | 7 | Disciplined and consistent; an off-grid hero, an empty video placeholder, a repeated phone and long wordy stretches |
+Result: FAIL (min 7). Glass visible: yes (3/3). Template named: Linear/Framer dark SaaS (3/3).
+Blocking issues: hero text column starts about 115px right of the page grid; founder video has no poster; second phone repeats the hero; frame rim evenly lit like an outline; clipped edge on the phone's glow.
+
+## Final
+Not passed after four attempts. Kept attempt 2 (7/8/7): attempts 3 and 4 both scored 7/7/7
+(commit 7f8809f). The shared iPhone keeps its later transition fix. Reviewers held at 7 on the
+template look below the hero, the repeated phone and the frame reading as a lit outline.

@@ -26,3 +26,17 @@ Blocking issues: bright founder video poster; white Product Hunt sticker; crowde
 | C | 7 | Convincing hero, then a long flat run of left-headline, right-paragraph rows |
 Result: FAIL (min 7). Glass visible: yes (3/3). Template named: Linear/Vercel dark SaaS (3/3).
 Blocking issues: repeated section layout below the hero; Island pill crowds the nav and reads as a flat chip; second phone repeats the hero; dead hero gap; small control panel heading; empty FAQ column.
+
+## Attempt 4 (commit 6ced66c)
+| Reviewer | Score | Verdict |
+|---|---|---|
+| A | 7 | Disciplined and consistent; the phone reads as an orange outline, not glass and metal, and the footer and repeats lose restraint |
+| B | 7 | Confident hero and a clear pitch; mostly text below the fold, thin trust and no visible pricing |
+| C | 7 | Fixes fonts, separators and phone, but reads as a generic dark SaaS template with a loud copper phone and a footer link dump |
+Result: FAIL (min 7). Glass visible: yes (3/3). Template named: Linear-style dark SaaS (3/3).
+Blocking issues: phone frame reads as a glowing outline; phone too small on mobile to read the notification; pricing never shown as a section; dead gap in the desktop hero; loose grid alignments.
+
+## Final
+Not passed after four attempts. Kept attempt 3 (7/8/7), the highest minimum and total (commit 2e9aec1).
+All three reviewers held at 7 on the same points every round: the page below the hero reads as a
+generic dark SaaS layout, and the copper frame reads as a lit outline rather than metal.
