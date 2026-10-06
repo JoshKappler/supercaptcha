@@ -11,3 +11,6 @@ reviews/*/attempt-*/*.png
 shared/iphone/private/
 versions/*/assets/iphone/private/
 explorations/*/private/
+
+# Hosting build output (scripts/build-site.mjs).
+dist/
