@@ -1,4 +1,4 @@
-/* v9: the hero light follows the decision, the step rows drive the second phone, and the copy button. */
+/* v9: the hero light follows the decision, the step in view is lit, and the copy button. */
 (function () {
   'use strict';
 
@@ -14,13 +14,10 @@
     sync();
   }
 
-  var flowEl = document.getElementById('flow-phone');
   var rows = document.querySelectorAll('.steps li');
-  if (rows.length && window.PusharyPhone) {
-    var flowPhone = flowEl ? PusharyPhone.mount(flowEl) : null;
+  if (rows.length) {
     var light = function (li) {
       rows.forEach(function (r) { r.classList.toggle('lit', r === li); });
-      if (flowPhone) flowPhone.setState(li.getAttribute('data-state'));
     };
     rows.forEach(function (r) {
       r.addEventListener('mouseenter', function () { light(r); });

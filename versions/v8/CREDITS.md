@@ -26,9 +26,9 @@
 
 ## Example content
 
-Everything in the phones, the island and the terminal ("Example session") is demo copy, not real data: the sender "Claude Code",
+Everything in the phone and the island is demo copy, not real data: the sender "Claude Code",
 the repo `api-gateway`, the commands `git push origin main` and `npm run deploy:staging`,
-"3 commits", `claude "ship the release"`, the date and the time 9:14. The control panel (tasks and
+"3 commits", the date and the time 9:14. The control panel (tasks and
 decision ledger) is labelled "Example data" on the page and comes from the example panel on pushary.com.
 
 Page copy is from the pushary.com home page scrape (`original/home.text.txt`), tightened. FAQ

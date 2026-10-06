@@ -177,7 +177,7 @@ img { display: block; }
   mask: url("../assets/iphone/assets/icons/check-circle.svg") center / contain no-repeat;
 }
 
-/* Hero: copy, trust and the agent's terminal on the left, the phone on the right. */
+/* Hero: copy and the press credit on the left, the phone on the right. */
 .hero {
   max-width: var(--wrap);
   margin: 0 auto;
@@ -217,40 +217,9 @@ h1 {
 }
 .cta:hover { transform: translateY(-1px); background-color: #ff9752; }
 .price { margin: 0; font-size: 15px; color: var(--body); }
-.price strong { color: var(--ink); font-weight: 600; }
-.trust { grid-area: trust; align-self: start; margin: 0; padding-top: 36px; display: flex; align-items: flex-start; gap: 14px; font-size: 14px; line-height: 1.55; color: var(--mute); max-width: 560px; }
+.trust { grid-area: trust; align-self: start; margin: 0; padding-top: 36px; font-size: 14px; line-height: 1.55; color: var(--mute); max-width: 560px; }
 .trust a { color: var(--body); }
-.marks { display: flex; flex: none; padding-top: 2px; }
-.marks { gap: 5px; }
-.marks img { border-radius: 5px; }
 
-.term {
-  margin: 0;
-  width: 100%;
-  max-width: 520px;
-  justify-self: end;
-  border-radius: 14px;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--line-strong), inset 0 1px 0 rgb(255 255 255 / 0.05), 0 24px 48px rgb(0 0 0 / 0.35);
-  overflow: hidden;
-}
-.term-bar { display: flex; align-items: center; gap: 8px; padding: 11px 16px; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink); }
-.term-bar img { border-radius: 3px; }
-.term-path { color: var(--mute); font-family: var(--mono); font-size: 12px; }
-.term-tag { margin-left: auto; color: var(--mute); font-size: 12px; }
-.term-lines { list-style: none; margin: 0; padding: 12px 16px 14px; font: 400 13px/1 var(--mono); color: #b9b1a9; }
-.term-lines li { height: 23px; display: flex; align-items: center; white-space: nowrap; overflow: hidden; }
-.t-cmd { color: var(--ink); }
-.t-p { color: var(--mute); margin-right: 8px; }
-.t-ask { color: var(--ink); }
-.q { color: var(--accent); font-weight: 400; }
-.term-lines em { font-style: normal; color: var(--mute); margin-left: 10px; font-family: "Inter", sans-serif; font-size: 12.5px; }
-.slot > span { display: none; }
-.term-lines[data-s="work"] .l-a, .term-lines[data-s="work"] .l-work,
-.term-lines[data-s="ask"] .l-a, .term-lines[data-s="ask"] .l-ask,
-.term-lines[data-s="done"] .l-b, .term-lines[data-s="done"] .l-done,
-.term-lines[data-s="ask2"] .l-b, .term-lines[data-s="ask2"] .l-ask2 { display: inline; }
-.motion .t-cur { animation: breathe 1000ms steps(2) infinite; }
 
 .device { grid-area: device; align-self: center; }
 .device .iphone { --iphone-w: 380px; }
@@ -262,8 +231,6 @@ h3 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
 .body { margin: 20px 0 0; font-size: 19px; line-height: 1.5; color: var(--body); max-width: 46ch; }
 .list-k { margin: 0 0 14px; font-size: 14px; font-weight: 600; color: var(--mute); }
 
-/* Walk away: the heading beside the agent's own terminal. */
-.walk-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: end; }
 .cols { margin-top: 72px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
 .cols h3 { margin-bottom: 20px; }
 .without h3 { color: var(--mute); }
@@ -274,45 +241,18 @@ time { font-variant-numeric: tabular-nums; color: var(--mute); font-size: 15px; 
 .without li p { color: #bdb5ad; }
 .with li { border-top-color: rgb(255 138 61 / 0.4); }
 .with li:last-child p { color: var(--ink); font-weight: 560; }
-.close { margin: 72px 0 0; font-size: 21px; line-height: 1.5; color: var(--body); }
-.close a { color: var(--accent); font-weight: 600; margin-left: 6px; white-space: nowrap; }
 
-/* What is Pushary: a connected hub diagram. Rows are 52px so the wires meet each label. */
 .head-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: end; }
 .head-split .body { margin: 0; }
-.route {
-  margin-top: 80px;
-  display: grid;
-  grid-template-columns: minmax(150px, 1fr) minmax(80px, 1.1fr) 56px minmax(80px, 1.1fr) minmax(150px, 1fr);
-  align-items: start;
-  height: 312px;
-}
-.route ul { list-style: none; margin: 0; padding: 0; }
-.route li { height: 52px; display: flex; align-items: center; gap: 12px; font-size: 18px; white-space: nowrap; }
-.route-in li { justify-content: flex-end; padding-right: 14px; }
-.route-in li img { border-radius: 5px; }
-.route-out { padding-top: 26px !important; }
-.route-out li { padding-left: 14px; }
-.route li.dim { color: var(--mute); font-size: 15px; }
-.route li.hot { color: var(--ink); font-weight: 560; }
-.wires { width: 100%; height: 312px; overflow: visible; }
-.wires path { fill: none; stroke: rgb(245 242 239 / 0.2); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.wires path.hot { stroke: rgb(255 138 61 / 0.75); }
-.hub { position: relative; height: 312px; display: grid; place-items: center; }
-.hub img { border-radius: 14px; background: #fff; box-shadow: 0 0 0 6px rgb(245 242 239 / 0.05), 0 12px 30px rgb(0 0 0 / 0.5); }
-.hub span { position: absolute; top: calc(50% + 40px); font-size: 13px; color: var(--mute); }
-.facts { margin: 56px auto 0; font-size: 17px; color: var(--body); max-width: 72ch; text-align: center; }
 
-/* How it works: the phone again, now on the approved state, beside the steps. */
-.how { display: grid; grid-template-columns: 340px minmax(0, 1fr); grid-template-areas: "phone copy"; column-gap: 96px; align-items: center; }
-.how-copy { grid-area: copy; }
-.how-phone { grid-area: phone; }
-.how-phone .iphone { --iphone-w: 340px; }
-.steps { margin-top: 48px; }
+/* How it works: the heading and the video link beside the steps. */
+.how-copy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 64px; }
+.how-copy > * { grid-column: 1; }
+.how-copy .steps { grid-column: 2; grid-row: 1 / span 3; }
 .steps li { display: grid; grid-template-columns: 44px 1fr; padding: 22px 0; border-top: 1px solid var(--line); }
 .steps .n { grid-row: span 2; font-variant-numeric: tabular-nums; color: var(--mute); font-size: 15px; padding-top: 1px; }
 .steps p { grid-column: 2; margin: 6px 0 0; color: var(--body); max-width: 44ch; }
-.watch { margin-top: 32px; display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 500; text-decoration: none; }
+.watch { margin-top: 32px; justify-self: start; align-self: start; display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 500; text-decoration: none; }
 .watch .ico { width: 14px; height: 14px; color: var(--accent); }
 .watch:hover { text-decoration: underline; }
 
@@ -399,7 +339,6 @@ td.no { color: #ff9b85; }
 .mini-steps { margin-top: 24px; counter-reset: s; }
 .mini-steps li { counter-increment: s; display: grid; grid-template-columns: 32px 1fr; padding: 12px 0; border-top: 1px solid var(--line); color: var(--body); }
 .mini-steps li::before { content: counter(s); color: var(--mute); font-variant-numeric: tabular-nums; }
-.buy { margin-top: 36px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 .note { margin: 16px 0 0; color: var(--mute); font-size: 15px; }
 .note a { color: var(--ink); }
 .agents { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; }
@@ -412,9 +351,7 @@ td.no { color: #ff9b85; }
 /* FAQ: the heading column stays in view and carries the price and a way out. */
 .faq { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 64px; align-items: start; }
 .faq-side { position: sticky; top: 96px; }
-.plan { margin: 28px 0 0; font-size: 17px; color: var(--body); max-width: 30ch; }
-.plan strong { color: var(--ink); font-weight: 600; }
-.plan a, .ask a { color: var(--ink); }
+.ask a { color: var(--ink); }
 .ask { margin: 16px 0 0; font-size: 15px; color: var(--mute); }
 .qs details { border-top: 1px solid var(--line); }
 .qs details:last-child { border-bottom: 1px solid var(--line); }
@@ -449,12 +386,6 @@ td.no { color: #ff9b85; }
 .lead figcaption, .quotes figcaption { margin-top: 16px; font-size: 14px; color: var(--mute); }
 .lead figcaption a, .quotes figcaption a { color: var(--mute); }
 
-/* Final */
-.final { text-align: center; padding-bottom: 112px; }
-.final h2 { margin: 0 auto; font-size: clamp(44px, 5.6vw, 84px); letter-spacing: -0.035em; line-height: 0.98; max-width: 12ch; }
-.final .body { margin: 24px auto 0; }
-.final .buy { justify-content: center; margin-top: 36px; }
-.fine { margin: 32px 0 0; font-size: 15px; color: var(--mute); }
 
 /* Footer: one grid; the long link groups sit behind a native disclosure. */
 .foot { max-width: var(--wrap); margin: 0 auto; padding: 40px var(--gut) 40px; border-top: 1px solid var(--line); font-size: 14px; }
@@ -485,13 +416,11 @@ td.no { color: #ff9b85; }
   .menu { display: block; }
   .hero { grid-template-columns: minmax(0, 1fr) 300px; column-gap: 40px; }
   .device .iphone { --iphone-w: 300px; }
-  .head-split, .faq, .founder, .people-top, .walk-head { grid-template-columns: 1fr; gap: 40px; }
-  .term { justify-self: start; }
+  .head-split, .faq, .founder, .people-top { grid-template-columns: 1fr; gap: 40px; }
   .setup { grid-template-columns: 1fr; grid-template-areas: "head" "main" "side"; }
-  .how { grid-template-columns: 280px minmax(0, 1fr); column-gap: 56px; }
-  .how-phone .iphone { --iphone-w: 280px; }
-  .route { grid-template-columns: minmax(130px, 1fr) minmax(40px, 0.6fr) 56px minmax(40px, 0.6fr) minmax(130px, 1fr); }
   .faq-side { position: static; }
+  .how-copy { grid-template-columns: 1fr; grid-template-rows: none; }
+  .how-copy .steps { grid-column: 1; grid-row: auto; margin-top: 40px; }
   .base { grid-template-columns: 1fr; }
 }
 
@@ -531,33 +460,15 @@ td.no { color: #ff9b85; }
   .cta-row .price { font-size: 13.5px; white-space: nowrap; }
   .device { padding-top: 22px; justify-self: center; }
   .device .iphone { --iphone-w: clamp(228px, calc((100svh - 410px) * 0.53), 300px); }
-  .trust { padding-top: 32px; font-size: 13.5px; flex-direction: column; gap: 10px; }
-  .term-lines { font-size: 12px; padding: 10px 14px 12px; }
-  .term-lines em { font-size: 12px; margin-left: 8px; }
-  .term-path { display: none; }
+  .trust { padding-top: 32px; font-size: 13.5px; }
 
   .body, .cols li p, .founder-body p { font-size: 17px; }
   h2 { font-size: 34px; }
   .cols, .rules { grid-template-columns: 1fr; gap: 40px; margin-top: 48px; }
   .cols li { grid-template-columns: 52px 1fr; }
-  .close { margin-top: 48px; font-size: 18px; }
 
-  .route { display: flex; flex-direction: column; align-items: center; height: auto; margin-top: 48px; text-align: center; }
-  .wires { display: none; }
-  .route ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 18px; max-width: 330px; }
-  .route li { height: auto; font-size: 16px; padding: 0 !important; }
-  .route-in li { flex-direction: row-reverse; gap: 8px; }
-  .route-out { padding-top: 0 !important; }
-  .hub { height: auto; display: flex; flex-direction: column; align-items: center; }
-  .hub::before, .hub::after { content: ""; width: 1px; height: 36px; margin: 14px 0; background: rgb(255 138 61 / 0.55); }
-  .hub img { width: 48px; height: 48px; border-radius: 12px; }
-  .hub span { position: static; margin-top: 8px; }
-  .facts { margin-top: 40px; font-size: 16px; }
 
-  .how { grid-template-columns: 1fr; grid-template-areas: "copy" "phone"; }
-  .how-phone { justify-self: center; margin-top: 48px; }
-  .how-phone .iphone { --iphone-w: 260px; }
-  .steps { margin-top: 32px; }
+  .how-copy .steps { margin-top: 32px; }
   .steps li { grid-template-columns: 32px 1fr; }
 
   .panel-intro { margin-top: 72px; }
@@ -577,10 +488,8 @@ td.no { color: #ff9b85; }
   .setup-side { margin-top: 56px; }
   .agents { column-gap: 20px; }
   .qs summary { font-size: 17px; padding: 18px 0; }
-  .plan { margin-top: 20px; }
   .quotes { grid-template-columns: 1fr; gap: 40px; margin-top: 48px; }
   .lead blockquote p { font-size: 24px; }
-  .final h2 { font-size: 44px; }
   .cols4 { grid-template-columns: 1fr 1fr; gap: 28px 24px; }
   .seo-cols { grid-template-columns: 1fr; gap: 24px; }
 }
