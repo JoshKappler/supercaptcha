@@ -1,0 +1,221 @@
+@font-face { font-family: "Sora"; src: url("../assets/fonts/sora-300.woff2") format("woff2"); font-weight: 300; font-display: swap; }
+@font-face { font-family: "Sora"; src: url("../assets/fonts/sora-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Sora"; src: url("../assets/fonts/sora-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Geist Mono"; src: url("../assets/fonts/GeistMono-Variable.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+
+@property --glow { syntax: "<color>"; inherits: true; initial-value: rgba(255, 120, 60, .1); }
+@property --glow-x { syntax: "<percentage>"; inherits: true; initial-value: 50%; }
+@property --glow-r { syntax: "<length>"; inherits: true; initial-value: 520px; }
+
+:root {
+  --bg: #0b0908;
+  --ink: #f2ece6;
+  --ink-2: rgba(242, 236, 230, .66);
+  --ink-3: rgba(242, 236, 230, .46);
+  --line: rgba(242, 236, 230, .1);
+  --lift: rgba(242, 236, 230, .045);
+  --accent: #f08a4b;
+  --sans: "Sora", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Geist Mono", ui-monospace, Menlo, Consolas, monospace;
+  --gutter: clamp(20px, 5vw, 88px);
+  --phone-w: clamp(260px, calc((100svh - 150px) * .49), 360px);
+  --ease: cubic-bezier(.25, .1, .25, 1);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 17px/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, ul, figure { margin: 0; }
+a { color: inherit; }
+img { display: block; }
+
+.skip { position: absolute; left: 16px; top: -48px; padding: 8px 14px; background: var(--ink); color: var(--bg); border-radius: 8px; z-index: 30; }
+.skip:focus { top: 12px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+/* Bar */
+.bar {
+  position: fixed; inset: 0 0 auto; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px; padding: 0 var(--gutter);
+  background: linear-gradient(var(--bg) 20%, rgba(11, 9, 8, 0));
+}
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 500; font-size: 17px; letter-spacing: -.01em; }
+.brand img { border-radius: 7px; }
+.bar__nav { display: flex; align-items: center; gap: 28px; font-size: 14px; }
+.bar__nav a { color: var(--ink-2); text-decoration: none; transition: color .2s var(--ease); }
+.bar__nav a:hover { color: var(--ink); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 48px; padding: 0 24px; border-radius: 999px;
+  background: var(--ink); color: #120d0a;
+  font-weight: 500; font-size: 15px; text-decoration: none; white-space: nowrap;
+  transition: background-color .2s var(--ease), transform .2s var(--ease);
+}
+.btn:hover { background: #fff; }
+.btn:active { transform: scale(.98); }
+.link { color: var(--ink-2); font-size: 15px; text-underline-offset: 4px; text-decoration-color: var(--ink-3); }
+.link:hover { color: var(--ink); }
+
+/* Story: one pinned phone, beats scroll past it */
+.story {
+  position: relative;
+  --glow: rgba(255, 120, 60, .1); --glow-x: 50%; --glow-r: 520px;
+  transition: --glow 1.1s var(--ease), --glow-x 1.4s var(--ease), --glow-r 1.4s var(--ease);
+}
+.story[data-beat="1"] { --glow: rgba(130, 145, 190, .08); --glow-x: 44%; --glow-r: 460px; }
+.story[data-beat="2"] { --glow: rgba(255, 128, 60, .2); --glow-x: 54%; --glow-r: 560px; }
+.story[data-beat="3"] { --glow: rgba(255, 196, 160, .13); --glow-x: 46%; --glow-r: 420px; }
+.story[data-beat="4"] { --glow: rgba(120, 205, 150, .11); --glow-x: 54%; --glow-r: 540px; }
+.story[data-beat="5"] { --glow: rgba(255, 150, 82, .14); --glow-x: 46%; --glow-r: 500px; }
+.story[data-beat="6"] { --glow: rgba(255, 168, 108, .17); --glow-x: 50%; --glow-r: 680px; }
+
+.stage {
+  position: sticky; top: 0; z-index: 0;
+  height: 100svh;
+  display: grid; place-items: center;
+  padding-top: 40px;
+}
+.stage__light {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(var(--glow-r) calc(var(--glow-r) * .9) at var(--glow-x) 52%, var(--glow), transparent 72%),
+    radial-gradient(60% 40% at 50% 100%, rgba(255, 255, 255, .025), transparent 70%);
+}
+.stage__phone { position: relative; display: grid; justify-items: center; gap: 14px; }
+.stage__phone .iphone { --iphone-w: var(--phone-w); }
+figcaption { font: 400 11.5px/1 var(--mono); color: var(--ink-3); letter-spacing: .02em; }
+
+.beats { position: relative; z-index: 1; margin-top: -100svh; }
+.beat {
+  min-height: 88svh;
+  display: grid;
+  grid-template-columns: 1fr var(--phone-w) 1fr;
+  column-gap: clamp(40px, 6vw, 104px);
+  align-items: center;
+  padding: 0 var(--gutter);
+}
+.beat--open { min-height: 100svh; padding-top: 40px; }
+.beat__a { grid-column: 1; justify-self: end; text-align: right; max-width: 430px; }
+.beat__b { grid-column: 3; justify-self: start; max-width: 400px; }
+
+h1 {
+  font-weight: 300; font-size: clamp(40px, 4.3vw, 64px); line-height: 1.04; letter-spacing: -.035em;
+  text-wrap: balance;
+}
+.line {
+  font-weight: 300; font-size: clamp(30px, 3.1vw, 46px); line-height: 1.1; letter-spacing: -.03em;
+  text-wrap: balance;
+}
+.lede { font-size: 19px; line-height: 1.5; color: var(--ink); max-width: 30ch; }
+.note { font-size: 16px; line-height: 1.65; color: var(--ink-2); max-width: 34ch; text-wrap: pretty; }
+.beat__a .note { margin-left: auto; }
+.fine { font-size: 13px; line-height: 1.5; color: var(--ink-3); }
+.cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-top: 32px; }
+.proof { margin-top: 28px; }
+
+.beat__b .line, .beat__a .line { color: var(--ink); }
+.beat [data-fade] { opacity: var(--o, 1); }
+
+.cmd { margin-top: 24px; display: flex; justify-content: flex-end; }
+.cmd code {
+  font: 450 14px/1 var(--mono); color: var(--ink);
+  padding: 14px 18px; border-radius: 12px;
+  background: var(--lift); box-shadow: inset 0 0 0 1px var(--line);
+}
+.cmd code::before { content: "$ "; color: var(--ink-3); }
+.agents { list-style: none; padding: 0; margin-top: 24px; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px 18px; font-size: 13.5px; color: var(--ink-2); max-width: 430px; }
+.agents li { display: inline-flex; align-items: center; gap: 7px; }
+.agents img { border-radius: 5px; }
+
+/* Closing panel */
+.close { position: relative; padding: 10svh var(--gutter) 96px; }
+.panel {
+  max-width: 1040px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 6vw, 88px);
+  padding: clamp(28px, 5vw, 64px);
+  border-radius: 32px;
+  background:
+    radial-gradient(80% 120% at 0% 0%, rgba(240, 138, 75, .13), transparent 60%),
+    #120f0d;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 40px 120px -40px rgba(0, 0, 0, .8);
+}
+.panel h2 { font-weight: 300; font-size: clamp(30px, 3vw, 42px); line-height: 1.1; letter-spacing: -.03em; text-wrap: balance; max-width: 13ch; }
+.price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 14px; margin: 36px 0 12px; }
+.price__n { font-weight: 300; font-size: 64px; line-height: 1; letter-spacing: -.04em; }
+.price__u { color: var(--ink-2); font-size: 15px; }
+.panel__buy .cta { margin-top: 28px; }
+.panel__buy > .fine { margin-top: 24px; max-width: 44ch; }
+
+.panel__faq h3 { font: 400 12px/1 var(--mono); color: var(--ink-3); letter-spacing: .04em; margin-bottom: 18px; }
+details { border-radius: 16px; background: var(--lift); margin-bottom: 8px; transition: background-color .2s var(--ease); }
+details[open] { background: rgba(242, 236, 230, .07); }
+summary {
+  list-style: none; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 16px 20px; font-size: 15px; font-weight: 400;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after {
+  content: ""; flex: none; width: 9px; height: 9px; margin-right: 2px;
+  border-right: 1.5px solid var(--ink-3); border-bottom: 1.5px solid var(--ink-3);
+  transform: translateY(-3px) rotate(45deg); transition: transform .25s var(--ease);
+}
+details[open] summary::after { transform: translateY(2px) rotate(-135deg); }
+details p { padding: 0 20px 18px; color: var(--ink-2); font-size: 14.5px; line-height: 1.6; }
+
+.foot { padding: 0 var(--gutter) 56px; max-width: 1040px; margin: 0 auto; box-sizing: content-box; display: grid; gap: 18px; }
+.foot__lead { color: var(--ink-2); font-size: 14.5px; }
+.foot__lead a { color: var(--ink); text-underline-offset: 4px; text-decoration-color: var(--ink-3); }
+.foot__links { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; }
+.foot__links a { color: var(--ink-2); text-decoration: none; }
+.foot__links a:hover { color: var(--ink); }
+
+/* Mobile: the phone pins in the top half, beats scroll under it */
+@media (max-width: 899px) {
+  :root { --phone-w: clamp(170px, calc((54svh - 92px) * .49), 230px); }
+  body { font-size: 16px; }
+  .bar { height: 56px; padding: 0 16px; background: var(--bg); }
+  .stage {
+    height: 54svh; z-index: 2; padding-top: 56px; align-items: end; padding-bottom: 14px;
+    background: var(--bg);
+    -webkit-mask: linear-gradient(#000 calc(100% - 22px), transparent);
+    mask: linear-gradient(#000 calc(100% - 22px), transparent);
+  }
+  .stage__light { background: radial-gradient(70% 70% at 50% 60%, var(--glow), transparent 75%); }
+  .stage__phone { gap: 8px; }
+  .beats { margin-top: 0; }
+  .beat, .beat--open {
+    min-height: 52svh; display: flex; flex-direction: column; justify-content: center; gap: 18px;
+    padding: 28px 20px 40px; text-align: left;
+  }
+  .beat--open { min-height: 46svh; padding-top: 22px; justify-content: flex-start; }
+  .beat__a, .beat__b { justify-self: auto; text-align: left; max-width: 34rem; }
+  .beat--flip .beat__b { order: -1; }
+  .beat__a .note { margin-left: 0; }
+  h1 { font-size: clamp(32px, 9vw, 40px); }
+  .line { font-size: clamp(27px, 7.6vw, 34px); }
+  .lede { font-size: 17px; }
+  .cta { margin-top: 20px; }
+  .proof { margin-top: 18px; }
+  .cmd, .agents { justify-content: flex-start; }
+  .cmd { margin-top: 18px; }
+  .agents { margin-top: 18px; }
+  .close { padding-top: 64px; padding-bottom: 64px; padding-inline: 16px; }
+  .panel { grid-template-columns: 1fr; border-radius: 26px; padding: 28px 22px; }
+  .price__n { font-size: 52px; }
+  .foot { padding-inline: 20px; }
+}
+
+/* Reduced motion: the phone still follows the beats, but every change is instant */
+@media (prefers-reduced-motion: reduce) {
+  .story, .btn, details, summary::after { transition: none; }
+}
