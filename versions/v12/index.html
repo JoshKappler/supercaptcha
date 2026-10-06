@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pushary: approve your AI agents from your lock screen</title>
+<meta name="description" content="Your AI agents stop when they need permission. Approve from your phone in one tap so they keep working. For Claude Code, Codex, Cursor, and any MCP agent.">
+<meta name="theme-color" content="#0c0508">
+<link rel="icon" href="assets/img/logo.webp">
+<link rel="preload" href="assets/fonts/MonaSansCondensed-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/iphone/assets/wallpaper-burgundy.webp" as="image">
+<link rel="stylesheet" href="assets/iphone/iphone.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<div class="wall" aria-hidden="true">
+  <div class="wall__tiles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</div>
+
+<header class="status">
+  <a class="status__brand" href="https://pushary.com/" aria-label="Pushary home">
+    <img src="assets/img/logo.webp" alt="" width="24" height="24">Pushary
+  </a>
+  <nav class="status__nav" aria-label="Main">
+    <a href="#how">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="https://pushary.com/docs">Docs</a>
+    <a href="https://pushary.com/sign-in">Sign in</a>
+  </nav>
+</header>
+
+<main>
+  <section class="lock" aria-labelledby="hero-title">
+    <span class="lock__icon" aria-hidden="true"></span>
+    <p class="lock__date">The decision layer for AI agents</p>
+    <h1 class="clock" id="hero-title"><span class="clock__l">Your agent froze,</span> <span class="clock__l">waiting for your yes.</span></h1>
+    <p class="lock__sub">Pushary sends the question to your phone. Tap Approve and it keeps working.</p>
+    <a class="btn" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
+
+    <ul class="dock" aria-label="Works with">
+      <li class="glass dock__w" title="Claude Code"><img src="assets/img/agents/claude.webp" alt="Claude Code" width="28" height="28"></li>
+      <li class="glass dock__w" title="Codex"><img src="assets/img/agents/codex.webp" alt="Codex" width="28" height="28"></li>
+      <li class="glass dock__w" title="Cursor"><img src="assets/img/agents/cursor.webp" alt="Cursor" width="28" height="28"></li>
+      <li class="glass dock__w" title="Antigravity CLI"><img src="assets/img/agents/antigravity.webp" alt="Antigravity CLI" width="28" height="28"></li>
+      <li class="glass dock__w" title="Gemini CLI"><img src="assets/img/agents/gemini.webp" alt="Gemini CLI" width="28" height="28"></li>
+      <li class="glass dock__w" title="Hermes Agent"><img src="assets/img/agents/hermes.webp" alt="Hermes Agent" width="28" height="28"></li>
+      <li class="glass dock__w" title="VS Code"><img src="assets/img/agents/vscode.svg" alt="VS Code" width="28" height="28"></li>
+      <li class="glass dock__w" title="OpenCode"><img src="assets/img/agents/opencode.svg" alt="OpenCode" width="28" height="28"></li>
+    </ul>
+
+    <p class="dock__cap">Works with these agents and any MCP agent.</p>
+
+    <p class="lock__proof">
+      <span><img src="assets/img/product-hunt-medal.svg" alt="" width="14" height="19">#2 Product of the Day on Product Hunt</span>
+      <span><img src="assets/img/hacker-news.webp" alt="" width="16" height="16">Featured on Hacker News</span>
+    </p>
+  </section>
+
+  <section class="block block--first" aria-labelledby="missed-title">
+    <h2 class="heading" id="missed-title">Walk away. Come back to finished work.</h2>
+    <p class="lede">9:12. You hand off a long task and leave your desk.</p>
+    <div class="groups">
+      <div class="group group--missed">
+        <p class="group__head"><span>Without Pushary</span><span class="group__count">Missed</span></p>
+        <article class="glass note note--stale">
+          <span class="note__icon note__icon--sym"><i class="ico ico--hourglass"></i></span>
+          <div class="note__body">
+            <p class="note__head"><span class="note__app">The agent stops</span><span class="note__time">9:14</span></p>
+            <p class="note__text">It reaches a step it should not take alone, and waits.</p>
+          </div>
+        </article>
+        <article class="glass note note--alert">
+          <span class="note__icon note__icon--sym"><i class="ico ico--warning"></i></span>
+          <div class="note__body">
+            <p class="note__head"><span class="note__app">Still waiting</span><span class="note__time">9:51</span></p>
+            <p class="note__text">You come back. It has not moved in 37 minutes.</p>
+          </div>
+        </article>
+      </div>
+      <div class="group">
+        <p class="group__head"><span>With Pushary</span></p>
+        <article class="glass note">
+          <img class="note__icon" src="assets/img/logo.webp" alt="" width="44" height="44">
+          <div class="note__body">
+            <p class="note__head"><span class="note__app">Your phone buzzes</span><span class="note__time">9:14</span></p>
+            <p class="note__text">Approve the change before it goes live? You tap yes.</p>
+          </div>
+        </article>
+        <article class="glass note note--done">
+          <span class="note__icon note__icon--sym"><i class="ico ico--check"></i></span>
+          <div class="note__body">
+            <p class="note__head"><span class="note__app">Done</span><span class="note__time">9:51</span></p>
+            <p class="note__text">The task finished half an hour ago.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="how" aria-labelledby="how-title">
+    <h2 class="heading" id="how-title">One approval, start to finish.</h2>
+    <p class="lede">Press and hold the notification, then answer. Try it.</p>
+
+    <div class="demo" data-state="expanded">
+      <article class="glass demo__card">
+        <div class="demo__top">
+          <img class="note__icon" src="assets/img/logo.webp" alt="" width="52" height="52">
+          <div class="demo__who">
+            <p class="note__head"><span class="note__app">Claude Code</span><span class="note__time">now</span></p>
+            <p class="demo__sub">api-gateway, approval request</p>
+          </div>
+        </div>
+        <div class="demo__msg demo__msg--ask">
+          <p>Wants to run this command:</p>
+          <p class="demo__cmd"><code><span aria-hidden="true">$ </span>git push origin main</code></p>
+          <p class="demo__meta">3 commits ahead of origin/main</p>
+        </div>
+        <div class="demo__msg demo__msg--approved" aria-live="polite">
+          <p class="demo__result"><i class="ico ico--check"></i>Approved</p>
+          <p>Claude Code pushed 3 commits to origin/main and is running the next step.</p>
+        </div>
+        <div class="demo__msg demo__msg--denied">
+          <p class="demo__result demo__result--deny"><i class="ico ico--x"></i>Denied</p>
+          <p>Claude Code will not run the push. The 3 commits stay local.</p>
+        </div>
+      </article>
+      <div class="glass demo__menu" role="group" aria-label="Answer">
+        <button class="demo__act" type="button" data-answer="approved"><i class="ico ico--check"></i>Approve</button>
+        <button class="demo__act demo__act--deny" type="button" data-answer="denied"><i class="ico ico--x"></i>Deny</button>
+      </div>
+      <article class="glass note demo__next">
+        <img class="note__icon" src="assets/img/logo.webp" alt="" width="44" height="44">
+        <div class="note__body">
+          <p class="note__head"><span class="note__app">Claude Code</span><span class="note__time">now</span></p>
+          <p class="note__text">Wants to run <code>npm run deploy:staging</code>. Tests passed on CI.</p>
+        </div>
+      </article>
+      <p class="demo__foot"><span class="tag">Example data</span><button class="demo__replay" type="button">Replay</button></p>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="rules-title">
+    <h2 class="heading" id="rules-title">Set the rules once. Approve only what matters.</h2>
+    <p class="lede">YOLO mode approves everything. Pushary runs the safe steps on its own and pings you for the ones you cannot undo.</p>
+
+    <div class="widgets">
+      <div class="glass widget w-policy">
+        <p class="widget__label"><i class="ico ico--shield"></i>Your rules</p>
+        <div class="policy">
+          <p class="policy__h">Runs on its own</p>
+          <p class="chips"><code>read</code><code>lint</code><code>test</code></p>
+          <p class="policy__s">Low-risk steps you can undo. Allow them once and stop seeing them.</p>
+        </div>
+        <div class="policy policy--ask">
+          <p class="policy__h">Comes to you</p>
+          <p class="chips"><code>rm</code><code>deploy</code></p>
+          <p class="policy__s">Spending money, or anything else you cannot take back.</p>
+        </div>
+        <p class="tag">Example rules</p>
+      </div>
+
+      <div class="glass widget w-wait">
+        <div class="ring" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27"/><circle class="ring__arc" cx="32" cy="32" r="27"/></svg><span>30s</span></div>
+        <div>
+          <p class="widget__label">You set the wait time</p>
+          <p class="widget__text">If you do not answer, your rule decides: deny, or hand it back to the terminal.</p>
+        </div>
+      </div>
+
+      <div class="glass widget w-audit">
+        <i class="ico ico--list" aria-hidden="true"></i>
+        <p class="widget__label">Every answer is saved</p>
+        <p class="widget__text">Each approval and denial goes into your audit trail, so you can see later who allowed what.</p>
+      </div>
+
+      <div class="glass widget w-setup">
+        <p class="widget__label">Set up in under 2 minutes</p>
+        <div class="cmd">
+          <code id="setup-cmd">npx pushary@latest setup</code>
+          <button class="cmd__copy" type="button" data-copy="setup-cmd" aria-label="Copy command"><i class="ico ico--copy"></i></button>
+        </div>
+        <p class="widget__text">Finds the agents on your computer and connects them. Mac, Windows and Linux.</p>
+      </div>
+
+      <div class="glass widget w-reach">
+        <p class="widget__label">Where it reaches you</p>
+        <p class="chips chips--soft"><span>Your phone</span><span>Your Mac</span><span>Slack</span><span>Web app</span></p>
+        <p class="widget__text">iPhone or Android, app or browser.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="pricing" aria-labelledby="price-title">
+    <h2 class="heading" id="price-title">One plan covers all your agents.</h2>
+    <p class="lede">Every plan starts with a 3&#8209;day free trial. Cancel anytime.</p>
+
+    <div class="widgets widgets--price">
+      <div class="glass widget plan plan--main">
+        <p class="plan__top"><span class="widget__label">Agent</span><span class="pill">Most popular</span></p>
+        <p class="plan__price">$9.99<small>/mo</small></p>
+        <p class="widget__text">For one person.</p>
+        <ul class="plan__list">
+          <li>5,000 notifications a month, about 160 a day</li>
+          <li>Full MCP and API access</li>
+          <li>30&#8209;day history</li>
+        </ul>
+      </div>
+      <div class="glass widget plan">
+        <p class="plan__top"><span class="widget__label">Agent Pro</span></p>
+        <p class="plan__price">$19.99<small>/mo</small></p>
+        <p class="widget__text">Unlimited notifications, budgets, priority support and 90&#8209;day history.</p>
+        <a class="link" href="https://pushary.com/sign-up?from=agent&amp;plan=agent_pro">Choose Agent Pro</a>
+      </div>
+      <div class="glass widget plan">
+        <p class="plan__top"><span class="widget__label">Team</span></p>
+        <p class="plan__price">$59.99<small>/mo</small></p>
+        <p class="widget__text">Up to 10 members, a shared audit trail with export and 365&#8209;day history.</p>
+        <a class="link" href="https://pushary.com/sign-up?from=agent&amp;plan=team">Choose Team</a>
+      </div>
+    </div>
+    <p class="aside">Building an agent for your own customers? <a href="https://pushary.com/partners">Partner plans</a> start at $99 a month.</p>
+  </section>
+
+  <section class="block" aria-labelledby="people-title">
+    <h2 class="heading" id="people-title">What people running agents tell us.</h2>
+    <div class="stack">
+      <p class="group__head"><span>From people using it</span><span class="group__count">3 notes</span></p>
+      <article class="glass note note--quote">
+        <span class="avatar" aria-hidden="true">RM</span>
+        <div class="note__body">
+          <p class="note__head"><span class="note__app">Reagan McCullough</span><a class="note__time" href="https://agentpays.dev/">AgentPays</a></p>
+          <p class="note__text">I instantly related with the pain of coming back to my Claude Code and seeing &ldquo;waiting for your permission&rdquo; instead of &ldquo;your task is completed.&rdquo;</p>
+        </div>
+      </article>
+      <article class="glass note note--quote">
+        <span class="avatar" aria-hidden="true">AK</span>
+        <div class="note__body">
+          <p class="note__head"><span class="note__app">Andreas Kuoppa</span><a class="note__time" href="https://portality.co/">Portality</a></p>
+          <p class="note__text">Your tool really helped me improve my Cursor workflow and notifies me when the agent needs me or when it has finished a task. I don&rsquo;t know why this problem wasn&rsquo;t solved by someone already.</p>
+        </div>
+      </article>
+      <article class="glass note note--quote">
+        <span class="avatar" aria-hidden="true">T</span>
+        <div class="note__body">
+          <p class="note__head"><span class="note__app">Takanari</span><a class="note__time" href="https://ai-plaza.io/">AI Plaza</a></p>
+          <p class="note__text">I love your vision of speeding AI agents up by unblocking the stuck permission screen and eventually learning from your permission behaviour based on the context.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="block" id="faq" aria-labelledby="faq-title">
+    <h2 class="heading" id="faq-title">Questions, answered.</h2>
+    <div class="press">
+      <div class="glass press__menu" role="tablist" aria-label="Questions" aria-orientation="vertical">
+        <button role="tab" id="q1" aria-controls="a1" aria-selected="true">How do I connect my phone?</button>
+        <button role="tab" id="q2" aria-controls="a2" aria-selected="false" tabindex="-1">Is my code sent to Pushary&rsquo;s servers?</button>
+        <button role="tab" id="q3" aria-controls="a3" aria-selected="false" tabindex="-1">What are permission hooks?</button>
+        <button role="tab" id="q4" aria-controls="a4" aria-selected="false" tabindex="-1">What can the agent ask me?</button>
+      </div>
+      <div class="glass press__preview">
+        <div class="answer" role="tabpanel" id="a1" aria-labelledby="q1"><h3>How do I connect my phone?</h3><p>Setup shows a QR code. Scan it once with your phone camera and questions start arriving on your lock screen.</p></div>
+        <div class="answer" role="tabpanel" id="a2" aria-labelledby="q2"><h3>Is my code sent to Pushary&rsquo;s servers?</h3><p>Not on routine product paths. The decision path sends notification metadata: title, body text and tool name. Transcripts that Pushary launches are redacted and encrypted on your machine, and your phone can decrypt them. Authorized Pushary compliance admins can recover them for documented legal obligations.</p></div>
+        <div class="answer" role="tabpanel" id="a3" aria-labelledby="q3"><h3>What are permission hooks?</h3><p>Hooks catch Claude Code&rsquo;s tool approval prompts and send them to you as push notifications, so the prompt no longer waits in a terminal you are not watching.</p></div>
+        <div class="answer" role="tabpanel" id="a4" aria-labelledby="q4"><h3>What can the agent ask me?</h3><p>Three types of question: confirm (yes or no), select (2 to 6 options), and input (free text). Your agent picks the right one for the situation.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="land" aria-labelledby="land-title">
+    <h2 class="heading" id="land-title">This is where it lands.</h2>
+    <figure class="land__phone">
+      <div class="iphone" data-model="18-pro-max" data-color="burgundy" data-sheen="on" data-manual></div>
+      <figcaption class="tag">Example data</figcaption>
+    </figure>
+    <p class="stores">
+      <a href="https://apps.apple.com/us/app/pushary/id6785677563"><img src="assets/img/app-store.svg" alt="Download on the App Store" height="40"></a>
+      <a href="https://play.google.com/store/apps/details?id=com.pushary.app"><img src="assets/img/google-play.svg" alt="Get it on Google Play" height="40"></a>
+    </p>
+  </section>
+</main>
+
+<footer class="foot">
+  <nav class="foot__links" aria-label="Footer">
+    <a href="https://pushary.com/vs">Compare</a>
+    <a href="https://pushary.com/blog">Blog</a>
+    <a href="https://pushary.com/about">About</a>
+    <a href="mailto:business@pushary.com">Contact</a>
+    <a href="https://pushary.com/security">Security</a>
+    <a href="https://pushary.com/privacy">Privacy</a>
+    <a href="https://pushary.com/terms">Terms</a>
+  </nav>
+  <p class="foot__legal">&copy; 2026 RalphNex O&Uuml;. Narva mnt 7-652, 10117 Tallinn, Estonia.</p>
+  <span class="foot__bar" aria-hidden="true"></span>
+</footer>
+
+<script src="assets/iphone/iphone.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
