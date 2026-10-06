@@ -347,15 +347,10 @@ h3 { color: var(--ink); font-weight: 450; letter-spacing: -0.012em; }
 .faq details p { max-width: 62ch; padding: 0 40px 22px 0; color: var(--ink-2); }
 
 /* Founder */
-.founder { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: clamp(48px, 7vw, 104px); align-items: center; }
-.founder__video { display: grid; justify-items: center; gap: 18px; }
-.founder__video img {
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 0 0 1px var(--line-2), 0 30px 60px -30px rgba(0, 0, 0, 0.9);
-}
+.founder { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(48px, 7vw, 104px); align-items: center; }
+.founder__video { display: grid; justify-items: start; gap: 18px; }
+.founder__poster { display: block; width: 100%; border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px var(--line-2), 0 30px 60px -30px rgba(0, 0, 0, 0.9); }
+.founder__poster img { display: block; width: 100%; height: auto; }
 .founder__play { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; color: var(--ink); text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.32); text-underline-offset: 3px; }
 .founder__play .ico { width: 14px; height: 14px; }
 .founder__text h2 { margin-top: 14px; max-width: 20ch; }
@@ -449,8 +444,6 @@ h3 { color: var(--ink); font-weight: 450; letter-spacing: -0.012em; }
   .plans { margin-top: 24px; }
   .faq summary { font-size: 17px; padding-block: 16px; }
   .founder { grid-template-columns: 1fr; gap: 28px; }
-  .founder__video { justify-items: start; grid-template-columns: auto 1fr; align-items: center; }
-  .founder__video img { width: 112px; height: 112px; }
   .quotes { grid-template-columns: 1fr; gap: 28px; margin-top: 36px; }
   .foot__main { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 14px; font-size: 13px; }
   .foot__main .label { font-size: 12.5px; }
