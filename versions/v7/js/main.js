@@ -1,7 +1,6 @@
 (() => {
   const root = document.documentElement;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const wide = matchMedia('(min-width: 901px)');
   const copy = {
     clock: '9:14',
     agent: 'Claude Code',
@@ -12,41 +11,7 @@
     approved: 'Approved. Pushed 3 commits to origin/main.'
   };
 
-  const heroEl = document.getElementById('phone-hero');
-  const flowEl = document.getElementById('phone-flow');
-  let flow = null;
-  if (window.PusharyPhone) {
-    PusharyPhone.mount(heroEl, Object.assign({ autoplay: true }, copy));
-    flow = PusharyPhone.mount(flowEl, Object.assign({ autoplay: false }, copy)).setState('arrived');
-  }
-
-  // Line from the terminal's "needs your yes" row to the flow phone's notification.
-  const ask = document.getElementById('ask');
-  const termWrap = document.querySelector('.term-wrap');
-  const flowSection = document.querySelector('.flow');
-  const flowPhone = document.querySelector('.flow-phone');
-  const NOTE_Y = 0.78;
-  const NOTE_X = 41 / 490;
-  const align = () => {
-    termWrap.style.marginTop = '';
-    if (!wide.matches) { flowPhone.style.marginTop = ''; return; }
-    flowPhone.style.marginTop = '0px';
-    const a = ask.getBoundingClientRect();
-    const t = termWrap.getBoundingClientRect();
-    const s = flowSection.getBoundingClientRect();
-    const dev = flowEl.getBoundingClientRect();
-    const askY = a.top + a.height / 2;
-    const pad = parseFloat(getComputedStyle(flowSection).paddingTop);
-    const shift = askY - s.top - pad - dev.height * NOTE_Y;
-    // A negative shift would lift the phone into the section above, so lower the terminal instead.
-    if (shift < 0) termWrap.style.marginTop = (parseFloat(getComputedStyle(termWrap).marginTop) - shift) + 'px';
-    flowPhone.style.marginTop = Math.max(0, shift) + 'px';
-    termWrap.style.setProperty('--wire-y', (askY - t.top) + 'px');
-    termWrap.style.setProperty('--wire-w', (dev.left + dev.width * NOTE_X - t.right) + 'px');
-  };
-  addEventListener('resize', align);
-  if (document.fonts) document.fonts.ready.then(align);
-  align();
+  if (window.PusharyPhone) PusharyPhone.mount(document.getElementById('phone-hero'), Object.assign({ autoplay: true }, copy));
 
   if (reduced) return;
   root.classList.add('js');
@@ -63,7 +28,7 @@
   }, { passive: true });
   light();
 
-  // While the flow is on screen, the steps light one at a time and the phone follows.
+  // While the flow is on screen, the steps light one at a time and the terminal follows.
   const steps = [...document.querySelectorAll('.step')];
   let i = 0;
   let timer = null;
@@ -72,14 +37,13 @@
     const state = steps[i].dataset.state;
     steps.forEach((s, k) => s.classList.toggle('on', k === i));
     term.classList.toggle('done', state === 'approved');
-    if (flow) flow.setState(state);
     i = (i + 1) % steps.length;
   };
   steps[steps.length - 1].classList.add('on');
   new IntersectionObserver(([e]) => {
     clearInterval(timer);
     if (e.isIntersecting) { i = 0; show(); timer = setInterval(show, 3200); }
-  }, { threshold: 0.35 }).observe(flowSection);
+  }, { threshold: 0.35 }).observe(document.querySelector('.flow'));
 })();
 
 document.querySelectorAll('.copy').forEach((b) => {

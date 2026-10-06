@@ -21,7 +21,6 @@
       <a href="https://pushary.com/docs">Docs</a>
       <a href="https://pushary.com/sign-in">Sign in</a>
     </nav>
-    <a class="btn btn-s" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
     <details class="menu">
       <summary>Menu</summary>
       <nav aria-label="Main, mobile">
@@ -90,27 +89,15 @@
           <p role="cell"><span class="tl-l">With Pushary</span>You come back. The task finished half an hour ago.</p>
         </div>
       </div>
-      <p class="pull">Your agent should not wait 37 minutes for a single&nbsp;yes.</p>
     </section>
 
     <section class="block wrap g what" aria-labelledby="what-h">
       <div class="head">
         <h2 id="what-h">What is Pushary?</h2>
-        <p class="body">The control panel for AI agents. When your agent needs a yes, Pushary sends the question to your phone, your Mac, Slack or the web app. You approve or deny, and every answer is saved.</p>
+        <p class="body">The control panel for AI agents.</p>
       </div>
-      <figure class="dg" aria-label="Your AI agents send permission requests to Pushary, which delivers them to your phone, your Mac's notch, Slack, the web app, and an audit trail.">
-        <p class="dg-h dg-h-l">Your agents</p>
+      <figure class="dg" aria-label="Pushary delivers each request to your phone, your Mac's notch, Slack, the web app, and an audit trail.">
         <p class="dg-h dg-h-r">Where it reaches you</p>
-        <ul class="dg-l">
-          <li><span class="tile"><img src="assets/img/agents/claude.webp" alt="" width="22" height="22"></span>Claude Code</li>
-          <li><span class="tile"><img src="assets/img/agents/codex.webp" alt="" width="22" height="22"></span>Codex</li>
-          <li><span class="tile"><img src="assets/img/agents/cursor.webp" alt="" width="22" height="22"></span>Cursor</li>
-          <li><span class="tile"><img src="assets/img/agents/antigravity.webp" alt="" width="22" height="22"></span>Antigravity CLI</li>
-          <li><span class="tile"><img src="assets/img/agents/gemini.webp" alt="" width="22" height="22"></span>Gemini CLI</li>
-          <li><span class="tile"><img src="assets/img/agents/hermes.webp" alt="" width="22" height="22"></span>Hermes Agent</li>
-          <li><span class="tile"><img src="assets/img/agents/vscode.svg" alt="" width="22" height="22"></span>VS Code</li>
-          <li><span class="tile"><img src="assets/img/agents/opencode.svg" alt="" width="22" height="22"></span>OpenCode</li>
-        </ul>
         <div class="dg-m"><span class="dg-node"><img src="assets/img/logo.webp" alt="" width="28" height="28">Pushary</span></div>
         <ul class="dg-r">
           <li>Your phone</li>
@@ -119,7 +106,6 @@
           <li>Web app</li>
           <li>Audit trail</li>
         </ul>
-        <p class="dg-note">Plus any MCP agent, wired the same way</p>
       </figure>
       <p class="facts">One setup for 6+ agents. One tap to approve or deny. Any device: iPhone, Android, Mac, Windows, Linux. Set up in under 2&nbsp;minutes.</p>
     </section>
@@ -142,25 +128,21 @@
             <p>Your answer flows straight back to the agent. When the task finishes, you get a ping for that too.</p>
           </li>
         </ol>
-        <figure class="term-wrap">
-          <div class="term" role="img" aria-label="Example terminal session: Claude Code runs tests, pauses on git push origin main, sends the question to your phone, and pushes once you approve">
-            <div class="term-bar"><span></span><span></span><span></span><em>~/billing</em></div>
-            <pre><span class="d">$</span> claude "ship the billing webhook"
+      </div>
+      <figure class="term-wrap">
+        <div class="term" role="img" aria-label="Example terminal session: Claude Code runs tests, pauses on git push origin main, sends the question to your phone, and pushes once you approve">
+          <div class="term-bar"><span></span><span></span><span></span><em>~/billing</em></div>
+          <pre><span class="d">$</span> claude "ship the billing webhook"
   <span class="d">read</span>   src/billing/webhook.ts
   <span class="d">edit</span>   src/billing/webhook.ts
   <span class="d">run</span>    bun run test        <span class="d">passed</span>
   <span class="d">run</span>    git push origin main
-  <span class="ask" id="ask">needs your yes, sent to your phone</span>
+  <span class="ask">needs your yes, sent to your phone</span>
 <span class="later">  <span class="d">answer</span> approved on your phone
   <span class="d">done</span>   pushed 3 commits to origin/main</span><span class="cur"></span></pre>
-          </div>
-          <span class="wire" aria-hidden="true"></span>
-          <figcaption>Example session. Pushary sends the step that needs you, not your codebase.</figcaption>
-        </figure>
-      </div>
-      <div class="flow-phone">
-        <div class="iphone" id="phone-flow" data-model="17-pro-max" data-color="cosmic-orange" data-sheen="on" data-manual role="img" aria-label="The request arriving on the lock screen: Claude Code wants to run git push origin main, 3 commits ahead of origin/main."><!-- phone:flow --><div class="iphone__device" data-pp="3"><div class="iphone__shadow"></div><i class="iphone__btn iphone__btn--action"></i><i class="iphone__btn iphone__btn--vol-up"></i><i class="iphone__btn iphone__btn--vol-down"></i><i class="iphone__btn iphone__btn--side"></i><i class="iphone__btn iphone__btn--camera"></i><div class="iphone__metal"></div><div class="iphone__bezel"></div><div class="iphone__screen" data-state="arrived"><div class="pp-wall iphone__wp"></div><div class="pp-shade"></div><div class="pp-status"><span class="pp-cell"><i></i><i></i><i></i><i></i></span><span class="pp-icon pp-i-wifi pp-wifi"></span><span class="pp-battery"></span></div><div class="pp-date">Monday, October 5</div><svg class="pp-clock" viewBox="0 0 440 260" aria-hidden="true"><defs><linearGradient id="v7b-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0"/><stop offset="1"/></linearGradient><filter id="v7b-clock" x="-5%" y="-10%" width="110%" height="120%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="1.4" result="b"/><feSpecularLighting in="b" surfaceScale="2.6" specularConstant="1.15" specularExponent="18" lighting-color="#fff" result="s"><feDistantLight azimuth="270" elevation="48"/></feSpecularLighting><feComposite in="s" in2="SourceAlpha" operator="in" result="si"/><feComposite in="SourceGraphic" in2="si" operator="arithmetic" k2="1" k3=".4"/></filter></defs><text x="220" y="234" text-anchor="middle" fill="url(#v7b-fill)" filter="url(#v7b-clock)">9:14</text></svg><div class="pp-glass pp-ctl pp-ctl--left"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><span class="pp-icon pp-i-flashlight"></span><div class="pp-rim"></div></div><div class="pp-glass pp-ctl pp-ctl--right"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><span class="pp-icon pp-i-camera"></span><div class="pp-rim"></div></div><div class="pp-home"></div><div class="pp-glass pp-note pp-note--a"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-note__content"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title"><span class="pp-note__t pp-note__t--req">Claude Code &middot; billing</span><span class="pp-note__t pp-note__t--done"><span class="pp-icon pp-i-ok"></span>Approved &middot; billing</span></span><span class="pp-note__time">now</span></div><div class="pp-note__msgs"><span class="pp-note__msg pp-note__msg--req">Wants to run git push origin main. 3 commits ahead of origin/main.</span><span class="pp-note__msg pp-note__msg--done">Approved. Pushed 3 commits to origin/main.</span></div></div></div><div class="pp-rim"></div></div><div class="pp-glass pp-note pp-note--b"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-note__content"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-note__body"><div class="pp-note__head"><span class="pp-note__title"><span class="pp-note__t pp-note__t--req">Claude Code &middot; billing</span></span><span class="pp-note__time">now</span></div><div class="pp-note__msgs"><span class="pp-note__msg">Wants to run npm run deploy:staging. Tests passed on CI.</span></div></div></div><div class="pp-rim"></div></div><div class="pp-dim"></div><div class="pp-glass pp-exp"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-exp__inner"><div class="pp-exp__head"><div class="pp-app"><img src="assets/iphone/assets/pushary-logo.webp" alt=""></div><div class="pp-exp__meta"><div class="pp-exp__row"><div class="pp-exp__title">Claude Code &middot; billing</div><div class="pp-exp__now">now</div></div><div class="pp-exp__time">Approval request</div></div></div><div class="pp-exp__body">Wants to run this command:<div class="pp-exp__cmd"><span>$ </span>git push origin main</div><div class="pp-exp__meta2">3 commits ahead of origin/main</div></div></div><div class="pp-rim"></div></div><div class="pp-glass pp-menu"><div class="pp-refract iphone__wp"></div><div class="pp-tint"></div><div class="pp-menu__rows"><div class="pp-row pp-row--approve"><span class="pp-icon pp-i-check"></span>Approve</div><div class="pp-row pp-row--deny"><span class="pp-icon pp-i-x"></span>Deny</div></div><div class="pp-rim"></div></div><div class="pp-sheen"></div><div class="pp-oled"></div></div><div class="iphone__island"></div><div class="iphone__tone"><i></i><i></i></div><div class="iphone__light"><i></i><i></i><i></i></div></div><!-- /phone:flow --></div>
-      </div>
+        </div>
+        <figcaption>Example session. Pushary sends the step that needs you, not your codebase.</figcaption>
+      </figure>
     </section>
 
     <section class="block wrap g rules" id="features" aria-labelledby="rules-h">
@@ -195,7 +177,6 @@
               <div>
                 <p class="job-t">Ship the billing webhook</p>
                 <p class="job-m">Codex, now</p>
-                <p class="mono">git push origin main</p>
                 <div class="job-act"><span class="mini on">Approve</span><span class="mini">Deny</span><span class="job-m"><span class="nw">auto-deny</span> in 30s</span></div>
               </div>
             </div>
@@ -218,7 +199,7 @@
             </div>
           </div>
           <div>
-            <p class="ph">Decision ledger <span>212 today</span></p>
+            <p class="ph">Decision ledger</p>
             <table class="ledger">
               <tbody>
                 <tr><td class="mono">rm -rf ./dist</td><td class="no">Denied</td><td class="ch">Phone</td><td>2m</td></tr>
@@ -237,37 +218,17 @@
     <section class="block wrap g setup" aria-labelledby="setup-h">
       <div>
         <h2 id="setup-h">One command sets up every&nbsp;agent.</h2>
-        <p class="body">It finds the agents on your computer and connects them all to your phone, in under two minutes. Works on Mac, Windows and Linux. On a Mac, <a href="https://pushary.com/download">the Pushary app</a> can set it up for you, no terminal needed.</p>
+        <p class="body">It finds the agents on your computer and connects them all to your phone. On a Mac, <a href="https://pushary.com/download">the Pushary app</a> can set it up for you, no terminal needed.</p>
         <div class="cmd"><code>npx pushary@latest setup</code><button type="button" class="copy" data-copy="npx pushary@latest setup">Copy</button></div>
+      </div>
+      <div class="setup-steps">
         <ol class="three">
           <li>Start your trial.</li>
           <li>Run the command on your computer.</li>
           <li>Scan the QR code with your phone. Done.</li>
         </ol>
-      </div>
-      <div class="agents">
-        <p class="dg-h">Works with your agent</p>
-        <ul>
-          <li><a href="https://pushary.com/docs/agents/guides/claude-code"><span class="tile"><img src="assets/img/agents/claude.webp" alt="" width="18" height="18"></span>Claude Code</a></li>
-          <li><a href="https://pushary.com/docs/agents/guides/codex"><span class="tile"><img src="assets/img/agents/codex.webp" alt="" width="18" height="18"></span>Codex</a></li>
-          <li><a href="https://pushary.com/docs/agents/guides/cursor"><span class="tile"><img src="assets/img/agents/cursor.webp" alt="" width="18" height="18"></span>Cursor</a></li>
-          <li><a href="https://pushary.com/docs/agents/guides/antigravity-cli"><span class="tile"><img src="assets/img/agents/antigravity.webp" alt="" width="18" height="18"></span>Antigravity CLI</a></li>
-          <li><a href="https://pushary.com/docs/agents/guides/gemini-cli"><span class="tile"><img src="assets/img/agents/gemini.webp" alt="" width="18" height="18"></span>Gemini CLI</a></li>
-          <li><a href="https://pushary.com/docs/agents/guides/hermes"><span class="tile"><img src="assets/img/agents/hermes.webp" alt="" width="18" height="18"></span>Hermes Agent</a></li>
-          <li><a href="https://pushary.com/docs/agents/supported-agents"><span class="tile"><img src="assets/img/agents/vscode.svg" alt="" width="18" height="18"></span>VS Code</a></li>
-          <li><a href="https://pushary.com/docs/agents/supported-agents"><span class="tile"><img src="assets/img/agents/opencode.svg" alt="" width="18" height="18"></span>OpenCode</a></li>
-        </ul>
         <p class="small">Windsurf or another MCP client? <a href="https://pushary.com/docs/agents/guides/windsurf-other">Connect it by hand</a></p>
-      </div>
-      <div class="plan">
-        <div class="plan-l">
-          <p class="plan-price"><b>$9.99</b> a month after a <span class="nw">3-day</span> free trial. Cancel anytime.</p>
-          <p class="plan-facts">One plan covers every agent you run: 5,000 notifications a month, the phone app and the Mac app. <a href="https://pushary.com/pricing">See all plans</a></p>
-        </div>
-        <div class="plan-r">
-          <a class="btn" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
-          <p class="price">Already have an account? <a href="https://pushary.com/download">Get the phone and Mac apps</a></p>
-        </div>
+        <p class="small">Already have an account? <a href="https://pushary.com/download">Get the phone and Mac apps</a></p>
       </div>
     </section>
 
@@ -294,39 +255,23 @@
       <div class="qa">
         <details>
           <summary>Can I approve an AI agent from my phone?</summary>
-          <p>Yes. Setup shows a QR code. Scan it once with your phone camera and questions start arriving on your lock screen, on iOS or Android, in the app or the browser. From the notification you approve, deny, choose an option, or type a reply, and the agent keeps going.</p>
+          <p>Yes. Questions arrive on your lock screen, on iOS or Android, in the app or the browser.</p>
         </details>
         <details>
           <summary>How much does it cost?</summary>
-          <p>The Agent plan is $9.99 a month after a <span class="nw">3-day</span> free trial, with 5,000 notifications a month, about 160 a day. It covers every agent you run. Agent Pro, at $19.99 a month, adds unlimited notifications, budgets, and up to 5 people.</p>
+          <p>The Agent plan comes with 5,000 notifications a month, about 160 a day. It covers every agent you run. Agent Pro, at $19.99 a month, adds unlimited notifications, budgets, and up to 5 people.</p>
         </details>
         <details>
           <summary>Is my code sent to Pushary's servers?</summary>
           <p>Not on routine product paths. The decision path sends notification metadata: title, body text and tool name. Transcripts Pushary launches are redacted and encrypted on your machine. Your phone can decrypt them, and authorized Pushary compliance admins can recover them for documented legal obligations.</p>
         </details>
         <details>
-          <summary>How long does it take to set up?</summary>
-          <p>Under 2 minutes. Run <code class="nw">npx pushary@latest setup</code>. It finds Claude Code, Codex, Cursor, Hermes and the other agents on your computer and connects each one, installing the Hermes plugin for you. On a Mac, the Pushary app does the same without a terminal.</p>
-        </details>
-        <details>
-          <summary>How is this different from YOLO mode or <span class="nw">auto-approve?</span></summary>
-          <p>YOLO mode approves everything, including destructive commands. Pushary lets you set rules per tool: <span class="nw">auto-approve</span> safe commands (read, lint, test) and send only the dangerous ones (rm, git push, deploy) to your phone. You stay in control without the fatigue.</p>
-        </details>
-        <details>
-          <summary>What AI agents work with Pushary?</summary>
-          <p>Claude Code, Codex, Hermes Agent, Cursor, Windsurf, and any <span class="nw">MCP-compatible</span> agent. Claude Code gets permission hooks and a setup wizard. Hermes gets a native plugin with automatic error notifications.</p>
-        </details>
-        <details>
-          <summary>How do I get notified when Claude Code needs permission?</summary>
-          <p>Install Pushary's hook with one command, <code class="nw">npx pushary@latest setup</code>. When Claude Code hits a permission prompt, you get a push notification to approve or deny from your phone. Safe tools can <span class="nw">auto-approve,</span> so only the decisions that matter reach you.</p>
-        </details>
-        <details>
           <summary>What are permission hooks?</summary>
-          <p>Permission hooks catch Claude Code's tool approval prompts and route them through push notifications. When the agent wants to run a command or edit a file, you get a push to approve or deny. If you do not answer, your rule answers for you: deny, or hand back to the terminal.</p>
+          <p>Permission hooks catch Claude Code's tool approval prompts and route them through push notifications. When the agent wants to run a command or edit a file, you get a push to approve or deny.</p>
         </details>
         <details>
           <summary>What is <span class="nw">human-in-the-loop</span> for AI agents?</summary>
-          <p>An AI agent pauses at important or risky steps and waits for a person to decide before it continues. Pushary delivers that decision to your phone as a push notification, so an autonomous agent keeps moving without you watching it, and you still catch the actions that matter.</p>
+          <p>An AI agent pauses at important or risky steps and waits for a person to decide before it continues.</p>
         </details>
         <details>
           <summary>What question types does Pushary support?</summary>
@@ -345,16 +290,6 @@
       <a class="video" href="https://www.loom.com/embed/ca5ad617d5a6460ba40a9039781e1144">
         <span class="play" aria-hidden="true"></span><span class="video-t">Watch the 2 minute version</span><span class="len">2:11</span>
       </a>
-    </section>
-
-
-    <section class="block wrap g final" aria-labelledby="final-h">
-      <h2 id="final-h">Send the next yes to your&nbsp;phone.</h2>
-      <p class="body">The next long task can finish while you are away. One tap and the agent keeps working.</p>
-      <div class="act">
-        <a class="btn" href="https://pushary.com/sign-up?from=agent">Start your trial</a>
-        <p class="price">$9.99/mo after a <span class="nw">3-day</span> free trial. Cancel anytime.</p>
-      </div>
     </section>
   </main>
 

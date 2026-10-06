@@ -85,7 +85,7 @@ figure, blockquote { margin: 0; }
 .cta:hover { transform: translateY(-1px); background: #fff; }
 
 /* Display type: Mona Sans at its wide setting, only at 32px and up. */
-h1, h2, .pull { font-stretch: 122%; letter-spacing: -0.012em; font-optical-sizing: auto; }
+h1, h2 { font-stretch: 122%; letter-spacing: -0.012em; font-optical-sizing: auto; }
 
 /* ---------- Hero: the lock screen wallpaper fills it, the phone is the window ---------- */
 .hero {
@@ -174,7 +174,7 @@ h1 {
 .agents-row { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 10px 26px; color: var(--ink); font-size: 15px; }
 .agents-row li { white-space: nowrap; }
 .agents-row li, .hn { display: inline-flex; align-items: center; gap: 9px; }
-.agents-row img, .route img { border-radius: 6px; }
+.agents-row img { border-radius: 6px; }
 .badges { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 13px; color: var(--body); }
 .badges li, .badges a { display: inline-flex; align-items: center; gap: 9px; }
 .badges a { color: var(--body); text-decoration: none; }
@@ -259,47 +259,30 @@ h3 { font-size: 20px; font-weight: 560; line-height: 1.3; letter-spacing: -0.005
 .t { font-variant-numeric: tabular-nums; color: var(--mute); }
 .without { color: var(--mute); }
 .withp { color: var(--ink); }
-.pull { margin-top: 72px; max-width: 20ch; color: var(--ink); font-size: clamp(28px, 2.8vw, 40px); font-weight: 380; line-height: 1.3; text-wrap: balance; }
 
-/* What is Pushary: connected routing figure */
+/* What is Pushary: routing figure */
 .what { align-items: center; }
 .route {
   margin: 0;
   display: grid;
-  grid-template-columns: 1fr 160px 1fr;
-  grid-template-areas: "fromh . toh" "from hub to" "note . .";
+  grid-template-columns: 160px 1fr;
+  grid-template-areas: ". toh" "hub to";
   align-items: center;
 }
 .route-h { font-size: 14px; color: var(--mute); margin-bottom: 8px; }
-.from-h { grid-area: fromh; text-align: right; padding-right: 40px; }
 .to-h { grid-area: toh; padding-left: 40px; }
-.from { grid-area: from; }
 .to { grid-area: to; }
 .route ul { position: relative; }
 .route li { position: relative; display: flex; align-items: center; gap: 10px; padding: 8px 0; color: var(--ink); font-size: 17px; line-height: 1.6; }
-.from li { justify-content: flex-end; padding-right: 40px; }
 .to li { padding-left: 40px; }
 .route li::after { content: ""; position: absolute; top: 50%; width: 28px; height: 1px; background: rgb(246 241 236 / 0.28); }
-.from li::after { right: 0; }
 .to li::after { left: 0; }
 .route ul::after { content: ""; position: absolute; top: 21px; bottom: 21px; width: 1px; background: rgb(246 241 236 / 0.28); }
-.from::after { right: 0; }
 .to::after { left: 0; }
 .hub { grid-area: hub; position: relative; height: 56px; display: flex; justify-content: center; }
-.hub::before, .hub::after { content: ""; position: absolute; top: 50%; width: 52px; height: 1px; background: rgb(246 241 236 / 0.28); }
-.hub::before { left: 0; }
-.hub::after { right: 0; }
+.hub::after { content: ""; position: absolute; top: 50%; right: 0; width: 52px; height: 1px; background: rgb(246 241 236 / 0.28); }
 .hub img { border-radius: 14px; background: #fff; box-shadow: 0 0 0 1px var(--line), 0 12px 32px rgb(0 0 0 / 0.55); }
 .hub span { position: absolute; top: calc(100% + 10px); left: 0; right: 0; text-align: center; color: var(--ink); font-weight: 600; font-size: 15px; }
-.route-note { grid-area: note; margin-top: 10px; padding-right: 40px; text-align: right; font-size: 14px; color: var(--mute); }
-
-/* How it works: a second phone, resting on Approved */
-.flow { display: grid; grid-template-columns: 390px minmax(0, 1fr); gap: 88px; align-items: center; }
-.flow-phone .iphone { --iphone-w: 390px; }
-.flow-phone .iphone__shadow::before { display: none; }
-.flow-sub { margin-top: 18px; font-size: 18px; }
-.steps-flow { margin-top: 40px; }
-.steps-flow li { grid-template-columns: 200px 1fr; }
 
 /* Control panel (example data) */
 .panel-fig { margin-top: 56px; }
@@ -331,7 +314,7 @@ h3 { font-size: 20px; font-weight: 560; line-height: 1.3; letter-spacing: -0.005
 .p-task { display: flex; justify-content: space-between; gap: 12px; }
 .p-task b { color: var(--ink); font-weight: 560; }
 .p-task span { color: var(--mute); font-size: 13px; white-space: nowrap; }
-.p-wait code, .p-work code { display: block; margin-top: 6px; font-size: 13px; color: var(--body); }
+.p-work code { display: block; margin-top: 6px; font-size: 13px; color: var(--body); }
 .p-act { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
 .p-timer { margin-right: auto; font-size: 13px; color: var(--mute); font-variant-numeric: tabular-nums; }
 .p-btn { padding: 6px 14px; border-radius: 99px; border: 1px solid var(--line); color: var(--ink); font-size: 13px; font-weight: 560; }
@@ -352,7 +335,7 @@ h3 { font-size: 20px; font-weight: 560; line-height: 1.3; letter-spacing: -0.005
   margin-top: 48px;
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  grid-template-areas: "main side" "agents side";
+  grid-template-areas: "main side";
   gap: 48px 72px;
 }
 .setup-side {
@@ -367,7 +350,6 @@ h3 { font-size: 20px; font-weight: 560; line-height: 1.3; letter-spacing: -0.005
 .setup-main { grid-area: main; }
 .setup-main > p:first-child { font-size: 18px; max-width: 46ch; }
 .steps3 { counter-reset: s; margin-top: 12px; }
-.agents { grid-area: agents; }
 .cta-block { margin-top: auto; padding-top: 32px; }
 .cmd {
   margin-top: 24px;
@@ -399,10 +381,6 @@ h3 { font-size: 20px; font-weight: 560; line-height: 1.3; letter-spacing: -0.005
 .steps3 li { counter-increment: s; display: grid; grid-template-columns: 32px 1fr; padding: 14px 0; border-top: 1px solid var(--line); color: var(--ink); }
 .steps3 li:last-child { border-bottom: 1px solid var(--line); }
 .steps3 li::before { content: counter(s); color: var(--mute); font-variant-numeric: tabular-nums; }
-.agent-links { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
-.agent-links a { display: inline-flex; align-items: center; height: 34px; padding: 0 14px; border: 1px solid rgb(246 241 236 / 0.16); border-radius: 99px; background: rgb(255 255 255 / 0.03); color: var(--ink); font-size: 14px; text-decoration: none; transition: background-color 160ms ease, border-color 160ms ease; }
-.agent-links a:hover { background: rgb(255 255 255 / 0.07); border-color: rgb(246 241 236 / 0.3); }
-.agents .small { margin-top: 16px; }
 .cta-block .small { margin-top: 14px; }
 
 /* FAQ */
@@ -479,7 +457,7 @@ h3 { font-size: 20px; font-weight: 560; line-height: 1.3; letter-spacing: -0.005
 .quotes figcaption { margin-top: auto; padding-top: 20px; font-size: 14px; color: var(--mute); }
 .quotes figcaption a { color: var(--body); }
 
-/* Final CTA: the wallpaper returns once */
+/* Closing band: the wallpaper returns once */
 .final { padding-bottom: 96px; isolation: isolate; }
 .final-wall {
   position: absolute;
@@ -491,26 +469,7 @@ h3 { font-size: 20px; font-weight: 560; line-height: 1.3; letter-spacing: -0.005
   -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 30%, #000 62%, transparent 100%);
   mask-image: linear-gradient(180deg, transparent 0, #000 30%, #000 62%, transparent 100%);
 }
-.final-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 72px; align-items: center; }
-.final h2 { font-size: clamp(36px, 4.6vw, 64px); max-width: 13ch; }
-.final .lede { margin-top: 24px; max-width: 40ch; font-size: 19px; }
-.final .cta { margin-top: 36px; }
-.privacy { margin-top: 16px; }
-.plan {
-  padding: 28px;
-  border: 1px solid rgb(246 241 236 / 0.14);
-  border-radius: 16px;
-  background: rgb(11 9 8 / 0.72);
-  color: var(--body);
-  font-size: 15px;
-  line-height: 1.55;
-}
-.plan-name { color: var(--mute); font-size: 14px; }
-.plan-price { margin: 6px 0 12px; color: var(--ink); font-size: 44px; font-weight: 400; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-.plan-price span { font-size: 17px; color: var(--body); letter-spacing: 0; }
-.plan p + p { margin-top: 4px; }
-.plan a { display: inline-block; margin-top: 14px; }
-.builders { margin-top: 96px; font-size: 16px; color: var(--body); }
+.builders { font-size: 16px; color: var(--body); }
 
 /* Footer: one grid */
 .foot { position: relative; padding: 64px 0 40px; font-size: 14px; line-height: 1.5; }
@@ -538,14 +497,11 @@ h3 { font-size: 20px; font-weight: 560; line-height: 1.3; letter-spacing: -0.005
 @media (max-width: 1240px) { .wide-only { display: none; } .menu { display: block; } }
 @media (max-width: 1100px) {
   :root { --phone-w: 360px; }
-  .split, .head-row, .final-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
-  .flow { grid-template-columns: 320px minmax(0, 1fr); gap: 56px; }
-  .flow-phone .iphone { --iphone-w: 320px; }
-  .rows li, .steps-flow li { grid-template-columns: 180px 1fr; }
+  .split, .head-row { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .rows li { grid-template-columns: 180px 1fr; }
   .cols, .more-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .brand-col, .more-agents { grid-column: 1 / -1; }
   .more-grid > div:nth-child(2), .more-grid > div:nth-child(3) { grid-column: auto / span 1; }
-  .plan { max-width: 420px; }
 }
 @media (max-width: 900px) {
   :root { --phone-w: 250px; --pad: 20px; --sec: 80px; }
@@ -569,32 +525,25 @@ h3 { font-size: 20px; font-weight: 560; line-height: 1.3; letter-spacing: -0.005
   .tl-row .t { grid-column: 1 / -1; }
   .tl-head { grid-template-columns: 1fr 1fr; }
   .tl-head span:first-child { display: none; }
-  .pull { margin-top: 48px; font-size: 26px; }
-  .rows li, .steps-flow li { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 22px 0; }
+  .rows li { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 22px 0; }
   .route {
     margin-top: 40px;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "fromh" "from" "note" "hub" "toh" "to";
+    grid-template-areas: "hub" "toh" "to";
     justify-items: center;
     text-align: center;
   }
-  .from-h, .to-h { padding: 0; text-align: center; }
+  .to-h { padding: 0; text-align: center; }
   .route ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; }
-  .route li, .from li, .to li { padding: 2px 0; font-size: 16px; }
+  .route li, .to li { padding: 2px 0; font-size: 16px; }
   .route li::after, .route ul::after { display: none; }
-  .route-note { padding: 0; margin-top: 10px; text-align: center; }
-  .hub { margin: 44px 0 80px; }
-  .hub::before, .hub::after { left: 50%; right: auto; width: 1px; height: 28px; top: auto; }
-  .hub::before { bottom: calc(100% + 8px); }
-  .hub::after { top: calc(100% + 40px); }
-  .flow { grid-template-columns: minmax(0, 1fr); gap: 40px; }
-  .flow-phone { order: 2; justify-self: center; }
-  .flow-phone .iphone { --iphone-w: 300px; }
+  .hub { margin: 0 0 80px; }
+  .hub::after { top: calc(100% + 40px); left: 50%; right: auto; width: 1px; height: 28px; }
   .p-body { grid-template-columns: minmax(0, 1fr); }
   .p-agents { border-right: 0; border-bottom: 1px solid var(--line); }
   .p-ledger td:nth-child(3) { display: none; }
   .p-top, .p-counts, .p-agents, .p-ledger { padding-left: 16px; padding-right: 16px; }
-  .setup-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "main" "side" "agents"; gap: 40px; }
+  .setup-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "main" "side"; gap: 40px; }
   .setup-side { padding: 22px 20px 24px; }
   .cmd { padding-left: 16px; }
   .cmd code { font-size: 14px; }
@@ -606,7 +555,6 @@ h3 { font-size: 20px; font-weight: 560; line-height: 1.3; letter-spacing: -0.005
   .quotes { grid-template-columns: minmax(0, 1fr); gap: 32px; }
   .quotes figure + figure { padding-top: 32px; }
   .quotes figure + figure::before { left: 0; right: 0; top: 0; bottom: auto; width: auto; height: 1px; }
-  .builders { margin-top: 64px; }
   .foot { font-size: 13px; }
   .cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; }
   .more-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
@@ -614,5 +562,5 @@ h3 { font-size: 20px; font-weight: 560; line-height: 1.3; letter-spacing: -0.005
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .cta, .copy-btn, a, .agent-links a { transition: none; }
+  .cta, .copy-btn, a { transition: none; }
 }
