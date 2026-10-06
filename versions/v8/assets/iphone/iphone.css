@@ -207,20 +207,21 @@
   border: calc(22 * var(--u)) solid transparent;
   border-radius: calc(var(--r) * var(--u));
   background-origin: border-box;
+  background-repeat: no-repeat;
   -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) padding-box exclude, linear-gradient(#000 0 0);
   pointer-events: none;
 }
 .iphone__light i:nth-child(1) {
-  background:
+  background-image:
     radial-gradient(42% 16% at 16% 3%, rgba(255, 255, 255, .7), rgba(255, 255, 255, 0) 70%),
     radial-gradient(30% 9% at 88% 98%, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 70%),
     linear-gradient(160deg, rgba(255, 255, 255, .2) 0%, rgba(255, 255, 255, 0) 24%);
   mix-blend-mode: screen;
 }
 .iphone__light i:nth-child(2) {
-  background: linear-gradient(160deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, .3) 70%, rgba(0, 0, 0, .5) 100%);
+  background-image: linear-gradient(160deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, .3) 70%, rgba(0, 0, 0, .5) 100%);
   mix-blend-mode: multiply;
 }
 .iphone__light i:nth-child(3) {
@@ -230,13 +231,13 @@
   height: calc(2945 * var(--u));
   border-width: calc(2 * var(--u));
   border-radius: calc((var(--r) - 7) * var(--u));
-  background: linear-gradient(160deg, rgba(255, 255, 255, .5), rgba(255, 255, 255, .12) 40%, rgba(255, 255, 255, .05) 70%, rgba(255, 255, 255, .2));
+  background-image: linear-gradient(160deg, rgba(255, 255, 255, .5), rgba(255, 255, 255, .12) 40%, rgba(255, 255, 255, .05) 70%, rgba(255, 255, 255, .2));
   mix-blend-mode: soft-light;
 }
 .iphone[data-sheen="off"] .iphone__light { display: none; }
 .iphone__tone i:nth-child(1) {
   border-width: calc(8 * var(--u));
-  background: linear-gradient(rgba(60, 20, 10, .42), rgba(60, 20, 10, .42));
+  background-image: linear-gradient(rgba(60, 20, 10, .42), rgba(60, 20, 10, .42));
   mix-blend-mode: multiply;
 }
 .iphone__tone i:nth-child(2) {
@@ -246,7 +247,7 @@
   height: calc(2921 * var(--u));
   border-width: calc(2.5 * var(--u));
   border-radius: calc((var(--r) - 19) * var(--u));
-  background: linear-gradient(#000, #000);
+  background-image: linear-gradient(#000, #000);
   opacity: .7;
 }
 .iphone__bezel::before {
