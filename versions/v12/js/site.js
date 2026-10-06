@@ -5,8 +5,8 @@
   var phoneEl = document.querySelector('.land__phone .iphone');
   if (phoneEl && window.PusharyPhone) {
     PusharyPhone.mount(phoneEl, {
-      model: '18-pro-max',
-      color: 'burgundy',
+      model: '17-pro-max',
+      color: 'cosmic-orange',
       agent: 'Codex',
       repo: 'billing',
       command: 'vercel deploy --prod',

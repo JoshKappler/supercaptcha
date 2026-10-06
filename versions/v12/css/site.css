@@ -6,10 +6,10 @@
 
 :root {
   color-scheme: dark;
-  --ink: #0c0508;
-  --t1: #fff5f8;
-  --t2: rgba(255, 236, 242, .76);
-  --t3: rgba(255, 230, 238, .6);
+  --ink: #0c0704;
+  --t1: #fff8f3;
+  --t2: rgba(255, 240, 230, .76);
+  --t3: rgba(255, 236, 222, .6);
   --red: #ff6961;
   --green: #4cd98b;
   --amber: #ffc46b;
@@ -44,7 +44,7 @@ button { font: inherit; color: inherit; }
   display: block;
   width: 100%;
   aspect-ratio: 880 / 1912;
-  background: url("../assets/iphone/assets/wallpaper-burgundy.webp") center / cover;
+  background: url("../assets/iphone/assets/wallpaper-cosmic-orange.webp") center / cover;
 }
 .wall__tiles i:nth-child(even) { transform: scaleY(-1); }
 .wall__tiles i + i { margin-top: -2px; }
@@ -54,8 +54,8 @@ button { font: inherit; color: inherit; }
   z-index: 1;
   inset: 0;
   background:
-    radial-gradient(70% 520px at 50% 320px, rgba(10, 3, 6, .5), rgba(10, 3, 6, 0)),
-    linear-gradient(rgba(12, 4, 8, .5), rgba(12, 4, 8, .5));
+    radial-gradient(70% 520px at 50% 320px, rgba(10, 5, 2, .5), rgba(10, 5, 2, 0)),
+    linear-gradient(rgba(12, 6, 3, .7), rgba(12, 6, 3, .7));
 }
 .wall::after {
   content: "";
@@ -74,7 +74,7 @@ button { font: inherit; color: inherit; }
   position: relative;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, .13), rgba(255, 255, 255, .05)),
-    rgba(52, 26, 36, .22);
+    rgba(52, 32, 22, .22);
   -webkit-backdrop-filter: blur(28px) saturate(175%) brightness(1.22);
   backdrop-filter: blur(28px) saturate(175%) brightness(1.22);
   box-shadow:
@@ -143,7 +143,7 @@ button { font: inherit; color: inherit; }
 }
 .lock__date {
   margin-top: 14px;
-  color: rgba(255, 238, 244, .88);
+  color: rgba(255, 242, 232, .88);
   font-size: 21px;
   font-weight: 600;
   letter-spacing: .01em;
@@ -152,7 +152,7 @@ button { font: inherit; color: inherit; }
   margin: 0;
   font-stretch: 75%;
   font-weight: 600;
-  color: #fff1f5;
+  color: #fff4ec;
   text-wrap: balance;
 }
 .clock {
@@ -160,7 +160,7 @@ button { font: inherit; color: inherit; }
   font-size: clamp(56px, 8.4vw, 128px);
   line-height: .9;
   letter-spacing: -.012em;
-  color: rgba(255, 226, 236, .9);
+  color: rgba(255, 232, 214, .9);
   mix-blend-mode: plus-lighter;
   text-shadow: 0 1px 0 rgba(255, 255, 255, .18);
 }
@@ -174,8 +174,8 @@ button { font: inherit; color: inherit; }
   margin-top: 30px;
   padding: 15px 30px;
   border-radius: 999px;
-  background: rgba(255, 250, 252, .94);
-  color: #22060f;
+  background: rgba(255, 252, 249, .94);
+  color: #221006;
   font-size: 17px;
   font-weight: 600;
   text-decoration: none;
@@ -219,7 +219,7 @@ button { font: inherit; color: inherit; }
 .note__head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-size: 16px; font-weight: 600; line-height: 1.35; }
 .note__time { flex: none; color: var(--t3); font-size: 14px; font-weight: 400; text-decoration: none; }
 a.note__time:hover { color: var(--t1); text-decoration: underline; }
-.note__text { margin-top: 2px; color: rgba(255, 240, 245, .86); font-size: 16px; line-height: 1.42; }
+.note__text { margin-top: 2px; color: rgba(255, 244, 236, .86); font-size: 16px; line-height: 1.42; }
 
 .groups {
   display: grid;
@@ -234,7 +234,7 @@ a.note__time:hover { color: var(--t1); text-decoration: underline; }
 .note--stale .note__icon--sym { color: var(--amber); background: rgba(255, 196, 107, .16); }
 .note--alert .note__icon--sym { color: #ff9a92; background: rgba(255, 105, 97, .2); }
 .note--done .note__icon--sym { color: var(--green); background: rgba(76, 217, 139, .18); }
-.group--missed .note { background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .03)), rgba(30, 12, 18, .3); }
+.group--missed .note { background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .03)), rgba(30, 17, 10, .3); }
 
 /* How it works: one expanded notification at page scale */
 .demo { display: grid; justify-items: start; gap: 10px; max-width: 600px; margin: 52px auto 0; text-align: left; }
@@ -315,7 +315,7 @@ a.note__time:hover { color: var(--t1); text-decoration: underline; }
 .ring .ring__arc { stroke: var(--t1); stroke-linecap: round; stroke-dasharray: 169.6; stroke-dashoffset: 56; }
 .ring span { position: absolute; inset: 0; display: grid; place-items: center; font-size: 24px; font-stretch: 75%; font-weight: 600; }
 
-.cmd { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 8px 8px 16px; border-radius: 16px; background: rgba(10, 2, 6, .32); }
+.cmd { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 8px 8px 16px; border-radius: 16px; background: rgba(10, 5, 2, .32); }
 .cmd code { font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cmd__copy { display: grid; place-items: center; flex: none; width: 38px; height: 38px; border: 0; border-radius: 12px; background: rgba(255, 255, 255, .1); cursor: pointer; font-size: 18px; transition: background-color .2s; }
 .cmd__copy:hover { background: rgba(255, 255, 255, .2); }
@@ -325,11 +325,11 @@ a.note__time:hover { color: var(--t1); text-decoration: underline; }
 .widgets--price .plan--main { grid-column: span 2; grid-row: span 2; }
 .widgets--price .plan:not(.plan--main) { grid-column: span 2; }
 .plan__top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.pill { padding: 3px 11px; border-radius: 999px; background: rgba(255, 255, 255, .9); color: #22060f; font-size: 13px; font-weight: 600; }
+.pill { padding: 3px 11px; border-radius: 999px; background: rgba(255, 255, 255, .9); color: #221006; font-size: 13px; font-weight: 600; }
 .plan__price { font-size: 52px; font-stretch: 75%; font-weight: 600; line-height: 1; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
 .plan--main .plan__price { margin-top: 18px; font-size: 96px; }
 .plan__price small { margin-left: 4px; color: var(--t3); font-size: .32em; font-stretch: 100%; font-weight: 500; letter-spacing: 0; }
-.plan__list { display: grid; gap: 10px; margin: auto 0 0; padding: 18px 0 0; list-style: none; color: rgba(255, 240, 245, .86); font-size: 15px; }
+.plan__list { display: grid; gap: 10px; margin: auto 0 0; padding: 18px 0 0; list-style: none; color: rgba(255, 244, 236, .86); font-size: 15px; }
 .plan__list li { display: flex; gap: 10px; }
 .plan__list li::before {
   content: "";

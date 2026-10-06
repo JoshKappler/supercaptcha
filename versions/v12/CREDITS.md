@@ -11,7 +11,7 @@
 | `assets/img/hacker-news.webp` | pushary.com scrape, `/hacker-news.webp` | As shown on pushary.com |
 | `assets/img/app-store.svg`, `google-play.svg` | pushary.com scrape, `original/site/pushary.com/badges/` | Badges as shown on pushary.com |
 | `assets/img/product-hunt-medal.svg` | Medal mark taken unchanged from `original/site/pushary.com/badges/product-hunt-top-post-light.svg` | Badge artwork as shown on pushary.com |
-| Page wallpaper | `assets/iphone/assets/wallpaper-burgundy.webp` from the shared iPhone, rendered from Paper Shaders' `warp` shader. Used full-bleed, mirrored tile by tile and dimmed in `css/site.css` | Apache-2.0 shader. Powered by Paper Shaders: https://shaders.paper.design |
+| Page wallpaper | `assets/iphone/assets/wallpaper-cosmic-orange.webp` from the shared iPhone, rendered from Paper Shaders' `warp` shader. Used full-bleed, mirrored tile by tile and dimmed in `css/site.css` | Apache-2.0 shader. Powered by Paper Shaders: https://shaders.paper.design |
 
 ## Shared iPhone (`assets/iphone/`, copied by `scripts/sync-phone.sh`)
 
