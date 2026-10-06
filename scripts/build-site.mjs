@@ -7,13 +7,12 @@ import path from 'node:path';
 // Site order: position N is served at /vN/, whatever the folder is called in versions/.
 const order = [
   ['v10', 'Lock screen first'],
+  ['v11', 'Scroll story'],
   ['v7', 'Moving light'],
   ['v8', 'Island'],
   ['v9', 'Single light'],
-  ['v11', 'Scroll story'],
   ['v12', 'Lock screen page'],
   ['v13', 'Split desk'],
-  ['v14', 'Editorial poster'],
 ];
 
 const out = 'dist';
